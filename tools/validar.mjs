@@ -1,10 +1,10 @@
 // Valida los datos de ObraLab antes de publicar: node tools/validar.mjs
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 const H = JSON.parse(readFileSync(new URL("../data/herramientas.json", import.meta.url))).herramientas;
 const U = JSON.parse(readFileSync(new URL("../data/actualizaciones.json", import.meta.url))).actualizaciones;
 const errs = [];
 const ids = new Set();
-const TIPOS = ["calculadora", "formato", "metodo", "recurso"];
+const TIPOS = ["calculadora", "formato", "calidad", "metodo", "recurso"];
 for (const t of H) {
   const w = (m) => errs.push(`${t.id || "(sin id)"}: ${m}`);
   for (const k of ["id", "tipo", "categoria", "titulo", "resumen", "agregada"]) if (!t[k]) w(`falta ${k}`);
@@ -12,7 +12,9 @@ for (const t of H) {
   if (!TIPOS.includes(t.tipo)) w(`tipo inválido ${t.tipo}`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(t.agregada || "")) w("fecha agregada inválida");
   if (!Array.isArray(t.como_usar) || t.como_usar.length < 2) w("como_usar necesita al menos 2 pasos");
-  if (t.tipo === "calculadora") {
+  if (t.modulo) {
+    if (!existsSync(new URL(`../modulos/${t.modulo}.js`, import.meta.url))) w(`no existe modulos/${t.modulo}.js`);
+  } else if (t.tipo === "calculadora") {
     const ins = t.entradas || [], outs = t.salidas || [];
     if (!ins.length || !outs.length) w("calculadora sin entradas o salidas");
     const names = ins.map((e) => e.id), vals = ins.map((e) => e.valor);
@@ -22,7 +24,7 @@ for (const t of H) {
       } catch (e) { w(`fórmula "${s.label}" con error: ${e.message}`); }
     }
   }
-  if (t.tipo === "formato" && (!t.campos?.length || !t.items?.length)) w("formato sin campos o items");
+  if ((t.tipo === "formato" || t.tipo === "calidad") && (!t.campos?.length || !t.items?.length)) w("formato sin campos o items");
   if (t.tipo === "recurso" && !t.url) w("recurso sin url");
 }
 for (const u of U) {

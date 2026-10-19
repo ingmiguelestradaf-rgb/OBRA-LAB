@@ -58,6 +58,7 @@ main .wrap{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:
 .item span.r{color:var(--muted);font-size:13px;line-height:1.4}
 .new{display:inline-block;margin-left:6px;font:600 10px var(--mono);background:var(--accent);color:var(--on-accent);border-radius:3px;padding:1px 5px;vertical-align:2px}
 .empty{color:var(--muted);padding:16px 4px}
+.grp{margin:10px 0 0;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 
 .detail{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px clamp(16px,3vw,32px);min-width:0;align-self:start}
 .eyebrow{font:500 12px var(--mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:6px 14px}
@@ -119,6 +120,83 @@ ol.steps li::before{content:counter(s,decimal-leading-zero);font:600 13px var(--
 a{color:var(--accent-ink)}
 footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 
+/* módulos: cuantificador de acero y escalera */
+.mod{display:flex;flex-direction:column;gap:16px}
+.ac{display:flex;flex-direction:column;gap:14px}
+.ac-banner{margin:0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--bg);border-radius:0 6px 6px 0;font-size:14px}
+.ac-addel{display:flex;flex-direction:column;gap:8px}
+.ac-addel>div{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ac-addel .ac-mut{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;width:92px}
+.ac-addel button,.ac-add button{background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:7px 10px;font:600 13px var(--body);cursor:pointer}
+.ac-addel button:hover,.ac-add button:hover{border-color:var(--accent)}
+.ac-crit{border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.ac-crit summary{cursor:pointer;font:600 14px var(--body)}
+.ac-crit[open] summary{margin-bottom:10px}
+.ac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px 10px}
+.ac-f{display:flex;flex-direction:column;gap:3px;min-width:0}
+.ac-f.w2{grid-column:span 2}
+.ac-f span{font-size:12px;color:var(--muted);line-height:1.25}
+.ac-f input,.ac-f select{width:100%;min-width:0;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);padding:7px 8px;font:500 14px var(--mono);font-variant-numeric:tabular-nums}
+.ac-f select{font-family:var(--body)}
+.ac-note{margin:0;font-size:13px;color:var(--muted);max-width:70ch}
+.ac-list{display:flex;flex-direction:column;gap:10px}
+.ac-el{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.ac-el>summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:12px 14px;cursor:pointer;list-style:none}
+.ac-el>summary::-webkit-details-marker{display:none}
+.ac-el>summary::before{content:"▸";color:var(--muted);font-size:12px}
+.ac-el[open]>summary::before{content:"▾"}
+.ac-el[open]>summary{border-bottom:1px dashed var(--line)}
+.ac-badge{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;background:var(--ink);color:var(--surface);border-radius:3px;padding:2px 6px}
+.ac-mut{color:var(--muted);font-size:13px}
+.ac-kg{margin-left:auto;font:600 14px var(--mono);font-variant-numeric:tabular-nums}
+.ac-body{padding:14px;display:flex;flex-direction:column;gap:12px}
+.ac-parr{display:flex;flex-wrap:wrap;align-items:center;gap:0}
+.ac-parr span{font-size:13px;color:var(--muted);margin-right:10px}
+.ac-parr button{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 14px;font:600 13px var(--body);cursor:pointer}
+.ac-parr button:first-of-type{border-radius:6px 0 0 6px}
+.ac-parr button:last-of-type{border-radius:0 6px 6px 0;border-left:0}
+.ac-parr button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.ac-rows{display:flex;flex-direction:column;gap:8px}
+.ac-row{border:1px solid var(--line);border-radius:6px;padding:10px;background:var(--bg)}
+.ac-row .ac-f input,.ac-row .ac-f select{background:var(--surface)}
+.ac-rowh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ac-kind{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-ink)}
+.ac-estribo .ac-kind{color:var(--ok)}
+.ac-x{background:none;border:0;color:var(--muted);font:500 12px var(--body);cursor:pointer;text-decoration:underline}
+.ac-out{margin-top:8px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.ac-out b{color:var(--ink);font-family:var(--mono);font-weight:600}
+.ac-out.bad{color:var(--bad)}
+.ac-add{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ac-sp{flex:1}
+.ac-danger{color:var(--bad)!important}
+.ac-res{display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--ink);padding-top:14px}
+.ac-res h3{margin:14px 0 4px}
+.ac-kpis{display:flex;flex-wrap:wrap;gap:10px 28px;font:500 12px var(--mono);color:var(--muted)}
+.ac-kpis b{display:block;font:700 22px var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.ac-tw{overflow-x:auto;max-width:100%}
+.ac-t{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.ac-t th{text-align:left;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--ink);white-space:nowrap}
+.ac-t td{padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ac-t td.ac-con{white-space:normal;min-width:220px}
+.ac-t tfoot td{font-weight:700;border-top:1px solid var(--ink);border-bottom:0}
+.es{display:flex;flex-direction:column;gap:16px}
+.es-av{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.es-av li{padding:8px 12px;border-radius:6px;font-size:14px;border-left:3px solid}
+.es-av .ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.es-av .warn{border-color:var(--warn);background:color-mix(in srgb,var(--warn) 12%,transparent)}
+.es-av .bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent)}
+.es-svg{width:100%;min-width:480px;height:auto;display:block}
+.es-step{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.es-floor{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.es-dim line{stroke:var(--accent-ink);stroke-width:1}
+.es-dim text,.es-lbl{fill:var(--muted);font:500 11px var(--mono)}
+.es-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.es-cols .ac-t td{white-space:normal}
+.es-cols h3{margin-top:0}
+.es-trazo{max-height:360px;overflow-y:auto}
+@media (max-width:520px){.ac-f.w2{grid-column:1/-1}.ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{.ac-addel,.ac-add,.ac-crit,.ac-x,.ac-parr button[aria-pressed="false"]{display:none!important}.ac-el{break-inside:avoid}}
+
 @media (max-width:820px){
   main .wrap{grid-template-columns:minmax(0,1fr)}
   body.viewing .list{display:none}
@@ -148,15 +226,18 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 </main>
 <footer><div class="wrap">ObraLab · mejora continua para control de obra · Ing. Miguel Estrada · Se actualiza diariamente.</div></footer>
 
+<script src="modulos/acero.js"></script>
+<script src="modulos/escalera.js"></script>
 <script>
 const TABS=[
   {id:"novedades",label:"Novedades"},
   {id:"calculadora",label:"Calculadoras"},
   {id:"formato",label:"Formatos"},
+  {id:"calidad",label:"Checklists de calidad"},
   {id:"metodo",label:"Métodos"},
   {id:"recurso",label:"Herramientas digitales"}
 ];
-const PREFIX={calculadora:"CAL",formato:"FMT",metodo:"MET",recurso:"DIG"};
+const PREFIX={calculadora:"CAL",formato:"FMT",calidad:"QC",metodo:"MET",recurso:"DIG"};
 let DATA=[],UPD=[],tab="novedades",sel=null,q="";
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -196,7 +277,7 @@ function render(){
   const cur=DATA.find(d=>d.id===sel);
   $("#main").innerHTML=`<section class="list">
     <input class="search" id="q" type="search" placeholder="Buscar en ${esc(TABS.find(t=>t.id===tab).label.toLowerCase())}…" value="${esc(q)}">
-    ${shown.map(i=>`<button class="item" data-id="${i.id}" aria-current="${i.id===sel}"><span class="code">${i._code}</span><strong>${esc(i.titulo)}${daysAgo(i.agregada)<7?'<span class="new">NUEVA</span>':""}</strong><span class="r">${esc(i.resumen)}</span></button>`).join("")||'<p class="empty">Sin resultados.</p>'}
+    ${shown.map((i,k)=>`${tab==="calidad"&&(k===0||shown[k-1].categoria!==i.categoria)?`<p class="grp">${esc(i.categoria)}</p>`:""}<button class="item" data-id="${i.id}" aria-current="${i.id===sel}"><span class="code">${i._code}</span><strong>${esc(i.titulo)}${daysAgo(i.agregada)<7?'<span class="new">NUEVA</span>':""}</strong><span class="r">${esc(i.resumen)}</span></button>`).join("")||'<p class="empty">Sin resultados.</p>'}
   </section>
   <section class="detail tool" id="detail">${cur?renderTool(cur):""}</section>`;
   const qi=$("#q");qi.oninput=()=>{q=qi.value;const p=qi.selectionStart;render();const n=$("#q");n.focus();n.setSelectionRange(p,p)};
@@ -209,13 +290,16 @@ function head(t){return `<button class="back" type="button">← ${esc(TABS.find(
   <h2>${esc(t.titulo)}</h2><p class="lead">${esc(t.resumen)}</p>`}
 const steps=a=>a?.length?`<h3>Cómo usarla en obra</h3><ol class="steps">${a.map(s=>`<li><span>${esc(s)}</span></li>`).join("")}</ol>`:"";
 function renderTool(t){
+  if(t.modulo){
+    return head(t)+(t.beneficio?`<p class="benefit">${esc(t.beneficio)}</p>`:"")+`<div id="mod" class="mod"></div>`+steps(t.como_usar);
+  }
   if(t.tipo==="calculadora"){
     const saved=store.get("calc:"+t.id)||{};
     return head(t)+`<div class="calc"><div>${t.entradas.map(e=>`<div class="field"><label for="in-${e.id}">${esc(e.label)}</label><div class="inp"><input id="in-${e.id}" data-k="${e.id}" type="number" inputmode="decimal" step="any" value="${saved[e.id]??e.valor}"><em>${esc(e.unidad)}</em></div></div>`).join("")}
       <button class="btn ghost" id="reset" type="button">Valores de ejemplo</button></div>
       <div><div class="outs" id="outs"></div></div></div>`+steps(t.como_usar);
   }
-  if(t.tipo==="formato"){
+  if(t.tipo==="formato"||t.tipo==="calidad"){
     const s=store.get("fmt:"+t.id)||{campos:{},items:{}};
     return head(t)+`<h3>Datos generales</h3><div class="hdr">${t.campos.map((c,i)=>{const long=/actividades|incidencias|materiales|equipo/i.test(c);
       return `<div class="field"><label for="c-${i}">${esc(c)}</label>${long?`<textarea id="c-${i}" data-c="${esc(c)}">${esc(s.campos[c]||"")}</textarea>`:`<input id="c-${i}" data-c="${esc(c)}" value="${esc(s.campos[c]||"")}">`}</div>`}).join("")}</div>
@@ -232,6 +316,8 @@ function renderTool(t){
 }
 function num(v,d){return Number.isFinite(v)?v.toLocaleString("es-MX",{minimumFractionDigits:d,maximumFractionDigits:d}):"—"}
 function bindTool(t){
+  if(t.modulo){const m=window.ObraModulos&&window.ObraModulos[t.modulo];
+    if(m)m($("#mod"));else $("#mod").innerHTML='<p class="empty">No se pudo cargar esta herramienta. Recarga la página.</p>';return}
   if(t.tipo==="calculadora"){
     const ids=t.entradas.map(e=>e.id);
     const fns=t.salidas.map(s=>{try{return new Function(...ids,"return ("+s.formula+")")}catch(e){return()=>NaN}});
@@ -244,7 +330,7 @@ function bindTool(t){
     $("#reset").onclick=()=>{t.entradas.forEach(e=>$("#in-"+e.id).value=e.valor);calc()};
     calc();
   }
-  if(t.tipo==="formato"){
+  if(t.tipo==="formato"||t.tipo==="calidad"){
     const key="fmt:"+t.id;
     const read=()=>{const s={campos:{},items:{}};document.querySelectorAll("#detail [data-c]").forEach(el=>s.campos[el.dataset.c]=el.value);
       document.querySelectorAll(".chk").forEach(r=>{const p=r.querySelector('[aria-pressed="true"]');s.items[r.dataset.i]={r:p?.dataset.v||"",o:r.querySelector(".obs").value}});return s};

@@ -2,9 +2,60 @@
   "actualizaciones": [
     {
       "fecha": "2026-10-18",
+      "titulo": "Checklists de calidad: de obra negra a entrega",
+      "resumen": "Nuevo apartado con 18 checklists de calidad: trazo y excavación, cimentación, estructura, mampostería, estructura metálica, instalaciones hidrosanitaria, eléctrica, de gas y aire acondicionado, impermeabilización, aplanados, pisos, tablaroca, pintura, carpintería y cancelería, muebles de baño y cocina, y entrega final.",
+      "herramientas": [
+        "qc-trazo",
+        "qc-cimentacion",
+        "qc-estructura",
+        "qc-desc-concreto",
+        "qc-muros-mamp",
+        "qc-acero-estructural",
+        "qc-hidrosanitaria",
+        "qc-electrica",
+        "qc-gas",
+        "qc-hvac",
+        "qc-impermeabilizacion",
+        "qc-aplanados",
+        "qc-pisos",
+        "qc-tablaroca",
+        "qc-pintura",
+        "qc-carpinteria",
+        "qc-muebles-banos",
+        "qc-entrega"
+      ],
+      "como_aplicarlo": "Entrega a cada contratista el checklist de su partida y liga su firma a la estimación: lo que no se libera no se paga.",
+      "fuentes": []
+    },
+    {
+      "fecha": "2026-10-18",
+      "titulo": "Cuantificador de acero por elemento y distribución de escaleras",
+      "resumen": "Nuevo módulo para cuantificar acero de trabes, columnas de cualquier sección, losas con parrilla sencilla o doble, castillos, muros y cimentaciones (zapatas aisladas y corridas, contratrabes, losas de cimentación), con estribos por zonas, grapas, zunchos y bastones. Además, calculadora de escaleras con perfil y tabla de trazo.",
+      "herramientas": [
+        "calc-acero-elementos",
+        "calc-escalera"
+      ],
+      "como_aplicarlo": "Toma una trabe y una columna de tu plano estructural, captúralas y compara el resumen por diámetro contra lo pedido al proveedor. Para la escalera, mide la altura real entre pisos y marca el trazo con la tabla.",
+      "fuentes": []
+    },
+    {
+      "fecha": "2026-10-18",
       "titulo": "Arranque de ObraLab",
       "resumen": "Primera versión con 6 calculadoras, 3 formatos de campo y 3 métodos de mejora continua. A partir de mañana se agrega al menos una herramienta nueva cada día.",
-      "herramientas": ["calc-concreto", "calc-varilla", "calc-valor-ganado", "calc-ppc", "calc-rendimiento", "calc-muro-block", "fmt-precolado", "fmt-reporte-diario", "fmt-seguridad", "met-last-planner", "met-5s", "met-pdca"],
+      "herramientas": [
+        "calc-concreto",
+        "calc-varilla",
+        "calc-valor-ganado",
+        "calc-ppc",
+        "calc-rendimiento",
+        "calc-muro-block",
+        "fmt-precolado",
+        "fmt-reporte-diario",
+        "fmt-seguridad",
+        "met-last-planner",
+        "met-5s",
+        "met-pdca"
+      ],
       "como_aplicarlo": "Empieza esta semana con el formato de Liberación de colado y el PPC semanal en tu junta con contratistas.",
       "fuentes": []
     }

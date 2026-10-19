@@ -10,6 +10,8 @@ Abre la app desde GitHub Pages: `https://ingmiguelestradaf-rgb.github.io/OBRA-LA
 
 - **Novedades**: qué se agregó cada día y cómo aplicarlo en obra.
 - **Calculadoras**: los valores capturados se guardan en tu navegador.
+- **Cuantificador de acero** y **Distribución de escalera** dentro de Calculadoras.
+- **Checklists de calidad**: de obra negra a acabados, instalaciones y entrega.
 - **Formatos**: llénalos en el celular o tablet, exporta a CSV o imprime a PDF.
 - **Métodos** y **Herramientas digitales**: pasos concretos para implementarlos.
 
@@ -28,7 +30,9 @@ Campos comunes: `id` (único, kebab-case con prefijo `calc-`, `fmt-`, `met-` o `
 |---|---|
 | `calculadora` | `entradas: [{id, label, unidad, valor}]`, `salidas: [{label, formula, unidad, decimales, destacar?, semaforo?: [verde_min, amarillo_min]}]`. `formula` es una expresión JavaScript que usa los `id` de las entradas y `Math`. |
 | `formato` | `campos: [texto]` (datos generales), `items: [texto]` (puntos a verificar Cumple / No / N/A) |
+| `calidad` | igual que `formato`; `categoria` = etapa (Obra negra, Estructura, Instalaciones, Acabados, Entrega). Aparece en la pestaña Checklists de calidad |
 | `metodo` | `beneficio` |
+| calculadora con `modulo` | herramienta interactiva propia en `modulos/<modulo>.js` (ej. `acero`, `escalera`); no lleva entradas ni salidas |
 | `recurso` | `beneficio`, `plataforma`, `costo`, `url` (herramienta digital externa) |
 
 ### Esquema de una actualización

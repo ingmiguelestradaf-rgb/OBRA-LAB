@@ -9,18 +9,69 @@
       "resumen": "Calcula m³ de un elemento con desperdicio y cuántas ollas pedir a la planta.",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "largo", "label": "Largo", "unidad": "m", "valor": 12},
-        {"id": "ancho", "label": "Ancho", "unidad": "m", "valor": 8},
-        {"id": "espesor", "label": "Espesor / peralte", "unidad": "m", "valor": 0.12},
-        {"id": "piezas", "label": "Número de elementos iguales", "unidad": "pza", "valor": 1},
-        {"id": "desp", "label": "Desperdicio", "unidad": "%", "valor": 3},
-        {"id": "olla", "label": "Capacidad de olla", "unidad": "m³", "valor": 7}
+        {
+          "id": "largo",
+          "label": "Largo",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "ancho",
+          "label": "Ancho",
+          "unidad": "m",
+          "valor": 8
+        },
+        {
+          "id": "espesor",
+          "label": "Espesor / peralte",
+          "unidad": "m",
+          "valor": 0.12
+        },
+        {
+          "id": "piezas",
+          "label": "Número de elementos iguales",
+          "unidad": "pza",
+          "valor": 1
+        },
+        {
+          "id": "desp",
+          "label": "Desperdicio",
+          "unidad": "%",
+          "valor": 3
+        },
+        {
+          "id": "olla",
+          "label": "Capacidad de olla",
+          "unidad": "m³",
+          "valor": 7
+        }
       ],
       "salidas": [
-        {"label": "Volumen neto", "formula": "largo*ancho*espesor*piezas", "unidad": "m³", "decimales": 2},
-        {"label": "Volumen a pedir", "formula": "largo*ancho*espesor*piezas*(1+desp/100)", "unidad": "m³", "decimales": 2, "destacar": true},
-        {"label": "Ollas", "formula": "Math.ceil(largo*ancho*espesor*piezas*(1+desp/100)/olla)", "unidad": "ollas", "decimales": 0},
-        {"label": "Última olla", "formula": "(function(v){var r=v%olla;return r===0?olla:r})(largo*ancho*espesor*piezas*(1+desp/100))", "unidad": "m³", "decimales": 2}
+        {
+          "label": "Volumen neto",
+          "formula": "largo*ancho*espesor*piezas",
+          "unidad": "m³",
+          "decimales": 2
+        },
+        {
+          "label": "Volumen a pedir",
+          "formula": "largo*ancho*espesor*piezas*(1+desp/100)",
+          "unidad": "m³",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Ollas",
+          "formula": "Math.ceil(largo*ancho*espesor*piezas*(1+desp/100)/olla)",
+          "unidad": "ollas",
+          "decimales": 0
+        },
+        {
+          "label": "Última olla",
+          "formula": "(function(v){var r=v%olla;return r===0?olla:r})(largo*ancho*espesor*piezas*(1+desp/100))",
+          "unidad": "m³",
+          "decimales": 2
+        }
       ],
       "como_usar": [
         "Mide en plano el elemento a colar (losa, zapata, muro) y captura sus dimensiones en metros.",
@@ -37,20 +88,92 @@
       "resumen": "Peso en kg de varillas por número (#3 a #12) con la fórmula 0.00617·d².",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "num", "label": "Número de varilla (octavos de pulgada)", "unidad": "#", "valor": 4},
-        {"id": "longitud", "label": "Longitud de cada pieza", "unidad": "m", "valor": 12},
-        {"id": "cantidad", "label": "Cantidad de piezas", "unidad": "pza", "valor": 50}
+        {
+          "id": "num",
+          "label": "Número de varilla (octavos de pulgada)",
+          "unidad": "#",
+          "valor": 4
+        },
+        {
+          "id": "longitud",
+          "label": "Longitud de cada pieza",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "cantidad",
+          "label": "Cantidad de piezas",
+          "unidad": "pza",
+          "valor": 50
+        }
       ],
       "salidas": [
-        {"label": "Diámetro", "formula": "num*25.4/8", "unidad": "mm", "decimales": 1},
-        {"label": "Peso por metro", "formula": "0.00617*Math.pow(num*25.4/8,2)", "unidad": "kg/m", "decimales": 3},
-        {"label": "Peso total", "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad", "unidad": "kg", "decimales": 1, "destacar": true},
-        {"label": "Toneladas", "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad/1000", "unidad": "t", "decimales": 3}
+        {
+          "label": "Diámetro",
+          "formula": "num*25.4/8",
+          "unidad": "mm",
+          "decimales": 1
+        },
+        {
+          "label": "Peso por metro",
+          "formula": "0.00617*Math.pow(num*25.4/8,2)",
+          "unidad": "kg/m",
+          "decimales": 3
+        },
+        {
+          "label": "Peso total",
+          "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad",
+          "unidad": "kg",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Toneladas",
+          "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad/1000",
+          "unidad": "t",
+          "decimales": 3
+        }
       ],
       "como_usar": [
         "Captura el número de varilla (#3 = 3/8\", #4 = 1/2\", etc.).",
         "Usa la longitud de corte de tu despiece, incluyendo ganchos y traslapes.",
-        "Suma el total por diámetro y compáralo contra las remisiones del proveedor para controlar desperdicio."
+        "Suma el total por diámetro y compáralo contra las remisiones del proveedor para controlar desperdicio.",
+        "Para cuantificar elementos completos (estribos, bastones, parrillas) usa el Cuantificador de acero por elemento."
+      ]
+    },
+    {
+      "id": "calc-acero-elementos",
+      "tipo": "calculadora",
+      "modulo": "acero",
+      "categoria": "Acero",
+      "titulo": "Cuantificador de acero por elemento",
+      "resumen": "Despiece de trabes, columnas, losas, castillos, muros y cimentaciones: corridas, bastones, estribos, grapas, zunchos y parrillas sencillas o dobles.",
+      "beneficio": "Captura el elemento como viene en el plano y obtén el despiece, el resumen por diámetro, las piezas de 12 m y la cuantía kg/m³ en segundos.",
+      "agregada": "2026-10-18",
+      "como_usar": [
+        "Agrega los elementos con los botones: Trabe, Columna, Losa, Castillo, Muro o, en cimentación, Zapata aislada, Zapata corrida, Contratrabe y Losa de cimentación.",
+        "Captura medidas y piezas iguales. En columnas elige la sección: rectangular, circular, en L o en T; el estribo se calcula solo con el recubrimiento.",
+        "Estribos: indica zona confinada (Lc), separación en esa zona y separación central; pon 0 en la central si es uniforme. Agrega grapas por posición o cambia a zuncho en espiral.",
+        "Bastones y corridas: la longitud acepta fórmulas como L/3, L/4+0.30 o Lx; se suman ganchos de 90° y traslapes automáticos cuando pasan de 12 m.",
+        "Losas, zapatas y muros: elige parrilla Sencilla o Doble con un clic; el lecho superior se crea igual al inferior y lo puedes modificar.",
+        "Revisa Criterios de cuantificación (traslape, ganchos, desperdicio) contra las notas de tu plano y exporta el despiece a CSV o imprímelo."
+      ]
+    },
+    {
+      "id": "calc-escalera",
+      "tipo": "calculadora",
+      "modulo": "escalera",
+      "categoria": "Diseño en obra",
+      "titulo": "Distribución de escalera",
+      "resumen": "Número de peraltes y huellas, regla de Blondel, tramos recto, en L o en U, perfil dibujado y tabla de trazo.",
+      "beneficio": "Pasa de la altura de entrepiso a una escalera cómoda y trazable en obra sin hacer cuentas a mano.",
+      "agregada": "2026-10-18",
+      "como_usar": [
+        "Mide la altura real de piso terminado a piso terminado; no la de proyecto si ya hay losa colada.",
+        "Captura el peralte máximo y la huella que pide tu reglamento o tu proyecto (valores de arranque: 18 cm y 28 cm).",
+        "Elige el arreglo: un tramo recto, dos tramos en L o en U. Si el largo disponible no alcanza, la app te lo indica.",
+        "Revisa que 2p + h quede entre 61 y 65 cm para que la escalera sea cómoda.",
+        "Usa la tabla de trazo para marcar en muro cada peralte: nivel de huella y distancia desde el arranque del tramo."
       ]
     },
     {
@@ -61,18 +184,78 @@
       "resumen": "Indica si la obra va adelantada o atrasada y si gasta más de lo presupuestado.",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "bac", "label": "Presupuesto total (BAC)", "unidad": "$", "valor": 12000000},
-        {"id": "pv", "label": "Valor planeado a la fecha (PV)", "unidad": "$", "valor": 4800000},
-        {"id": "ev", "label": "Valor ganado (EV = avance real × presupuesto)", "unidad": "$", "valor": 4320000},
-        {"id": "ac", "label": "Costo real a la fecha (AC)", "unidad": "$", "valor": 4550000}
+        {
+          "id": "bac",
+          "label": "Presupuesto total (BAC)",
+          "unidad": "$",
+          "valor": 12000000
+        },
+        {
+          "id": "pv",
+          "label": "Valor planeado a la fecha (PV)",
+          "unidad": "$",
+          "valor": 4800000
+        },
+        {
+          "id": "ev",
+          "label": "Valor ganado (EV = avance real × presupuesto)",
+          "unidad": "$",
+          "valor": 4320000
+        },
+        {
+          "id": "ac",
+          "label": "Costo real a la fecha (AC)",
+          "unidad": "$",
+          "valor": 4550000
+        }
       ],
       "salidas": [
-        {"label": "SPI (programa)", "formula": "ev/pv", "unidad": "", "decimales": 2, "destacar": true, "semaforo": [0.95, 0.9]},
-        {"label": "CPI (costo)", "formula": "ev/ac", "unidad": "", "decimales": 2, "destacar": true, "semaforo": [0.95, 0.9]},
-        {"label": "Variación de programa (SV)", "formula": "ev-pv", "unidad": "$", "decimales": 0},
-        {"label": "Variación de costo (CV)", "formula": "ev-ac", "unidad": "$", "decimales": 0},
-        {"label": "Costo estimado al terminar (EAC)", "formula": "bac/(ev/ac)", "unidad": "$", "decimales": 0},
-        {"label": "Avance real", "formula": "ev/bac*100", "unidad": "%", "decimales": 1}
+        {
+          "label": "SPI (programa)",
+          "formula": "ev/pv",
+          "unidad": "",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0.95,
+            0.9
+          ]
+        },
+        {
+          "label": "CPI (costo)",
+          "formula": "ev/ac",
+          "unidad": "",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0.95,
+            0.9
+          ]
+        },
+        {
+          "label": "Variación de programa (SV)",
+          "formula": "ev-pv",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Variación de costo (CV)",
+          "formula": "ev-ac",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo estimado al terminar (EAC)",
+          "formula": "bac/(ev/ac)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Avance real",
+          "formula": "ev/bac*100",
+          "unidad": "%",
+          "decimales": 1
+        }
       ],
       "como_usar": [
         "Cada viernes toma el avance físico por partida y multiplícalo por su importe: eso es el EV.",
@@ -89,12 +272,37 @@
       "resumen": "Porcentaje de Plan Completado: mide qué tan confiables son los compromisos de la semana.",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "comp", "label": "Tareas comprometidas en la semana", "unidad": "tareas", "valor": 24},
-        {"id": "hechas", "label": "Tareas completadas al 100 %", "unidad": "tareas", "valor": 18}
+        {
+          "id": "comp",
+          "label": "Tareas comprometidas en la semana",
+          "unidad": "tareas",
+          "valor": 24
+        },
+        {
+          "id": "hechas",
+          "label": "Tareas completadas al 100 %",
+          "unidad": "tareas",
+          "valor": 18
+        }
       ],
       "salidas": [
-        {"label": "PPC", "formula": "hechas/comp*100", "unidad": "%", "decimales": 0, "destacar": true, "semaforo": [80, 65]},
-        {"label": "Tareas no cumplidas", "formula": "comp-hechas", "unidad": "tareas", "decimales": 0}
+        {
+          "label": "PPC",
+          "formula": "hechas/comp*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "Tareas no cumplidas",
+          "formula": "comp-hechas",
+          "unidad": "tareas",
+          "decimales": 0
+        }
       ],
       "como_usar": [
         "Solo cuenta una tarea como hecha si quedó 100 % terminada; 90 % es no cumplida.",
@@ -110,15 +318,51 @@
       "resumen": "Rendimiento real por jornal y días para terminar el volumen restante.",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "ejecutado", "label": "Cantidad ejecutada", "unidad": "unid.", "valor": 180},
-        {"id": "dias", "label": "Días trabajados", "unidad": "días", "valor": 4},
-        {"id": "gente", "label": "Integrantes de la cuadrilla", "unidad": "pers.", "valor": 3},
-        {"id": "restante", "label": "Cantidad restante", "unidad": "unid.", "valor": 420}
+        {
+          "id": "ejecutado",
+          "label": "Cantidad ejecutada",
+          "unidad": "unid.",
+          "valor": 180
+        },
+        {
+          "id": "dias",
+          "label": "Días trabajados",
+          "unidad": "días",
+          "valor": 4
+        },
+        {
+          "id": "gente",
+          "label": "Integrantes de la cuadrilla",
+          "unidad": "pers.",
+          "valor": 3
+        },
+        {
+          "id": "restante",
+          "label": "Cantidad restante",
+          "unidad": "unid.",
+          "valor": 420
+        }
       ],
       "salidas": [
-        {"label": "Rendimiento por cuadrilla", "formula": "ejecutado/dias", "unidad": "unid./día", "decimales": 1, "destacar": true},
-        {"label": "Rendimiento por jornal", "formula": "ejecutado/(dias*gente)", "unidad": "unid./jornal", "decimales": 2},
-        {"label": "Días para terminar", "formula": "Math.ceil(restante/(ejecutado/dias))", "unidad": "días", "decimales": 0}
+        {
+          "label": "Rendimiento por cuadrilla",
+          "formula": "ejecutado/dias",
+          "unidad": "unid./día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Rendimiento por jornal",
+          "formula": "ejecutado/(dias*gente)",
+          "unidad": "unid./jornal",
+          "decimales": 2
+        },
+        {
+          "label": "Días para terminar",
+          "formula": "Math.ceil(restante/(ejecutado/dias))",
+          "unidad": "días",
+          "decimales": 0
+        }
       ],
       "como_usar": [
         "Usa una unidad que coincida con tu presupuesto (m², m³, ml, pza).",
@@ -134,16 +378,57 @@
       "resumen": "Piezas de block 15×20×40 y mortero para un muro, descontando vanos.",
       "agregada": "2026-10-18",
       "entradas": [
-        {"id": "largo", "label": "Largo del muro", "unidad": "m", "valor": 20},
-        {"id": "alto", "label": "Altura", "unidad": "m", "valor": 2.8},
-        {"id": "vanos", "label": "Área de vanos a descontar", "unidad": "m²", "valor": 4.2},
-        {"id": "pzm2", "label": "Piezas por m²", "unidad": "pza/m²", "valor": 12.5},
-        {"id": "desp", "label": "Desperdicio", "unidad": "%", "valor": 5}
+        {
+          "id": "largo",
+          "label": "Largo del muro",
+          "unidad": "m",
+          "valor": 20
+        },
+        {
+          "id": "alto",
+          "label": "Altura",
+          "unidad": "m",
+          "valor": 2.8
+        },
+        {
+          "id": "vanos",
+          "label": "Área de vanos a descontar",
+          "unidad": "m²",
+          "valor": 4.2
+        },
+        {
+          "id": "pzm2",
+          "label": "Piezas por m²",
+          "unidad": "pza/m²",
+          "valor": 12.5
+        },
+        {
+          "id": "desp",
+          "label": "Desperdicio",
+          "unidad": "%",
+          "valor": 5
+        }
       ],
       "salidas": [
-        {"label": "Área neta", "formula": "largo*alto-vanos", "unidad": "m²", "decimales": 2},
-        {"label": "Block a pedir", "formula": "Math.ceil((largo*alto-vanos)*pzm2*(1+desp/100))", "unidad": "pza", "decimales": 0, "destacar": true},
-        {"label": "Mortero aprox. (0.012 m³/m²)", "formula": "(largo*alto-vanos)*0.012*(1+desp/100)", "unidad": "m³", "decimales": 2}
+        {
+          "label": "Área neta",
+          "formula": "largo*alto-vanos",
+          "unidad": "m²",
+          "decimales": 2
+        },
+        {
+          "label": "Block a pedir",
+          "formula": "Math.ceil((largo*alto-vanos)*pzm2*(1+desp/100))",
+          "unidad": "pza",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Mortero aprox. (0.012 m³/m²)",
+          "formula": "(largo*alto-vanos)*0.012*(1+desp/100)",
+          "unidad": "m³",
+          "decimales": 2
+        }
       ],
       "como_usar": [
         "12.5 pzas/m² aplica a block de 40×20 con junta de 1 cm; ajusta si usas otra medida.",
@@ -158,7 +443,15 @@
       "titulo": "Liberación de colado",
       "resumen": "Checklist previo a colar: cimbra, acero, instalaciones y pruebas.",
       "agregada": "2026-10-18",
-      "campos": ["Obra", "Elemento / eje", "Fecha", "Volumen programado (m³)", "f'c especificado", "Residente", "Supervisión"],
+      "campos": [
+        "Obra",
+        "Elemento / eje",
+        "Fecha",
+        "Volumen programado (m³)",
+        "f'c especificado",
+        "Residente",
+        "Supervisión"
+      ],
       "items": [
         "Cimbra alineada, a plomo y con niveles revisados",
         "Cimbra limpia, con desmoldante y sin fugas",
@@ -184,7 +477,18 @@
       "titulo": "Reporte diario de obra",
       "resumen": "Registro del día: personal, equipo, actividades, clima e incidencias.",
       "agregada": "2026-10-18",
-      "campos": ["Obra", "Fecha", "Clima", "Personal propio", "Personal de contratistas", "Equipo en obra", "Actividades realizadas", "Materiales recibidos", "Incidencias / retrasos", "Elaboró"],
+      "campos": [
+        "Obra",
+        "Fecha",
+        "Clima",
+        "Personal propio",
+        "Personal de contratistas",
+        "Equipo en obra",
+        "Actividades realizadas",
+        "Materiales recibidos",
+        "Incidencias / retrasos",
+        "Elaboró"
+      ],
       "items": [
         "Fotografías del avance tomadas por frente",
         "Charla de seguridad de 5 minutos realizada",
@@ -204,7 +508,13 @@
       "titulo": "Recorrido de seguridad semanal",
       "resumen": "Inspección rápida de condiciones de seguridad en obra (referencia NOM-031-STPS).",
       "agregada": "2026-10-18",
-      "campos": ["Obra", "Fecha", "Área recorrida", "Responsable", "Contratistas presentes"],
+      "campos": [
+        "Obra",
+        "Fecha",
+        "Área recorrida",
+        "Responsable",
+        "Contratistas presentes"
+      ],
       "items": [
         "Personal con EPP completo (casco, chaleco, botas, lentes, guantes)",
         "Arnés y línea de vida en trabajos en altura",
@@ -268,6 +578,578 @@
         "Hacer: prueba la solución en un solo frente durante una semana.",
         "Verificar: compara el dato antes y después.",
         "Actuar: si funcionó, agrégala al checklist correspondiente de ObraLab."
+      ]
+    },
+    {
+      "id": "qc-trazo",
+      "tipo": "calidad",
+      "categoria": "Obra negra",
+      "titulo": "Trazo, nivelación y excavación",
+      "resumen": "Antes de cimentar: ejes, niveles y fondo de excavación.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Bancos de nivel y referencias de ejes protegidos y verificados",
+        "Trazo de ejes conforme a plano, con diagonales comprobadas",
+        "Dimensiones de excavación conforme a proyecto",
+        "Fondo de excavación al nivel de desplante y libre de material suelto",
+        "Terreno de desplante revisado por mecánica de suelos cuando aplica",
+        "Taludes o ademes estables y sin agua acumulada",
+        "Plantilla de concreto pobre con espesor y nivel correctos",
+        "Instalaciones enterradas (drenaje, tierras físicas) colocadas antes de cimentar"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-cimentacion",
+      "tipo": "calidad",
+      "categoria": "Obra negra",
+      "titulo": "Cimentación",
+      "resumen": "Zapatas, contratrabes y losa de cimentación antes de colar.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Acero de zapatas y contratrabes conforme a plano (diámetros, separaciones, piezas)",
+        "Dados o silletas que garantizan recubrimiento inferior",
+        "Anclajes y arranques de columnas a plomo y en posición",
+        "Traslapes y ganchos con longitud correcta",
+        "Cimbra de contratrabes alineada, limpia y con desmoldante",
+        "Pasos de instalaciones y mangas dejados según plano",
+        "Impermeabilización de cimentación aplicada donde se especifica",
+        "Relleno compactado por capas con prueba de compactación registrada"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-muros-mamp",
+      "tipo": "calidad",
+      "categoria": "Obra negra",
+      "titulo": "Muros de mampostería",
+      "resumen": "Block o tabique, castillos, dalas y cerramientos.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Pieza conforme a especificación (tipo, resistencia, dimensiones)",
+        "Primer hilada nivelada y alineada a trazo",
+        "Junta de mortero uniforme (aprox. 1 cm) y llena",
+        "Muro a plomo y alineado; hiladas a nivel",
+        "Cuatrapeo correcto y sin juntas verticales corridas",
+        "Castillos y dalas en la ubicación y con el armado de plano",
+        "Escalerilla o refuerzo horizontal colocado según proyecto",
+        "Huecos de puertas y ventanas a la medida y con cerramiento",
+        "Ranuras para instalaciones hechas con cortadora, sin debilitar el muro"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-estructura",
+      "tipo": "calidad",
+      "categoria": "Estructura",
+      "titulo": "Columnas, trabes y losas",
+      "resumen": "Liberación de elementos estructurales de concreto antes del colado.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Ejes y niveles de cimbra verificados con topografía",
+        "Cimbra a plomo, apuntalada y contraflechada si se especifica",
+        "Acero longitudinal, estribos y bastones conforme a despiece",
+        "Zona confinada de estribos con la separación indicada",
+        "Recubrimientos garantizados con separadores",
+        "Juntas de colado ubicadas y tratadas según proyecto",
+        "Instalaciones ahogadas fijas y probadas",
+        "Concreto con f'c, revenimiento y tamaño de agregado especificados",
+        "Muestreo de cilindros programado",
+        "Curado iniciado en las primeras horas y registrado"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-desc-concreto",
+      "tipo": "calidad",
+      "categoria": "Estructura",
+      "titulo": "Descimbrado y concreto endurecido",
+      "resumen": "Revisión de elementos colados al retirar cimbra.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Tiempo mínimo de descimbrado respetado o resistencia verificada",
+        "Elementos sin oquedades, segregación ni acero expuesto",
+        "Dimensiones y plomos dentro de tolerancia",
+        "Niveles de losa y pendientes conforme a proyecto",
+        "Sin grietas por contracción relevantes; registradas si existen",
+        "Reparaciones con producto especificado y aprobadas por supervisión",
+        "Resultados de cilindros a 7 y 28 días registrados y conformes"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-acero-estructural",
+      "tipo": "calidad",
+      "categoria": "Estructura",
+      "titulo": "Estructura metálica",
+      "resumen": "Montaje de columnas, vigas y conexiones.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Perfiles conforme a plano y certificados de material entregados",
+        "Placas base niveladas, con grout y anclas apretadas",
+        "Columnas a plomo dentro de tolerancia",
+        "Conexiones atornilladas con torque o marcado verificado",
+        "Soldaduras con inspección visual liberada y reporte de END cuando aplica",
+        "Contraventeos completos antes de cargar losas",
+        "Pintura anticorrosiva y retoques en zonas soldadas",
+        "Protección contra fuego aplicada donde se especifica"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-hidrosanitaria",
+      "tipo": "calidad",
+      "categoria": "Instalaciones",
+      "titulo": "Instalación hidrosanitaria",
+      "resumen": "Agua fría y caliente, drenaje sanitario y pluvial.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Trayectorias y diámetros conforme a plano",
+        "Material de tubería y conexiones según especificación",
+        "Prueba de hermeticidad del agua a la presión indicada, sin caída en el tiempo especificado",
+        "Prueba de drenaje por inundación o con tapones, sin fugas",
+        "Pendientes de drenaje verificadas",
+        "Registros y coladeras en posición y nivel",
+        "Tubería soportada y con camisa al pasar muros o losas",
+        "Ventilación sanitaria completa",
+        "Salidas a la altura de proyecto para cada mueble"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-electrica",
+      "tipo": "calidad",
+      "categoria": "Instalaciones",
+      "titulo": "Instalación eléctrica",
+      "resumen": "Canalización, cableado, tableros y tierras.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Canalización completa, sujeta y con registros accesibles",
+        "Calibre de conductores conforme a cuadro de cargas",
+        "Código de colores de conductores respetado",
+        "Tablero con circuitos identificados y protecciones correctas",
+        "Sistema de tierra física instalado y medido",
+        "Contactos y apagadores a altura de proyecto, nivelados",
+        "Prueba de aislamiento y continuidad registrada",
+        "Contactos en zonas húmedas con protección de falla a tierra donde se especifica"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-gas",
+      "tipo": "calidad",
+      "categoria": "Instalaciones",
+      "titulo": "Instalación de gas",
+      "resumen": "Tubería, reguladores y pruebas.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Material y diámetros conforme a proyecto aprobado",
+        "Trayectoria visible o en ducto ventilado según especificación",
+        "Prueba de hermeticidad a la presión y tiempo indicados, sin caída",
+        "Válvulas de corte accesibles en cada aparato",
+        "Regulador y tanque o medidor en ubicación permitida",
+        "Tubería pintada con color de identificación",
+        "Dictamen de unidad de verificación cuando aplique"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-hvac",
+      "tipo": "calidad",
+      "categoria": "Instalaciones",
+      "titulo": "Aire acondicionado y ventilación",
+      "resumen": "Equipos, ductos y drenes de condensado.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Equipos en la ubicación de proyecto con base y antivibradores",
+        "Ductos sellados, soportados y aislados",
+        "Rejillas y difusores en posición y balanceados",
+        "Línea de refrigerante aislada y con prueba de presión",
+        "Drenes de condensado con pendiente y trampa",
+        "Arranque y pruebas del fabricante registradas"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-impermeabilizacion",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Impermeabilización",
+      "resumen": "Azoteas, terrazas y áreas húmedas.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Superficie limpia, seca y sin grietas abiertas",
+        "Pendientes a bajadas pluviales verificadas",
+        "Chaflanes en encuentros de muro y losa",
+        "Primario aplicado según fabricante",
+        "Refuerzo en bajadas, bases de equipos y juntas",
+        "Número de capas y espesor según especificación",
+        "Prueba de inundación de 24 a 48 horas sin filtraciones",
+        "Garantía del fabricante o aplicador entregada"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-aplanados",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Aplanados y yesos",
+      "resumen": "Repellados, aplanados de mortero y yeso.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Muros limpios y humedecidos antes de aplicar",
+        "Maestras a plomo y a regla",
+        "Espesor dentro de especificación",
+        "Superficie a plomo y sin ondulaciones al pasar regla de 2 m",
+        "Aristas rectas y esquineros colocados",
+        "Sin fisuras, desprendimientos ni huecos",
+        "Curado del aplanado de mortero realizado"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-pisos",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Pisos y recubrimientos cerámicos",
+      "resumen": "Firmes, cerámica, porcelanato y piedra.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Firme nivelado y curado antes de colocar",
+        "Material del lote y tono aprobados",
+        "Adhesivo especificado y llenado completo (sin piezas huecas al golpeteo)",
+        "Junta uniforme, alineada y con separadores",
+        "Nivelación entre piezas sin cejas",
+        "Juntas de dilatación respetadas",
+        "Cortes limpios, ocultos y simétricos donde se especifica",
+        "Boquilla uniforme y limpia",
+        "Pendientes hacia coladeras en baños y exteriores"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-tablaroca",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Muros y plafones de tablaroca",
+      "resumen": "Bastidores, placas y acabado de juntas.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Canales y postes a la separación especificada",
+        "Refuerzos para muebles, gabinetes y equipos colocados",
+        "Placa del tipo especificado (regular, resistente a humedad o al fuego)",
+        "Tornillería a la separación correcta, sin romper el papel",
+        "Juntas con cinta y compuesto, lijadas y sin marcas",
+        "Plafón nivelado y con registros para instalaciones",
+        "Aislamiento acústico o térmico colocado donde se indica"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-pintura",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Pintura",
+      "resumen": "Preparación, sellado y aplicación.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Superficie seca, limpia y resanada",
+        "Sellador aplicado según fabricante",
+        "Color y acabado conforme a muestra aprobada",
+        "Número de manos especificado",
+        "Cobertura uniforme, sin transparencias, escurrimientos ni marcas de rodillo",
+        "Cortes limpios en esquinas, plafones y marcos",
+        "Áreas adyacentes protegidas y limpias"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-carpinteria",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Carpintería, cancelería y herrería",
+      "resumen": "Puertas, closets, ventanas y barandales.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Medidas y modelo conforme a plano y muestra aprobada",
+        "Marcos a plomo, nivelados y bien anclados",
+        "Puertas que abren y cierran sin rozar; holgura uniforme",
+        "Herrajes, chapas y bisagras completos y funcionando",
+        "Cancelería sellada contra agua y aire; prueba con manguera sin filtraciones",
+        "Vidrios del espesor y tipo especificados, sin rayaduras",
+        "Barandales a la altura de reglamento y firmes",
+        "Acabado sin golpes ni rayones; película protectora retirada al entregar"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-muebles-banos",
+      "tipo": "calidad",
+      "categoria": "Acabados",
+      "titulo": "Muebles sanitarios, accesorios y cocinas",
+      "resumen": "Instalación y prueba de muebles y equipos.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Muebles del modelo aprobado y sin daños",
+        "Fijación firme y sellado perimetral",
+        "Llaves, mezcladoras y válvulas sin fugas",
+        "Desagües con buen flujo y sin olores",
+        "Accesorios a la altura de proyecto",
+        "Cubiertas niveladas, con sellado y sin despostilladuras",
+        "Equipos de cocina conectados y probados"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "qc-entrega",
+      "tipo": "calidad",
+      "categoria": "Entrega",
+      "titulo": "Entrega final y punch list",
+      "resumen": "Revisión de cada área antes de entregar al cliente.",
+      "agregada": "2026-10-18",
+      "campos": [
+        "Obra",
+        "Nivel / eje / área",
+        "Fecha",
+        "Contratista",
+        "Residente",
+        "Supervisión"
+      ],
+      "items": [
+        "Limpieza fina completa en pisos, vidrios, muebles y herrajes",
+        "Todas las instalaciones probadas en funcionamiento",
+        "Sin pendientes de acabados (golpes, manchas, rayones, resanes)",
+        "Planos as built y manuales de equipos entregados",
+        "Garantías de proveedores y contratistas entregadas",
+        "Llaves y controles identificados y entregados",
+        "Acta de entrega firmada con lista de pendientes y fechas compromiso"
+      ],
+      "como_usar": [
+        "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
+        "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
+        "Toma foto de cada hallazgo y de la condición final liberada.",
+        "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
       ]
     }
   ]
