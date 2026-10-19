@@ -341,6 +341,18 @@
           "decimales": 0
         },
         {
+          "label": "Costo por terminar (ETC)",
+          "formula": "bac/(ev/ac)-ac",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Desviación al terminar (VAC, negativo = sobrecosto)",
+          "formula": "bac-bac/(ev/ac)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
           "label": "Avance real",
           "formula": "ev/bac*100",
           "unidad": "%",
@@ -351,7 +363,132 @@
         "Cada viernes toma el avance físico por partida y multiplícalo por su importe: eso es el EV.",
         "El PV sale de tu programa de obra (curva S) a esa misma fecha.",
         "El AC es lo realmente pagado o estimado a contratistas y proveedores.",
-        "SPI o CPI menores a 0.95 en verde-amarillo, menores a 0.90 en rojo: lleva el dato a la junta semanal con la causa."
+        "SPI o CPI menores a 0.95 en verde-amarillo, menores a 0.90 en rojo: lleva el dato a la junta semanal con la causa.",
+        "Para saber en qué semana terminas (no solo cuánto vas), usa la calculadora Programa ganado con el mismo corte."
+      ]
+    },
+    {
+      "id": "calc-programa-ganado",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Programa ganado: fecha de término pronosticada",
+      "resumen": "Earned Schedule: convierte tu avance real en semanas ganadas y pronostica en qué semana terminas si sigues al ritmo actual. A diferencia del SPI en pesos, no se 'corrige solo' al final de la obra.",
+      "agregada": "2026-10-19",
+      "entradas": [
+        {
+          "id": "pd",
+          "label": "Duración del programa contractual (PD)",
+          "unidad": "semanas",
+          "valor": 40
+        },
+        {
+          "id": "at",
+          "label": "Semana actual de obra (AT)",
+          "unidad": "semana",
+          "valor": 20
+        },
+        {
+          "id": "c",
+          "label": "Última semana del programa cuyo % planeado acumulado no rebasa tu avance real (C)",
+          "unidad": "semana",
+          "valor": 16
+        },
+        {
+          "id": "pvc",
+          "label": "% planeado acumulado en la semana C",
+          "unidad": "%",
+          "valor": 38
+        },
+        {
+          "id": "pvc1",
+          "label": "% planeado acumulado en la semana C+1",
+          "unidad": "%",
+          "valor": 42.5
+        },
+        {
+          "id": "ev",
+          "label": "% de avance real acumulado (EV)",
+          "unidad": "%",
+          "valor": 40
+        },
+        {
+          "id": "pvat",
+          "label": "% planeado acumulado en la semana actual",
+          "unidad": "%",
+          "valor": 48
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Programa ganado (ES)",
+          "formula": "c+(ev-pvc)/(pvc1-pvc)",
+          "unidad": "semanas",
+          "decimales": 1
+        },
+        {
+          "label": "SPI(t) = ES / AT",
+          "formula": "(c+(ev-pvc)/(pvc1-pvc))/at",
+          "unidad": "",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0.95,
+            0.9
+          ]
+        },
+        {
+          "label": "Atraso a la fecha SV(t) (negativo = atrasado)",
+          "formula": "c+(ev-pvc)/(pvc1-pvc)-at",
+          "unidad": "semanas",
+          "decimales": 1
+        },
+        {
+          "label": "Duración pronosticada IEAC(t) = PD / SPI(t)",
+          "formula": "pd/((c+(ev-pvc)/(pvc1-pvc))/at)",
+          "unidad": "semanas",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Atraso pronosticado al término",
+          "formula": "pd/((c+(ev-pvc)/(pvc1-pvc))/at)-pd",
+          "unidad": "semanas",
+          "decimales": 1
+        },
+        {
+          "label": "Ritmo necesario para terminar a tiempo (TSPI)",
+          "formula": "(pd-(c+(ev-pvc)/(pvc1-pvc)))/(pd-at)",
+          "unidad": "× ritmo planeado",
+          "decimales": 2
+        },
+        {
+          "label": "SPI en pesos (comparación) = EV / PV",
+          "formula": "ev/pvat",
+          "unidad": "",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Cada viernes toma de tu curva S (programa de obra) la columna de % planeado acumulado por semana y tu % de avance real ponderado por importe.",
+        "Busca en la curva la última semana cuyo % planeado sea menor o igual a tu avance real: esa es C; anota su % y el de la semana siguiente.",
+        "Captura la semana actual y la duración contractual: el ES te dice 'a qué semana del programa equivale lo que llevas'.",
+        "Si SPI(t) baja de 0.95 o la duración pronosticada rebasa la contractual, revisa la ruta crítica y llévalo a la junta con contratistas con la fecha pronosticada, no solo el %.",
+        "Un TSPI mayor a 1.10 significa que tendrías que trabajar más de 10 % más rápido que lo planeado el resto de la obra: es momento de reprogramar o reforzar cuadrillas, y de dejarlo asentado en bitácora.",
+        "Guarda el pronóstico semanal: si la duración pronosticada sube 3 semanas seguidas, la tendencia es real y no un mal corte."
+      ],
+      "fuentes": [
+        {
+          "titulo": "PMI – The practical calculation of schedule variance in terms of schedule (Warburton y Kanabar)",
+          "url": "https://www.pmi.org/learning/library/practical-calculation-schedule-variance-7028"
+        },
+        {
+          "titulo": "AACE PSP – Independent Schedule Forecasting e IEAC(t)",
+          "url": "https://open-exam-prep.com/study-guides/aace-psp/earned-value-schedule/independent-schedule-forecasting-ieact"
+        },
+        {
+          "titulo": "Earned Schedule (Lipke, 2003) – resumen NAOCON",
+          "url": "https://www.naocon.org/wp-content/uploads/Earned-Schedule.pdf"
+        }
       ]
     },
     {
@@ -359,7 +496,7 @@
       "tipo": "calculadora",
       "categoria": "Last Planner",
       "titulo": "PPC semanal",
-      "resumen": "Porcentaje de Plan Completado: mide qué tan confiables son los compromisos de la semana.",
+      "resumen": "Porcentaje de Plan Completado y PCR (restricciones liberadas a tiempo): mide qué tan confiables son los compromisos y si el lookahead se está preparando.",
       "agregada": "2026-10-18",
       "entradas": [
         {
@@ -373,6 +510,18 @@
           "label": "Tareas completadas al 100 %",
           "unidad": "tareas",
           "valor": 18
+        },
+        {
+          "id": "rprog",
+          "label": "Restricciones que debían liberarse esta semana",
+          "unidad": "restricciones",
+          "valor": 15
+        },
+        {
+          "id": "rlib",
+          "label": "Restricciones liberadas a tiempo",
+          "unidad": "restricciones",
+          "valor": 11
         }
       ],
       "salidas": [
@@ -392,12 +541,45 @@
           "formula": "comp-hechas",
           "unidad": "tareas",
           "decimales": 0
+        },
+        {
+          "label": "PCR (restricciones liberadas a tiempo)",
+          "formula": "rprog>0?rlib/rprog*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "Restricciones vencidas",
+          "formula": "rprog-rlib",
+          "unidad": "restricciones",
+          "decimales": 0
         }
       ],
       "como_usar": [
         "Solo cuenta una tarea como hecha si quedó 100 % terminada; 90 % es no cumplida.",
         "Por cada tarea no cumplida anota la causa (material, diseño, mano de obra, clima, predecesora).",
-        "Grafica el PPC semana a semana; la meta práctica es mantenerlo arriba de 80 %."
+        "Grafica el PPC semana a semana; la meta práctica es mantenerlo arriba de 80 %.",
+        "El PCR (restricciones liberadas a tiempo) es indicador adelantado: si baja esta semana, el PPC bajará en las siguientes. Tómalo del formato Análisis de restricciones.",
+        "Un PPC sostenido arriba de ~88 % suele indicar que el equipo se compromete a poco; la referencia publicada es lograr 70 % o más de forma estable."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Mastt – Last Planner System: los 5 niveles, PPC y registro de restricciones (jul 2026)",
+          "url": "https://www.mastt.com/blogs/last-planner-system"
+        },
+        {
+          "titulo": "Lean Construction Institute – Top Mistakes to Avoid in Last Planner System Use (oct 2025)",
+          "url": "https://leanconstruction.org/events/webinars/free-exhibitor-webinar-top-mistakes-to-avoid-in-last-planner-system-use/"
+        },
+        {
+          "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
+          "url": "https://iglc.net/Papers/Details/497"
+        }
       ]
     },
     {
@@ -527,6 +709,61 @@
       ]
     },
     {
+      "id": "fmt-restricciones",
+      "tipo": "formato",
+      "categoria": "Last Planner",
+      "titulo": "Análisis de restricciones (lookahead 6 semanas)",
+      "resumen": "Registro de restricciones por actividad del plan intermedio: qué falta para que el frente esté listo, quién lo libera y para cuándo. Solo entra al plan semanal lo que quedó sin restricciones.",
+      "agregada": "2026-10-19",
+      "campos": [
+        "Obra",
+        "Semana del lookahead (del … al …)",
+        "Frente / nivel / eje",
+        "Actividad del programa",
+        "Contratista o cuadrilla",
+        "Restricción encontrada",
+        "Tipo (predecesora, diseño/RFI, material, mano de obra, equipo/cimbra, espacio/acceso, permiso/aprobación, contrato/anticipo)",
+        "Responsable de liberarla",
+        "Fecha en que se necesita liberada",
+        "Fecha real de liberación",
+        "Elaboró"
+      ],
+      "items": [
+        "Planos en la última revisión vigente y en manos de la cuadrilla",
+        "RFIs y dudas de proyecto respondidas por escrito",
+        "Material en obra o con fecha de entrega confirmada por el proveedor",
+        "Cuadrilla asignada con número de personas confirmado por el contratista",
+        "Equipo, cimbra, andamio o grúa disponible para la fecha",
+        "Actividad predecesora terminada y liberada con su checklist de calidad firmado",
+        "Frente limpio, con acceso y sin interferencia con otra cuadrilla",
+        "Permisos, licencia o visto bueno del DRO / supervisión obtenidos",
+        "Análisis de riesgo y permisos de trabajo (alturas, caliente, excavación) listos",
+        "Contrato, anticipo o pedido autorizado"
+      ],
+      "como_usar": [
+        "El viernes, antes de la junta semanal, toma las actividades del programa de las próximas 6 semanas por frente.",
+        "Revisa cada actividad contra la lista: cada punto que no se cumpla es una restricción; anota tipo, responsable y fecha en que debe estar liberada.",
+        "En la junta, cada responsable confirma su fecha; si una restricción no tiene responsable, no se libera.",
+        "Pasa al plan semanal solo las actividades con todos los puntos en Cumple o N/A.",
+        "Al cierre de la semana marca la fecha real de liberación y captura en la calculadora PPC cuántas restricciones se liberaron a tiempo (PCR).",
+        "Exporta el CSV cada semana: las restricciones que más se repiten por tipo son tu siguiente ciclo PDCA."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Mastt – Last Planner System: los 5 niveles, PPC y registro de restricciones (jul 2026)",
+          "url": "https://www.mastt.com/blogs/last-planner-system"
+        },
+        {
+          "titulo": "Lean Construction Institute – Top Mistakes to Avoid in Last Planner System Use (oct 2025)",
+          "url": "https://leanconstruction.org/events/webinars/free-exhibitor-webinar-top-mistakes-to-avoid-in-last-planner-system-use/"
+        },
+        {
+          "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
+          "url": "https://iglc.net/Papers/Details/497"
+        }
+      ]
+    },
+    {
       "id": "fmt-precolado",
       "tipo": "formato",
       "categoria": "Concreto",
@@ -632,10 +869,24 @@
       "beneficio": "Reduce retrasos al liberar restricciones antes de que la cuadrilla llegue al frente.",
       "como_usar": [
         "Plan maestro: hitos principales del programa general.",
-        "Plan intermedio (lookahead) de 4 a 6 semanas: identifica restricciones de cada actividad (planos, material, permisos, frente libre).",
+        "Plan intermedio (lookahead) de 6 semanas: registra las restricciones de cada actividad en el formato Análisis de restricciones (planos, material, permisos, frente libre, predecesora).",
         "Junta semanal: cada contratista se compromete solo a lo que no tiene restricciones.",
         "Junta diaria de 15 minutos al inicio de jornada para alinear el día.",
         "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Mastt – Last Planner System: los 5 niveles, PPC y registro de restricciones (jul 2026)",
+          "url": "https://www.mastt.com/blogs/last-planner-system"
+        },
+        {
+          "titulo": "Lean Construction Institute – Top Mistakes to Avoid in Last Planner System Use (oct 2025)",
+          "url": "https://leanconstruction.org/events/webinars/free-exhibitor-webinar-top-mistakes-to-avoid-in-last-planner-system-use/"
+        },
+        {
+          "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
+          "url": "https://iglc.net/Papers/Details/497"
+        }
       ]
     },
     {

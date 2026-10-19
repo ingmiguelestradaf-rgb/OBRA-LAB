@@ -2,6 +2,41 @@
   "actualizaciones": [
     {
       "fecha": "2026-10-19",
+      "titulo": "Control de avance: fecha de término pronosticada y análisis de restricciones",
+      "resumen": "Nueva calculadora de Programa ganado (Earned Schedule) que pronostica en qué semana terminas al ritmo actual y qué ritmo necesitas para cumplir, y nuevo formato de Análisis de restricciones para el lookahead de 6 semanas. Mejoras: la calculadora PPC ahora mide el PCR (restricciones liberadas a tiempo) como indicador adelantado; Valor ganado agrega costo por terminar (ETC) y desviación al terminar (VAC); Last Planner enlaza al nuevo formato.",
+      "herramientas": [
+        "calc-programa-ganado",
+        "fmt-restricciones",
+        "calc-ppc",
+        "calc-valor-ganado",
+        "met-last-planner"
+      ],
+      "como_aplicarlo": "Este viernes llena el Análisis de restricciones con las actividades de las próximas 6 semanas antes de la junta, y con el corte de avance calcula el Programa ganado: lleva a la junta la semana de término pronosticada y el PCR, no solo el % de avance.",
+      "fuentes": [
+        {
+          "titulo": "PMI – The practical calculation of schedule variance in terms of schedule (Warburton y Kanabar)",
+          "url": "https://www.pmi.org/learning/library/practical-calculation-schedule-variance-7028"
+        },
+        {
+          "titulo": "AACE PSP – Independent Schedule Forecasting e IEAC(t)",
+          "url": "https://open-exam-prep.com/study-guides/aace-psp/earned-value-schedule/independent-schedule-forecasting-ieact"
+        },
+        {
+          "titulo": "Mastt – Last Planner System: los 5 niveles, PPC y registro de restricciones (jul 2026)",
+          "url": "https://www.mastt.com/blogs/last-planner-system"
+        },
+        {
+          "titulo": "Lean Construction Institute – Top Mistakes to Avoid in Last Planner System Use (oct 2025)",
+          "url": "https://leanconstruction.org/events/webinars/free-exhibitor-webinar-top-mistakes-to-avoid-in-last-planner-system-use/"
+        },
+        {
+          "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
+          "url": "https://iglc.net/Papers/Details/497"
+        }
+      ]
+    },
+    {
+      "fecha": "2026-10-19",
       "titulo": "Materiales: concreto en obra, morteros, pintura, repellos, block, tablaroca y plafones",
       "resumen": "Seis calculadoras nuevas: dosificación de concreto hecho en obra y morteros con receta por bulto en botes de 19 L; pintura y sellador; repellos y aplanados; muros de block y tabique con castillos y dalas; muros de tablaroca; plafones corridos de tablaroca y reticulares registrables.",
       "herramientas": [
