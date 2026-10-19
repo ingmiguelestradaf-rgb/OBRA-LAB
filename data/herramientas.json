@@ -165,15 +165,16 @@
       "modulo": "escalera",
       "categoria": "Diseño en obra",
       "titulo": "Distribución de escalera",
-      "resumen": "Número de peraltes y huellas, regla de Blondel, tramos recto, en L o en U, perfil dibujado y tabla de trazo.",
+      "resumen": "Uno o varios entrepisos con descanso en cada piso: peraltes, huellas, regla de Blondel, tramos recto, en L o en U, perfil, tabla de trazo y material de barandal.",
       "beneficio": "Pasa de la altura de entrepiso a una escalera cómoda y trazable en obra sin hacer cuentas a mano.",
       "agregada": "2026-10-18",
       "como_usar": [
-        "Mide la altura real de piso terminado a piso terminado; no la de proyecto si ya hay losa colada.",
-        "Captura el peralte máximo y la huella que pide tu reglamento o tu proyecto (valores de arranque: 18 cm y 28 cm).",
-        "Elige el arreglo: un tramo recto, dos tramos en L o en U. Si el largo disponible no alcanza, la app te lo indica.",
-        "Revisa que 2p + h quede entre 61 y 65 cm para que la escalera sea cómoda.",
-        "Usa la tabla de trazo para marcar en muro cada peralte: nivel de huella y distancia desde el arranque del tramo."
+        "Elige cuántos entrepisos sube la escalera: 1 si va de un piso al siguiente, o varios si llega a un piso, descansa y continúa.",
+        "Captura la altura real de piso terminado a piso terminado de cada entrepiso; cada uno puede ser distinto.",
+        "Captura peralte máximo y huella de tu reglamento o proyecto (arranque: 18 cm y 28 cm) y el arreglo: recto, en L o en U.",
+        "En L o en U puedes fijar la altura del descanso intermedio; la app la ajusta al peralte más cercano para que todos sean iguales.",
+        "Revisa que 2p + h quede entre 61 y 65 cm y usa la tabla de trazo para marcar cada escalón con su nivel.",
+        "En Barandal elige uno o dos lados, altura, postes y relleno; obtienes metros, piezas, tubos comerciales, placas y anclas."
       ]
     },
     {

@@ -1,6 +1,16 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-19",
+      "titulo": "Escaleras de varios entrepisos y material de barandal",
+      "resumen": "La calculadora de escaleras ahora llega a un piso con descanso y continúa al siguiente (hasta 8 entrepisos con alturas distintas), permite fijar la altura del descanso intermedio y calcula el material del barandal: pasamanos, larguero, postes, barrotes o líneas horizontales o panel, tubos comerciales, placas y anclas.",
+      "herramientas": [
+        "calc-escalera"
+      ],
+      "como_aplicarlo": "Captura las alturas reales de entrepiso de tu obra, revisa la tabla de trazo por nivel y usa la lista de barandal para pedir el tubo al herrero.",
+      "fuentes": []
+    },
+    {
       "fecha": "2026-10-18",
       "titulo": "Checklists de calidad: de obra negra a entrega",
       "resumen": "Nuevo apartado con 18 checklists de calidad: trazo y excavación, cimentación, estructura, mampostería, estructura metálica, instalaciones hidrosanitaria, eléctrica, de gas y aire acondicionado, impermeabilización, aplanados, pisos, tablaroca, pintura, carpintería y cancelería, muebles de baño y cocina, y entrega final.",
