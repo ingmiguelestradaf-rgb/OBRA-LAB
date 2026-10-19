@@ -3,6 +3,17 @@ import { readFileSync, existsSync } from "node:fs";
 const H = JSON.parse(readFileSync(new URL("../data/herramientas.json", import.meta.url))).herramientas;
 const U = JSON.parse(readFileSync(new URL("../data/actualizaciones.json", import.meta.url))).actualizaciones;
 const errs = [];
+// carga los módulos en un entorno simulado para saber cuáles quedan registrados
+import { readdirSync } from "node:fs";
+import vm from "node:vm";
+const MODULOS = new Set();
+{
+  const ctx = { window: {}, localStorage: { getItem: () => null, setItem() {} }, console };
+  vm.createContext(ctx);
+  for (const f of readdirSync(new URL("../modulos/", import.meta.url)).filter((x) => x.endsWith(".js")))
+    vm.runInContext(readFileSync(new URL("../modulos/" + f, import.meta.url), "utf8"), ctx);
+  Object.keys(ctx.window.ObraModulos || {}).filter((k) => !k.startsWith("_")).forEach((k) => MODULOS.add(k));
+}
 const ids = new Set();
 const TIPOS = ["calculadora", "formato", "calidad", "metodo", "recurso"];
 for (const t of H) {
@@ -13,7 +24,7 @@ for (const t of H) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(t.agregada || "")) w("fecha agregada inválida");
   if (!Array.isArray(t.como_usar) || t.como_usar.length < 2) w("como_usar necesita al menos 2 pasos");
   if (t.modulo) {
-    if (!existsSync(new URL(`../modulos/${t.modulo}.js`, import.meta.url))) w(`no existe modulos/${t.modulo}.js`);
+    if (!MODULOS.has(t.modulo)) w(`ningún archivo de modulos/ registra el módulo "${t.modulo}"`);
   } else if (t.tipo === "calculadora") {
     const ins = t.entradas || [], outs = t.salidas || [];
     if (!ins.length || !outs.length) w("calculadora sin entradas o salidas");

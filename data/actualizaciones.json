@@ -2,6 +2,21 @@
   "actualizaciones": [
     {
       "fecha": "2026-10-19",
+      "titulo": "Materiales: concreto en obra, morteros, pintura, repellos, block, tablaroca y plafones",
+      "resumen": "Seis calculadoras nuevas: dosificación de concreto hecho en obra y morteros con receta por bulto en botes de 19 L; pintura y sellador; repellos y aplanados; muros de block y tabique con castillos y dalas; muros de tablaroca; plafones corridos de tablaroca y reticulares registrables.",
+      "herramientas": [
+        "calc-dosificacion",
+        "calc-pintura",
+        "calc-repello",
+        "calc-block",
+        "calc-tablaroca",
+        "calc-plafon"
+      ],
+      "como_aplicarlo": "Calcula el material de la siguiente partida antes de pedirlo y compara contra lo que pide el contratista; pega la receta por bulto en la revolvedora.",
+      "fuentes": []
+    },
+    {
+      "fecha": "2026-10-19",
       "titulo": "Escaleras de varios entrepisos y material de barandal",
       "resumen": "La calculadora de escaleras ahora llega a un piso con descanso y continúa al siguiente (hasta 8 entrepisos con alturas distintas), permite fijar la altura del descanso intermedio y calcula el material del barandal: pasamanos, larguero, postes, barrotes o líneas horizontales o panel, tubos comerciales, placas y anclas.",
       "herramientas": [

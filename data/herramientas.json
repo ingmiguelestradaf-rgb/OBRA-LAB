@@ -178,6 +178,95 @@
       ]
     },
     {
+      "id": "calc-dosificacion",
+      "tipo": "calculadora",
+      "modulo": "dosificacion",
+      "categoria": "Concreto",
+      "titulo": "Concreto hecho en obra y morteros",
+      "resumen": "Dosificación por resistencia o proporción: bultos, arena, grava y agua, y la receta por bulto en botes de 19 L.",
+      "beneficio": "Le das al maestro de obra una receta clara por bulto y pides el material exacto.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Elige Concreto hecho en obra o Mortero y captura el volumen en m³.",
+        "En concreto elige la resistencia buscada (f'c 100 a 250) o una proporción propia; en mortero elige la proporción según el uso.",
+        "Entrega al maestro la receta por bulto: botes de arena, de grava y litros de agua.",
+        "Para elementos estructurales confirma la resistencia con cilindros o usa concreto premezclado."
+      ]
+    },
+    {
+      "id": "calc-pintura",
+      "tipo": "calculadora",
+      "modulo": "pintura",
+      "categoria": "Acabados",
+      "titulo": "Pintura",
+      "resumen": "Litros de pintura y sellador por área, manos y tipo de superficie, con cubetas y galones.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Captura largo y altura de los muros y descuenta vanos, o pon el área directa.",
+        "Elige el tipo de superficie: lisa, aplanado rústico o block aparente.",
+        "Ajusta el rendimiento al de la ficha técnica de la pintura que vas a comprar."
+      ]
+    },
+    {
+      "id": "calc-repello",
+      "tipo": "calculadora",
+      "modulo": "repello",
+      "categoria": "Albañilería",
+      "titulo": "Repellos y aplanados",
+      "resumen": "Mortero, cemento, arena, cal y agua para repellar muros según espesor y proporción.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Captura el área a repellar y el número de caras.",
+        "Mide el espesor promedio real con reventones; 1.5 cm es un valor común.",
+        "Elige la proporción: 1:4 en exteriores, 1:5 o cemento-cal-arena en interiores."
+      ]
+    },
+    {
+      "id": "calc-block",
+      "tipo": "calculadora",
+      "modulo": "block",
+      "categoria": "Albañilería",
+      "titulo": "Muros de block y tabique",
+      "resumen": "Piezas, mortero de junteo, castillos, dalas, concreto y acero para muros de block, tabique o tabicón.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Captura largo total y altura de muros, y descuenta vanos.",
+        "Elige la pieza y la junta; revisa piezas por m² contra tu práctica.",
+        "Activa castillos y dalas para obtener concreto, varilla #3 y alambrón.",
+        "Confirma la ubicación de castillos con tu proyecto estructural."
+      ]
+    },
+    {
+      "id": "calc-tablaroca",
+      "tipo": "calculadora",
+      "modulo": "tablaroca",
+      "categoria": "Acabados",
+      "titulo": "Muros de tablaroca",
+      "resumen": "Placas, postes, canales, tornillos, anclas, cinta, compuesto, esquineros y aislante para muros de tablaroca.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Captura largo y altura del muro, caras y capas de placa.",
+        "Elige el tipo de placa y la separación de postes (61 o 40.6 cm).",
+        "Indica cuántas puertas y ventanas hay para sumar postes de jamba.",
+        "Ajusta tornillos y compuesto por m² a la recomendación del fabricante."
+      ]
+    },
+    {
+      "id": "calc-plafon",
+      "tipo": "calculadora",
+      "modulo": "plafon",
+      "categoria": "Acabados",
+      "titulo": "Plafones",
+      "resumen": "Material para plafón corrido de tablaroca o plafón reticular registrable de 61×61 o 61×122.",
+      "agregada": "2026-10-19",
+      "como_usar": [
+        "Elige el tipo: corrido de tablaroca o reticular registrable.",
+        "Captura largo y ancho del local, o el área y el perímetro.",
+        "Ajusta la altura de suspensión para calcular el alambre de colgantes.",
+        "En reticular, inicia la retícula desde el centro del local para cortes iguales."
+      ]
+    },
+    {
       "id": "calc-valor-ganado",
       "tipo": "calculadora",
       "categoria": "Control de avance",

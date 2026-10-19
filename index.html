@@ -194,6 +194,11 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 .es-cols .ac-t td{white-space:normal}
 .es-cols h3{margin-top:0}
 .es-trazo{max-height:360px;overflow-y:auto}
+.mt{display:flex;flex-direction:column;gap:14px}
+.mt-receta{border:1px solid var(--accent);border-radius:8px;padding:12px 16px;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.mt-receta h4{margin:0 0 6px;font:700 15px var(--display)}
+.mt-receta ul{margin:0;padding-left:18px;font:500 15px var(--mono)}
+.mt-notas{margin:0;padding-left:18px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px;max-width:72ch}
 @media (max-width:520px){.ac-f.w2{grid-column:1/-1}.ac-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media print{.ac-addel,.ac-add,.ac-crit,.ac-x,.ac-parr button[aria-pressed="false"]{display:none!important}.ac-el{break-inside:avoid}}
 
@@ -228,6 +233,7 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 
 <script src="modulos/acero.js"></script>
 <script src="modulos/escalera.js"></script>
+<script src="modulos/materiales.js"></script>
 <script>
 const TABS=[
   {id:"novedades",label:"Novedades"},
