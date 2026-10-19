@@ -6,7 +6,7 @@ Autor: Ing. Miguel Estrada · Tijuana, B.C.
 
 ## Uso
 
-Abre la app desde GitHub Pages: `https://ingmiguelestradaf-rgb.github.io/obra-lab/`
+Abre la app desde GitHub Pages: `https://ingmiguelestradaf-rgb.github.io/OBRA-LAB/`
 
 - **Novedades**: qué se agregó cada día y cómo aplicarlo en obra.
 - **Calculadoras**: los valores capturados se guardan en tu navegador.
