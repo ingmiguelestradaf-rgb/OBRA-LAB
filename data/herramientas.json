@@ -1,0 +1,274 @@
+{
+  "version": 1,
+  "herramientas": [
+    {
+      "id": "calc-concreto",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Volumen de concreto y ollas",
+      "resumen": "Calcula m³ de un elemento con desperdicio y cuántas ollas pedir a la planta.",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "largo", "label": "Largo", "unidad": "m", "valor": 12},
+        {"id": "ancho", "label": "Ancho", "unidad": "m", "valor": 8},
+        {"id": "espesor", "label": "Espesor / peralte", "unidad": "m", "valor": 0.12},
+        {"id": "piezas", "label": "Número de elementos iguales", "unidad": "pza", "valor": 1},
+        {"id": "desp", "label": "Desperdicio", "unidad": "%", "valor": 3},
+        {"id": "olla", "label": "Capacidad de olla", "unidad": "m³", "valor": 7}
+      ],
+      "salidas": [
+        {"label": "Volumen neto", "formula": "largo*ancho*espesor*piezas", "unidad": "m³", "decimales": 2},
+        {"label": "Volumen a pedir", "formula": "largo*ancho*espesor*piezas*(1+desp/100)", "unidad": "m³", "decimales": 2, "destacar": true},
+        {"label": "Ollas", "formula": "Math.ceil(largo*ancho*espesor*piezas*(1+desp/100)/olla)", "unidad": "ollas", "decimales": 0},
+        {"label": "Última olla", "formula": "(function(v){var r=v%olla;return r===0?olla:r})(largo*ancho*espesor*piezas*(1+desp/100))", "unidad": "m³", "decimales": 2}
+      ],
+      "como_usar": [
+        "Mide en plano el elemento a colar (losa, zapata, muro) y captura sus dimensiones en metros.",
+        "Usa 2–3 % de desperdicio en losas con bomba y 5 % en zapatas o elementos colados contra terreno.",
+        "Revisa la última olla: si llega muy ligera, ajusta el pedido para no pagar viaje incompleto.",
+        "Anota el volumen a pedir en tu formato de liberación de colado y compáralo con las remisiones."
+      ]
+    },
+    {
+      "id": "calc-varilla",
+      "tipo": "calculadora",
+      "categoria": "Acero",
+      "titulo": "Peso de varilla",
+      "resumen": "Peso en kg de varillas por número (#3 a #12) con la fórmula 0.00617·d².",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "num", "label": "Número de varilla (octavos de pulgada)", "unidad": "#", "valor": 4},
+        {"id": "longitud", "label": "Longitud de cada pieza", "unidad": "m", "valor": 12},
+        {"id": "cantidad", "label": "Cantidad de piezas", "unidad": "pza", "valor": 50}
+      ],
+      "salidas": [
+        {"label": "Diámetro", "formula": "num*25.4/8", "unidad": "mm", "decimales": 1},
+        {"label": "Peso por metro", "formula": "0.00617*Math.pow(num*25.4/8,2)", "unidad": "kg/m", "decimales": 3},
+        {"label": "Peso total", "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad", "unidad": "kg", "decimales": 1, "destacar": true},
+        {"label": "Toneladas", "formula": "0.00617*Math.pow(num*25.4/8,2)*longitud*cantidad/1000", "unidad": "t", "decimales": 3}
+      ],
+      "como_usar": [
+        "Captura el número de varilla (#3 = 3/8\", #4 = 1/2\", etc.).",
+        "Usa la longitud de corte de tu despiece, incluyendo ganchos y traslapes.",
+        "Suma el total por diámetro y compáralo contra las remisiones del proveedor para controlar desperdicio."
+      ]
+    },
+    {
+      "id": "calc-valor-ganado",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Valor ganado (SPI / CPI)",
+      "resumen": "Indica si la obra va adelantada o atrasada y si gasta más de lo presupuestado.",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "bac", "label": "Presupuesto total (BAC)", "unidad": "$", "valor": 12000000},
+        {"id": "pv", "label": "Valor planeado a la fecha (PV)", "unidad": "$", "valor": 4800000},
+        {"id": "ev", "label": "Valor ganado (EV = avance real × presupuesto)", "unidad": "$", "valor": 4320000},
+        {"id": "ac", "label": "Costo real a la fecha (AC)", "unidad": "$", "valor": 4550000}
+      ],
+      "salidas": [
+        {"label": "SPI (programa)", "formula": "ev/pv", "unidad": "", "decimales": 2, "destacar": true, "semaforo": [0.95, 0.9]},
+        {"label": "CPI (costo)", "formula": "ev/ac", "unidad": "", "decimales": 2, "destacar": true, "semaforo": [0.95, 0.9]},
+        {"label": "Variación de programa (SV)", "formula": "ev-pv", "unidad": "$", "decimales": 0},
+        {"label": "Variación de costo (CV)", "formula": "ev-ac", "unidad": "$", "decimales": 0},
+        {"label": "Costo estimado al terminar (EAC)", "formula": "bac/(ev/ac)", "unidad": "$", "decimales": 0},
+        {"label": "Avance real", "formula": "ev/bac*100", "unidad": "%", "decimales": 1}
+      ],
+      "como_usar": [
+        "Cada viernes toma el avance físico por partida y multiplícalo por su importe: eso es el EV.",
+        "El PV sale de tu programa de obra (curva S) a esa misma fecha.",
+        "El AC es lo realmente pagado o estimado a contratistas y proveedores.",
+        "SPI o CPI menores a 0.95 en verde-amarillo, menores a 0.90 en rojo: lleva el dato a la junta semanal con la causa."
+      ]
+    },
+    {
+      "id": "calc-ppc",
+      "tipo": "calculadora",
+      "categoria": "Last Planner",
+      "titulo": "PPC semanal",
+      "resumen": "Porcentaje de Plan Completado: mide qué tan confiables son los compromisos de la semana.",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "comp", "label": "Tareas comprometidas en la semana", "unidad": "tareas", "valor": 24},
+        {"id": "hechas", "label": "Tareas completadas al 100 %", "unidad": "tareas", "valor": 18}
+      ],
+      "salidas": [
+        {"label": "PPC", "formula": "hechas/comp*100", "unidad": "%", "decimales": 0, "destacar": true, "semaforo": [80, 65]},
+        {"label": "Tareas no cumplidas", "formula": "comp-hechas", "unidad": "tareas", "decimales": 0}
+      ],
+      "como_usar": [
+        "Solo cuenta una tarea como hecha si quedó 100 % terminada; 90 % es no cumplida.",
+        "Por cada tarea no cumplida anota la causa (material, diseño, mano de obra, clima, predecesora).",
+        "Grafica el PPC semana a semana; la meta práctica es mantenerlo arriba de 80 %."
+      ]
+    },
+    {
+      "id": "calc-rendimiento",
+      "tipo": "calculadora",
+      "categoria": "Mano de obra",
+      "titulo": "Rendimiento de cuadrilla",
+      "resumen": "Rendimiento real por jornal y días para terminar el volumen restante.",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "ejecutado", "label": "Cantidad ejecutada", "unidad": "unid.", "valor": 180},
+        {"id": "dias", "label": "Días trabajados", "unidad": "días", "valor": 4},
+        {"id": "gente", "label": "Integrantes de la cuadrilla", "unidad": "pers.", "valor": 3},
+        {"id": "restante", "label": "Cantidad restante", "unidad": "unid.", "valor": 420}
+      ],
+      "salidas": [
+        {"label": "Rendimiento por cuadrilla", "formula": "ejecutado/dias", "unidad": "unid./día", "decimales": 1, "destacar": true},
+        {"label": "Rendimiento por jornal", "formula": "ejecutado/(dias*gente)", "unidad": "unid./jornal", "decimales": 2},
+        {"label": "Días para terminar", "formula": "Math.ceil(restante/(ejecutado/dias))", "unidad": "días", "decimales": 0}
+      ],
+      "como_usar": [
+        "Usa una unidad que coincida con tu presupuesto (m², m³, ml, pza).",
+        "Compara el rendimiento por jornal contra el de tu análisis de precio unitario.",
+        "Si los días para terminar no caben en el programa, decide: más cuadrillas, tiempo extra o resecuenciar."
+      ]
+    },
+    {
+      "id": "calc-muro-block",
+      "tipo": "calculadora",
+      "categoria": "Albañilería",
+      "titulo": "Muro de block",
+      "resumen": "Piezas de block 15×20×40 y mortero para un muro, descontando vanos.",
+      "agregada": "2026-10-18",
+      "entradas": [
+        {"id": "largo", "label": "Largo del muro", "unidad": "m", "valor": 20},
+        {"id": "alto", "label": "Altura", "unidad": "m", "valor": 2.8},
+        {"id": "vanos", "label": "Área de vanos a descontar", "unidad": "m²", "valor": 4.2},
+        {"id": "pzm2", "label": "Piezas por m²", "unidad": "pza/m²", "valor": 12.5},
+        {"id": "desp", "label": "Desperdicio", "unidad": "%", "valor": 5}
+      ],
+      "salidas": [
+        {"label": "Área neta", "formula": "largo*alto-vanos", "unidad": "m²", "decimales": 2},
+        {"label": "Block a pedir", "formula": "Math.ceil((largo*alto-vanos)*pzm2*(1+desp/100))", "unidad": "pza", "decimales": 0, "destacar": true},
+        {"label": "Mortero aprox. (0.012 m³/m²)", "formula": "(largo*alto-vanos)*0.012*(1+desp/100)", "unidad": "m³", "decimales": 2}
+      ],
+      "como_usar": [
+        "12.5 pzas/m² aplica a block de 40×20 con junta de 1 cm; ajusta si usas otra medida.",
+        "Descuenta puertas y ventanas en el área de vanos.",
+        "El consumo de mortero es una referencia: valídalo con tu análisis o con un tramo de prueba."
+      ]
+    },
+    {
+      "id": "fmt-precolado",
+      "tipo": "formato",
+      "categoria": "Concreto",
+      "titulo": "Liberación de colado",
+      "resumen": "Checklist previo a colar: cimbra, acero, instalaciones y pruebas.",
+      "agregada": "2026-10-18",
+      "campos": ["Obra", "Elemento / eje", "Fecha", "Volumen programado (m³)", "f'c especificado", "Residente", "Supervisión"],
+      "items": [
+        "Cimbra alineada, a plomo y con niveles revisados",
+        "Cimbra limpia, con desmoldante y sin fugas",
+        "Acero conforme a plano: diámetros, separaciones y número de piezas",
+        "Traslapes y anclajes con longitud correcta",
+        "Recubrimientos garantizados con silletas o separadores",
+        "Instalaciones eléctricas, hidráulicas y pasos de ductos colocados",
+        "Juntas de colado definidas y tratadas",
+        "Bomba, vibradores y personal confirmados",
+        "Laboratorio confirmado para revenimiento y cilindros",
+        "Pronóstico de clima revisado; curado programado"
+      ],
+      "como_usar": [
+        "Llénalo junto con la supervisión un día antes del colado.",
+        "Cualquier 'No cumple' bloquea el colado hasta corregirse y anotarse.",
+        "Exporta el CSV o imprímelo y adjúntalo a la bitácora con fotos."
+      ]
+    },
+    {
+      "id": "fmt-reporte-diario",
+      "tipo": "formato",
+      "categoria": "Bitácora",
+      "titulo": "Reporte diario de obra",
+      "resumen": "Registro del día: personal, equipo, actividades, clima e incidencias.",
+      "agregada": "2026-10-18",
+      "campos": ["Obra", "Fecha", "Clima", "Personal propio", "Personal de contratistas", "Equipo en obra", "Actividades realizadas", "Materiales recibidos", "Incidencias / retrasos", "Elaboró"],
+      "items": [
+        "Fotografías del avance tomadas por frente",
+        "Charla de seguridad de 5 minutos realizada",
+        "Pendientes del día anterior revisados",
+        "Notas de bitácora electrónica registradas"
+      ],
+      "como_usar": [
+        "Llénalo al cierre de cada jornada; toma menos de 10 minutos.",
+        "Sé específico en incidencias: hora, causa y quién la reporta. Te protege en reclamaciones.",
+        "Guarda el CSV por fecha; al final del mes tienes tu historial completo."
+      ]
+    },
+    {
+      "id": "fmt-seguridad",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Recorrido de seguridad semanal",
+      "resumen": "Inspección rápida de condiciones de seguridad en obra (referencia NOM-031-STPS).",
+      "agregada": "2026-10-18",
+      "campos": ["Obra", "Fecha", "Área recorrida", "Responsable", "Contratistas presentes"],
+      "items": [
+        "Personal con EPP completo (casco, chaleco, botas, lentes, guantes)",
+        "Arnés y línea de vida en trabajos en altura",
+        "Andamios con base firme, rodapiés y barandal",
+        "Bordes de losa y huecos protegidos",
+        "Excavaciones con talud o ademe y señalizadas",
+        "Orden y limpieza en áreas de trabajo y circulaciones",
+        "Extintores vigentes y accesibles",
+        "Instalación eléctrica provisional protegida y con tierra",
+        "Botiquín y rutas de evacuación señalizadas"
+      ],
+      "como_usar": [
+        "Haz el recorrido con un representante de cada contratista.",
+        "Cada 'No cumple' debe tener responsable y fecha de corrección en la observación.",
+        "Compara semana contra semana: el número de hallazgos debe bajar."
+      ]
+    },
+    {
+      "id": "met-last-planner",
+      "tipo": "metodo",
+      "categoria": "Last Planner",
+      "titulo": "Last Planner System",
+      "resumen": "Planeación colaborativa con los contratistas para cumplir lo que se promete cada semana.",
+      "agregada": "2026-10-18",
+      "beneficio": "Reduce retrasos al liberar restricciones antes de que la cuadrilla llegue al frente.",
+      "como_usar": [
+        "Plan maestro: hitos principales del programa general.",
+        "Plan intermedio (lookahead) de 4 a 6 semanas: identifica restricciones de cada actividad (planos, material, permisos, frente libre).",
+        "Junta semanal: cada contratista se compromete solo a lo que no tiene restricciones.",
+        "Junta diaria de 15 minutos al inicio de jornada para alinear el día.",
+        "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento."
+      ]
+    },
+    {
+      "id": "met-5s",
+      "tipo": "metodo",
+      "categoria": "Mejora continua",
+      "titulo": "5S en obra",
+      "resumen": "Orden y limpieza sistemáticos para reducir tiempos muertos y accidentes.",
+      "agregada": "2026-10-18",
+      "beneficio": "Menos tiempo buscando material y herramienta; menos accidentes por tropiezos.",
+      "como_usar": [
+        "Seleccionar: retira del frente todo lo que no se usará esta semana.",
+        "Ordenar: zonas marcadas para acero, cimbra, agregados y herramienta.",
+        "Limpiar: 10 minutos al final de cada jornada por cuadrilla.",
+        "Estandarizar: fotos de 'cómo debe verse' cada zona, pegadas en sitio.",
+        "Sostener: califica cada área en el recorrido de seguridad semanal."
+      ]
+    },
+    {
+      "id": "met-pdca",
+      "tipo": "metodo",
+      "categoria": "Mejora continua",
+      "titulo": "Ciclo PDCA para problemas recurrentes",
+      "resumen": "Planear, hacer, verificar y actuar sobre un problema que se repite en obra.",
+      "agregada": "2026-10-18",
+      "beneficio": "Convierte cada error repetido en un cambio de proceso documentado.",
+      "como_usar": [
+        "Planear: define el problema con un dato (ej. 3 de 10 colados con fugas de cimbra).",
+        "Busca la causa raíz con los 5 porqués junto con el contratista.",
+        "Hacer: prueba la solución en un solo frente durante una semana.",
+        "Verificar: compara el dato antes y después.",
+        "Actuar: si funcionó, agrégala al checklist correspondiente de ObraLab."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "actualizaciones": [
+    {
+      "fecha": "2026-10-18",
+      "titulo": "Arranque de ObraLab",
+      "resumen": "Primera versión con 6 calculadoras, 3 formatos de campo y 3 métodos de mejora continua. A partir de mañana se agrega al menos una herramienta nueva cada día.",
+      "herramientas": ["calc-concreto", "calc-varilla", "calc-valor-ganado", "calc-ppc", "calc-rendimiento", "calc-muro-block", "fmt-precolado", "fmt-reporte-diario", "fmt-seguridad", "met-last-planner", "met-5s", "met-pdca"],
+      "como_aplicarlo": "Empieza esta semana con el formato de Liberación de colado y el PPC semanal en tu junta con contratistas.",
+      "fuentes": []
+    }
+  ]
+}
