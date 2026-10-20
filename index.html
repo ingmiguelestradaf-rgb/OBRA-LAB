@@ -294,16 +294,17 @@ function render(){
 function head(t){return `<button class="back" type="button">← ${esc(TABS.find(x=>x.id===t.tipo).label)}</button>
   <div class="eyebrow"><span>${t._code}</span><span>${esc(t.categoria)}</span><span>agregada ${fmtDate(t.agregada)}</span></div>
   <h2>${esc(t.titulo)}</h2><p class="lead">${esc(t.resumen)}</p>`}
+const srcs=t=>t.fuentes?.length?`<p class="src">Fuentes: ${t.fuentes.map(f=>`<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.titulo)}</a>`).join(" · ")}</p>`:"";
 const steps=a=>a?.length?`<h3>Cómo usarla en obra</h3><ol class="steps">${a.map(s=>`<li><span>${esc(s)}</span></li>`).join("")}</ol>`:"";
 function renderTool(t){
   if(t.modulo){
-    return head(t)+(t.beneficio?`<p class="benefit">${esc(t.beneficio)}</p>`:"")+`<div id="mod" class="mod"></div>`+steps(t.como_usar);
+    return head(t)+(t.beneficio?`<p class="benefit">${esc(t.beneficio)}</p>`:"")+`<div id="mod" class="mod"></div>`+steps(t.como_usar)+srcs(t);
   }
   if(t.tipo==="calculadora"){
     const saved=store.get("calc:"+t.id)||{};
     return head(t)+`<div class="calc"><div>${t.entradas.map(e=>`<div class="field"><label for="in-${e.id}">${esc(e.label)}</label><div class="inp"><input id="in-${e.id}" data-k="${e.id}" type="number" inputmode="decimal" step="any" value="${saved[e.id]??e.valor}"><em>${esc(e.unidad)}</em></div></div>`).join("")}
       <button class="btn ghost" id="reset" type="button">Valores de ejemplo</button></div>
-      <div><div class="outs" id="outs"></div></div></div>`+steps(t.como_usar);
+      <div><div class="outs" id="outs"></div></div></div>`+steps(t.como_usar)+srcs(t);
   }
   if(t.tipo==="formato"||t.tipo==="calidad"){
     const s=store.get("fmt:"+t.id)||{campos:{},items:{}};
@@ -313,12 +314,12 @@ function renderTool(t){
         <span class="seg">${[["si","Cumple"],["no","No"],["na","N/A"]].map(([k,l])=>`<button type="button" class="${k}" data-v="${k}" aria-pressed="${v.r===k}">${l}</button>`).join("")}</span>
         <input class="obs" id="o-${i}" placeholder="Observación / responsable / fecha" value="${esc(v.o||"")}"></div>`}).join("")}
       <p class="tally" id="tally"></p>
-      <div class="actions"><button class="btn" id="csv" type="button">Exportar CSV</button><button class="btn ghost" id="print" type="button">Imprimir / PDF</button><button class="btn ghost" id="clear" type="button">Nuevo (limpiar)</button></div>`+steps(t.como_usar);
+      <div class="actions"><button class="btn" id="csv" type="button">Exportar CSV</button><button class="btn ghost" id="print" type="button">Imprimir / PDF</button><button class="btn ghost" id="clear" type="button">Nuevo (limpiar)</button></div>`+steps(t.como_usar)+srcs(t);
   }
   // metodo / recurso
   return head(t)+(t.beneficio?`<p class="benefit"><b>Beneficio:</b> ${esc(t.beneficio)}</p>`:"")+
     (t.tipo==="recurso"?`<div class="kpis">${t.plataforma?`<span>Plataforma<b>${esc(t.plataforma)}</b></span>`:""}${t.costo?`<span>Costo<b>${esc(t.costo)}</b></span>`:""}</div>${t.url?`<p><a href="${esc(t.url)}" target="_blank" rel="noopener">Abrir sitio oficial ↗</a></p>`:""}`:"")+
-    steps(t.como_usar)+(t.fuentes?.length?`<p class="src">Fuentes: ${t.fuentes.map(f=>`<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.titulo)}</a>`).join(" · ")}</p>`:"");
+    steps(t.como_usar)+srcs(t);
 }
 function num(v,d){return Number.isFinite(v)?v.toLocaleString("es-MX",{minimumFractionDigits:d,maximumFractionDigits:d}):"—"}
 function bindTool(t){

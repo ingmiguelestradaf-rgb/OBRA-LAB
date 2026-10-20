@@ -194,6 +194,302 @@
       ]
     },
     {
+      "id": "calc-aceptacion-fc",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Aceptación de resistencia f'c (3 pruebas consecutivas)",
+      "resumen": "Dictamina si el concreto cumple f'c con los resultados del laboratorio: promedio de 3 pruebas consecutivas, prueba mínima contra el límite individual y dispersión entre cilindros gemelos.",
+      "agregada": "2026-10-20",
+      "entradas": [
+        {
+          "id": "fc",
+          "label": "f'c especificado",
+          "unidad": "kg/cm²",
+          "valor": 250
+        },
+        {
+          "id": "a1",
+          "label": "Prueba 1 – cilindro A",
+          "unidad": "kg/cm²",
+          "valor": 262
+        },
+        {
+          "id": "b1",
+          "label": "Prueba 1 – cilindro B",
+          "unidad": "kg/cm²",
+          "valor": 255
+        },
+        {
+          "id": "a2",
+          "label": "Prueba 2 – cilindro A",
+          "unidad": "kg/cm²",
+          "valor": 241
+        },
+        {
+          "id": "b2",
+          "label": "Prueba 2 – cilindro B",
+          "unidad": "kg/cm²",
+          "valor": 236
+        },
+        {
+          "id": "a3",
+          "label": "Prueba 3 – cilindro A",
+          "unidad": "kg/cm²",
+          "valor": 268
+        },
+        {
+          "id": "b3",
+          "label": "Prueba 3 – cilindro B",
+          "unidad": "kg/cm²",
+          "valor": 259
+        },
+        {
+          "id": "tol",
+          "label": "Tolerancia individual (0 = automática: 35 kg/cm² o 10 % si f'c > 350)",
+          "unidad": "kg/cm²",
+          "valor": 0
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Prueba 1 (promedio de 2 cilindros)",
+          "formula": "(a1+b1)/2",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Prueba 2 (promedio de 2 cilindros)",
+          "formula": "(a2+b2)/2",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Prueba 3 (promedio de 2 cilindros)",
+          "formula": "(a3+b3)/2",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Promedio de 3 pruebas consecutivas",
+          "formula": "(a1+b1+a2+b2+a3+b3)/6",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Promedio / f'c (debe ser ≥ 100 %)",
+          "formula": "(a1+b1+a2+b2+a3+b3)/6/fc*100",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            100,
+            95
+          ]
+        },
+        {
+          "label": "Límite para prueba individual",
+          "formula": "fc-(tol>0?tol:(fc>350?0.1*fc:35))",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Holgura de la prueba más baja sobre el límite",
+          "formula": "Math.min((a1+b1)/2,(a2+b2)/2,(a3+b3)/2)-(fc-(tol>0?tol:(fc>350?0.1*fc:35)))",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "semaforo": [
+            0,
+            -0.0001
+          ]
+        },
+        {
+          "label": "Dictamen (1 = cumple ambos criterios, 0 = no cumple)",
+          "formula": "((a1+b1+a2+b2+a3+b3)/6>=fc && Math.min((a1+b1)/2,(a2+b2)/2,(a3+b3)/2)>=fc-(tol>0?tol:(fc>350?0.1*fc:35)))?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        },
+        {
+          "label": "Dispersión máxima entre cilindros gemelos (referencia ASTM C39: ≤ 8 % para 2 cilindros 15×30)",
+          "formula": "Math.max(Math.abs(a1-b1)/((a1+b1)/2),Math.abs(a2-b2)/((a2+b2)/2),Math.abs(a3-b3)/((a3+b3)/2))*100",
+          "unidad": "%",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Captura el f'c del plano y los resultados a 28 días de los dos cilindros de cada muestreo (cada 'prueba' es el promedio de 2 cilindros de la misma olla). Usa siempre las 3 últimas pruebas consecutivas del mismo f'c.",
+        "Deja la tolerancia en 0 para usar el criterio NMX-C-155 / ACI 318: ninguna prueba más de 35 kg/cm² abajo de f'c (10 % si f'c > 350). Si tu especificación o el DRO piden otro valor (p. ej. concreto clase 2 de las NTC), escríbelo aquí.",
+        "Dictamen 0: no aceptes ni rechaces el elemento de inmediato; pide al laboratorio el cilindro testigo de 56 días, revisa remisiones, revenimiento y curado de esa olla y, si persiste, extrae corazones (NMX-C-169) en el elemento afectado.",
+        "Si la dispersión entre gemelos pasa de 8 %, el problema suele ser de muestreo, cabeceo o curado de los cilindros, no del concreto: revisa el procedimiento del laboratorio antes de reclamar a la planta.",
+        "Lleva el registro prueba por prueba en el formato Liberación de colado y anota en bitácora cada dictamen; indicador: % de pruebas que cumplen por proveedor y por mes."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ACI – FAQ: criterios de aceptación de resistencia (ACI 318-19, 26.12.3)",
+          "url": "https://www.concrete.org/frequentlyaskedquestions.aspx?faqid=13"
+        },
+        {
+          "titulo": "Conpre Concretos – Cómo interpretar resultados de pruebas de compresión (NMX-C-155, jun 2026)",
+          "url": "https://conpreconcretos.com/blog/interpretar-resultados-pruebas-compresion-concreto.html"
+        },
+        {
+          "titulo": "NTC-Concreto 2023 CDMX (índice; aceptación en cap. 16 Construcción)",
+          "url": "https://www.uteycv.esiaz.ipn.mx/comunidad/estructuras/comunicados/NTC%2006.nov.2023_concreto.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-madurez",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Madurez del concreto: resistencia estimada y hora de descimbrado",
+      "resumen": "Método de madurez (Nurse-Saul, ASTM C1074): con las temperaturas del concreto en obra y tu curva de calibración estima la resistencia en sitio y cuántas horas faltan para descimbrar o tensar.",
+      "agregada": "2026-10-20",
+      "entradas": [
+        {
+          "id": "t1",
+          "label": "Tramo 1: temperatura promedio del concreto",
+          "unidad": "°C",
+          "valor": 24
+        },
+        {
+          "id": "h1",
+          "label": "Tramo 1: duración",
+          "unidad": "h",
+          "valor": 24
+        },
+        {
+          "id": "t2",
+          "label": "Tramo 2: temperatura promedio del concreto",
+          "unidad": "°C",
+          "valor": 17
+        },
+        {
+          "id": "h2",
+          "label": "Tramo 2: duración",
+          "unidad": "h",
+          "valor": 24
+        },
+        {
+          "id": "t3",
+          "label": "Tramo 3 (actual): temperatura promedio del concreto",
+          "unidad": "°C",
+          "valor": 15
+        },
+        {
+          "id": "h3",
+          "label": "Tramo 3: duración",
+          "unidad": "h",
+          "valor": 24
+        },
+        {
+          "id": "t0",
+          "label": "Temperatura de referencia (datum; ASTM C1074 sugiere 0 °C)",
+          "unidad": "°C",
+          "valor": 0
+        },
+        {
+          "id": "ma",
+          "label": "Calibración punto A: madurez",
+          "unidad": "°C·h",
+          "valor": 1000
+        },
+        {
+          "id": "ra",
+          "label": "Calibración punto A: resistencia",
+          "unidad": "kg/cm²",
+          "valor": 140
+        },
+        {
+          "id": "mb",
+          "label": "Calibración punto B: madurez",
+          "unidad": "°C·h",
+          "valor": 3000
+        },
+        {
+          "id": "rb",
+          "label": "Calibración punto B: resistencia",
+          "unidad": "kg/cm²",
+          "valor": 230
+        },
+        {
+          "id": "robj",
+          "label": "Resistencia requerida para descimbrar / tensar",
+          "unidad": "kg/cm²",
+          "valor": 175
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Madurez acumulada (Nurse-Saul)",
+          "formula": "Math.max(0,t1-t0)*h1+Math.max(0,t2-t0)*h2+Math.max(0,t3-t0)*h3",
+          "unidad": "°C·h",
+          "decimales": 0
+        },
+        {
+          "label": "Edad equivalente a 23 °C (Arrhenius, Q = 5000 K)",
+          "formula": "h1*Math.exp(-5000*(1/(t1+273.15)-1/296.15))+h2*Math.exp(-5000*(1/(t2+273.15)-1/296.15))+h3*Math.exp(-5000*(1/(t3+273.15)-1/296.15))",
+          "unidad": "h",
+          "decimales": 1
+        },
+        {
+          "label": "Resistencia estimada en sitio",
+          "formula": "ra+(rb-ra)*Math.log(Math.max(1,Math.max(0,t1-t0)*h1+Math.max(0,t2-t0)*h2+Math.max(0,t3-t0)*h3)/ma)/Math.log(mb/ma)",
+          "unidad": "kg/cm²",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Estimada / requerida",
+          "formula": "(ra+(rb-ra)*Math.log(Math.max(1,Math.max(0,t1-t0)*h1+Math.max(0,t2-t0)*h2+Math.max(0,t3-t0)*h3)/ma)/Math.log(mb/ma))/robj*100",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            100,
+            90
+          ]
+        },
+        {
+          "label": "Madurez necesaria para la resistencia requerida",
+          "formula": "ma*Math.exp((robj-ra)/(rb-ra)*Math.log(mb/ma))",
+          "unidad": "°C·h",
+          "decimales": 0
+        },
+        {
+          "label": "Horas que faltan (a la temperatura del tramo actual)",
+          "formula": "t3>t0?Math.max(0,(ma*Math.exp((robj-ra)/(rb-ra)*Math.log(mb/ma))-(Math.max(0,t1-t0)*h1+Math.max(0,t2-t0)*h2+Math.max(0,t3-t0)*h3))/(t3-t0)):0",
+          "unidad": "h",
+          "decimales": 1,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Calibra una vez por mezcla (misma planta, f'c y aditivos): pide al laboratorio romper cilindros a 1, 3, 7 y 28 días registrando su temperatura; toma dos puntos (madurez, resistencia) de esa curva, uno temprano y uno tardío, y captúralos como A y B.",
+        "En el colado deja un sensor o termopar con datalogger en la zona más fría del elemento (borde de losa, esquina, lado a la sombra), no en el centro.",
+        "Captura la temperatura promedio del concreto por tramos (por ejemplo, cada 24 h o día/noche); el tramo 3 es el actual y se usa para pronosticar las horas faltantes.",
+        "Cuando la resistencia estimada llegue al 100 % de la requerida, confirma con cilindros curados en obra o un ensayo no destructivo antes de descimbrar; la madurez no sustituye los cilindros de aceptación.",
+        "Recalibra si cambia la planta, el cemento, los aditivos o la relación agua/cemento. Indicador: horas de ciclo de cimbra por nivel antes y después de usar madurez."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Giatec – Métodos de cálculo de madurez (Nurse-Saul y Arrhenius, ASTM C1074; act. sep 2026)",
+          "url": "https://www.giatecscientific.com/education/concrete-maturity-calculation-methods/"
+        },
+        {
+          "titulo": "NRMCA CIP 39 – Método de madurez (en español)",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP39es.pdf"
+        },
+        {
+          "titulo": "Giatec – SmartRock: ficha oficial (batería, alcance, app gratuita)",
+          "url": "https://www.giatecscientific.com/products/concrete-sensors/smartrock-maturity-meter/"
+        }
+      ]
+    },
+    {
       "id": "calc-pintura",
       "tipo": "calculadora",
       "modulo": "pintura",
@@ -789,12 +1085,14 @@
         "Juntas de colado definidas y tratadas",
         "Bomba, vibradores y personal confirmados",
         "Laboratorio confirmado para revenimiento y cilindros",
-        "Pronóstico de clima revisado; curado programado"
+        "Pronóstico de clima revisado; curado programado",
+        "Puntos de muestreo de cilindros definidos y, si aplica, sensores de madurez amarrados y activados"
       ],
       "como_usar": [
         "Llénalo junto con la supervisión un día antes del colado.",
         "Cualquier 'No cumple' bloquea el colado hasta corregirse y anotarse.",
-        "Exporta el CSV o imprímelo y adjúntalo a la bitácora con fotos."
+        "Exporta el CSV o imprímelo y adjúntalo a la bitácora con fotos.",
+        "Después del colado, captura los resultados de cilindros en la calculadora 'Aceptación de resistencia f'c' para dictaminar cada grupo de 3 pruebas."
       ]
     },
     {
@@ -1068,13 +1366,13 @@
         "Supervisión"
       ],
       "items": [
-        "Tiempo mínimo de descimbrado respetado o resistencia verificada",
+        "Tiempo mínimo de descimbrado respetado o resistencia verificada (cilindros de obra o método de madurez)",
         "Elementos sin oquedades, segregación ni acero expuesto",
         "Dimensiones y plomos dentro de tolerancia",
         "Niveles de losa y pendientes conforme a proyecto",
         "Sin grietas por contracción relevantes; registradas si existen",
         "Reparaciones con producto especificado y aprobadas por supervisión",
-        "Resultados de cilindros a 7 y 28 días registrados y conformes"
+        "Resultados de cilindros a 7 y 28 días registrados y dictaminados (promedio de 3 pruebas ≥ f'c y ninguna prueba bajo el límite individual)"
       ],
       "como_usar": [
         "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
@@ -1491,6 +1789,38 @@
         "Marca Cumple, No cumple o N/A; en cada 'No cumple' anota responsable y fecha compromiso.",
         "Toma foto de cada hallazgo y de la condición final liberada.",
         "Exporta el CSV o imprímelo, fírmalo con la supervisión y archívalo con la estimación del contratista."
+      ]
+    },
+    {
+      "id": "dig-sensores-madurez",
+      "tipo": "recurso",
+      "categoria": "Concreto",
+      "titulo": "Sensores inalámbricos de madurez (SmartRock de Giatec)",
+      "resumen": "Sensor que se amarra a la varilla antes del colado, registra la temperatura cada 15 min y calcula la resistencia en sitio por madurez (ASTM C1074) en una app del celular.",
+      "agregada": "2026-10-20",
+      "beneficio": "Descimbrar, cargar o tensar con dato de resistencia del propio elemento en lugar de días fijos: ciclos de cimbra más cortos en clima cálido y alerta temprana de concreto frío en invierno.",
+      "plataforma": "Sensor embebido + app iOS / Android + tablero web",
+      "costo": "Giatec no publica precio en su sitio oficial (pide cotización). Referencia de distribuidor en EE. UU. (Humboldt, consultado 20-oct-2026): USD 160 por sensor de 12\" y USD 1,515 el paquete de 10; desechable, batería hasta 4 meses. App gratuita y tablero web básico gratis. Disponibilidad y precio en México: no verificados, confirmar con Giatec. Alternativa económica: termopar o datalogger de temperatura + calculadora 'Madurez del concreto' de ObraLab.",
+      "url": "https://www.giatecscientific.com/products/concrete-sensors/smartrock-maturity-meter/",
+      "como_usar": [
+        "Pide cotización a Giatec (o distribuidor) para 4–6 sensores y pide la curva de calibración de tu mezcla al laboratorio o a la planta concretera.",
+        "En el siguiente colado de losa amarra 2 sensores a la varilla en el punto más frío y en el más crítico para descimbrar; actívalos con la app antes de colar.",
+        "Al recorrer la obra, acércate con el celular (alcance hasta ~12 m embebido) para descargar datos; revisa la resistencia estimada contra la requerida para descimbrar.",
+        "Compara durante 2 colados la hora real de descimbrado contra tu regla de días fijos; si ahorras al menos medio día por nivel sin incidentes, adopta el método y documenta el criterio con el DRO."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Giatec – SmartRock: ficha oficial (batería, alcance, app gratuita)",
+          "url": "https://www.giatecscientific.com/products/concrete-sensors/smartrock-maturity-meter/"
+        },
+        {
+          "titulo": "Humboldt (distribuidor) – Precio SmartRock 12\" HG-4040A",
+          "url": "https://www.humboldtmfg.com/smartrock-wireless-concrete-sensors.html"
+        },
+        {
+          "titulo": "Giatec – SmartRock en español (cumplimiento de normas en México y Latinoamérica)",
+          "url": "https://info.giatecscientific.com/giatec-smartrock-es"
+        }
       ]
     }
   ]

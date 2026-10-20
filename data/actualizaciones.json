@@ -1,6 +1,45 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-20",
+      "titulo": "Calidad del concreto: aceptación de f'c y método de madurez",
+      "resumen": "Nueva calculadora de Aceptación de resistencia f'c que dictamina 3 pruebas consecutivas (promedio ≥ f'c y ninguna prueba más de 35 kg/cm² abajo, o 10 % si f'c > 350) y revisa la dispersión entre cilindros gemelos. Nueva calculadora de Madurez del concreto (Nurse-Saul y edad equivalente, ASTM C1074) que estima la resistencia en sitio y las horas que faltan para descimbrar. Nuevo recurso: sensores inalámbricos SmartRock. Mejoras: Liberación de colado incluye puntos de muestreo y sensores; Descimbrado y concreto endurecido pide dictamen de cilindros y acepta verificación por madurez; las fuentes ahora se muestran en todas las herramientas, no solo en métodos y recursos.",
+      "herramientas": [
+        "calc-aceptacion-fc",
+        "calc-madurez",
+        "dig-sensores-madurez",
+        "fmt-precolado",
+        "qc-desc-concreto"
+      ],
+      "como_aplicarlo": "Esta semana pide al laboratorio los resultados de 28 días del último mes y dictamínalos por grupos de 3 en la calculadora de aceptación. En el próximo colado de losa deja un termopar o sensor en el borde más frío y usa la calculadora de madurez para decidir el descimbrado con dato, confirmándolo con cilindros de obra.",
+      "fuentes": [
+        {
+          "titulo": "ACI – FAQ: criterios de aceptación de resistencia (ACI 318-19, 26.12.3)",
+          "url": "https://www.concrete.org/frequentlyaskedquestions.aspx?faqid=13"
+        },
+        {
+          "titulo": "Conpre Concretos – Cómo interpretar resultados de pruebas de compresión (NMX-C-155, jun 2026)",
+          "url": "https://conpreconcretos.com/blog/interpretar-resultados-pruebas-compresion-concreto.html"
+        },
+        {
+          "titulo": "Giatec – Métodos de cálculo de madurez (Nurse-Saul y Arrhenius, ASTM C1074; act. sep 2026)",
+          "url": "https://www.giatecscientific.com/education/concrete-maturity-calculation-methods/"
+        },
+        {
+          "titulo": "NRMCA CIP 39 – Método de madurez (en español)",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP39es.pdf"
+        },
+        {
+          "titulo": "Giatec – SmartRock: ficha oficial (batería, alcance, app gratuita)",
+          "url": "https://www.giatecscientific.com/products/concrete-sensors/smartrock-maturity-meter/"
+        },
+        {
+          "titulo": "Humboldt (distribuidor) – Precio SmartRock 12\" HG-4040A",
+          "url": "https://www.humboldtmfg.com/smartrock-wireless-concrete-sensors.html"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-19",
       "titulo": "Control de avance: fecha de término pronosticada y análisis de restricciones",
       "resumen": "Nueva calculadora de Programa ganado (Earned Schedule) que pronostica en qué semana terminas al ritmo actual y qué ritmo necesitas para cumplir, y nuevo formato de Análisis de restricciones para el lookahead de 6 semanas. Mejoras: la calculadora PPC ahora mide el PCR (restricciones liberadas a tiempo) como indicador adelantado; Valor ganado agrega costo por terminar (ETC) y desviación al terminar (VAC); Last Planner enlaza al nuevo formato.",
