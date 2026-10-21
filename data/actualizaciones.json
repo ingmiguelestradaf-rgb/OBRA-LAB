@@ -1,6 +1,48 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-21",
+      "titulo": "Seguridad: trabajos en altura y lo que cuesta un accidente",
+      "resumen": "Nueva calculadora de Claro libre de caída que dice si el trabajador con arnés y línea con absorbedor se detiene antes de pegar con el nivel inferior y si la caída libre respeta el límite del absorbedor (1.8 o 3.5 m, NOM-009-STPS-2011). Nuevo formato de Permiso de trabajo en altura por tarea y turno: examen médico, DC-3, revisión de arnés y línea, anclaje, andamios, escaleras y plan de rescate. Nueva calculadora de Prima de riesgo de trabajo IMSS (art. 72 LSS, tope ±1 punto) que convierte los accidentes en pesos de nómina. Mejora: el Recorrido de seguridad semanal ahora revisa permisos de altura, anclajes, DC-3 y caída de objetos.",
+      "herramientas": [
+        "calc-claro-caida",
+        "fmt-permiso-altura",
+        "calc-prima-riesgo",
+        "fmt-seguridad"
+      ],
+      "como_aplicarlo": "Esta semana elige el frente con más trabajo en borde de losa o andamio, mide la altura libre real y calcula el claro con la línea que trae la cuadrilla; desde el siguiente turno nadie sube sin permiso firmado. En la plática de seguridad del lunes muestra con la calculadora de prima cuánto le cuesta a la empresa, cada año, un solo accidente grave.",
+      "fuentes": [
+        {
+          "titulo": "STPS – Guía informativa NOM-009-STPS-2011, trabajos en altura",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807421/GUIA_INFORMATIVA_NOM-009.pdf"
+        },
+        {
+          "titulo": "NOM-009-STPS-2011 (texto en normasoficiales.mx)",
+          "url": "https://www.normasoficiales.mx/nom/nom-009-stps-2011"
+        },
+        {
+          "titulo": "Construction Executive – Cálculo de claro libre con línea con absorbedor (caída libre + detención + estiramiento + margen)",
+          "url": "https://constructionexec.com/article/calculating-shock-absorbing-lanyard-fall-clearance-for-construction-workers/"
+        },
+        {
+          "titulo": "JSP (fabricante) – Cómo calcular el claro libre para equipo anticaídas",
+          "url": "https://jspsafety.helpjuice.com/en_GB/644c244b6bf34a8be9f2be77dbb4ba0c"
+        },
+        {
+          "titulo": "Revista Veritas – Cálculo y presentación de la prima de riesgo de trabajo para 2026 (feb 2026)",
+          "url": "https://www.veritas.org.mx/Impuestos/Seguridad-social/Calculo-y-presentacion-de-la-prima-de-riesgo-de-trabajo-para-2026"
+        },
+        {
+          "titulo": "Siempre al Día – Prima de riesgo de trabajo 2026: límites, vigencia y prima media por clase (jul 2026)",
+          "url": "https://siemprealdia.co/mexico/derecho-laboral/prima-de-riesgo-de-trabajo/"
+        },
+        {
+          "titulo": "SDV – Calculadora y ejemplo de prima de riesgo (art. 72 y 74 LSS)",
+          "url": "https://sdv.com.mx/herramientas/calculadora-prima-riesgo/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-20",
       "titulo": "Calidad del concreto: aceptación de f'c y método de madurez",
       "resumen": "Nueva calculadora de Aceptación de resistencia f'c que dictamina 3 pruebas consecutivas (promedio ≥ f'c y ninguna prueba más de 35 kg/cm² abajo, o 10 % si f'c > 350) y revisa la dispersión entre cilindros gemelos. Nueva calculadora de Madurez del concreto (Nurse-Saul y edad equivalente, ASTM C1074) que estima la resistencia en sitio y las horas que faltan para descimbrar. Nuevo recurso: sensores inalámbricos SmartRock. Mejoras: Liberación de colado incluye puntos de muestreo y sensores; Descimbrado y concreto endurecido pide dictamen de cilindros y acepta verificación por madurez; las fuentes ahora se muestran en todas las herramientas, no solo en métodos y recursos.",

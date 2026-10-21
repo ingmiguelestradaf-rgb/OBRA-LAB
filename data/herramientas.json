@@ -1143,18 +1143,33 @@
       "items": [
         "Personal con EPP completo (casco, chaleco, botas, lentes, guantes)",
         "Arnés y línea de vida en trabajos en altura",
+        "Todo trabajo a más de 1.80 m tiene Permiso de trabajo en altura firmado y vigente, con claro libre calculado",
+        "Anclajes arriba de la argolla D, nunca abajo de los pies; sin líneas de vida improvisadas ni extendidas",
         "Andamios con base firme, rodapiés y barandal",
         "Bordes de losa y huecos protegidos",
         "Excavaciones con talud o ademe y señalizadas",
         "Orden y limpieza en áreas de trabajo y circulaciones",
         "Extintores vigentes y accesibles",
         "Instalación eléctrica provisional protegida y con tierra",
-        "Botiquín y rutas de evacuación señalizadas"
+        "Botiquín y rutas de evacuación señalizadas",
+        "Constancias DC-3 y exámenes médicos vigentes del personal que trabaja en altura",
+        "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)"
       ],
       "como_usar": [
         "Haz el recorrido con un representante de cada contratista.",
         "Cada 'No cumple' debe tener responsable y fecha de corrección en la observación.",
-        "Compara semana contra semana: el número de hallazgos debe bajar."
+        "Compara semana contra semana: el número de hallazgos debe bajar.",
+        "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana."
+      ],
+      "fuentes": [
+        {
+          "titulo": "STPS – Guía informativa NOM-009-STPS-2011, trabajos en altura",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807421/GUIA_INFORMATIVA_NOM-009.pdf"
+        },
+        {
+          "titulo": "NOM-031-STPS-2011 – Construcción, condiciones de seguridad y salud (DOF)",
+          "url": "https://dof.gob.mx/normasOficiales/4212/stps/stps.htm"
+        }
       ]
     },
     {
@@ -1820,6 +1835,304 @@
         {
           "titulo": "Giatec – SmartRock en español (cumplimiento de normas en México y Latinoamérica)",
           "url": "https://info.giatecscientific.com/giatec-smartrock-es"
+        }
+      ]
+    },
+    {
+      "id": "calc-claro-caida",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Claro libre de caída para arnés y línea de vida",
+      "resumen": "Calcula la caída libre y la altura libre que necesitas bajo la plataforma para que un trabajador con arnés y línea con absorbedor no golpee el piso, una losa inferior o un obstáculo antes de detenerse (NOM-009-STPS-2011).",
+      "agregada": "2026-10-21",
+      "entradas": [
+        {
+          "id": "ha",
+          "label": "Altura del punto de anclaje sobre la plataforma de trabajo (no puede ir abajo de los pies)",
+          "unidad": "m",
+          "valor": 1.5
+        },
+        {
+          "id": "hd",
+          "label": "Altura de la argolla D dorsal del arnés sobre la plataforma (trabajador de pie)",
+          "unidad": "m",
+          "valor": 1.5
+        },
+        {
+          "id": "L",
+          "label": "Longitud de la línea de vida / cola de amarre",
+          "unidad": "m",
+          "valor": 1.8
+        },
+        {
+          "id": "da",
+          "label": "Elongación máxima del absorbedor (ficha del fabricante; típico 1.07 m)",
+          "unidad": "m",
+          "valor": 1.07
+        },
+        {
+          "id": "eh",
+          "label": "Estiramiento del arnés y corrimiento de la argolla D",
+          "unidad": "m",
+          "valor": 0.3
+        },
+        {
+          "id": "ms",
+          "label": "Margen de seguridad",
+          "unidad": "m",
+          "valor": 1
+        },
+        {
+          "id": "lim",
+          "label": "Caída libre máxima del absorbedor (1.8 o 3.5 m según tipo, ver etiqueta)",
+          "unidad": "m",
+          "valor": 1.8
+        },
+        {
+          "id": "disp",
+          "label": "Altura libre disponible bajo la plataforma (al piso, losa u obstáculo más alto)",
+          "unidad": "m",
+          "valor": 4.5
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Caída libre (antes de que actúe el absorbedor)",
+          "formula": "Math.max(0,L-(ha-hd))",
+          "unidad": "m",
+          "decimales": 2
+        },
+        {
+          "label": "Margen contra la caída libre máxima del absorbedor (debe ser ≥ 0)",
+          "formula": "lim-Math.max(0,L-(ha-hd))",
+          "unidad": "m",
+          "decimales": 2,
+          "semaforo": [
+            0.3,
+            0
+          ]
+        },
+        {
+          "label": "Distancia total de caída de los pies (caída libre + absorbedor + arnés)",
+          "formula": "Math.max(0,L-(ha-hd))+da+eh",
+          "unidad": "m",
+          "decimales": 2
+        },
+        {
+          "label": "Claro libre requerido bajo la plataforma",
+          "formula": "(Math.max(0,L-(ha-hd))+da+eh+ms)",
+          "unidad": "m",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Holgura: disponible − requerido (debe ser ≥ 0)",
+          "formula": "disp-(Math.max(0,L-(ha-hd))+da+eh+ms)",
+          "unidad": "m",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0.5,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Mide en sitio la altura libre real bajo el punto de trabajo: al piso, a la losa del nivel inferior, a la cimbra, al andamio o a la varilla de espera más alta que haya abajo (no a la planta baja si hay obstáculos antes).",
+        "Captura la altura del anclaje y de la argolla D, la longitud de la línea y la elongación del absorbedor tomadas de la etiqueta y del instructivo del fabricante; no uses valores de memoria.",
+        "Si la holgura sale en rojo: sube el anclaje sobre la cabeza, acorta la línea o cambia a retráctil (bloquea en menos de 0.5 m) y vuelve a calcular. Si el margen de caída libre sale negativo, el absorbedor no está diseñado para esa caída: no se autoriza el trabajo.",
+        "Evita el efecto péndulo: el anclaje debe quedar lo más vertical posible sobre el trabajador; si se desplaza a los lados, el balanceo puede golpearlo contra columnas o bordes aunque el claro vertical alcance.",
+        "Anota el claro requerido y la holgura en el Permiso de trabajo en altura antes de firmar; indicador: % de permisos con cálculo de claro libre (meta 100 %) y hallazgos de anclajes mal ubicados por semana en el recorrido de seguridad."
+      ],
+      "fuentes": [
+        {
+          "titulo": "STPS – Guía informativa NOM-009-STPS-2011, trabajos en altura",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807421/GUIA_INFORMATIVA_NOM-009.pdf"
+        },
+        {
+          "titulo": "NOM-009-STPS-2011 (texto en normasoficiales.mx)",
+          "url": "https://www.normasoficiales.mx/nom/nom-009-stps-2011"
+        },
+        {
+          "titulo": "Construction Executive – Cálculo de claro libre con línea con absorbedor (caída libre + detención + estiramiento + margen)",
+          "url": "https://constructionexec.com/article/calculating-shock-absorbing-lanyard-fall-clearance-for-construction-workers/"
+        },
+        {
+          "titulo": "JSP (fabricante) – Cómo calcular el claro libre para equipo anticaídas",
+          "url": "https://jspsafety.helpjuice.com/en_GB/644c244b6bf34a8be9f2be77dbb4ba0c"
+        }
+      ]
+    },
+    {
+      "id": "fmt-permiso-altura",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Permiso de trabajo en altura (NOM-009-STPS-2011)",
+      "resumen": "Autorización por escrito, por tarea y por turno, para trabajos a más de 1.80 m: verifica trabajador apto y capacitado, equipo revisado, anclaje, claro libre de caída, andamio o escalera y plan de rescate antes de subir.",
+      "agregada": "2026-10-21",
+      "campos": [
+        "Obra",
+        "Fecha y turno",
+        "Frente / nivel / eje",
+        "Descripción de la tarea",
+        "Altura de trabajo (m)",
+        "Medio de acceso (andamio torre, suspendido, plataforma de elevación, escalera de mano, borde de losa)",
+        "Trabajadores autorizados y contratista",
+        "Claro libre requerido y disponible (m) – calculadora ObraLab",
+        "Vigencia del permiso (hora inicio / fin)",
+        "Autoriza (nombre y firma)",
+        "Responsable de rescate en sitio"
+      ],
+      "items": [
+        "Cada trabajador tiene examen médico vigente (máx. 1 año) para trabajo en altura y declaró no tener afectación de salud ni acrofobia",
+        "Cada trabajador tiene constancia de capacitación (DC-3) en el sistema que va a usar: instalación, inspección, cálculo de caída, efecto péndulo y rescate",
+        "Arnés de cuerpo completo revisado antes de usarse: hebillas, argollas, ganchos y mosquetones sin corrosión, grietas ni deformación; cintas sin cortes, quemaduras ni deshilachado; etiqueta legible",
+        "Línea de vida o retráctil revisada, sin extensiones improvisadas, protegida de bordes filosos; ningún componente ha detenido una caída antes",
+        "Equipo con certificación de organismo acreditado y revisión anual (o la del fabricante) registrada",
+        "Masa del trabajador más herramienta dentro de la capacidad indicada por el fabricante",
+        "Punto de anclaje capaz de soportar la fuerza de detención, ubicado arriba de la argolla D y nunca debajo del plano de trabajo",
+        "Claro libre de caída calculado y holgura ≥ 0; caída libre dentro del límite del absorbedor (1.8 m o 3.5 m según tipo)",
+        "Línea de vida horizontal (si aplica) instalada según fabricante, con su catenaria considerada en el cálculo",
+        "Andamio torre: base firme y nivelada, barandal a 90 cm, rodapié de 15 cm, tablones ≥ 45 × 5 cm, relación base-altura 1:4 o sujeto cada 4 m",
+        "Andamio suspendido o plataforma de elevación: autorización escrita, plan de trabajo con análisis de riesgos y revisión de cables, frenos y contrapesos",
+        "Escalera de mano: base a 1/4 de su longitud, sobresale 90 cm del apoyo, nadie arriba del antepenúltimo peldaño; ayudante sujetándola si pasa de 5 m; no metálica cerca de líneas energizadas",
+        "Área inferior delimitada y señalizada; herramienta amarrada para evitar caída de objetos",
+        "Sin tormenta eléctrica ni viento fuerte; iluminación suficiente",
+        "Plan de rescate explicado al equipo: quién rescata, con qué equipo, teléfono de emergencia y hospital; tiempo de respuesta definido para el trabajador suspendido",
+        "Botiquín acorde con el riesgo disponible en el nivel de trabajo"
+      ],
+      "como_usar": [
+        "Llena un permiso por tarea y por turno antes de subir; lo autoriza el residente o el responsable de seguridad, no el propio cuadrillero.",
+        "Calcula el claro libre con la calculadora 'Claro libre de caída' y anota el resultado en los datos generales; sin holgura positiva no se firma.",
+        "Revisa en sitio cada punto con el trabajador presente; cualquier 'No cumple' detiene el permiso hasta corregirlo (anota responsable y hora de corrección).",
+        "Al terminar el turno cierra el permiso y guarda la copia (CSV o PDF) con las constancias DC-3 y exámenes médicos; la NOM pide conservar registros de revisión del equipo al menos un año.",
+        "Indicador: trabajos en altura detectados sin permiso en el recorrido semanal (meta 0) y % de permisos cerrados correctamente."
+      ],
+      "fuentes": [
+        {
+          "titulo": "STPS – Guía informativa NOM-009-STPS-2011, trabajos en altura",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807421/GUIA_INFORMATIVA_NOM-009.pdf"
+        },
+        {
+          "titulo": "NOM-009-STPS-2011 (texto en normasoficiales.mx)",
+          "url": "https://www.normasoficiales.mx/nom/nom-009-stps-2011"
+        }
+      ]
+    },
+    {
+      "id": "calc-prima-riesgo",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Prima de riesgo de trabajo IMSS: lo que cuesta cada accidente",
+      "resumen": "Calcula la prima de riesgo de trabajo con la fórmula del art. 72 LSS, aplica el tope de ±1 punto por año y el rango 0.5–15 %, y la traduce a pesos sobre la nómina para que los accidentes de la obra se vean en el presupuesto.",
+      "agregada": "2026-10-21",
+      "entradas": [
+        {
+          "id": "S",
+          "label": "Días subsidiados por incapacidad temporal (riesgos de trabajo del año, sin trayecto)",
+          "unidad": "días",
+          "valor": 45
+        },
+        {
+          "id": "I",
+          "label": "Suma de % de incapacidades permanentes ÷ 100 (ej. 25 % = 0.25)",
+          "unidad": "",
+          "valor": 0
+        },
+        {
+          "id": "D",
+          "label": "Defunciones por riesgo de trabajo (sin trayecto)",
+          "unidad": "",
+          "valor": 0
+        },
+        {
+          "id": "N",
+          "label": "Trabajadores promedio expuestos (días cotizados del año ÷ 365)",
+          "unidad": "trab.",
+          "valor": 80
+        },
+        {
+          "id": "F",
+          "label": "Factor de prima (2.3; 2.2 con sistema de seguridad acreditado por STPS)",
+          "unidad": "",
+          "valor": 2.3
+        },
+        {
+          "id": "Pa",
+          "label": "Prima vigente del registro patronal",
+          "unidad": "%",
+          "valor": 7.58875
+        },
+        {
+          "id": "MS",
+          "label": "Nómina anual con salario base de cotización (SBC × días cotizados)",
+          "unidad": "$",
+          "valor": 13140000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Índice de siniestralidad por fórmula (sin topes)",
+          "formula": "(S/365+28*(I+D))*(F/N)*100+0.5",
+          "unidad": "%",
+          "decimales": 5
+        },
+        {
+          "label": "Prima aplicable el siguiente periodo (tope ±1 punto y rango 0.5–15 %)",
+          "formula": "Math.min(15,Math.max(0.5,Math.min(Pa+1,Math.max(Pa-1,(S/365+28*(I+D))*(F/N)*100+0.5))))",
+          "unidad": "%",
+          "decimales": 5,
+          "destacar": true
+        },
+        {
+          "label": "Cambio contra la prima vigente",
+          "formula": "Math.min(15,Math.max(0.5,Math.min(Pa+1,Math.max(Pa-1,(S/365+28*(I+D))*(F/N)*100+0.5))))-Pa",
+          "unidad": "puntos",
+          "decimales": 5
+        },
+        {
+          "label": "Cuota anual de riesgo de trabajo con la prima nueva",
+          "formula": "MS*Math.min(15,Math.max(0.5,Math.min(Pa+1,Math.max(Pa-1,(S/365+28*(I+D))*(F/N)*100+0.5))))/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Ahorro (+) o sobrecosto (−) anual contra la prima vigente",
+          "formula": "MS*(Pa-Math.min(15,Math.max(0.5,Math.min(Pa+1,Math.max(Pa-1,(S/365+28*(I+D))*(F/N)*100+0.5)))))/100",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -0.01
+          ]
+        },
+        {
+          "label": "Prima por fórmula que sumaría UNA defunción más",
+          "formula": "28*(F/N)*100",
+          "unidad": "puntos",
+          "decimales": 3
+        }
+      ],
+      "como_usar": [
+        "Pide a nómina o al contador los datos del año: días subsidiados, incapacidades permanentes y defunciones por riesgo de trabajo (sin accidentes de trayecto) y los días cotizados del registro patronal; N = días cotizados ÷ 365.",
+        "Captura la prima vigente del registro (empresa nueva o que cambia de actividad: prima media de su clase, p. ej. 7.58875 % en clase V) y la nómina anual con SBC.",
+        "Lee la prima aplicable: la fórmula nunca te deja subir o bajar más de 1 punto por año, así que una obra sin accidentes tarda años en recuperar lo que un accidente grave le subió.",
+        "Usa la última salida en la plática de seguridad y con los contratistas: un solo accidente fatal puede llevar la prima al tope de +1 punto por varios años; en pesos, eso es 1 % de toda la nómina cada año.",
+        "La declaración oficial se hace en febrero con la siniestralidad del año anterior (vigencia de marzo a febrero) desde el SUA/IDSE; esta calculadora es para planear y concientizar, confírmala con tu contador o el IMSS."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Revista Veritas – Cálculo y presentación de la prima de riesgo de trabajo para 2026 (feb 2026)",
+          "url": "https://www.veritas.org.mx/Impuestos/Seguridad-social/Calculo-y-presentacion-de-la-prima-de-riesgo-de-trabajo-para-2026"
+        },
+        {
+          "titulo": "Siempre al Día – Prima de riesgo de trabajo 2026: límites, vigencia y prima media por clase (jul 2026)",
+          "url": "https://siemprealdia.co/mexico/derecho-laboral/prima-de-riesgo-de-trabajo/"
+        },
+        {
+          "titulo": "SDV – Calculadora y ejemplo de prima de riesgo (art. 72 y 74 LSS)",
+          "url": "https://sdv.com.mx/herramientas/calculadora-prima-riesgo/"
         }
       ]
     }
