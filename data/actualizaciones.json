@@ -1,6 +1,43 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-22",
+      "titulo": "Costos y estimaciones: neto a cobrar, ajuste de costos y generadores sin rechazo",
+      "resumen": "Nueva calculadora de Estimación neta que descuenta amortización de anticipo, 5 al millar, fondo de garantía y penas, suma IVA (8 % en la franja fronteriza, vigente hasta dic 2026) y muestra qué porcentaje del importe llega a caja. Nueva calculadora de Ajuste de costos por índices (art. 57–58 LOPSRM): factor ponderado de materiales, mano de obra y equipo aplicado al importe pendiente y afectado por el anticipo; con referencia al informe CMIC 2026 (construcción +3.95 % anual, concreto premezclado +6.26 %, acero +5.96 %). Nuevo formato de Números generadores con los 12 puntos que revisa la supervisión antes de autorizar una estimación.",
+      "herramientas": [
+        "calc-estimacion-neta",
+        "calc-ajuste-costos",
+        "fmt-generadores"
+      ],
+      "como_aplicarlo": "En el próximo corte de estimación llena los generadores el mismo día que se termina cada trabajo y revisa los 12 puntos antes de mandarla a supervisión; calcula el neto real para el flujo de la semana. Si tu contrato tiene cláusula de escalatoria, corre el ajuste con los índices INPP del mes de la propuesta y del mes actual para saber si vale la pena solicitarlo.",
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 58 – Cálculo de ajustes de costos: índices INEGI, factor solo al costo directo, afectación por anticipo (compendio SDV)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-58/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 143 – Amortización del anticipo en cada estimación",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
+        },
+        {
+          "titulo": "Ley Federal de Derechos art. 191 – Derecho de 5 al millar sobre cada estimación de obra pública",
+          "url": "https://mley.mx/LFD/articulo/191/"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de materiales, ene 2025–ene 2026 (feb 2026): construcción 3.95 %, concreto premezclado 6.26 %, acero 5.96 %, cemento 5.40 %",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "AFN Tijuana – IVA 8 % e ISR 20 % en la frontera prorrogados hasta el 31 de diciembre de 2026 (dic 2025)",
+          "url": "https://www.afntijuana.info/informacion_general/172077_iva_e_isr_en_la_frontera_hasta_diciembre_de_2026"
+        },
+        {
+          "titulo": "Obraflow – Estimaciones de obra: integración, números generadores y errores que causan rechazo (2026)",
+          "url": "https://obraflow.mx/estimaciones-de-obra/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-21",
       "titulo": "Seguridad: trabajos en altura y lo que cuesta un accidente",
       "resumen": "Nueva calculadora de Claro libre de caída que dice si el trabajador con arnés y línea con absorbedor se detiene antes de pegar con el nivel inferior y si la caída libre respeta el límite del absorbedor (1.8 o 3.5 m, NOM-009-STPS-2011). Nuevo formato de Permiso de trabajo en altura por tarea y turno: examen médico, DC-3, revisión de arnés y línea, anclaje, andamios, escaleras y plan de rescate. Nueva calculadora de Prima de riesgo de trabajo IMSS (art. 72 LSS, tope ±1 punto) que convierte los accidentes en pesos de nómina. Mejora: el Recorrido de seguridad semanal ahora revisa permisos de altura, anclajes, DC-3 y caída de objetos.",

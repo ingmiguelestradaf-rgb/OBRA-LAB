@@ -788,6 +788,290 @@
       ]
     },
     {
+      "id": "calc-estimacion-neta",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Estimación neta: cuánto entra realmente a caja",
+      "resumen": "Del importe estimado a precio unitario descuenta amortización de anticipo, retención de 5 al millar, fondo de garantía y penas, suma IVA (8 % en la franja fronteriza) y te dice el neto a cobrar y qué porcentaje del importe bruto llega a caja.",
+      "agregada": "2026-10-22",
+      "entradas": [
+        {
+          "id": "E",
+          "label": "Importe de la estimación a precio unitario (sin IVA)",
+          "unidad": "$",
+          "valor": 850000
+        },
+        {
+          "id": "AJ",
+          "label": "Ajuste de costos del periodo (ya afectado por anticipo; 0 si no aplica)",
+          "unidad": "$",
+          "valor": 0
+        },
+        {
+          "id": "PA",
+          "label": "Porcentaje de anticipo otorgado (se amortiza en la misma proporción)",
+          "unidad": "%",
+          "valor": 30
+        },
+        {
+          "id": "M5",
+          "label": "Retención 5 al millar (0.5 % en obra pública federal; 0 en obra privada)",
+          "unidad": "%",
+          "valor": 0.5
+        },
+        {
+          "id": "OR",
+          "label": "Otras retenciones pactadas en el contrato (al millar convertido a %)",
+          "unidad": "%",
+          "valor": 0
+        },
+        {
+          "id": "FG",
+          "label": "Fondo de garantía retenido (obra privada típico 5 %; 0 si hay fianza de vicios ocultos)",
+          "unidad": "%",
+          "valor": 5
+        },
+        {
+          "id": "PEN",
+          "label": "Penas convencionales del periodo",
+          "unidad": "$",
+          "valor": 0
+        },
+        {
+          "id": "IVA",
+          "label": "Tasa de IVA (8 % región fronteriza norte con aviso al SAT; 16 % general)",
+          "unidad": "%",
+          "valor": 8
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Amortización de anticipo",
+          "formula": "E*PA/100",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "Subtotal facturable (estimación + ajuste − amortización)",
+          "formula": "E+AJ-E*PA/100",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "IVA",
+          "formula": "(E+AJ-E*PA/100)*IVA/100",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "Retenciones al millar",
+          "formula": "(E+AJ)*(M5+OR)/100",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "Fondo de garantía",
+          "formula": "E*FG/100",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "NETO A COBRAR",
+          "formula": "(E+AJ-E*PA/100)*(1+IVA/100)-(E+AJ)*(M5+OR)/100-E*FG/100-PEN",
+          "unidad": "$",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Del importe bruto con IVA, llega a caja",
+          "formula": "100*((E+AJ-E*PA/100)*(1+IVA/100)-(E+AJ)*(M5+OR)/100-E*FG/100-PEN)/((E+AJ)*(1+IVA/100))",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            75,
+            60
+          ]
+        }
+      ],
+      "como_usar": [
+        "Captura el importe del periodo tal como sale del resumen de la estimación (cantidades de los generadores × precio unitario, sin IVA).",
+        "Ajusta los porcentajes a lo que dice TU contrato: anticipo, fondo de garantía, retenciones y tasa de IVA (8 % solo si el contratista está inscrito en el estímulo de la región fronteriza norte, vigente hasta el 31 de diciembre de 2026).",
+        "Si hay ajuste de costos en el periodo, calcúlalo con la calculadora de Ajuste de costos por índices y pégalo en el campo AJ (ya afectado por el anticipo).",
+        "Lee el neto a cobrar y el porcentaje que llega a caja: si baja de 60 % (rojo) revisa con administración el flujo del mes, porque el anticipo y el fondo de garantía se están comiendo la cobranza.",
+        "Usa el neto, no el bruto, para el flujo de efectivo semanal y para pagar a subcontratistas; el orden exacto de retenciones e IVA lo marca el contrato y el contador, esta calculadora es para planear."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 143 – Amortización del anticipo en cada estimación",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
+        },
+        {
+          "titulo": "Ley Federal de Derechos art. 191 – Derecho de 5 al millar sobre cada estimación de obra pública",
+          "url": "https://mley.mx/LFD/articulo/191/"
+        },
+        {
+          "titulo": "AFN Tijuana – IVA 8 % e ISR 20 % en la frontera prorrogados hasta el 31 de diciembre de 2026 (dic 2025)",
+          "url": "https://www.afntijuana.info/informacion_general/172077_iva_e_isr_en_la_frontera_hasta_diciembre_de_2026"
+        },
+        {
+          "titulo": "Obraflow – Estimaciones de obra: integración, números generadores y errores que causan rechazo (2026)",
+          "url": "https://obraflow.mx/estimaciones-de-obra/"
+        }
+      ]
+    },
+    {
+      "id": "calc-ajuste-costos",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Ajuste de costos por índices (escalatoria)",
+      "resumen": "Calcula el factor de ajuste ponderando la variación de índices de materiales, mano de obra y equipo del costo directo (art. 57 y 58 LOPSRM), lo aplica al importe pendiente o estimado y descuenta la parte cubierta por el anticipo. Sirve para soportar una solicitud de escalatoria o para pactarla en obra privada.",
+      "agregada": "2026-10-22",
+      "entradas": [
+        {
+          "id": "P",
+          "label": "Importe a ajustar a precio unitario original (pendiente de ejecutar o estimación del periodo, sin IVA)",
+          "unidad": "$",
+          "valor": 4000000
+        },
+        {
+          "id": "wm",
+          "label": "Peso de materiales en el costo directo",
+          "unidad": "%",
+          "valor": 60
+        },
+        {
+          "id": "wo",
+          "label": "Peso de mano de obra en el costo directo",
+          "unidad": "%",
+          "valor": 30
+        },
+        {
+          "id": "we",
+          "label": "Peso de maquinaria y equipo en el costo directo",
+          "unidad": "%",
+          "valor": 10
+        },
+        {
+          "id": "m0",
+          "label": "Índice de materiales en el mes de la propuesta",
+          "unidad": "",
+          "valor": 100
+        },
+        {
+          "id": "m1",
+          "label": "Índice de materiales en el mes a ajustar",
+          "unidad": "",
+          "valor": 104.5
+        },
+        {
+          "id": "o0",
+          "label": "Índice (o salario) de mano de obra en el mes de la propuesta",
+          "unidad": "",
+          "valor": 100
+        },
+        {
+          "id": "o1",
+          "label": "Índice (o salario) de mano de obra en el mes a ajustar",
+          "unidad": "",
+          "valor": 106.5
+        },
+        {
+          "id": "e0",
+          "label": "Índice de equipo en el mes de la propuesta",
+          "unidad": "",
+          "valor": 100
+        },
+        {
+          "id": "e1",
+          "label": "Índice de equipo en el mes a ajustar",
+          "unidad": "",
+          "valor": 102
+        },
+        {
+          "id": "PA",
+          "label": "Porcentaje de anticipo otorgado",
+          "unidad": "%",
+          "valor": 30
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Suma de pesos (debe dar 100)",
+          "formula": "wm+wo+we",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            100,
+            99.5
+          ]
+        },
+        {
+          "label": "Variación de materiales",
+          "formula": "(m1/m0-1)*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Variación de mano de obra",
+          "formula": "(o1/o0-1)*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Variación de equipo",
+          "formula": "(e1/e0-1)*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "FACTOR DE AJUSTE del costo directo",
+          "formula": "((wm*m1/m0+wo*o1/o0+we*e1/e0)/(wm+wo+we)-1)*100",
+          "unidad": "%",
+          "decimales": 3,
+          "destacar": true
+        },
+        {
+          "label": "Ajuste sin afectar por anticipo",
+          "formula": "P*((wm*m1/m0+wo*o1/o0+we*e1/e0)/(wm+wo+we)-1)",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "AJUSTE A COBRAR (afectado por el % de anticipo)",
+          "formula": "P*((wm*m1/m0+wo*o1/o0+we*e1/e0)/(wm+wo+we)-1)*(1-PA/100)",
+          "unidad": "$",
+          "decimales": 2,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Saca los pesos de materiales, mano de obra y equipo de tu presupuesto (explosión de insumos del costo directo); deben sumar 100 %.",
+        "Busca los índices del mes de la propuesta y del mes a ajustar en el INPP de INEGI (índices de actualización de costos de obras públicas por insumo); para mano de obra puedes usar el salario de tu tabulador o el incremento de CONASAMI.",
+        "Captura el importe a ajustar: lo pendiente de ejecutar según el programa vigente, o la estimación del periodo. Si el atraso es tuyo, usa los índices del mes en que debió ejecutarse (salvo que el del mes real sea menor).",
+        "El factor se aplica al costo directo y los indirectos, financiamiento y utilidad conservan sus porcentajes, por eso se multiplica el importe a precio unitario; la parte cubierta por el anticipo no se ajusta.",
+        "Entrega la solicitud con la tabla de índices y sus fuentes. En obra pública el procedimiento (art. 57 fracc. I, II o III) lo fija el contrato y la dependencia revisa con sus matrices; en obra privada solo procede si hay cláusula de escalatoria."
+      ],
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 58 – Cálculo de ajustes de costos: índices INEGI, factor solo al costo directo, afectación por anticipo (compendio SDV)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-58/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 180 – Ajuste por revisión de cada precio sobre los trabajos no ejecutados",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/180/"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de materiales, ene 2025–ene 2026 (feb 2026): construcción 3.95 %, concreto premezclado 6.26 %, acero 5.96 %, cemento 5.40 %",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "CMIC – Índice Nacional de Precios Productor (consulta de índices para ajuste)",
+          "url": "https://www.cmic.org.mx/comisiones/tematicas/costosyp/indicadoresbm/inpp.htm"
+        }
+      ]
+    },
+    {
       "id": "calc-ppc",
       "tipo": "calculadora",
       "categoria": "Last Planner",
@@ -1169,6 +1453,59 @@
         {
           "titulo": "NOM-031-STPS-2011 – Construcción, condiciones de seguridad y salud (DOF)",
           "url": "https://dof.gob.mx/normasOficiales/4212/stps/stps.htm"
+        }
+      ]
+    },
+    {
+      "id": "fmt-generadores",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Números generadores y soporte de estimación",
+      "resumen": "Hoja de generador por concepto con croquis, ejes, desarrollo de cantidades, acumulados y firmas, más la revisión de los errores que hacen que la supervisión regrese una estimación (unidades, vanos, tramos cobrados dos veces, falta de fotos o nota de bitácora).",
+      "agregada": "2026-10-22",
+      "campos": [
+        "Obra / contrato",
+        "Estimación No. y periodo (del – al)",
+        "Clave del concepto y unidad (igual al catálogo)",
+        "Descripción corta del concepto",
+        "Frente / nivel / ejes",
+        "Plano de referencia (número y revisión) o croquis con cotas",
+        "Desarrollo: largo × ancho × alto × piezas − vanos = cantidad",
+        "Cantidad de este periodo",
+        "Acumulado anterior / acumulado actual",
+        "Cantidad contratada y saldo por ejecutar",
+        "Nota de bitácora y número de fotos",
+        "Elaboró (contratista) / Revisó (residente) / Autorizó (supervisión)"
+      ],
+      "items": [
+        "La clave y la unidad del generador son idénticas a las del catálogo de conceptos (m², m³, kg, pza, lote)",
+        "Cada cantidad tiene su desarrollo con medidas tomadas en campo o de plano vigente, no un total sin desglose",
+        "Se descontaron vanos, huecos y traslapes según el alcance del precio unitario",
+        "El tramo, eje o nivel no se cobró en una estimación anterior (comparado con el control de acumulados)",
+        "El acumulado no rebasa la cantidad contratada; si la rebasa, existe volumen excedente o concepto extraordinario autorizado",
+        "El trabajo está terminado y liberado conforme a la especificación (checklist de calidad o liberación de colado firmada)",
+        "Croquis o plano con ejes y cotas que permite ubicar y volver a medir lo cobrado",
+        "Fotografías fechadas del trabajo terminado y, cuando quede oculto, del proceso (armado, ductos, impermeabilización)",
+        "Referencia a la nota de bitácora que registra el inicio o término del trabajo",
+        "Pruebas de laboratorio anexas cuando el concepto las exige (cilindros, compactación, hermeticidad)",
+        "Deducciones del periodo calculadas: amortización de anticipo, retenciones, fondo de garantía y penas (calculadora Estimación neta)",
+        "Firmas de quien elaboró, revisó y autorizó con fecha, dentro del plazo de corte del contrato"
+      ],
+      "como_usar": [
+        "Llena un generador por concepto y frente el mismo día que se termina el trabajo, no al cierre del periodo: mide en campo con el residente del contratista.",
+        "Toma 2 a 4 fotos fechadas y anota la nota de bitácora; si el trabajo queda oculto, fotografíalo antes de taparlo.",
+        "Antes del corte revisa los 12 puntos; cada 'No cumple' se corrige antes de que la estimación salga a supervisión.",
+        "Exporta a CSV para pasar las cantidades al resumen de la estimación y guarda el PDF firmado como soporte.",
+        "Mide: estimaciones regresadas por supervisión y días entre corte y pago, antes y después de usar el formato durante un mes."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Obraflow – Estimaciones de obra: integración, números generadores y errores que causan rechazo (2026)",
+          "url": "https://obraflow.mx/estimaciones-de-obra/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 143 – Amortización del anticipo en cada estimación",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
         }
       ]
     },
