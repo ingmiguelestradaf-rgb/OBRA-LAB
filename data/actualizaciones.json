@@ -1,6 +1,56 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-23",
+      "titulo": "Herramientas digitales: dron para levantamientos, volúmenes y avance",
+      "resumen": "Nueva calculadora de Plan de vuelo fotogramétrico que, con la cámara del dron (ejemplo: DJI Mini 5 Pro), la altura y los traslapes, da el GSD, la precisión esperada, separación de líneas y disparos, fotos, minutos y baterías, con semáforo si no alcanzas el GSD objetivo o si la cámara no aguanta el ritmo de disparo. Nuevo recurso WebODM: fotogrametría de código abierto con instaladores gratuitos desde abril 2026, ortomosaico, modelo 3D y cálculo de volúmenes de corte, relleno y acopios (1–2 % con puntos de control). Nuevo Checklist de vuelo de dron en obra con los límites del texto oficial de la NOM-107-SCT3-2019: 122 m de altura, 9.2 km de aeródromos, 457 m del piloto, 10 m de personas, seguro de responsabilidad civil y folio AFAC arriba de 250 g. Mejora: el Reporte diario registra el vuelo de dron y el enlace al ortomosaico.",
+      "herramientas": [
+        "calc-vuelo-dron",
+        "dig-webodm",
+        "fmt-vuelo-dron",
+        "fmt-reporte-diario"
+      ],
+      "como_aplicarlo": "Esta semana elige un acopio o un corte que ya tengas cuantificado por topografía, calcula el plan de vuelo para 1.5 cm/px, llena el checklist y vuela con 4–6 puntos de control. Procesa en WebODM y compara el volumen contra tu número: si la diferencia es menor a 3 %, deja el vuelo semanal (mismos parámetros) como soporte de generadores de terracerías y del avance. En Tijuana revisa primero la distancia al aeropuerto; dentro de 9.2 km se necesita autorización especial de AFAC.",
+      "fuentes": [
+        {
+          "titulo": "DOF – NOM-107-SCT3-2019, texto oficial (micro RPAS: 122 m, 9.2 km de aeródromos, 457 m del piloto, seguro RC, folio >250 g)",
+          "url": "https://dof.gob.mx/normasOficiales/8006/sct11_C/sct11_C.html"
+        },
+        {
+          "titulo": "SkyeBrowse – GSD: fórmula, metas por uso y precisión ≈ 2×GSD (abr 2026)",
+          "url": "https://www.skyebrowse.com/news/posts/ground-sample-distance.md"
+        },
+        {
+          "titulo": "Camtec (distribuidor) – Ficha DJI Mini 5 Pro: 1\", 8192×6144 px, 24 mm equiv., 249.9 g ±4 g",
+          "url": "https://www.camtecphoto.com/en/product/dji-mini-5-pro"
+        },
+        {
+          "titulo": "ADN40 – Precio del DJI Mini 5 Pro en México (desde ~$19,599 MXN, sep 2025)",
+          "url": "https://www.adn40.mx/es-tendencia/2025-09-17/precio-del-dron-dji-mini-5-pro-en-mexico/"
+        },
+        {
+          "titulo": "GitHub WebODM – código abierto AGPL-3.0, descarga gratuita",
+          "url": "https://github.com/WebODM/WebODM"
+        },
+        {
+          "titulo": "SkyeBrowse – WebODM vs OpenDroneMap: instaladores gratis desde abril 2026 (jul 2026)",
+          "url": "https://www.skyebrowse.com/news/posts/webodm-vs-opendronemap"
+        },
+        {
+          "titulo": "WebODM Lightning – Planes y precios oficiales (consultado 23-oct-2026)",
+          "url": "https://webodm.net/pricing"
+        },
+        {
+          "titulo": "WebODM – Cómo calcular volúmenes (planos base, precisión 1–2 % con GCP y GSD ~1 cm)",
+          "url": "https://docs.webodm.net/how-to/calculate-volumes"
+        },
+        {
+          "titulo": "PricingSaaS – Planes de DroneDeploy (captura 28-sep-2026; sin plan gratuito)",
+          "url": "https://pricingsaas.com/companies/dronedeploy"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-22",
       "titulo": "Costos y estimaciones: neto a cobrar, ajuste de costos y generadores sin rechazo",
       "resumen": "Nueva calculadora de Estimación neta que descuenta amortización de anticipo, 5 al millar, fondo de garantía y penas, suma IVA (8 % en la franja fronteriza, vigente hasta dic 2026) y muestra qué porcentaje del importe llega a caja. Nueva calculadora de Ajuste de costos por índices (art. 57–58 LOPSRM): factor ponderado de materiales, mano de obra y equipo aplicado al importe pendiente y afectado por el anticipo; con referencia al informe CMIC 2026 (construcción +3.95 % anual, concreto premezclado +6.26 %, acero +5.96 %). Nuevo formato de Números generadores con los 12 puntos que revisa la supervisión antes de autorizar una estimación.",

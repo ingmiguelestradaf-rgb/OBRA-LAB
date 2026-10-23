@@ -1395,6 +1395,7 @@
         "Equipo en obra",
         "Actividades realizadas",
         "Materiales recibidos",
+        "Vuelo de dron / captura de avance (sí/no y enlace)",
         "Incidencias / retrasos",
         "Elaboró"
       ],
@@ -1402,7 +1403,8 @@
         "Fotografías del avance tomadas por frente",
         "Charla de seguridad de 5 minutos realizada",
         "Pendientes del día anterior revisados",
-        "Notas de bitácora electrónica registradas"
+        "Notas de bitácora electrónica registradas",
+        "Si hubo vuelo de dron: checklist de vuelo llenado, GSD y enlace al ortomosaico del día registrados"
       ],
       "como_usar": [
         "Llénalo al cierre de cada jornada; toma menos de 10 minutos.",
@@ -2176,6 +2178,51 @@
       ]
     },
     {
+      "id": "dig-webodm",
+      "tipo": "recurso",
+      "categoria": "Herramientas digitales",
+      "titulo": "WebODM: ortomosaicos, modelos 3D y volúmenes con fotos de dron (código abierto)",
+      "resumen": "Programa de fotogrametría de código abierto: subes las fotos del dron y entrega ortomosaico georreferenciado, nube de puntos, modelo digital de superficie y medición de volúmenes de corte, relleno y acopios con un polígono. Corre gratis en tu PC o en la nube con WebODM Lightning.",
+      "agregada": "2026-10-23",
+      "beneficio": "Cuantificar volúmenes de excavación, relleno y acopios de material en minutos y con evidencia visual, en lugar de seccionar a mano o confiar en el número del contratista; ortomosaico semanal para juntas de avance y estimaciones. Con puntos de control y GSD ~1 cm/px el fabricante reporta precisión de volumen de 1–2 %.",
+      "plataforma": "Windows, macOS y Linux (Docker) en PC; nube WebODM Lightning en navegador",
+      "costo": "WebODM: gratis (código abierto AGPL-3.0); los instaladores de Windows y macOS son descarga gratuita desde abril de 2026 (si alguien te cobra un instalador, no es el oficial). Requiere PC con al menos 4 GB de RAM para menos de 200 fotos; recomendado 16 GB. WebODM Lightning en la nube (webodm.net/pricing, consultado 23-oct-2026): Starter USD 24/mes, Pro USD 35/mes, Business USD 99/mes, facturación anual, o pago por mapa (cotizador en el sitio). Alternativa comercial: DroneDeploy, sin plan gratuito; referencia de PricingSaaS (28-sep-2026, no publicado en el sitio oficial) Flight & Analysis USD 349/mes anual. Precios en pesos y facturación en México: no verificados.",
+      "url": "https://github.com/WebODM/WebODM",
+      "como_usar": [
+        "Instala WebODM en la PC de oficina de obra (instalador gratuito) o crea una cuenta en WebODM Lightning si la PC tiene menos de 16 GB de RAM.",
+        "Coloca de 4 a 6 puntos de control (dianas de 50 × 50 cm en blanco y negro) en las esquinas y al centro del área, y levántalos con estación total o GPS RTK; anota coordenadas en el Checklist de vuelo.",
+        "Vuela la misión con los parámetros de la calculadora 'Plan de vuelo fotogramétrico' (GSD 1–2 cm/px para volúmenes), sube las fotos y procesa con la opción de volúmenes / modelo digital de superficie (DSM) activada.",
+        "En el mapa dibuja un polígono alrededor del acopio o del corte; usa plano base 'Triangulate' si los bordes se ven y 'Custom' con la cota de proyecto para cortes. Exporta el resultado y el ortomosaico con fecha.",
+        "Prueba PDCA de 2 semanas: compara el volumen de WebODM contra tus secciones topográficas o contra los viajes de camión del mismo corte; si la diferencia es menor a 3 %, adopta el vuelo semanal como soporte de generadores de terracerías."
+      ],
+      "fuentes": [
+        {
+          "titulo": "GitHub WebODM – código abierto AGPL-3.0, descarga gratuita",
+          "url": "https://github.com/WebODM/WebODM"
+        },
+        {
+          "titulo": "SkyeBrowse – WebODM vs OpenDroneMap: instaladores gratis desde abril 2026 (jul 2026)",
+          "url": "https://www.skyebrowse.com/news/posts/webodm-vs-opendronemap"
+        },
+        {
+          "titulo": "WebODM Lightning – Planes y precios oficiales (consultado 23-oct-2026)",
+          "url": "https://webodm.net/pricing"
+        },
+        {
+          "titulo": "WebODM – Cómo calcular volúmenes (planos base, precisión 1–2 % con GCP y GSD ~1 cm)",
+          "url": "https://docs.webodm.net/how-to/calculate-volumes"
+        },
+        {
+          "titulo": "Virginia Tech – Requisitos de hardware de WebODM (4 GB mínimo <200 fotos, 16 GB recomendado)",
+          "url": "https://pressbooks.lib.vt.edu/webodm/?p=25"
+        },
+        {
+          "titulo": "PricingSaaS – Planes de DroneDeploy (captura 28-sep-2026; sin plan gratuito)",
+          "url": "https://pricingsaas.com/companies/dronedeploy"
+        }
+      ]
+    },
+    {
       "id": "calc-claro-caida",
       "tipo": "calculadora",
       "categoria": "Seguridad",
@@ -2357,6 +2404,64 @@
       ]
     },
     {
+      "id": "fmt-vuelo-dron",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Checklist de vuelo de dron en obra (NOM-107-SCT3-2019)",
+      "resumen": "Lista previa al despegue para levantamientos fotogramétricos y fotos de avance con dron micro (hasta 2 kg): documentos, zona de vuelo respecto a aeródromos, personas, clima, parámetros de misión y puntos de control. Deja evidencia de que el vuelo fue legal y de que los datos son comparables semana a semana.",
+      "agregada": "2026-10-23",
+      "campos": [
+        "Obra",
+        "Fecha y hora de despegue",
+        "Piloto",
+        "Observador",
+        "Modelo de dron y peso de despegue (g)",
+        "Folio de registro AFAC (obligatorio si pesa más de 250 g)",
+        "Póliza de seguro de responsabilidad civil (número y vigencia)",
+        "Distancia al aeródromo o helipuerto más cercano (km)",
+        "Viento y visibilidad",
+        "Altura de vuelo (m)",
+        "Traslape frontal / lateral (%)",
+        "GSD calculado (cm/px)",
+        "Número de puntos de control y método de levantamiento",
+        "Fotos tomadas / baterías usadas",
+        "Archivo o enlace del ortomosaico",
+        "Elaboró / Revisó"
+      ],
+      "items": [
+        "Copia del folio de registro y de la póliza de seguro disponibles en el control (si el dron pasa de 250 g; revisar el peso real con la batería que se usa)",
+        "Zona de vuelo a más de 9.2 km de aeródromos y 0.9 km de helipuertos, o autorización especial de AFAC vigente (en Tijuana revisar la distancia al aeropuerto)",
+        "Sin NOTAM, zona restringida ni corredor de helicópteros activo sobre la obra",
+        "Altura planeada ≤ 122 m sobre terreno (≤ 100 m entre 9.2 y 18.5 km de aeródromo)",
+        "El dron no se alejará más de 457 m del piloto y se mantiene siempre a la vista",
+        "Vuelo entre la salida y la puesta del sol",
+        "Personas ajenas a más de 10 m horizontales o bajo cubierta; cuadrillas avisadas y grúas detenidas o coordinadas",
+        "Hélices, baterías cargadas y tarjeta de memoria con espacio revisadas",
+        "Geocerca (altura y distancia) configurada en la app",
+        "Parámetros de misión iguales a los del vuelo anterior (altura, traslapes, velocidad, hora del día similar)",
+        "Puntos de control colocados, visibles y con coordenadas levantadas",
+        "Fotos revisadas en campo antes de retirar los puntos de control (sin borrosas ni huecos)",
+        "Datos descargados, respaldados y con acceso restringido (contienen imágenes de vecinos y personas)"
+      ],
+      "como_usar": [
+        "Llénalo en el celular antes de cada despegue; el piloto y el residente lo firman.",
+        "Copia del Plan de vuelo fotogramétrico la altura, traslapes y GSD para que todos los vuelos semanales usen los mismos parámetros.",
+        "Si un punto sale en No cumple (sin seguro, dentro de 9.2 km sin autorización, gente bajo la ruta) no se vuela: anota la causa y reprograma.",
+        "Guarda el CSV junto con el ortomosaico del día; es tu soporte si la supervisión cuestiona un volumen o un avance.",
+        "Si la foto es para cartografía con cámara métrica, consulta además el requisito de autorización de INEGI que señala la NOM-107 (5.2.1 c)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "DOF – NOM-107-SCT3-2019, texto oficial (micro RPAS: 122 m, 9.2 km de aeródromos, 457 m del piloto, seguro RC, folio >250 g)",
+          "url": "https://dof.gob.mx/normasOficiales/8006/sct11_C/sct11_C.html"
+        },
+        {
+          "titulo": "Plano Informativo – ¿Tu dron necesita registro o licencia en México? Categorías y folio AFAC (sep 2026)",
+          "url": "https://planoinformativo.com/1171002/tu-dron-necesita-registro-o-licencia-en-mexicog-este-es-el-peso-que-marca-la-ley"
+        }
+      ]
+    },
+    {
       "id": "calc-prima-riesgo",
       "tipo": "calculadora",
       "categoria": "Seguridad",
@@ -2470,6 +2575,194 @@
         {
           "titulo": "SDV – Calculadora y ejemplo de prima de riesgo (art. 72 y 74 LSS)",
           "url": "https://sdv.com.mx/herramientas/calculadora-prima-riesgo/"
+        }
+      ]
+    },
+    {
+      "id": "calc-vuelo-dron",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "Plan de vuelo fotogramétrico con dron: GSD, traslapes y fotos",
+      "resumen": "Con los datos de la cámara del dron, la altura y los traslapes te da el tamaño de píxel en terreno (GSD), la huella de cada foto, la separación entre líneas y entre disparos, cuántas fotos, minutos de vuelo y baterías para levantar un predio, un corte o un acopio. Avisa si el GSD no alcanza tu objetivo o si el dron dispararía más rápido de lo que la cámara aguanta.",
+      "agregada": "2026-10-23",
+      "entradas": [
+        {
+          "id": "SW",
+          "label": "Ancho del sensor (1\" = 13.2 mm; 1/1.3\" ≈ 9.6 mm)",
+          "unidad": "mm",
+          "valor": 13.2
+        },
+        {
+          "id": "FL",
+          "label": "Distancia focal REAL (no la equivalente; Mini 5 Pro ≈ 8.8 mm)",
+          "unidad": "mm",
+          "valor": 8.8
+        },
+        {
+          "id": "IW",
+          "label": "Ancho de la foto (lado perpendicular al vuelo)",
+          "unidad": "px",
+          "valor": 8192
+        },
+        {
+          "id": "IH",
+          "label": "Alto de la foto (lado en dirección del vuelo)",
+          "unidad": "px",
+          "valor": 6144
+        },
+        {
+          "id": "ALT",
+          "label": "Altura de vuelo sobre el terreno (máx. 122 m por NOM-107; 100 m entre 9.2 y 18.5 km de aeródromo)",
+          "unidad": "m",
+          "valor": 60
+        },
+        {
+          "id": "FO",
+          "label": "Traslape frontal (75–80 % recomendado)",
+          "unidad": "%",
+          "valor": 75
+        },
+        {
+          "id": "SO",
+          "label": "Traslape lateral (65–70 %)",
+          "unidad": "%",
+          "valor": 70
+        },
+        {
+          "id": "L",
+          "label": "Largo del área a levantar (dirección del vuelo, +10 m por lado)",
+          "unidad": "m",
+          "valor": 120
+        },
+        {
+          "id": "A",
+          "label": "Ancho del área a levantar (+10 m por lado)",
+          "unidad": "m",
+          "valor": 80
+        },
+        {
+          "id": "V",
+          "label": "Velocidad de vuelo",
+          "unidad": "m/s",
+          "valor": 5
+        },
+        {
+          "id": "BAT",
+          "label": "Minutos útiles por batería (deja reserva; Mini 5 Pro típico 21 min)",
+          "unidad": "min",
+          "valor": 18
+        },
+        {
+          "id": "GOBJ",
+          "label": "GSD objetivo (1–2 cm/px volúmenes; 3–5 cm/px avance)",
+          "unidad": "cm/px",
+          "valor": 2
+        }
+      ],
+      "salidas": [
+        {
+          "label": "GSD (tamaño de píxel en terreno)",
+          "formula": "SW*ALT*100/(FL*IW)",
+          "unidad": "cm/px",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra GSD objetivo (negativo = no alcanza, baja la altura)",
+          "formula": "100*(GOBJ-SW*ALT*100/(FL*IW))/GOBJ",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            0,
+            -25
+          ]
+        },
+        {
+          "label": "Precisión horizontal esperada con puntos de control (≈ 2 × GSD)",
+          "formula": "2*SW*ALT*100/(FL*IW)",
+          "unidad": "cm",
+          "decimales": 1
+        },
+        {
+          "label": "Huella de la foto: ancho en terreno",
+          "formula": "SW*ALT/FL",
+          "unidad": "m",
+          "decimales": 1
+        },
+        {
+          "label": "Huella de la foto: largo en terreno",
+          "formula": "SW*ALT/FL*IH/IW",
+          "unidad": "m",
+          "decimales": 1
+        },
+        {
+          "label": "Separación entre líneas de vuelo",
+          "formula": "SW*ALT/FL*(1-SO/100)",
+          "unidad": "m",
+          "decimales": 1
+        },
+        {
+          "label": "Separación entre disparos",
+          "formula": "SW*ALT/FL*IH/IW*(1-FO/100)",
+          "unidad": "m",
+          "decimales": 1
+        },
+        {
+          "label": "Intervalo entre fotos (la cámara necesita ≥ 2 s)",
+          "formula": "SW*ALT/FL*IH/IW*(1-FO/100)/V",
+          "unidad": "s",
+          "decimales": 1,
+          "semaforo": [
+            2.5,
+            2
+          ]
+        },
+        {
+          "label": "Líneas de vuelo",
+          "formula": "Math.ceil(A/(SW*ALT/FL*(1-SO/100)))+1",
+          "unidad": "líneas",
+          "decimales": 0
+        },
+        {
+          "label": "Fotos estimadas",
+          "formula": "(Math.ceil(A/(SW*ALT/FL*(1-SO/100)))+1)*(Math.ceil(L/(SW*ALT/FL*IH/IW*(1-FO/100)))+1)",
+          "unidad": "fotos",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Tiempo de vuelo (recorrido + 30 % por vueltas, despegue y aterrizaje)",
+          "formula": "1.3*((Math.ceil(A/(SW*ALT/FL*(1-SO/100)))+1)*L+Math.ceil(A/(SW*ALT/FL*(1-SO/100)))*SW*ALT/FL*(1-SO/100))/V/60",
+          "unidad": "min",
+          "decimales": 1
+        },
+        {
+          "label": "Baterías necesarias",
+          "formula": "Math.ceil(1.3*((Math.ceil(A/(SW*ALT/FL*(1-SO/100)))+1)*L+Math.ceil(A/(SW*ALT/FL*(1-SO/100)))*SW*ALT/FL*(1-SO/100))/V/60/BAT)",
+          "unidad": "pzas",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Busca en la ficha de tu dron el ancho del sensor, la resolución de foto y la focal real (si solo trae la equivalente, focal real ≈ focal equivalente × ancho del sensor / 36). Los valores de ejemplo son de un DJI Mini 5 Pro.",
+        "Define el GSD objetivo según el uso: 1–2 cm/px para volúmenes de corte, relleno o acopios; 3–5 cm/px para fotos de avance semanal. Mide el área en el plano y agrégale 10 m por lado.",
+        "Ajusta la altura hasta que el margen quede en verde y revisa que la altura no pase de 122 m (ni de 100 m si estás entre 9.2 y 18.5 km de un aeródromo).",
+        "Si el intervalo entre fotos sale en rojo (< 2 s), baja la velocidad; si las baterías no alcanzan, divide el predio en dos misiones con el mismo traslape.",
+        "Captura los mismos valores (altura, traslapes, velocidad) en la app de misiones de tu dron y repítelos en cada vuelo: así los ortomosaicos de cada semana se pueden comparar.",
+        "Antes de despegar llena el Checklist de vuelo de dron en obra; en Tijuana confirma la distancia al Aeropuerto Internacional, porque buena parte de la ciudad queda dentro de los 9.2 km."
+      ],
+      "fuentes": [
+        {
+          "titulo": "SkyeBrowse – GSD: fórmula, metas por uso y precisión ≈ 2×GSD (abr 2026)",
+          "url": "https://www.skyebrowse.com/news/posts/ground-sample-distance.md"
+        },
+        {
+          "titulo": "DOF – NOM-107-SCT3-2019, texto oficial (micro RPAS: 122 m, 9.2 km de aeródromos, 457 m del piloto, seguro RC, folio >250 g)",
+          "url": "https://dof.gob.mx/normasOficiales/8006/sct11_C/sct11_C.html"
+        },
+        {
+          "titulo": "Camtec (distribuidor) – Ficha DJI Mini 5 Pro: 1\", 8192×6144 px, 24 mm equiv., 249.9 g ±4 g",
+          "url": "https://www.camtecphoto.com/en/product/dji-mini-5-pro"
         }
       ]
     }
