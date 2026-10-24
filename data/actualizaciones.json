@@ -1,6 +1,40 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-24",
+      "titulo": "Lean y mejora continua: plan takt, muestreo del trabajo y recorrido Gemba",
+      "resumen": "Nueva calculadora Plan takt: divide un frente repetitivo en zonas de igual carga y calcula producción diaria por vagón, cuadrillas del oficio más lento, duración total con la fórmula (vagones + zonas − 1 + colchón) × takt del Lean Construction Institute y días ganados contra el programa. Nueva calculadora de Muestreo del trabajo: % productivo, contributivo y no contributivo, LUR de Oglesby (productivo + ¼ contributivo; meta > 50 %), cuántas observaciones faltan para un error de ±5 % y el costo semanal del tiempo no contributivo. Nuevo formato Recorrido Gemba con los 8 desperdicios traducidos a obra, plan del día contra lo real y pregunta abierta a la cuadrilla. Mejora: el método Last Planner ahora remite al plan takt para frentes repetitivos y al Recorrido Gemba para verificar causas de no cumplimiento.",
+      "herramientas": [
+        "calc-takt",
+        "calc-muestreo-trabajo",
+        "fmt-gemba",
+        "met-last-planner"
+      ],
+      "como_aplicarlo": "Lunes: arranca el muestreo del trabajo en una cuadrilla (10–15 recorridos aleatorios al día) hasta completar la muestra. Miércoles: haz el primer Recorrido Gemba en ese mismo frente y elige un desperdicio principal. En paralelo, toma el frente más repetitivo que tengas (niveles o departamentos), divídelo en zonas de igual carga y calcula el plan takt; preséntalo en la junta semanal de Last Planner. En 4 semanas repite el muestreo y compara LUR y costo del tiempo no contributivo.",
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Takt time: definición y fórmula de duración (Wagones + Zonas − 1) × Takt (actualizado ago 2025)",
+          "url": "https://leanconstruction.org/lean-topics/takt-time/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Congreso LCI 2026 (12–16 oct, Atlanta): sesión de VDC y Takt Planning",
+          "url": "https://leanconstruction.org/?p=82141"
+        },
+        {
+          "titulo": "Susanti et al. – Muestreo del trabajo en aplanados: 52.5 % efectivo, 37.6 % contributorio, LUR de Oglesby (Jurnal Pensil, may 2025)",
+          "url": "https://journal.unj.ac.id/unj/index.php/jpensil/article/download/54314/20137/158693"
+        },
+        {
+          "titulo": "McGraw-Hill – Cálculo del tamaño de muestra para proporciones n = Z²·p·q / e²",
+          "url": "https://highered.mheducation.com/sites/dl/free/1456223968/1016239/01_Documento_CalculoMuestra.pdf"
+        },
+        {
+          "titulo": "Construction Dive / LCI – Guía de gemba walk en obra y los 8 desperdicios (sep 2024)",
+          "url": "https://www.constructiondive.com/news/gemba-walk-guide-lean-construction-how-to/726442"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-23",
       "titulo": "Herramientas digitales: dron para levantamientos, volúmenes y avance",
       "resumen": "Nueva calculadora de Plan de vuelo fotogramétrico que, con la cámara del dron (ejemplo: DJI Mini 5 Pro), la altura y los traslapes, da el GSD, la precisión esperada, separación de líneas y disparos, fotos, minutos y baterías, con semáforo si no alcanzas el GSD objetivo o si la cámara no aguanta el ritmo de disparo. Nuevo recurso WebODM: fotogrametría de código abierto con instaladores gratuitos desde abril 2026, ortomosaico, modelo 3D y cálculo de volúmenes de corte, relleno y acopios (1–2 % con puntos de control). Nuevo Checklist de vuelo de dron en obra con los límites del texto oficial de la NOM-107-SCT3-2019: 122 m de altura, 9.2 km de aeródromos, 457 m del piloto, 10 m de personas, seguro de responsabilidad civil y folio AFAC arriba de 250 g. Mejora: el Reporte diario registra el vuelo de dron y el enlace al ortomosaico.",

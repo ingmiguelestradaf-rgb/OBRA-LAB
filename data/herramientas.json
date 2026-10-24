@@ -1524,7 +1524,9 @@
         "Plan intermedio (lookahead) de 6 semanas: registra las restricciones de cada actividad en el formato Análisis de restricciones (planos, material, permisos, frente libre, predecesora).",
         "Junta semanal: cada contratista se compromete solo a lo que no tiene restricciones.",
         "Junta diaria de 15 minutos al inicio de jornada para alinear el día.",
-        "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento."
+        "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento.",
+        "En frentes repetitivos (niveles, departamentos, viviendas) arma el plan intermedio como tren takt con la calculadora 'Plan takt': cada contratista sabe en qué zona debe estar cada semana.",
+        "Clasifica las causas de no cumplimiento del PPC y verifícalas en sitio con el Recorrido Gemba; la causa más repetida del mes es la que se ataca primero."
       ],
       "fuentes": [
         {
@@ -1538,6 +1540,10 @@
         {
           "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
           "url": "https://iglc.net/Papers/Details/497"
+        },
+        {
+          "titulo": "Lean Construction Institute – Takt time: definición y fórmula de duración (Wagones + Zonas − 1) × Takt (actualizado ago 2025)",
+          "url": "https://leanconstruction.org/lean-topics/takt-time/"
         }
       ]
     },
@@ -2763,6 +2769,338 @@
         {
           "titulo": "Camtec (distribuidor) – Ficha DJI Mini 5 Pro: 1\", 8192×6144 px, 24 mm equiv., 249.9 g ±4 g",
           "url": "https://www.camtecphoto.com/en/product/dji-mini-5-pro"
+        }
+      ]
+    },
+    {
+      "id": "calc-takt",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Plan takt: duración por zonas, cuadrillas y días ganados",
+      "resumen": "Divide un frente repetitivo (niveles, departamentos, viviendas, tramos) en zonas de igual carga y haz que los oficios pasen en tren, uno detrás del otro, al mismo ritmo (takt). Te da la cantidad por zona, la producción diaria que exige el takt, cuántas cuadrillas necesita el oficio más lento, la duración total con la fórmula (vagones + zonas − 1 + colchón) × takt y los días que ganas contra tu programa actual.",
+      "agregada": "2026-10-24",
+      "entradas": [
+        {
+          "id": "Q",
+          "label": "Cantidad total del frente (ej. 4 niveles × 600 m² de acabados)",
+          "unidad": "m²",
+          "valor": 2400
+        },
+        {
+          "id": "Z",
+          "label": "Número de zonas de igual carga de trabajo",
+          "unidad": "zonas",
+          "valor": 8
+        },
+        {
+          "id": "W",
+          "label": "Vagones = paquetes de oficios en secuencia (ej. muros, instalaciones, tablaroca, aplanado, pintura, pisos)",
+          "unidad": "vagones",
+          "valor": 6
+        },
+        {
+          "id": "T",
+          "label": "Takt: días que cada vagón permanece en cada zona",
+          "unidad": "días",
+          "valor": 3
+        },
+        {
+          "id": "BUF",
+          "label": "Takts de colchón (zonas vacías entre oficios para absorber variación; 0–2)",
+          "unidad": "takts",
+          "valor": 1
+        },
+        {
+          "id": "REND",
+          "label": "Rendimiento de UNA cuadrilla del oficio más lento (de tu calculadora de rendimiento)",
+          "unidad": "m²/día",
+          "valor": 40
+        },
+        {
+          "id": "DPROG",
+          "label": "Duración del mismo frente en tu programa actual",
+          "unidad": "días",
+          "valor": 60
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Cantidad por zona",
+          "formula": "Q/Z",
+          "unidad": "m²",
+          "decimales": 0
+        },
+        {
+          "label": "Producción diaria que exige el takt (por vagón)",
+          "formula": "Q/Z/T",
+          "unidad": "m²/día",
+          "decimales": 1
+        },
+        {
+          "label": "Cuadrillas necesarias en el oficio más lento",
+          "formula": "Math.ceil(Q/Z/(REND*T))",
+          "unidad": "cuadrillas",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Holgura de esas cuadrillas contra el takt (negativo = no alcanzan)",
+          "formula": "100*(Math.ceil(Q/Z/(REND*T))*REND*T-Q/Z)/(Q/Z)",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            10,
+            0
+          ]
+        },
+        {
+          "label": "Primera zona terminada (todos los vagones pasaron)",
+          "formula": "W*T",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Duración total del frente con takt",
+          "formula": "(W+Z-1+BUF)*T",
+          "unidad": "días",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Días ganados contra el programa actual",
+          "formula": "DPROG-(W+Z-1+BUF)*T",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Reducción de duración",
+          "formula": "100*(DPROG-(W+Z-1+BUF)*T)/DPROG",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            10,
+            0
+          ]
+        },
+        {
+          "label": "Zonas abiertas al mismo tiempo (trabajo en proceso)",
+          "formula": "Math.min(W,Z)",
+          "unidad": "zonas",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Elige un frente repetitivo (niveles de un edificio, departamentos, viviendas en serie) y divídelo en zonas con la MISMA carga de trabajo, no con la misma área: un núcleo de baños pesa más que un pasillo. Zonas más chicas = flujo más rápido.",
+        "Agrupa las actividades en vagones que quepan en el mismo takt (3 a 5 días es lo común); si un oficio no cabe, súbele cuadrillas o pártelo en dos vagones, y si le sobra tiempo, júntalo con otro.",
+        "Captura el rendimiento real de una cuadrilla del oficio más lento (sácalo de la calculadora 'Rendimiento de cuadrilla'). Si la holgura sale en rojo, agrega cuadrillas o reduce la cantidad por zona antes de arrancar.",
+        "Dibuja el tren en una sábana (zonas en filas, semanas en columnas) y pégala en la oficina de obra; en la junta semanal de Last Planner cada contratista revisa que su zona siguiente esté libre de restricciones.",
+        "Cada día el residente marca en la sábana si cada vagón terminó su zona en el takt; un vagón atrasado se ataca ese mismo día (takt control), sin dejar que el siguiente oficio entre a una zona incompleta.",
+        "Indicador: % de entregas de zona a tiempo y días ganados reales contra el programa. Prueba 4 semanas en un solo frente y adopta si la entrega a tiempo supera 80 %."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Takt time: definición y fórmula de duración (Wagones + Zonas − 1) × Takt (actualizado ago 2025)",
+          "url": "https://leanconstruction.org/lean-topics/takt-time/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Congreso LCI 2026 (12–16 oct, Atlanta): sesión de VDC y Takt Planning",
+          "url": "https://leanconstruction.org/?p=82141"
+        },
+        {
+          "titulo": "Kyle Nitchen – Inside my Takt plan: zonas por densidad de trabajo, vagones y trenes (act. ene 2025)",
+          "url": "https://kylenitchen.substack.com/p/inside-my-takt-plan"
+        }
+      ]
+    },
+    {
+      "id": "calc-muestreo-trabajo",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Muestreo del trabajo: tiempo productivo, LUR y costo del tiempo perdido",
+      "resumen": "Con recorridos aleatorios clasificas lo que hace cada trabajador en el instante en que lo ves: productivo (agrega valor: colocar block, colar, armar), contributivo (necesario pero no agrega valor: acarrear, medir, recibir instrucciones) o no contributivo (esperar, buscar, rehacer, platicar). Te da los porcentajes, el índice de utilización de mano de obra LUR de Oglesby, si ya juntaste suficientes observaciones y cuánto te cuesta a la semana el tiempo no contributivo.",
+      "agregada": "2026-10-24",
+      "entradas": [
+        {
+          "id": "P",
+          "label": "Observaciones de trabajo productivo",
+          "unidad": "obs.",
+          "valor": 210
+        },
+        {
+          "id": "C",
+          "label": "Observaciones de trabajo contributivo",
+          "unidad": "obs.",
+          "valor": 150
+        },
+        {
+          "id": "NC",
+          "label": "Observaciones de trabajo no contributivo",
+          "unidad": "obs.",
+          "valor": 90
+        },
+        {
+          "id": "E",
+          "label": "Error aceptable (5 % es lo usual)",
+          "unidad": "%",
+          "valor": 5
+        },
+        {
+          "id": "ZC",
+          "label": "Valor Z de confianza (1.96 = 95 %; 1.645 = 90 %)",
+          "unidad": "Z",
+          "valor": 1.96
+        },
+        {
+          "id": "G",
+          "label": "Trabajadores en el frente observado",
+          "unidad": "pers.",
+          "valor": 8
+        },
+        {
+          "id": "D",
+          "label": "Días trabajados por semana",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "J",
+          "label": "Costo de un jornal con cargas (usa tu dato real; ejemplo)",
+          "unidad": "$/jornal",
+          "valor": 650
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Trabajo productivo",
+          "formula": "100*P/(P+C+NC)",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Trabajo contributivo",
+          "formula": "100*C/(P+C+NC)",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Trabajo no contributivo",
+          "formula": "100*NC/(P+C+NC)",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "LUR = (productivo + ¼ contributivo) / total (meta > 50 %)",
+          "formula": "100*(P+0.25*C)/(P+C+NC)",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            60,
+            50
+          ]
+        },
+        {
+          "label": "Observaciones necesarias para el error elegido",
+          "formula": "Math.ceil(ZC*ZC*(P/(P+C+NC))*(1-P/(P+C+NC))/Math.pow(E/100,2))",
+          "unidad": "obs.",
+          "decimales": 0
+        },
+        {
+          "label": "Observaciones que faltan (0 = muestra suficiente)",
+          "formula": "Math.max(0,Math.ceil(ZC*ZC*(P/(P+C+NC))*(1-P/(P+C+NC))/Math.pow(E/100,2))-(P+C+NC))",
+          "unidad": "obs.",
+          "decimales": 0
+        },
+        {
+          "label": "Error real con tus observaciones (±)",
+          "formula": "100*ZC*Math.sqrt((P/(P+C+NC))*(1-P/(P+C+NC))/(P+C+NC))",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Jornales no contributivos por semana",
+          "formula": "NC/(P+C+NC)*G*D",
+          "unidad": "jornales",
+          "decimales": 1
+        },
+        {
+          "label": "Costo semanal del tiempo no contributivo",
+          "formula": "NC/(P+C+NC)*G*D*J",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Define las 3 categorías con la cuadrilla antes de empezar y explícales que se mide el proceso, no a las personas. Productivo: la tarea del concepto de obra. Contributivo: acarreo, trazo, limpieza necesaria, instrucciones. No contributivo: esperas, búsqueda de material o herramienta, retrabajo, ausencias del frente.",
+        "Haz recorridos a horas aleatorias (ej. 10 a 15 al día, a distintas horas, también después de comida). En cada recorrido anota con una rayita, en el instante en que ves a cada trabajador, una sola categoría.",
+        "Al final de cada día captura los totales; sigue observando hasta que 'Observaciones que faltan' llegue a 0 (con 5 % de error suelen bastar 3 a 4 días en una cuadrilla de 8).",
+        "Si el no contributivo pasa de 15–20 %, anota qué lo causa (esperar material, esperar al oficio anterior, buscar herramienta) y atácalo con el Recorrido Gemba, 5S o el Análisis de restricciones.",
+        "Repite la medición 2 a 4 semanas después de la mejora con el mismo método y compara el LUR y el costo semanal: ese es tu antes y después medible."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Susanti et al. – Muestreo del trabajo en aplanados: 52.5 % efectivo, 37.6 % contributorio, LUR de Oglesby (Jurnal Pensil, may 2025)",
+          "url": "https://journal.unj.ac.id/unj/index.php/jpensil/article/download/54314/20137/158693"
+        },
+        {
+          "titulo": "UIS – Medición directa de productividad (AACE 22R-01) en mampostería: trabajo productivo, contributivo y no contributivo (2022)",
+          "url": "https://noesis.uis.edu.co/items/220e0b2f-e776-4aa0-9ecd-e4ed414ec5ea/full"
+        },
+        {
+          "titulo": "McGraw-Hill – Cálculo del tamaño de muestra para proporciones n = Z²·p·q / e²",
+          "url": "https://highered.mheducation.com/sites/dl/free/1456223968/1016239/01_Documento_CalculoMuestra.pdf"
+        }
+      ]
+    },
+    {
+      "id": "fmt-gemba",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Recorrido Gemba: los 8 desperdicios en el frente de trabajo",
+      "resumen": "Recorrido semanal de 30 minutos donde se hace el trabajo para ver los 8 desperdicios (sobreproducción, esperas, transporte, sobreprocesamiento, inventario, movimientos, defectos y talento no aprovechado) con ejemplos de obra. Compara lo planeado del día contra lo real, pregunta qué estorba y deja cada hallazgo con responsable y fecha.",
+      "agregada": "2026-10-24",
+      "campos": [
+        "Obra",
+        "Fecha y hora del recorrido",
+        "Frente / zona / nivel",
+        "Quién recorre (superintendente o residente)",
+        "Acompañantes (cabo, contratista, almacenista)",
+        "Actividad planeada para hoy según el plan semanal",
+        "Actividad que realmente se está haciendo",
+        "Pregunta abierta hecha a la cuadrilla y respuesta ('¿Qué te estorba hoy?', '¿Por qué cambió el plan?')",
+        "Trabajadores en el frente al momento del recorrido",
+        "Principal desperdicio encontrado y acción acordada"
+      ],
+      "items": [
+        "Sin sobreproducción: no se habilita acero, cimbra o block muy por delante de lo que el frente siguiente puede recibir",
+        "Sin esperas: la cuadrilla tiene material, herramienta, frente libre e indicaciones; nadie espera al oficio anterior, a la olla, a la bomba o al supervisor",
+        "Sin transporte innecesario: el material se descargó lo más cerca posible del punto de uso, sin doble maniobra de acopio",
+        "Sin sobreprocesamiento: no se hace más de lo especificado (doble mano de repello, espesores mayores, acabados no pedidos)",
+        "Inventario controlado: el acopio en frente es de máximo 1 a 2 días de consumo, ordenado y protegido de daño, robo o intemperie",
+        "Sin movimientos innecesarios: la herramienta y el material menor están al alcance; nadie sube y baja niveles por cosas que faltan",
+        "Sin defectos ni retrabajos: no hay demoliciones, resanes o correcciones en el frente; si los hay, se anotó la causa",
+        "Talento aprovechado: se preguntó a la cuadrilla y al cabo cómo hacer el trabajo más fácil y se anotó al menos una idea",
+        "El plan del día coincide con lo que se ejecuta; si no, se conoce la causa (restricción, cambio, clima)",
+        "Orden y limpieza (5S) del frente aceptable: pasillos libres, desperdicio en su lugar",
+        "Los hallazgos de la semana pasada quedaron cerrados"
+      ],
+      "como_usar": [
+        "Avisa al contratista que vas a recorrer y que se revisa el proceso, no a las personas. Ve al frente a la misma hora cada semana, máximo 30 minutos.",
+        "Empieza comparando la actividad planeada para hoy contra lo que se está haciendo; haz al menos una pregunta abierta (qué, por qué, cómo) y anota la respuesta tal cual.",
+        "Revisa los 8 desperdicios en orden; cada 'No cumple' lleva observación con foto, responsable y fecha de cierre.",
+        "Elige solo UN desperdicio principal por recorrido y acuerda una acción concreta con la cuadrilla; si se repite 3 semanas, ábrele un ciclo PDCA.",
+        "Exporta el CSV y lleva el conteo de 'No cumple' por desperdicio; en un mes el más frecuente es tu prioridad. Mide el efecto con la calculadora de Muestreo del trabajo."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Construction Dive / LCI – Guía de gemba walk en obra y los 8 desperdicios (sep 2024)",
+          "url": "https://www.constructiondive.com/news/gemba-walk-guide-lean-construction-how-to/726442"
+        },
+        {
+          "titulo": "Lean Construction Institute – Host a Gemba Day (Congreso LCI)",
+          "url": "https://congress.leanconstruction.org/program/gemba-day/host-a-gemba-day/"
         }
       ]
     }
