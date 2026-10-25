@@ -1072,6 +1072,121 @@
       ]
     },
     {
+      "id": "calc-plazos-estimacion",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Plazos de estimación y gastos financieros por pago tardío (LOPSRM 54 y 55)",
+      "resumen": "Revisa si tu estimación de obra pública se presentó, revisó y pagó dentro de los plazos de ley (6, 15 y 20 días naturales) y calcula los gastos financieros que puedes reclamar por pago tardío a la tasa de prórroga de la LIF 2026 (1.38 % mensual), en dos criterios: literal desde que se definió el importe y conservador solo por días de atraso.",
+      "agregada": "2026-10-25",
+      "entradas": [
+        {
+          "id": "M",
+          "label": "Importe autorizado pendiente de pago",
+          "unidad": "$",
+          "valor": 918000
+        },
+        {
+          "id": "DC",
+          "label": "Días naturales del corte a la entrega de la estimación a la residencia",
+          "unidad": "días",
+          "valor": 5
+        },
+        {
+          "id": "DR",
+          "label": "Días naturales que tardó la residencia en revisar y autorizar",
+          "unidad": "días",
+          "valor": 22
+        },
+        {
+          "id": "DP",
+          "label": "Días naturales de la autorización + factura al pago efectivo (o a hoy si no han pagado)",
+          "unidad": "días",
+          "valor": 45
+        },
+        {
+          "id": "T",
+          "label": "Tasa mensual de recargos por prórroga (LIF 2026: 1.38 %)",
+          "unidad": "%",
+          "valor": 1.38
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Días de retraso del contratista en presentar (límite 6)",
+          "formula": "Math.max(0,DC-6)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Días de retraso de la residencia en autorizar (límite 15)",
+          "formula": "Math.max(0,DR-15)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Días de atraso en el pago (límite 20)",
+          "formula": "Math.max(0,DP-20)",
+          "unidad": "días",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Costo financiero por cada día sin cobrar",
+          "formula": "M*T/100/30",
+          "unidad": "$/día",
+          "decimales": 2
+        },
+        {
+          "label": "Gastos financieros – criterio conservador (solo días después del día 20)",
+          "formula": "M*T/100*Math.max(0,DP-20)/30",
+          "unidad": "$",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Gastos financieros – lectura literal art. 55 (desde que se definió el importe, si hubo incumplimiento)",
+          "formula": "DP>20?M*T/100*DP/30:0",
+          "unidad": "$",
+          "decimales": 2
+        },
+        {
+          "label": "Gastos financieros como % del importe pendiente (criterio conservador)",
+          "formula": "T*Math.max(0,DP-20)/30",
+          "unidad": "%",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Toma las fechas de tus propias notas de bitácora electrónica: corte, entrega de la estimación a la residencia, autorización, ingreso de la factura y pago (o la fecha de hoy si sigue pendiente).",
+        "Captura los días naturales de cada tramo y el importe autorizado que no te han pagado; la tasa 1.38 % mensual es la de prórroga de la LIF 2026, cámbiala en enero cuando salga la LIF 2027.",
+        "Si los días de presentación pasan de 6, la estimación es tuya: entrégala dentro del plazo o pasa al siguiente periodo. Si la revisión pasa de 15 días, déjalo asentado en bitácora el mismo día 16.",
+        "Si el pago pasa de 20 días, presenta por escrito la solicitud de gastos financieros (el art. 55 los concede solo a solicitud del contratista) con el criterio conservador como mínimo y anexa este cálculo.",
+        "Para obra privada no aplica la ley: usa la calculadora para negociar intereses moratorios solo si tu contrato los pacta; en ambos casos confirma el criterio de días con tu jurídico antes de reclamar."
+      ],
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 54 – Estimaciones: presentación 6 días, revisión 15 días, pago 20 días naturales (reformado DOF 16-04-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-54/"
+        },
+        {
+          "titulo": "LOPSRM art. 55 – Gastos financieros por pago tardío a la tasa de prórroga de la LIF, por días naturales (reformado DOF 16-04-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-55/"
+        },
+        {
+          "titulo": "Infobae (jun 2026) – LIF 2026 (DOF 7-11-2025): recargos por prórroga 1.38 % mensual (antes 0.98 %)",
+          "url": "https://www.infobae.com/mexico/2026/06/07/tu-deuda-con-el-sat-ahora-crece-al-doble-los-recargos-por-mora-subieron-40-en-2026/"
+        },
+        {
+          "titulo": "AMCP – Puntos relevantes de la LIF 2026: tasa de prórroga 1.38 % mensual",
+          "url": "https://amcpdf.org.mx/puntos-relevantes-de-la-ley-de-ingresos-de-la-federacion-para-el-ejercicio-fiscal-2026/"
+        },
+        {
+          "titulo": "Garrigues – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica obligatoria y nueva plataforma que sustituye a CompraNet",
+          "url": "https://www.garrigues.com/es_ES/noticia/mexico-reforma-ley-obras-publicas-incluyendo-creacion-nueva-plataforma-contrataciones"
+        }
+      ]
+    },
+    {
       "id": "calc-ppc",
       "tipo": "calculadora",
       "categoria": "Last Planner",
@@ -1404,12 +1519,15 @@
         "Charla de seguridad de 5 minutos realizada",
         "Pendientes del día anterior revisados",
         "Notas de bitácora electrónica registradas",
-        "Si hubo vuelo de dron: checklist de vuelo llenado, GSD y enlace al ortomosaico del día registrados"
+        "Si hubo vuelo de dron: checklist de vuelo llenado, GSD y enlace al ortomosaico del día registrados",
+        "Si hubo visita del DRO, corresponsable o inspector urbano: folio de la nota de bitácora registrado",
+        "Si hay estimación en trámite: fechas de entrega, autorización, factura y pago anotadas (plazos 6/15/20 días)"
       ],
       "como_usar": [
         "Llénalo al cierre de cada jornada; toma menos de 10 minutos.",
         "Sé específico en incidencias: hora, causa y quién la reporta. Te protege en reclamaciones.",
-        "Guarda el CSV por fecha; al final del mes tienes tu historial completo."
+        "Guarda el CSV por fecha; al final del mes tienes tu historial completo.",
+        "Las fechas de visitas del DRO y de trámite de estimaciones alimentan el formato Visita del DRO y la calculadora de Plazos de estimación."
       ]
     },
     {
@@ -1508,6 +1626,64 @@
         {
           "titulo": "Reglamento LOPSRM art. 143 – Amortización del anticipo en cada estimación",
           "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
+        }
+      ]
+    },
+    {
+      "id": "fmt-bitacora-dro",
+      "tipo": "formato",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Visita del DRO y nota de bitácora (Reglamento de Edificaciones de Tijuana, art. 17)",
+      "resumen": "Guía de campo para que cada visita del Director Responsable de Obra quede asentada como pide el reglamento municipal de Tijuana: bitácora foliada y registrada, mínimo 2 visitas por semana, inicio y término de cada etapa, control de calidad, incidentes, modificaciones y aviso de terminación.",
+      "agregada": "2026-10-25",
+      "campos": [
+        "Obra y número de licencia de construcción",
+        "Folio de la nota de bitácora",
+        "Fecha y hora de la visita",
+        "Director Responsable de Obra (nombre y registro)",
+        "Corresponsables presentes (estructural, instalaciones)",
+        "Superintendente / residente que atiende",
+        "Etapa (trazo, excavación, habilitado de acero, cimentación, desplante, estructura, entrepisos, cubiertas, instalaciones, demolición) e indicar inicio o término",
+        "Materiales y pruebas revisadas (f'c, acero, laboratorio, folios de informes)",
+        "Observaciones e instrucciones del DRO",
+        "Responsable y fecha compromiso de cada observación",
+        "Visitas de la semana a la fecha (número)",
+        "Firma del DRO y del superintendente"
+      ],
+      "items": [
+        "Bitácora en obra, foliada y registrada ante la Dirección",
+        "Licencia y copia de planos autorizados disponibles en obra",
+        "Letrero de control de obra visible desde la calle",
+        "Esta semana van al menos 2 visitas del DRO asentadas",
+        "Si inicia o termina una etapa, la nota lo dice expresamente con fecha",
+        "Especificaciones y control de calidad de materiales asentados (resultados de laboratorio con folio)",
+        "Procedimiento constructivo de elementos estructurales anotado cuando aplica (apuntalamiento, descimbrado, secuencia de colado)",
+        "Incidentes y visitas de inspectores urbanos asentados con hora y nombre",
+        "Modificaciones al proyecto anotadas y firmadas por el responsable o corresponsable que las autoriza",
+        "Pendientes de la nota anterior cerrados o con nueva fecha",
+        "Fotografías de la visita ligadas al folio de la nota",
+        "Si hay suspensión temporal: notificada a la autoridad",
+        "Al terminar la obra: aviso de terminación presentado para obtener la constancia"
+      ],
+      "como_usar": [
+        "Imprime o abre el formato antes de la visita del DRO y llena obra, licencia y folio; ten la bitácora y planos autorizados a la mano.",
+        "Durante el recorrido marca Cumple / No / N/A y anota en observaciones lo que el DRO instruya, con responsable y fecha compromiso.",
+        "Antes de que el DRO se retire, verifica que la nota física diga etapa, inicio o término, calidad revisada e instrucciones, y que ambos firmen.",
+        "Exporta el CSV con el número de folio en el nombre y lleva el conteo de visitas semanales: si el viernes llevas menos de 2, agenda la siguiente.",
+        "Al cierre de cada etapa revisa que existan las notas de inicio y término; sin ellas la constancia de terminación y cualquier reclamación se complican."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento de la Ley de Edificaciones para el Municipio de Tijuana, art. 17 – obligaciones del DRO: bitácora foliada, visitas y aviso de terminación",
+          "url": "https://www.tijuana.gob.mx/normatividad/documentos/Reglamentos/40_20211126144942_wp.pdf"
+        },
+        {
+          "titulo": "El Imparcial (jul 2026) – Tijuana busca reactivar mesas para actualizar reglamentos urbanos",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/07/17/buscan-reactivar-mesas-de-trabajo-para-actualizar-reglamentos-urbanos-de-tijuana/"
+        },
+        {
+          "titulo": "Garrigues – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica obligatoria y nueva plataforma que sustituye a CompraNet",
+          "url": "https://www.garrigues.com/es_ES/noticia/mexico-reforma-ley-obras-publicas-incluyendo-creacion-nueva-plataforma-contrataciones"
         }
       ]
     },

@@ -1,6 +1,39 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-25",
+      "titulo": "Normatividad y documentación: plazos de estimación, gastos financieros y bitácora del DRO",
+      "resumen": "Nueva calculadora Plazos de estimación y gastos financieros: compara tus tiempos reales contra los 6 días para presentar, 15 para autorizar y 20 para pagar que fija el art. 54 de la LOPSRM (reformado el 16-04-2025) y calcula los gastos financieros por pago tardío del art. 55 a la tasa de prórroga de la LIF 2026 (1.38 % mensual, antes 0.98 %), con criterio conservador y literal. Nuevo formato Visita del DRO y nota de bitácora con las obligaciones del art. 17 del reglamento municipal de Tijuana: bitácora foliada y registrada, mínimo 2 visitas por semana, notas de inicio y término de etapa, control de calidad, incidentes y aviso de terminación. Mejora: el Reporte diario ahora registra el folio de bitácora de cada visita del DRO o inspector y las fechas de trámite de estimaciones.",
+      "herramientas": [
+        "calc-plazos-estimacion",
+        "fmt-bitacora-dro",
+        "fmt-reporte-diario"
+      ],
+      "como_aplicarlo": "Lunes: con tus notas de bitácora reconstruye las fechas de la última estimación cobrada y la que está en trámite y pásalas por la calculadora; si alguna pasa de 20 días, prepara esta semana la solicitud escrita de gastos financieros. En la próxima visita del DRO usa el formato y cuenta las visitas de la semana. Durante 4 semanas mide dos indicadores: días promedio de cobro por estimación y % de etapas con nota de inicio y término; si mejoran, adóptalo en todas las obras.",
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 54 – Estimaciones: presentación 6 días, revisión 15 días, pago 20 días naturales (reformado DOF 16-04-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-54/"
+        },
+        {
+          "titulo": "LOPSRM art. 55 – Gastos financieros por pago tardío a la tasa de prórroga de la LIF, por días naturales (reformado DOF 16-04-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-55/"
+        },
+        {
+          "titulo": "Infobae (jun 2026) – LIF 2026 (DOF 7-11-2025): recargos por prórroga 1.38 % mensual (antes 0.98 %)",
+          "url": "https://www.infobae.com/mexico/2026/06/07/tu-deuda-con-el-sat-ahora-crece-al-doble-los-recargos-por-mora-subieron-40-en-2026/"
+        },
+        {
+          "titulo": "Reglamento de la Ley de Edificaciones para el Municipio de Tijuana, art. 17 – obligaciones del DRO: bitácora foliada, visitas y aviso de terminación",
+          "url": "https://www.tijuana.gob.mx/normatividad/documentos/Reglamentos/40_20211126144942_wp.pdf"
+        },
+        {
+          "titulo": "Garrigues – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica obligatoria y nueva plataforma que sustituye a CompraNet",
+          "url": "https://www.garrigues.com/es_ES/noticia/mexico-reforma-ley-obras-publicas-incluyendo-creacion-nueva-plataforma-contrataciones"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-24",
       "titulo": "Lean y mejora continua: plan takt, muestreo del trabajo y recorrido Gemba",
       "resumen": "Nueva calculadora Plan takt: divide un frente repetitivo en zonas de igual carga y calcula producción diaria por vagón, cuadrillas del oficio más lento, duración total con la fórmula (vagones + zonas − 1 + colchón) × takt del Lean Construction Institute y días ganados contra el programa. Nueva calculadora de Muestreo del trabajo: % productivo, contributivo y no contributivo, LUR de Oglesby (productivo + ¼ contributivo; meta > 50 %), cuántas observaciones faltan para un error de ±5 % y el costo semanal del tiempo no contributivo. Nuevo formato Recorrido Gemba con los 8 desperdicios traducidos a obra, plan del día contra lo real y pregunta abierta a la cuadrilla. Mejora: el método Last Planner ahora remite al plan takt para frentes repetitivos y al Recorrido Gemba para verificar causas de no cumplimiento.",
