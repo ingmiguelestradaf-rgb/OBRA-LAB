@@ -656,11 +656,12 @@
         }
       ],
       "como_usar": [
-        "Cada viernes toma el avance físico por partida y multiplícalo por su importe: eso es el EV.",
+        "Cada viernes toma el avance físico por partida con el formato Corte semanal de avance físico (medido en obra, con regla de medición escrita) y multiplícalo por su importe: eso es el EV.",
         "El PV sale de tu programa de obra (curva S) a esa misma fecha.",
         "El AC es lo realmente pagado o estimado a contratistas y proveedores.",
         "SPI o CPI menores a 0.95 en verde-amarillo, menores a 0.90 en rojo: lleva el dato a la junta semanal con la causa.",
-        "Para saber en qué semana terminas (no solo cuánto vas), usa la calculadora Programa ganado con el mismo corte."
+        "Para saber en qué semana terminas (no solo cuánto vas), usa la calculadora Programa ganado con el mismo corte.",
+        "Si el SPI o el CPI salen en rojo, cuantifica la consecuencia: la calculadora Penas convencionales y retenciones te dice cuánto cuesta cada día de atraso en obra pública y cuánto dejas de cobrar en la estimación en proceso."
       ]
     },
     {
@@ -765,12 +766,13 @@
         }
       ],
       "como_usar": [
-        "Cada viernes toma de tu curva S (programa de obra) la columna de % planeado acumulado por semana y tu % de avance real ponderado por importe.",
+        "Cada viernes toma de tu curva S (programa de obra) la columna de % planeado acumulado por semana y tu % de avance real ponderado por importe; levanta ese avance con el formato Corte semanal de avance físico para que el dato venga medido en obra y no del porcentaje que reporta el contratista.",
         "Busca en la curva la última semana cuyo % planeado sea menor o igual a tu avance real: esa es C; anota su % y el de la semana siguiente.",
         "Captura la semana actual y la duración contractual: el ES te dice 'a qué semana del programa equivale lo que llevas'.",
         "Si SPI(t) baja de 0.95 o la duración pronosticada rebasa la contractual, revisa la ruta crítica y llévalo a la junta con contratistas con la fecha pronosticada, no solo el %.",
         "Un TSPI mayor a 1.10 significa que tendrías que trabajar más de 10 % más rápido que lo planeado el resto de la obra: es momento de reprogramar o reforzar cuadrillas, y de dejarlo asentado en bitácora.",
-        "Guarda el pronóstico semanal: si la duración pronosticada sube 3 semanas seguidas, la tendencia es real y no un mal corte."
+        "Guarda el pronóstico semanal: si la duración pronosticada sube 3 semanas seguidas, la tendencia es real y no un mal corte.",
+        "Si el TSPI te pide acelerar, no decidas 'meterle horas extra' de memoria: pásalo por la calculadora Recuperar atraso para comparar horas extra contra cuadrilla adicional con la productividad real y el pago doble o triple de la reforma de jornada."
       ],
       "fuentes": [
         {
@@ -3277,6 +3279,393 @@
         {
           "titulo": "Lean Construction Institute – Host a Gemba Day (Congreso LCI)",
           "url": "https://congress.leanconstruction.org/program/gemba-day/host-a-gemba-day/"
+        }
+      ]
+    },
+    {
+      "id": "calc-recuperacion-atraso",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Recuperar atraso: horas extra contra cuadrilla adicional",
+      "resumen": "Compara qué te cuesta recuperar el atraso con horas extra (incluyendo la caída de productividad que documentan los estudios de obra y el pago doble o triple que obliga la reforma de jornada 2026) contra meterle una cuadrilla adicional en jornada normal. Dice en cuántas semanas recuperas y cuánto de cada peso se convierte en trabajo.",
+      "agregada": "2026-10-26",
+      "entradas": [
+        {
+          "id": "hh_pend",
+          "label": "Horas-hombre de obra por recuperar (atraso)",
+          "unidad": "HH",
+          "valor": 1200
+        },
+        {
+          "id": "trab",
+          "label": "Trabajadores de la cuadrilla que harían horas extra",
+          "unidad": "personas",
+          "valor": 15
+        },
+        {
+          "id": "he_sem",
+          "label": "Horas extra por trabajador por semana que piensas programar",
+          "unidad": "h/sem",
+          "valor": 9
+        },
+        {
+          "id": "tope",
+          "label": "Tope legal de horas extra por semana (2026 y 2027: 9; 2028: 10; 2029: 11; 2030: 12)",
+          "unidad": "h/sem",
+          "valor": 9
+        },
+        {
+          "id": "jor",
+          "label": "Jornada ordinaria semanal (2026: 48 h; 2027: 46 h)",
+          "unidad": "h/sem",
+          "valor": 48
+        },
+        {
+          "id": "pi",
+          "label": "Índice de productividad en horas extra (50 h/sem: 0.95 la 1ª semana, 0.72 la 10ª; 60 h/sem: 0.91 y 0.61)",
+          "unidad": "",
+          "valor": 0.91
+        },
+        {
+          "id": "chh",
+          "label": "Costo de la hora-hombre ordinaria (salario real con factor)",
+          "unidad": "$/h",
+          "valor": 95
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Horas extra pagadas por semana (nómina)",
+          "formula": "trab*he_sem",
+          "unidad": "h",
+          "decimales": 0
+        },
+        {
+          "label": "Horas dentro del tope legal (pago doble)",
+          "formula": "trab*Math.min(he_sem,tope)",
+          "unidad": "h",
+          "decimales": 0
+        },
+        {
+          "label": "Horas que exceden el tope (pago triple, art. 68)",
+          "formula": "trab*Math.max(he_sem-tope,0)",
+          "unidad": "h",
+          "decimales": 0
+        },
+        {
+          "label": "Obra realmente recuperada por semana",
+          "formula": "trab*he_sem*pi",
+          "unidad": "HH",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Semanas de horas extra para cerrar el atraso",
+          "formula": "hh_pend/(trab*he_sem*pi)",
+          "unidad": "semanas",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Costo de las horas extra por semana",
+          "formula": "trab*(Math.min(he_sem,tope)*2*chh+Math.max(he_sem-tope,0)*3*chh)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo total de recuperar con horas extra",
+          "formula": "trab*(Math.min(he_sem,tope)*2*chh+Math.max(he_sem-tope,0)*3*chh)*(hh_pend/(trab*he_sem*pi))",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Costo por hora-hombre realmente recuperada",
+          "formula": "(Math.min(he_sem,tope)*2*chh+Math.max(he_sem-tope,0)*3*chh)/(he_sem*pi)",
+          "unidad": "$/HH",
+          "decimales": 0
+        },
+        {
+          "label": "De cada peso en horas extra, cuánto se convierte en obra",
+          "formula": "chh/((Math.min(he_sem,tope)*2*chh+Math.max(he_sem-tope,0)*3*chh)/(he_sem*pi))*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            60,
+            45
+          ]
+        },
+        {
+          "label": "Trabajadores adicionales en jornada normal para el mismo ritmo",
+          "formula": "trab*he_sem*pi/jor",
+          "unidad": "personas",
+          "decimales": 1
+        },
+        {
+          "label": "Costo de recuperar con cuadrilla adicional (sin prima)",
+          "formula": "hh_pend*chh",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Lo que te ahorras con cuadrilla adicional en vez de horas extra",
+          "formula": "trab*(Math.min(he_sem,tope)*2*chh+Math.max(he_sem-tope,0)*3*chh)*(hh_pend/(trab*he_sem*pi))-hh_pend*chh",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Jornada total diaria si reparten las extras en 4 días (tope legal 12 h)",
+          "formula": "jor/6+he_sem/4",
+          "unidad": "h/día",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Convierte el atraso a horas-hombre: toma del programa las actividades que debieron estar terminadas, saca sus cantidades pendientes y multiplícalas por el rendimiento de tu cuadrilla (la calculadora Rendimiento de cuadrilla te da las HH por unidad). Si traes el atraso en semanas, úsalo con la calculadora Programa ganado para dimensionar el importe y de ahí las HH.",
+        "Captura el índice de productividad según la semana de horas extra que llevas, no según lo que quieres creer: 0.95 la primera semana de 50 h, 0.91 la primera de 60 h, y baja a 0.72 y 0.61 si llevas 10 semanas seguidas. Si ya traes varias semanas con extras, usa el valor bajo.",
+        "Revisa el tope legal: en 2026 son 9 horas extra a la semana, repartidas en máximo 4 horas al día y 4 días; lo que pase del tope se paga con 200 % más y la jornada ordinaria más extra nunca puede pasar de 12 horas al día.",
+        "Compara las dos columnas: costo total con horas extra contra costo con cuadrilla adicional. Si el indicador 'de cada peso cuánto se convierte en obra' sale en amarillo o rojo, estás pagando casi todo en prima y no en avance.",
+        "Lleva el número a la junta semanal con contratistas: pide cuadrilla adicional o segundo turno con responsable y fecha, y deja la nota en bitácora. Las horas extra prolongadas también suben el riesgo de accidente, así que súmalas al recorrido de seguridad.",
+        "Prueba PDCA de 3 semanas en un solo frente: mide HH pagadas y cantidad realmente instalada por semana, calcula tu propio índice (obra planeada / obra real) y guárdalo; ese dato propio vale más que cualquier tabla para la siguiente vez que te pidan 'meterle extras'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Long International – Labor Productivity Loss Calculation for Overtime (índice de productividad MCAA: 50 h/sem 0.95 en la 1ª semana y 0.72 en la 10ª; 60 h/sem 0.91 y 0.61)",
+          "url": "https://www.long-intl.com/articles/loss-of-labor-productivity/"
+        },
+        {
+          "titulo": "MCAA – How to estimate the impact of overtime on productivity (el índice es Trabajo planeado / Trabajo real; una semana de 40 h vale 1.00 y la eficiencia se recupera al volver a 40 h)",
+          "url": "https://www.mcaa.org/wp-content/uploads/2020/06/Webinar-3-co-prod-ot-How-to-estimate-the-impact-of-overtime-on-productivity.pdf"
+        },
+        {
+          "titulo": "Construction Industry Institute (CII) – Effects of Scheduled Overtime on Labor Productivity: A Quantitative Analysis (la caída se explica por falta de disponibilidad de recursos, no por flojera de la cuadrilla)",
+          "url": "https://www.construction-institute.org/effects-of-scheduled-overtime-on-labor-productivity-a-quantitative-analysis"
+        },
+        {
+          "titulo": "DOF 01-05-2026 – Decreto de reforma a la LFT (jornada de 48 h en 2026 a 40 h en 2030; art. 66: tiempo extra de 9 h/semana en 2026, hasta 4 h al día y 4 días por semana, pago con 100 % más; art. 68: lo que exceda el tope se paga con 200 % más y la jornada total no puede pasar de 12 h diarias)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft/LFT_ref52_01may26.pdf"
+        },
+        {
+          "titulo": "La Jornada (01-05-2026) – Publican en el DOF la reforma para jornada laboral de 40 horas",
+          "url": "https://www.jornada.com.mx/noticia/2026/05/01/politica/publican-en-dof-reforma-para-jornada-laboral-de-40-horas"
+        }
+      ]
+    },
+    {
+      "id": "calc-penas-atraso",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Penas convencionales y retenciones por atraso (LOPSRM art. 46 Bis)",
+      "resumen": "Cuánto cuesta cada día natural de atraso en obra pública: pena convencional sobre el importe de los trabajos no ejecutados, tope legal del monto de la garantía de cumplimiento, día en que ese tope se agota, retención económica sobre la estimación en proceso y lo que realmente te queda de flujo.",
+      "agregada": "2026-10-26",
+      "entradas": [
+        {
+          "id": "ic",
+          "label": "Importe contratado sin IVA",
+          "unidad": "$",
+          "valor": 12000000
+        },
+        {
+          "id": "ine",
+          "label": "Importe de los trabajos no ejecutados a la fecha pactada de terminación",
+          "unidad": "$",
+          "valor": 1350000
+        },
+        {
+          "id": "pp",
+          "label": "Pena pactada en el contrato por día natural de atraso",
+          "unidad": "% del importe no ejecutado",
+          "valor": 0.5
+        },
+        {
+          "id": "d",
+          "label": "Días naturales de atraso",
+          "unidad": "días",
+          "valor": 20
+        },
+        {
+          "id": "pg",
+          "label": "Garantía de cumplimiento pactada",
+          "unidad": "% del importe contratado",
+          "valor": 10
+        },
+        {
+          "id": "est",
+          "label": "Importe de la estimación en proceso",
+          "unidad": "$",
+          "valor": 2400000
+        },
+        {
+          "id": "pr",
+          "label": "Retención económica pactada por atraso",
+          "unidad": "% de la estimación",
+          "valor": 5
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Pena por cada día natural de atraso",
+          "formula": "ine*pp/100",
+          "unidad": "$/día",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Pena acumulada a la fecha",
+          "formula": "ine*pp/100*d",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Tope legal: monto de la garantía de cumplimiento",
+          "formula": "ic*pg/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Pena aplicable (la menor de las dos)",
+          "formula": "Math.min(ine*pp/100*d, ic*pg/100)",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Día de atraso en que la pena alcanza el tope",
+          "formula": "(ic*pg/100)/(ine*pp/100)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Pena como % del importe no ejecutado",
+          "formula": "Math.min(ine*pp/100*d, ic*pg/100)/ine*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Retención económica sobre la estimación en proceso",
+          "formula": "est*pr/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Lo que no entra a caja esta estimación (pena + retención)",
+          "formula": "Math.min(ine*pp/100*d, ic*pg/100)+est*pr/100",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "De la estimación, cuánto sí cobras",
+          "formula": "(1-(Math.min(ine*pp/100*d, ic*pg/100)+est*pr/100)/est)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "Costo del atraso por semana",
+          "formula": "ine*pp/100*7",
+          "unidad": "$/semana",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Saca del contrato tres datos y captúralos tal como están escritos: el porcentaje de pena por día de atraso, la base sobre la que se aplica (debe ser el importe de los trabajos no ejecutados) y el porcentaje de la garantía de cumplimiento.",
+        "Calcula el importe de los trabajos no ejecutados con tu corte semanal de avance físico, no con el porcentaje de la junta: cantidades medidas en obra por los precios unitarios del catálogo.",
+        "Revisa el resultado contra el tope: la ley no permite penas superiores al monto de la garantía de cumplimiento, en su conjunto. Si la dependencia te está calculando sobre el importe total del contrato y no sobre lo no ejecutado, ahí tienes el argumento por escrito.",
+        "Compara la pena por semana contra lo que costaría recuperar el atraso (calculadora Recuperar atraso): si la pena semanal es mayor que el sobrecosto de acelerar, acelerar se paga solo y así lo presentas a la dirección.",
+        "Documenta la causa de cada día de atraso en bitácora y en el reporte diario: lluvia, falta de frente, cambio de proyecto, RFI sin respuesta o falta de pago. La pena procede solo por causas imputables al contratista y no aplica en caso fortuito o fuerza mayor acreditados; si no está en bitácora, no se acredita.",
+        "Si firmas convenio que modifica el programa, vuelve a correr el cálculo con el programa nuevo: el atraso se mide contra el programa convenido vigente, no contra el original."
+      ],
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 46 Bis – Las penas convencionales se determinan únicamente sobre el importe de los trabajos no ejecutados en la fecha pactada y en ningún caso pueden ser superiores al monto de la garantía de cumplimiento (texto vigente con reforma DOF 14-11-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-46-bis/"
+        },
+        {
+          "titulo": "LOPSRM art. 46 Bis – Retenciones económicas a las estimaciones en proceso por atraso durante la vigencia del programa, recuperables si el contratista regulariza",
+          "url": "https://mley.mx/LOPSRM/articulo/46-bis/"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM art. 87 – Las penas proceden solo por causas imputables al contratista, se miden contra fechas críticas y la fecha de terminación, y no aplican en caso fortuito o fuerza mayor acreditados",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/87/"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM art. 88 – La retención se determina con base en el contrato y el grado de atraso (avance físico contra programa), se notifica por nota de bitácora u oficio y se aplica en la estimación correspondiente; si se firma convenio que modifica el programa, el cálculo se hace con el nuevo programa",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/88/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-corte-avance",
+      "tipo": "formato",
+      "categoria": "Control de avance",
+      "titulo": "Corte semanal de avance físico por frente (reglas de medición)",
+      "resumen": "Formato de campo para levantar el avance de la semana midiendo en obra, partida por partida, con reglas de medición escritas para que el porcentaje no se infle. De aquí salen el EV del valor ganado, el avance de la curva S y el importe no ejecutado que usan las demás calculadoras.",
+      "agregada": "2026-10-26",
+      "campos": [
+        "Obra",
+        "Contrato / orden de trabajo",
+        "Semana No. y periodo (del … al …)",
+        "Fecha y hora del corte",
+        "Frente / nivel / eje / zona",
+        "Contratista o cuadrilla",
+        "Clave y descripción de la partida del catálogo",
+        "Unidad",
+        "Cantidad contratada",
+        "Precio unitario e importe de la partida",
+        "Regla de medición aplicada (unidades terminadas, hitos incrementales, inicio/fin 0-100 o 50-50, razón de costo)",
+        "Cantidad acumulada al corte anterior",
+        "Cantidad ejecutada esta semana (medida en obra)",
+        "Cantidad acumulada al corte",
+        "% de avance de la partida",
+        "Importe ganado acumulado (cantidad acumulada × precio unitario)",
+        "% planeado acumulado de la curva S a esta fecha",
+        "Desviación en importe y en %",
+        "Causa de la desviación y responsable",
+        "Midió / residente",
+        "Revisó / superintendente"
+      ],
+      "items": [
+        "La cantidad se midió en obra esta semana (cinta, estación, conteo o croquis), no se copió del porcentaje que reportó el contratista",
+        "La regla de medición de cada partida quedó escrita y es la misma que la semana pasada (no se cambió para mejorar el número)",
+        "Material en almacén, habilitado o pagado pero no instalado se reporta en cero avance",
+        "Obra ejecutada sin liberación de calidad o sin su checklist firmado no se cuenta como avance",
+        "Trabajos fuera de catálogo o extraordinarios se anotan aparte, no se mezclan en el % de las partidas contratadas",
+        "Las cantidades acumuladas no rebasan la cantidad contratada; si la rebasan, se levanta el aviso de cantidades adicionales o excedentes",
+        "El corte se hace el mismo día y hora cada semana, con la misma persona midiendo",
+        "El % de avance de la obra es ponderado por importe, no promedio simple de partidas",
+        "Las partidas de la ruta crítica están medidas y marcadas como tales",
+        "El avance acumulado se comparó contra la curva S y la desviación tiene causa y responsable anotados",
+        "Los números generadores y croquis del corte quedaron firmados por residente y contratista",
+        "El corte se anotó en bitácora con el folio correspondiente"
+      ],
+      "como_usar": [
+        "Antes del primer corte define por escrito la regla de medición de cada partida del catálogo: unidades terminadas para lo que se cuenta o mide (m³ de concreto, kg de acero, m² de aplanado), hitos incrementales para lo que tiene etapas (habilitado, armado, cimbra, colado, descimbrado) e inicio/fin 0-100 para lo que dura menos de una semana. Déjala en la primera columna del formato.",
+        "Cada viernes a la misma hora recorre los frentes con el formato en el celular o tablet y mide con el residente del contratista presente; firma los generadores en el frente, no en la oficina.",
+        "Captura cantidad de la semana y acumulada; el importe ganado sale de multiplicar la cantidad acumulada por el precio unitario. Súmalos para obtener el EV y el % de avance ponderado por importe.",
+        "Pasa ese EV a la calculadora Valor ganado (SPI y CPI) y el % acumulado a Programa ganado para obtener la fecha de término pronosticada; el importe de las partidas atrasadas es la base para Penas convencionales y para Recuperar atraso.",
+        "Exporta el CSV y archívalo con la fecha: la serie semanal es tu defensa documental en reclamaciones y el soporte de la estimación.",
+        "Prueba PDCA de 4 semanas: compara el % del corte medido contra el % que reportaba el contratista; si la diferencia baja de 2 puntos, el formato ya está disciplinando la medición y puedes extenderlo a todos los frentes."
+      ],
+      "fuentes": [
+        {
+          "titulo": "KFUPM / AACE – Progress Measurement: métodos de medición de avance (unidades terminadas, hitos incrementales, inicio/fin 0-100 y 50-50, opinión del supervisor, razón de costo y unidades equivalentes con reglas de crédito)",
+          "url": "https://faculty.kfupm.edu.sa/CEM/alkhalil/PDF%20Files_CEM_510/Project%20Control%202%20-%20Progress%20Measurment.pdf"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM art. 132 – Contenido y soporte de las estimaciones (números generadores, medición de los trabajos ejecutados)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/132/"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM art. 88 – El grado de atraso se mide con el avance físico contra el programa de ejecución convenido",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/88/"
         }
       ]
     }

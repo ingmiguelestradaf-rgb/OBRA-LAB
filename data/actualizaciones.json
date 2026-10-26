@@ -1,6 +1,53 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-26",
+      "titulo": "Control de avance: recuperar atraso sin regalar el dinero, costo del atraso y corte de avance medido en obra",
+      "resumen": "Tres herramientas nuevas para el control de programa. Recuperar atraso compara horas extra contra cuadrilla adicional con dos cosas que casi nadie mete al cálculo: la caída de productividad documentada (índice 0.95 la primera semana de 50 h y 0.91 la primera de 60 h, que baja a 0.72 y 0.61 a la décima semana seguida) y el costo legal vigente tras la reforma de jornada publicada en el DOF el 1 de mayo de 2026: jornada de 48 h en 2026 que baja a 40 h en 2030, tope de 9 horas extra por semana en 2026 repartidas en máximo 4 horas al día y 4 días, pago con 100 % más dentro del tope y 200 % más arriba, y nunca más de 12 horas diarias sumando ordinaria y extra. En el ejemplo cargado, recuperar 1,200 HH con horas extra cuesta $250,549 y con cuadrilla adicional $114,000, y solo 45.5 % de cada peso en extras se convierte en obra. Penas convencionales y retenciones calcula lo que cuesta cada día natural de atraso en obra pública conforme al art. 46 Bis de la LOPSRM: la pena se determina únicamente sobre el importe de los trabajos no ejecutados, nunca puede exceder el monto de la garantía de cumplimiento, y se suma la retención económica a la estimación en proceso. Corte semanal de avance físico es el formato de campo que da el dato de entrada a todo lo anterior, con reglas de medición escritas y 12 puntos de verificación para que el porcentaje no se infle. Mejoras: Valor ganado y Programa ganado ahora arrancan del corte medido en obra y remiten a las dos calculadoras nuevas.",
+      "herramientas": [
+        "calc-recuperacion-atraso",
+        "calc-penas-atraso",
+        "fmt-corte-avance",
+        "calc-valor-ganado",
+        "calc-programa-ganado"
+      ],
+      "como_aplicarlo": "Lunes: define por escrito la regla de medición de las 10 partidas de mayor importe y haz el corte de avance de este viernes con el formato nuevo, midiendo en obra con el residente del contratista. Con ese corte actualiza Valor ganado y Programa ganado; si el pronóstico rebasa la fecha contractual, convierte el atraso a horas-hombre y pásalo por Recuperar atraso antes de autorizar horas extra, y por Penas convencionales para llevar a la dirección el costo del atraso en pesos. Mide 4 semanas dos indicadores: diferencia entre el % que mides y el que reporta el contratista, y días de atraso pronosticado; si la primera baja de 2 puntos y la segunda deja de crecer, adóptalo en todos los frentes.",
+      "fuentes": [
+        {
+          "titulo": "Long International – Labor Productivity Loss Calculation for Overtime (índice de productividad MCAA: 50 h/sem 0.95 en la 1ª semana y 0.72 en la 10ª; 60 h/sem 0.91 y 0.61)",
+          "url": "https://www.long-intl.com/articles/loss-of-labor-productivity/"
+        },
+        {
+          "titulo": "MCAA – How to estimate the impact of overtime on productivity (el índice es Trabajo planeado / Trabajo real; una semana de 40 h vale 1.00 y la eficiencia se recupera al volver a 40 h)",
+          "url": "https://www.mcaa.org/wp-content/uploads/2020/06/Webinar-3-co-prod-ot-How-to-estimate-the-impact-of-overtime-on-productivity.pdf"
+        },
+        {
+          "titulo": "Construction Industry Institute (CII) – Effects of Scheduled Overtime on Labor Productivity: A Quantitative Analysis (la caída se explica por falta de disponibilidad de recursos, no por flojera de la cuadrilla)",
+          "url": "https://www.construction-institute.org/effects-of-scheduled-overtime-on-labor-productivity-a-quantitative-analysis"
+        },
+        {
+          "titulo": "DOF 01-05-2026 – Decreto de reforma a la LFT (jornada de 48 h en 2026 a 40 h en 2030; art. 66: tiempo extra de 9 h/semana en 2026, hasta 4 h al día y 4 días por semana, pago con 100 % más; art. 68: lo que exceda el tope se paga con 200 % más y la jornada total no puede pasar de 12 h diarias)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft/LFT_ref52_01may26.pdf"
+        },
+        {
+          "titulo": "La Jornada (01-05-2026) – Publican en el DOF la reforma para jornada laboral de 40 horas",
+          "url": "https://www.jornada.com.mx/noticia/2026/05/01/politica/publican-en-dof-reforma-para-jornada-laboral-de-40-horas"
+        },
+        {
+          "titulo": "LOPSRM art. 46 Bis – Las penas convencionales se determinan únicamente sobre el importe de los trabajos no ejecutados en la fecha pactada y en ningún caso pueden ser superiores al monto de la garantía de cumplimiento (texto vigente con reforma DOF 14-11-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-46-bis/"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM art. 87 – Las penas proceden solo por causas imputables al contratista, se miden contra fechas críticas y la fecha de terminación, y no aplican en caso fortuito o fuerza mayor acreditados",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/87/"
+        },
+        {
+          "titulo": "KFUPM / AACE – Progress Measurement: métodos de medición de avance (unidades terminadas, hitos incrementales, inicio/fin 0-100 y 50-50, opinión del supervisor, razón de costo y unidades equivalentes con reglas de crédito)",
+          "url": "https://faculty.kfupm.edu.sa/CEM/alkhalil/PDF%20Files_CEM_510/Project%20Control%202%20-%20Progress%20Measurment.pdf"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-25",
       "titulo": "Normatividad y documentación: plazos de estimación, gastos financieros y bitácora del DRO",
       "resumen": "Nueva calculadora Plazos de estimación y gastos financieros: compara tus tiempos reales contra los 6 días para presentar, 15 para autorizar y 20 para pagar que fija el art. 54 de la LOPSRM (reformado el 16-04-2025) y calcula los gastos financieros por pago tardío del art. 55 a la tasa de prórroga de la LIF 2026 (1.38 % mensual, antes 0.98 %), con criterio conservador y literal. Nuevo formato Visita del DRO y nota de bitácora con las obligaciones del art. 17 del reglamento municipal de Tijuana: bitácora foliada y registrada, mínimo 2 visitas por semana, notas de inicio y término de etapa, control de calidad, incidentes y aviso de terminación. Mejora: el Reporte diario ahora registra el folio de bitácora de cada visita del DRO o inspector y las fechas de trámite de estimaciones.",
