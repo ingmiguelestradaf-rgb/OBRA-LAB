@@ -325,7 +325,8 @@
         "Deja la tolerancia en 0 para usar el criterio NMX-C-155 / ACI 318: ninguna prueba más de 35 kg/cm² abajo de f'c (10 % si f'c > 350). Si tu especificación o el DRO piden otro valor (p. ej. concreto clase 2 de las NTC), escríbelo aquí.",
         "Dictamen 0: no aceptes ni rechaces el elemento de inmediato; pide al laboratorio el cilindro testigo de 56 días, revisa remisiones, revenimiento y curado de esa olla y, si persiste, extrae corazones (NMX-C-169) en el elemento afectado.",
         "Si la dispersión entre gemelos pasa de 8 %, el problema suele ser de muestreo, cabeceo o curado de los cilindros, no del concreto: revisa el procedimiento del laboratorio antes de reclamar a la planta.",
-        "Lleva el registro prueba por prueba en el formato Liberación de colado y anota en bitácora cada dictamen; indicador: % de pruebas que cumplen por proveedor y por mes."
+        "Lleva el registro prueba por prueba en el formato Liberación de colado y anota en bitácora cada dictamen; indicador: % de pruebas que cumplen por proveedor y por mes.",
+        "Si una prueba sale baja, busca en los formatos 'Recepción de olla y muestreo' la olla de esos cilindros: minutos desde la carga, revenimiento y agua agregada suelen explicar el resultado antes de culpar a la planta."
       ],
       "fuentes": [
         {
@@ -1487,13 +1488,15 @@
         "Bomba, vibradores y personal confirmados",
         "Laboratorio confirmado para revenimiento y cilindros",
         "Pronóstico de clima revisado; curado programado",
-        "Puntos de muestreo de cilindros definidos y, si aplica, sensores de madurez amarrados y activados"
+        "Puntos de muestreo de cilindros definidos y, si aplica, sensores de madurez amarrados y activados",
+        "Responsable de llenar 'Recepción de olla y muestreo' por cada olla asignado, y datos de cemento y agua retenida pedidos a la planta"
       ],
       "como_usar": [
         "Llénalo junto con la supervisión un día antes del colado.",
         "Cualquier 'No cumple' bloquea el colado hasta corregirse y anotarse.",
         "Exporta el CSV o imprímelo y adjúntalo a la bitácora con fotos.",
-        "Después del colado, captura los resultados de cilindros en la calculadora 'Aceptación de resistencia f'c' para dictaminar cada grupo de 3 pruebas."
+        "Después del colado, captura los resultados de cilindros en la calculadora 'Aceptación de resistencia f'c' para dictaminar cada grupo de 3 pruebas.",
+        "Durante el colado usa una hoja de 'Recepción de olla y muestreo de concreto fresco' por olla para tener la trazabilidad olla → cilindros → elemento."
       ]
     },
     {
@@ -1812,7 +1815,8 @@
         "Cimbra de contratrabes alineada, limpia y con desmoldante",
         "Pasos de instalaciones y mangas dejados según plano",
         "Impermeabilización de cimentación aplicada donde se especifica",
-        "Relleno compactado por capas con prueba de compactación registrada"
+        "Relleno compactado por capas con prueba de compactación registrada",
+        "Rellenos y plataformas compactados por capas con grado de compactación verificado (calculadora 'Grado de compactación con cono de arena') antes de colar plantilla o firme"
       ],
       "como_usar": [
         "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",
@@ -3666,6 +3670,371 @@
         {
           "titulo": "Reglamento de la LOPSRM art. 88 – El grado de atraso se mide con el avance físico contra el programa de ejecución convenido",
           "url": "https://mley.mx/Reg_LOPSRM/articulo/88/"
+        }
+      ]
+    },
+    {
+      "id": "calc-compactacion",
+      "tipo": "calculadora",
+      "categoria": "Terracerías y rellenos",
+      "titulo": "Grado de compactación con cono de arena (rellenos y plataformas)",
+      "resumen": "Calcula en campo el peso volumétrico seco y el grado de compactación de una capa de relleno con la prueba de cono de arena, lo compara con lo que pide el proyecto (SCT: terraplén 90 ± 2 %, subyacente 95 ± 2 % AASHTO Estándar) y revisa si la humedad está cerca de la óptima.",
+      "agregada": "2026-10-27",
+      "entradas": [
+        {
+          "id": "m_ini",
+          "label": "Frasco + arena antes de la prueba",
+          "unidad": "g",
+          "valor": 6500
+        },
+        {
+          "id": "m_fin",
+          "label": "Frasco + arena sobrante después de la prueba",
+          "unidad": "g",
+          "valor": 2950
+        },
+        {
+          "id": "m_cono",
+          "label": "Arena que llena cono y placa (calibración)",
+          "unidad": "g",
+          "valor": 1650
+        },
+        {
+          "id": "d_arena",
+          "label": "Peso volumétrico de la arena calibrada",
+          "unidad": "g/cm³",
+          "valor": 1.45
+        },
+        {
+          "id": "m_hum",
+          "label": "Suelo húmedo extraído del hoyo",
+          "unidad": "g",
+          "valor": 2600
+        },
+        {
+          "id": "w",
+          "label": "Humedad del suelo extraído (horno, speedy o estufa)",
+          "unidad": "%",
+          "valor": 11.5
+        },
+        {
+          "id": "pvsm",
+          "label": "Peso volumétrico seco máximo del laboratorio (Proctor/AASHTO)",
+          "unidad": "kg/m³",
+          "valor": 1950
+        },
+        {
+          "id": "w_opt",
+          "label": "Humedad óptima del laboratorio",
+          "unidad": "%",
+          "valor": 13
+        },
+        {
+          "id": "req",
+          "label": "Grado de compactación pedido por proyecto",
+          "unidad": "%",
+          "valor": 95
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Arena que quedó en el hoyo",
+          "formula": "m_ini-m_fin-m_cono",
+          "unidad": "g",
+          "decimales": 0
+        },
+        {
+          "label": "Volumen del hoyo (debe ser ≤ 2,830 cm³)",
+          "formula": "(m_ini-m_fin-m_cono)/d_arena",
+          "unidad": "cm³",
+          "decimales": 0
+        },
+        {
+          "label": "Peso volumétrico húmedo en sitio",
+          "formula": "m_hum/((m_ini-m_fin-m_cono)/d_arena)*1000",
+          "unidad": "kg/m³",
+          "decimales": 0
+        },
+        {
+          "label": "Peso volumétrico seco en sitio",
+          "formula": "m_hum/((m_ini-m_fin-m_cono)/d_arena)*1000/(1+w/100)",
+          "unidad": "kg/m³",
+          "decimales": 0
+        },
+        {
+          "label": "Grado de compactación",
+          "formula": "m_hum/((m_ini-m_fin-m_cono)/d_arena)*1000/(1+w/100)/pvsm*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Holgura contra lo pedido (verde ≥ 0; amarillo hasta −2 puntos, la tolerancia SCT)",
+          "formula": "m_hum/((m_ini-m_fin-m_cono)/d_arena)*1000/(1+w/100)/pvsm*100-req",
+          "unidad": "puntos",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -2
+          ]
+        },
+        {
+          "label": "Humedad en sitio menos óptima (lo usual es trabajar entre −2 y +2)",
+          "formula": "w-w_opt",
+          "unidad": "puntos",
+          "decimales": 1
+        },
+        {
+          "label": "Peso volumétrico seco que faltó para cumplir",
+          "formula": "Math.max(0,req/100*pvsm-m_hum/((m_ini-m_fin-m_cono)/d_arena)*1000/(1+w/100))",
+          "unidad": "kg/m³",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Pide al laboratorio, antes de tender la primera capa, la prueba Proctor/AASHTO del banco de material (peso volumétrico seco máximo y humedad óptima) y la calibración vigente de la arena y del cono; anótalos aquí y no los cambies si no cambia el banco.",
+        "Compacta capas de 20 cm sueltos como máximo (o lo que diga el proyecto), nivela una zona de 30 × 30 cm, asienta la placa, excava el hoyo a todo el espesor de la capa sin perder material y pesa todo el suelo extraído en bolsa cerrada.",
+        "Llena el hoyo con la arena calibrada sin vibrar la placa (que no pase equipo cerca), pesa el frasco con la arena sobrante y determina la humedad de una muestra del suelo extraído.",
+        "Captura los pesos: si la holgura sale en rojo la capa no se libera; si la humedad está más de 2 puntos abajo de la óptima, riega y vuelve a compactar; si está más de 2 arriba, escarifica y deja orear antes de otra pasada.",
+        "Haz al menos una prueba por capa y por cada zona de trabajo (cimentación, plataforma, patio) en puntos distintos de la capa anterior; anota capa, cadenamiento o eje y resultado en el reporte diario.",
+        "Indicador: % de pruebas que pasan a la primera por capa y por contratista de movimiento de tierras; mídelo 4 semanas y compáralo contra el número de recompactaciones pagadas."
+      ],
+      "fuentes": [
+        {
+          "titulo": "SCT / IMT – N·CMT·1·01/21 Materiales para terraplén (Tabla 1: grado de compactación 90 ± 2 % respecto a la masa volumétrica seca máxima AASHTO Estándar; verificación con M·MMP·1·10 o LWD M·MMP·1·16)",
+          "url": "https://normas.imt.mx/storage/normativa/N-CMT-1-01-21.pdf"
+        },
+        {
+          "titulo": "SCT / IMT – N·CMT·1·02/21 Materiales para subyacente (Tabla 1: grado de compactación 95 ± 2 %, AASHTO Estándar en humedad óptima)",
+          "url": "https://normas.imt.mx/storage/normativa/N-CMT-1-02-21.pdf"
+        },
+        {
+          "titulo": "ASTM D1556/D1556M-24 – Densidad en sitio por cono de arena (vigente, actualizada oct 2024): partículas ≤ 38 mm, hoyo ≤ 2,830 cm³, no apta para suelos saturados, orgánicos o muy plásticos",
+          "url": "https://store.astm.org/d1556_d1556m-24.html"
+        },
+        {
+          "titulo": "Univ. of Alabama CE 340 – Lab 6 Sand Cone: secuencia de cálculo (arena en hoyo, volumen, peso volumétrico húmedo y seco, % de compactación)",
+          "url": "https://adhc.lib.ua.edu/ce340/?p=126"
+        }
+      ]
+    },
+    {
+      "id": "calc-agua-olla",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "¿Se le puede agregar agua a la olla? Relación a/c y litros máximos",
+      "resumen": "Cuando la olla llega con poco revenimiento, calcula cuánta agua pide el operador para subirlo, cuánta permite la relación agua/cemento máxima de la especificación y si la regla de ASTM C94 (antes de descargar 0.2 m³) todavía lo permite. Evita colar concreto que no va a dar f'c.",
+      "agregada": "2026-10-27",
+      "entradas": [
+        {
+          "id": "cem",
+          "label": "Cemento del diseño (remisión o ficha de la planta)",
+          "unidad": "kg/m³",
+          "valor": 320
+        },
+        {
+          "id": "agua",
+          "label": "Agua total ya dosificada en planta",
+          "unidad": "L/m³",
+          "valor": 195
+        },
+        {
+          "id": "acmax",
+          "label": "Relación a/c máxima especificada (proyecto o planta)",
+          "unidad": "",
+          "valor": 0.65
+        },
+        {
+          "id": "vol",
+          "label": "Volumen en la olla",
+          "unidad": "m³",
+          "valor": 7
+        },
+        {
+          "id": "rev_med",
+          "label": "Revenimiento medido al llegar",
+          "unidad": "cm",
+          "valor": 8
+        },
+        {
+          "id": "rev_esp",
+          "label": "Revenimiento especificado",
+          "unidad": "cm",
+          "valor": 12
+        },
+        {
+          "id": "desc",
+          "label": "Volumen ya descargado",
+          "unidad": "m³",
+          "valor": 0
+        },
+        {
+          "id": "min",
+          "label": "Minutos desde la carga en planta (hora de la remisión)",
+          "unidad": "min",
+          "valor": 55
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Relación a/c como salió de planta",
+          "formula": "agua/cem",
+          "unidad": "",
+          "decimales": 3
+        },
+        {
+          "label": "Agua que todavía permite la a/c máxima",
+          "formula": "Math.max(0,acmax*cem-agua)",
+          "unidad": "L/m³",
+          "decimales": 1
+        },
+        {
+          "label": "Agua máxima permitida en toda la olla",
+          "formula": "Math.max(0,acmax*cem-agua)*vol",
+          "unidad": "L",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Agua estimada para llegar al revenimiento (≈ 5 L/m³ por cada 2.5 cm)",
+          "formula": "Math.max(0,rev_esp-rev_med)/2.5*5*vol",
+          "unidad": "L",
+          "decimales": 0
+        },
+        {
+          "label": "Litros que se pueden autorizar (0 si ya se descargaron más de 0.2 m³ o pasaron 90 min)",
+          "formula": "(desc<=0.2&&min<=90)?Math.min(Math.max(0,acmax*cem-agua),Math.max(0,rev_esp-rev_med)/2.5*5)*vol:0",
+          "unidad": "L",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Relación a/c después de agregar esa agua",
+          "formula": "(agua+((desc<=0.2&&min<=90)?Math.min(Math.max(0,acmax*cem-agua),Math.max(0,rev_esp-rev_med)/2.5*5):0))/cem",
+          "unidad": "",
+          "decimales": 3
+        },
+        {
+          "label": "Margen de a/c que queda (verde ≥ 0.02; amarillo ≥ 0)",
+          "formula": "acmax-(agua+((desc<=0.2&&min<=90)?Math.min(Math.max(0,acmax*cem-agua),Math.max(0,rev_esp-rev_med)/2.5*5):0))/cem",
+          "unidad": "",
+          "decimales": 3,
+          "semaforo": [
+            0.02,
+            0
+          ]
+        },
+        {
+          "label": "Dictamen (1 = el agua alcanza sin pasar la a/c máxima; 0 = no alcanza: aditivo o rechazo)",
+          "formula": "(desc<=0.2&&min<=90&&Math.max(0,rev_esp-rev_med)/2.5*5<=Math.max(0,acmax*cem-agua))?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        }
+      ],
+      "como_usar": [
+        "Antes del colado pide a la planta, por escrito, el cemento (kg/m³), el agua total dosificada (L/m³) y cuánta agua dejaron retenida para ajustar en obra; si no te la dan, no autorices agua.",
+        "Al llegar la olla mide el revenimiento con la primera porción (NMX-C-156) y captura los datos de la remisión: volumen y minutos desde la carga.",
+        "Si el dictamen es 1, autoriza solo los litros que marca la calculadora, que el operador los mida con el medidor de la olla, gire 30 revoluciones a velocidad de mezclado y vuelve a medir revenimiento; anota litros y firma en la remisión.",
+        "Si el dictamen es 0 (no alcanza el agua, pasaron 90 min o ya se descargó más de 0.2 m³), no agregues agua: pide aditivo fluidificante dosificado por personal de la planta o rechaza la olla y anótalo en bitácora.",
+        "La regla de 5 L/m³ por cada 2.5 cm es una aproximación de NRMCA; ajústala con lo que observes con tu proveedor (litros agregados contra centímetros ganados) y regístralo en el formato de recepción de olla.",
+        "Indicador: litros agregados por m³ y % de ollas con agua agregada por proveedor; meta: bajar a menos de 10 % de ollas en 4 semanas."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NRMCA – CIP 26 Adición de agua en la obra (ASTM C94: solo al llegar y antes de descargar más de 0.2 m³, sin exceder revenimiento ni a/c máximos; 30 revoluciones a velocidad de mezclado; ≈ 5 L/m³ sube ~2.5 cm el revenimiento)",
+          "url": "https://nrmca.org/wp-content/uploads/2020/04/CIP26es.pdf"
+        },
+        {
+          "titulo": "Concrete Products – Revisión de ASTM C94: reconoce la dosificación automática de agua en tránsito con medición de revenimiento dentro de la olla",
+          "url": "https://concreteproducts.com/?p=4682"
+        },
+        {
+          "titulo": "Conpre Concretos – Normas NMX para concreto premezclado (mar 2026): NMX-C-155, -161 muestreo, -156 revenimiento, -159 especímenes, -083 compresión; rechazo a más de 90 min desde la carga; ≤ 15 min de la muestra a los ensayes",
+          "url": "https://conpreconcretos.com/blog/normas-nmx-concreto-premezclado.html"
+        },
+        {
+          "titulo": "Concretos Miracle – Qué exige la NMX-C-155 (may 2026): datos de la remisión, descarga en 90 min (75 min con calor o tráfico) y frecuencia de muestreo",
+          "url": "https://concretosmiracle.com/blog/norma-nmx-c-155-concreto-clase-1"
+        }
+      ]
+    },
+    {
+      "id": "fmt-recepcion-olla",
+      "tipo": "formato",
+      "categoria": "Concreto",
+      "titulo": "Recepción de olla y muestreo de concreto fresco (NMX-C-155 / -161 / -156)",
+      "resumen": "Formato por olla para recibir, aceptar o rechazar concreto premezclado en la descarga: remisión, tiempo desde la carga, revenimiento, temperatura, agua agregada y cilindros tomados, con trazabilidad al elemento colado.",
+      "agregada": "2026-10-27",
+      "campos": [
+        "Obra",
+        "Elemento / eje / nivel colado",
+        "Fecha",
+        "Proveedor y planta",
+        "No. de remisión",
+        "No. de olla y operador",
+        "f'c y tipo de concreto (remisión)",
+        "Revenimiento especificado (cm)",
+        "TMA especificado",
+        "Volumen de la olla (m³)",
+        "Hora de carga en planta",
+        "Hora de llegada a obra",
+        "Hora de inicio de descarga",
+        "Hora de fin de descarga",
+        "Minutos desde la carga hasta el fin de descarga",
+        "Revenimiento medido (cm)",
+        "Temperatura del concreto (°C)",
+        "Temperatura ambiente (°C)",
+        "Agua agregada en obra (L) y quién autorizó",
+        "Aditivo agregado en obra (tipo y litros)",
+        "Clave del juego de cilindros / sensor de madurez",
+        "Laboratorio y técnico",
+        "Decisión: aceptada / rechazada y motivo",
+        "Residente y supervisión"
+      ],
+      "items": [
+        "La remisión coincide con lo pedido: obra, f'c, tipo de concreto, revenimiento, TMA, aditivos y volumen",
+        "Han pasado menos de 90 minutos desde la carga en planta (75 si hace calor o hubo tráfico) al terminar la descarga",
+        "El tambor llegó girando y el concreto se ve homogéneo, sin segregación ni grumos de cemento",
+        "Revenimiento medido con la primera porción dentro de la tolerancia (referencia ASTM C94: ±1.3 cm hasta 5 cm; ±2.5 cm de 5 a 10 cm; ±3.8 cm arriba de 10 cm), salvo que la especificación diga otra cosa",
+        "Si se agregó agua: fue antes de descargar 0.2 m³, se revisó con la calculadora '¿Se le puede agregar agua a la olla?', se dieron 30 revoluciones y se anotó en la remisión",
+        "No se agregó agua después de iniciar la descarga ni para 'lavar' la canaleta hacia el elemento",
+        "Muestra compuesta tomada de la parte media de la descarga (no del primer ni del último chorro), conforme a NMX-C-161",
+        "Ensayes de revenimiento y temperatura iniciados antes de 5 min y especímenes moldeados antes de 15 min desde que se tomó la muestra",
+        "Juego de cilindros tomado según la frecuencia de la especificación (y al menos uno por día de colado y por f'c), identificado con la clave del elemento",
+        "Cilindros protegidos en obra a la sombra, sin golpes ni vibración, y entregados al laboratorio en la ventana que marca NMX-C-159",
+        "Elemento donde se descargó esta olla anotado (eje, tramo, nivel) para poder rastrear cualquier resultado bajo",
+        "Remisión firmada por el residente con hora de fin de descarga y archivada con este formato"
+      ],
+      "como_usar": [
+        "Asigna a una sola persona por colado (residente o laboratorista) para llenar una hoja por olla en el celular, desde que la olla entra a la obra.",
+        "Antes de bajar la canaleta revisa la remisión y los minutos desde la carga; con más de 90 min o datos que no coinciden, la olla no se descarga hasta que decida el residente.",
+        "Mide revenimiento con la primera porción; si viene bajo, usa la calculadora '¿Se le puede agregar agua a la olla?' antes de autorizar un solo litro.",
+        "Toma la muestra para cilindros a la mitad de la descarga, anota la clave del juego y el elemento colado, y exporta el CSV al terminar el colado.",
+        "Cuando lleguen los resultados del laboratorio, captúralos en 'Aceptación de resistencia f'c' y usa este formato para rastrear qué ollas y qué elemento revisar si alguna prueba sale baja.",
+        "Indicador: % de ollas rechazadas, % con agua agregada y minutos promedio de la carga a la descarga por proveedor; llévalo a la junta mensual con la planta."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Conpre Concretos – Normas NMX para concreto premezclado (mar 2026): NMX-C-155, -161 muestreo, -156 revenimiento, -159 especímenes, -083 compresión; rechazo a más de 90 min desde la carga; ≤ 15 min de la muestra a los ensayes",
+          "url": "https://conpreconcretos.com/blog/normas-nmx-concreto-premezclado.html"
+        },
+        {
+          "titulo": "Concretos Miracle – Qué exige la NMX-C-155 (may 2026): datos de la remisión, descarga en 90 min (75 min con calor o tráfico) y frecuencia de muestreo",
+          "url": "https://concretosmiracle.com/blog/norma-nmx-c-155-concreto-clase-1"
+        },
+        {
+          "titulo": "Conpre Concretos – Revenimiento del concreto (jun 2026): rangos por tipo de elemento y pérdida de revenimiento en tránsito",
+          "url": "https://conpreconcretos.com/blog/revenimiento-concreto-que-es-como-medirlo.html"
+        },
+        {
+          "titulo": "NRMCA – CIP 26 Adición de agua en la obra (ASTM C94: solo al llegar y antes de descargar más de 0.2 m³, sin exceder revenimiento ni a/c máximos; 30 revoluciones a velocidad de mezclado; ≈ 5 L/m³ sube ~2.5 cm el revenimiento)",
+          "url": "https://nrmca.org/wp-content/uploads/2020/04/CIP26es.pdf"
         }
       ]
     }

@@ -1,6 +1,50 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-27",
+      "titulo": "Calidad: compactación de rellenos, agua en la olla y recepción de concreto fresco",
+      "resumen": "Tres herramientas nuevas para calidad en obra. Grado de compactación con cono de arena calcula el volumen del hoyo, el peso volumétrico seco en sitio y el % de compactación contra el Proctor/AASHTO del laboratorio, con semáforo que usa la tolerancia de ±2 puntos de las normas SCT vigentes (N·CMT·1·01/21 terraplén 90 ± 2 %, N·CMT·1·02/21 subyacente 95 ± 2 %); en el ejemplo cargado la capa da 91.3 % y no se libera al 95 % pedido. ¿Se le puede agregar agua a la olla? cruza los litros que pide el operador para subir revenimiento (≈ 5 L/m³ por cada 2.5 cm, NRMCA) con los que permite la a/c máxima y con la regla de ASTM C94 (solo antes de descargar 0.2 m³, 30 revoluciones después); en el ejemplo, una olla de 7 m³ con a/c 0.609 admite 91 L y necesita 56 L, y queda en a/c 0.634. Recepción de olla y muestreo es el formato por olla que liga remisión, minutos desde la carga (límite de 90), revenimiento, temperatura, agua agregada y clave de cilindros con el elemento colado. Mejoras: Liberación de colado, Cimentación y Aceptación de f'c ahora remiten a estas herramientas para tener trazabilidad olla → cilindro → elemento.",
+      "herramientas": [
+        "calc-compactacion",
+        "calc-agua-olla",
+        "fmt-recepcion-olla",
+        "fmt-precolado",
+        "qc-cimentacion",
+        "calc-aceptacion-fc"
+      ],
+      "como_aplicarlo": "En el próximo colado asigna a una persona para llenar Recepción de olla en cada olla y pide antes a la planta el cemento, el agua dosificada y el agua retenida para usar la calculadora de agua en la olla. En el siguiente relleno o plataforma exige una prueba de cono de arena por capa y captúrala en Grado de compactación antes de liberar la capa. Mide 4 semanas: % de ollas con agua agregada, % de ollas rechazadas y % de capas que pasan a la primera; si el agua agregada baja de 10 % de ollas y no aumentan los rechazos de f'c, adopta los formatos en todos los frentes.",
+      "fuentes": [
+        {
+          "titulo": "SCT / IMT – N·CMT·1·01/21 Materiales para terraplén (Tabla 1: grado de compactación 90 ± 2 % respecto a la masa volumétrica seca máxima AASHTO Estándar; verificación con M·MMP·1·10 o LWD M·MMP·1·16)",
+          "url": "https://normas.imt.mx/storage/normativa/N-CMT-1-01-21.pdf"
+        },
+        {
+          "titulo": "SCT / IMT – N·CMT·1·02/21 Materiales para subyacente (Tabla 1: grado de compactación 95 ± 2 %, AASHTO Estándar en humedad óptima)",
+          "url": "https://normas.imt.mx/storage/normativa/N-CMT-1-02-21.pdf"
+        },
+        {
+          "titulo": "ASTM D1556/D1556M-24 – Densidad en sitio por cono de arena (vigente, actualizada oct 2024): partículas ≤ 38 mm, hoyo ≤ 2,830 cm³, no apta para suelos saturados, orgánicos o muy plásticos",
+          "url": "https://store.astm.org/d1556_d1556m-24.html"
+        },
+        {
+          "titulo": "NRMCA – CIP 26 Adición de agua en la obra (ASTM C94: solo al llegar y antes de descargar más de 0.2 m³, sin exceder revenimiento ni a/c máximos; 30 revoluciones a velocidad de mezclado; ≈ 5 L/m³ sube ~2.5 cm el revenimiento)",
+          "url": "https://nrmca.org/wp-content/uploads/2020/04/CIP26es.pdf"
+        },
+        {
+          "titulo": "Concrete Products – Revisión de ASTM C94: reconoce la dosificación automática de agua en tránsito con medición de revenimiento dentro de la olla",
+          "url": "https://concreteproducts.com/?p=4682"
+        },
+        {
+          "titulo": "Conpre Concretos – Normas NMX para concreto premezclado (mar 2026): NMX-C-155, -161 muestreo, -156 revenimiento, -159 especímenes, -083 compresión; rechazo a más de 90 min desde la carga; ≤ 15 min de la muestra a los ensayes",
+          "url": "https://conpreconcretos.com/blog/normas-nmx-concreto-premezclado.html"
+        },
+        {
+          "titulo": "Concretos Miracle – Qué exige la NMX-C-155 (may 2026): datos de la remisión, descarga en 90 min (75 min con calor o tráfico) y frecuencia de muestreo",
+          "url": "https://concretosmiracle.com/blog/norma-nmx-c-155-concreto-clase-1"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-26",
       "titulo": "Control de avance: recuperar atraso sin regalar el dinero, costo del atraso y corte de avance medido en obra",
       "resumen": "Tres herramientas nuevas para el control de programa. Recuperar atraso compara horas extra contra cuadrilla adicional con dos cosas que casi nadie mete al cálculo: la caída de productividad documentada (índice 0.95 la primera semana de 50 h y 0.91 la primera de 60 h, que baja a 0.72 y 0.61 a la décima semana seguida) y el costo legal vigente tras la reforma de jornada publicada en el DOF el 1 de mayo de 2026: jornada de 48 h en 2026 que baja a 40 h en 2030, tope de 9 horas extra por semana en 2026 repartidas en máximo 4 horas al día y 4 días, pago con 100 % más dentro del tope y 200 % más arriba, y nunca más de 12 horas diarias sumando ordinaria y extra. En el ejemplo cargado, recuperar 1,200 HH con horas extra cuesta $250,549 y con cuadrilla adicional $114,000, y solo 45.5 % de cada peso en extras se convierte en obra. Penas convencionales y retenciones calcula lo que cuesta cada día natural de atraso en obra pública conforme al art. 46 Bis de la LOPSRM: la pena se determina únicamente sobre el importe de los trabajos no ejecutados, nunca puede exceder el monto de la garantía de cumplimiento, y se suma la retención económica a la estimación en proceso. Corte semanal de avance físico es el formato de campo que da el dato de entrada a todo lo anterior, con reglas de medición escritas y 12 puntos de verificación para que el porcentaje no se infle. Mejoras: Valor ganado y Programa ganado ahora arrancan del corte medido en obra y remiten a las dos calculadoras nuevas.",
