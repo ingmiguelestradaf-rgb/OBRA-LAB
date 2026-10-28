@@ -1,6 +1,40 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-28",
+      "titulo": "Seguridad: excavaciones con talud correcto e izajes con grúa calculados",
+      "resumen": "Tres herramientas nuevas para los dos riesgos que más fatalidades dejan en obra después de las caídas: derrumbes de zanja y maniobras de izaje. Talud de excavación y zanja aplica la Tabla 6 de la NOM-031-STPS-2011 (roca vertical, suelo A 0.75:1 = 53°, B 1:1 = 45°, C 1.5:1 = 34°, solo hasta 6 m): en el ejemplo, una zanja de 2.5 m × 0.8 m × 30 m en suelo B abre 5.80 m en corona, son 247.5 m³ (187.5 m³ más que ademada) y el acopio va a 4.90 m del eje; además indica si la NOM pide escalera (desde 1.20 m) y barandal rígido (más de 1.50 m). Izaje con grúa calcula el ángulo real de la eslinga (sen θ = altura del gancho ÷ longitud), la tensión por pierna con la regla de 2 piernas efectivas de ASME B30.9 para cargas rígidas y el % de la tabla de carga contra un límite de maniobra crítica (75 % por defecto): en el ejemplo, 2,500 kg con 4 piernas de 3 m y gancho a 2.2 m dan 47° y 1,705 kg por pierna (85 % de una eslinga de 2,000 kg) y la grúa trabaja al 53 %. Inspección diaria de excavación es el formato del numeral 11.2 para inicio y fin de jornada, después de lluvia y de maquinaria pesada. Mejora: el Recorrido de seguridad semanal ahora revisa talud, acopio y escalera con estas reglas y agrega el punto de izajes calculados.",
+      "herramientas": [
+        "calc-talud-excavacion",
+        "calc-eslingas-izaje",
+        "fmt-excavacion",
+        "fmt-seguridad"
+      ],
+      "como_aplicarlo": "En la próxima zanja (cimentación, drenaje o cisterna) pide al residente el tipo de suelo del estudio, calcula el talud y traza con cal la corona y la línea de acopio; llena la Inspección diaria al inicio y al final de cada jornada mientras esté abierta. En el siguiente izaje de canastas de acero, precolados o equipo, el señalero llena la calculadora de eslingas con el operador antes de levantar y no se iza con ángulo abajo de 30° ni con eslinga sin etiqueta. Mide 4 semanas: % de excavaciones con inspección del día, acopios a menos de 2 m y eslingas retiradas; si los hallazgos críticos bajan, vuélvelo obligatorio para todos los contratistas.",
+      "fuentes": [
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
+          "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        },
+        {
+          "titulo": "SpanSet – Cálculo de ángulo y tensión de eslingas; ASME B30.9 prohíbe ángulos menores de 30°",
+          "url": "https://www.spanset.com/id-en/section/blog/lifting/how-to-calculate-sling-angle"
+        },
+        {
+          "titulo": "Open Exam Prep (NCCER Rigger) – Regla de 2 piernas efectivas en cargas rígidas de 3 y 4 piernas",
+          "url": "https://open-exam-prep.com/study-guides/nccer-rigger/sling-angles-and-tension/sling-tension-formulas-calculations"
+        },
+        {
+          "titulo": "New Mexico Tech – Plan de izaje crítico cuando la carga bruta supera el 75 % de la capacidad",
+          "url": "https://www.nmt.edu/research/organizations/mines/docs/liftplmapsflow.pdf"
+        },
+        {
+          "titulo": "MX Legal – Nuevo modelo de inspecciones laborales STPS 2026: inspecciones dirigidas por riesgo con cruce de datos IMSS-SAT-INFONAVIT (abr 2026)",
+          "url": "https://mxlegal.com.mx/nuevo-modelo-de-inspecciones-laborales-stps-2026/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-27",
       "titulo": "Calidad: compactación de rellenos, agua en la olla y recepción de concreto fresco",
       "resumen": "Tres herramientas nuevas para calidad en obra. Grado de compactación con cono de arena calcula el volumen del hoyo, el peso volumétrico seco en sitio y el % de compactación contra el Proctor/AASHTO del laboratorio, con semáforo que usa la tolerancia de ±2 puntos de las normas SCT vigentes (N·CMT·1·01/21 terraplén 90 ± 2 %, N·CMT·1·02/21 subyacente 95 ± 2 %); en el ejemplo cargado la capa da 91.3 % y no se libera al 95 % pedido. ¿Se le puede agregar agua a la olla? cruza los litros que pide el operador para subir revenimiento (≈ 5 L/m³ por cada 2.5 cm, NRMCA) con los que permite la a/c máxima y con la regla de ASTM C94 (solo antes de descargar 0.2 m³, 30 revoluciones después); en el ejemplo, una olla de 7 m³ con a/c 0.609 admite 91 L y necesita 56 L, y queda en a/c 0.634. Recepción de olla y muestreo es el formato por olla que liga remisión, minutos desde la carga (límite de 90), revenimiento, temperatura, agua agregada y clave de cilindros con el elemento colado. Mejoras: Liberación de colado, Cimentación y Aceptación de f'c ahora remiten a estas herramientas para tener trazabilidad olla → cilindro → elemento.",

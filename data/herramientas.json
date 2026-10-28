@@ -1556,19 +1556,21 @@
         "Anclajes arriba de la argolla D, nunca abajo de los pies; sin líneas de vida improvisadas ni extendidas",
         "Andamios con base firme, rodapiés y barandal",
         "Bordes de losa y huecos protegidos",
-        "Excavaciones con talud o ademe y señalizadas",
+        "Excavaciones con talud o ademe según la Tabla 6, acopio a 2 m o más del borde, escalera desde 1.20 m y 'Inspección diaria de excavación' del día firmada",
         "Orden y limpieza en áreas de trabajo y circulaciones",
         "Extintores vigentes y accesibles",
         "Instalación eléctrica provisional protegida y con tierra",
         "Botiquín y rutas de evacuación señalizadas",
         "Constancias DC-3 y exámenes médicos vigentes del personal que trabaja en altura",
-        "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)"
+        "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)",
+        "Izajes con grúa con cálculo de eslingas y % de tabla de carga hecho antes de levantar; radio de acción acordonado y un solo señalero"
       ],
       "como_usar": [
         "Haz el recorrido con un representante de cada contratista.",
         "Cada 'No cumple' debe tener responsable y fecha de corrección en la observación.",
         "Compara semana contra semana: el número de hallazgos debe bajar.",
-        "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana."
+        "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana.",
+        "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar."
       ],
       "fuentes": [
         {
@@ -4035,6 +4037,325 @@
         {
           "titulo": "NRMCA – CIP 26 Adición de agua en la obra (ASTM C94: solo al llegar y antes de descargar más de 0.2 m³, sin exceder revenimiento ni a/c máximos; 30 revoluciones a velocidad de mezclado; ≈ 5 L/m³ sube ~2.5 cm el revenimiento)",
           "url": "https://nrmca.org/wp-content/uploads/2020/04/CIP26es.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-talud-excavacion",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Talud de excavación y zanja (NOM-031-STPS-2011, Tabla 6)",
+      "resumen": "Con la profundidad, el ancho de fondo y el tipo de suelo calcula cuánto se abre la corona del talud, el volumen real de excavación, cuánto volumen extra cuesta el talud contra una zanja vertical ademada, a qué distancia mínima va el acopio de tierra y si la NOM pide escalera y barandal rígido.",
+      "agregada": "2026-10-28",
+      "entradas": [
+        {
+          "id": "H",
+          "label": "Profundidad de la excavación",
+          "unidad": "m",
+          "valor": 2.5
+        },
+        {
+          "id": "b",
+          "label": "Ancho de fondo de la zanja",
+          "unidad": "m",
+          "valor": 0.8
+        },
+        {
+          "id": "k",
+          "label": "Relación horizontal : vertical del talud según Tabla 6 (roca estable 0 · suelo A 0.75 · suelo B 1 · suelo C 1.5)",
+          "unidad": "H:V",
+          "valor": 1
+        },
+        {
+          "id": "Lz",
+          "label": "Longitud de la zanja o del frente excavado",
+          "unidad": "m",
+          "valor": 30
+        },
+        {
+          "id": "dac",
+          "label": "Distancia mínima del acopio de tierra o material al borde (NOM-031 11.2 r: 2 m)",
+          "unidad": "m",
+          "valor": 2
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Ángulo del talud con la horizontal",
+          "formula": "k>0?Math.atan(1/k)*180/Math.PI:90",
+          "unidad": "°",
+          "decimales": 0
+        },
+        {
+          "label": "Retiro horizontal de la corona por lado",
+          "formula": "k*H",
+          "unidad": "m",
+          "decimales": 2
+        },
+        {
+          "label": "Ancho en la corona (lo que hay que trazar arriba)",
+          "formula": "b+2*k*H",
+          "unidad": "m",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Volumen de excavación en banco con taludes",
+          "formula": "H*(b+k*H)*Lz",
+          "unidad": "m³",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Volumen extra del talud contra zanja vertical ademada",
+          "formula": "k*H*H*Lz",
+          "unidad": "m³",
+          "decimales": 1
+        },
+        {
+          "label": "Distancia mínima del eje de la zanja al pie del acopio",
+          "formula": "b/2+k*H+dac",
+          "unidad": "m",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra el límite de 6 m de la Tabla 6 (≤ 0: la tabla no aplica, diseño por especialista)",
+          "formula": "6-H",
+          "unidad": "m",
+          "decimales": 2,
+          "semaforo": [
+            1,
+            0.01
+          ]
+        },
+        {
+          "label": "Escalera o rampa obligatoria a ≤ 7 m del punto de trabajo (1 = sí, desde 1.20 m)",
+          "formula": "H>=1.2?1:0",
+          "unidad": "",
+          "decimales": 0
+        },
+        {
+          "label": "Barandal rígido de 90 cm en el perímetro (1 = sí, más de 1.50 m; 0 = basta cinta o malla)",
+          "formula": "H>1.5?1:0",
+          "unidad": "",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Clasifica el suelo con el estudio de mecánica de suelos de la obra (la NOM-031 lo pide para toda excavación); si no lo tienes o hay rellenos, agua o grietas, usa suelo C (1.5 : 1) o adema.",
+        "Captura profundidad, ancho de fondo y longitud; traza en campo el ancho en corona y la línea de acopio con cal antes de meter la retro.",
+        "Si el volumen extra del talud es grande o no cabe por colindancias, compara contra el costo de ademar (puntales, tablaestaca o caja de zanja); en zanjas de más de 1.50 m el ademe debe sobresalir 20 cm del terreno.",
+        "Si la profundidad llega a 6 m o más, la Tabla 6 ya no aplica: pide el diseño del talud o del ademe al especialista y anótalo en bitácora.",
+        "Anota los resultados en el formato 'Inspección diaria de excavación'; indicador: excavaciones con talud o ademe conforme al cálculo en el recorrido semanal (meta 100 %) y acopios a menos de 2 m del borde (meta 0)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
+          "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        },
+        {
+          "titulo": "Diario Oficial de la Federación – NOM-031-STPS-2011 (texto oficial en SIDOF)",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5188292"
+        }
+      ]
+    },
+    {
+      "id": "calc-eslingas-izaje",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Izaje con grúa: ángulo y tensión de eslingas, % de capacidad",
+      "resumen": "Antes de levantar una canasta de acero, un paquete de varilla, una trabe precolada o un equipo: calcula el ángulo real de las eslingas con su longitud y la altura del gancho, la tensión en cada pierna (regla de 2 piernas efectivas de ASME B30.9 para cargas rígidas), el % de la capacidad de la eslinga y el % de la tabla de carga de la grúa.",
+      "agregada": "2026-10-28",
+      "entradas": [
+        {
+          "id": "W",
+          "label": "Peso de la pieza a izar (plano, báscula o remisión; no al tanteo)",
+          "unidad": "kg",
+          "valor": 2500
+        },
+        {
+          "id": "ap",
+          "label": "Peso de aparejos: eslingas, grilletes, balancín, gancho/bloque",
+          "unidad": "kg",
+          "valor": 150
+        },
+        {
+          "id": "n",
+          "label": "Número de piernas de la eslinga (1 a 4)",
+          "unidad": "pzas",
+          "valor": 4
+        },
+        {
+          "id": "Le",
+          "label": "Longitud de cada pierna (del gancho al punto de amarre)",
+          "unidad": "m",
+          "valor": 3
+        },
+        {
+          "id": "He",
+          "label": "Altura vertical del gancho sobre los puntos de amarre",
+          "unidad": "m",
+          "valor": 2.2
+        },
+        {
+          "id": "wll",
+          "label": "Capacidad (WLL) de una pierna en tiro vertical, según etiqueta",
+          "unidad": "kg",
+          "valor": 2000
+        },
+        {
+          "id": "cap",
+          "label": "Capacidad de la tabla de carga de la grúa al radio y pluma de la maniobra",
+          "unidad": "kg",
+          "valor": 5000
+        },
+        {
+          "id": "lim",
+          "label": "Límite de maniobra crítica de tu procedimiento (% de tabla; común 75 %)",
+          "unidad": "%",
+          "valor": 75
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Ángulo de la eslinga con la horizontal (mínimo 30°, recomendable ≥ 45°)",
+          "formula": "Math.asin(Math.min(1,He/Le))*180/Math.PI",
+          "unidad": "°",
+          "decimales": 1,
+          "semaforo": [
+            45,
+            30
+          ]
+        },
+        {
+          "label": "Piernas que se consideran cargando (cargas rígidas: máximo 2)",
+          "formula": "Math.min(n,2)",
+          "unidad": "pzas",
+          "decimales": 0
+        },
+        {
+          "label": "Tensión en cada pierna",
+          "formula": "W/(Math.min(n,2)*Math.min(1,He/Le))",
+          "unidad": "kg",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Uso de la capacidad de la pierna",
+          "formula": "100*W/(Math.min(n,2)*Math.min(1,He/Le))/wll",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Capacidad restante de la pierna (debe ser > 0)",
+          "formula": "100-100*W/(Math.min(n,2)*Math.min(1,He/Le))/wll",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            15,
+            0
+          ]
+        },
+        {
+          "label": "Carga bruta en el gancho (pieza + aparejos)",
+          "formula": "W+ap",
+          "unidad": "kg",
+          "decimales": 0
+        },
+        {
+          "label": "Uso de la tabla de carga de la grúa",
+          "formula": "100*(W+ap)/cap",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra el límite de maniobra crítica (≤ 0: plan de izaje crítico por escrito)",
+          "formula": "lim-100*(W+ap)/cap",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            10,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Obtén el peso de la pieza del plano o de la remisión (varilla: calculadora 'Peso de varilla'); suma grilletes, balancín y bloque del gancho, que también cuentan contra la tabla de la grúa.",
+        "Mide la longitud de la pierna y la altura del gancho sobre los puntos de amarre con la eslinga tensada; si el ángulo sale abajo de 30° no se iza: usa eslingas más largas o un balancín.",
+        "Captura la WLL de la etiqueta de la eslinga (sin etiqueta legible, la eslinga se retira) y la capacidad de la tabla de la grúa al radio real de la maniobra, no la capacidad nominal de la grúa.",
+        "Si la pierna queda sin capacidad restante o la grúa pasa del límite de maniobra crítica, cambia aparejo, acerca la grúa o elabora un plan de izaje por escrito con el operador antes de levantar.",
+        "Acordona el radio de acción, asigna un solo señalero, revisa la distancia a líneas eléctricas (NOM-031 Tabla 7: 3.10 m hasta 50 kV) y suspende con lluvia o viento fuerte; indicador: izajes con cálculo previo (meta 100 %) y eslingas retiradas por daño o sin etiqueta por semana."
+      ],
+      "fuentes": [
+        {
+          "titulo": "SpanSet – Cómo calcular el ángulo de eslinga: tensión por pierna = carga ÷ (n × sen θ); ASME B30.9 prohíbe ángulos menores de 30°",
+          "url": "https://www.spanset.com/id-en/section/blog/lifting/how-to-calculate-sling-angle"
+        },
+        {
+          "titulo": "Open Exam Prep (NCCER Rigger) – Fórmulas de tensión: en cargas rígidas de 3 y 4 piernas se suponen 2 piernas efectivas (ASME B30.9); sen θ = H/L, rechazar si H < 0.5 L",
+          "url": "https://open-exam-prep.com/study-guides/nccer-rigger/sling-angles-and-tension/sling-tension-formulas-calculations"
+        },
+        {
+          "titulo": "New Mexico Tech – Procedimiento de plan de izaje: es crítico si la carga bruta pasa del 75 % de la capacidad de la grúa",
+          "url": "https://www.nmt.edu/research/organizations/mines/docs/liftplmapsflow.pdf"
+        },
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
+          "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        }
+      ]
+    },
+    {
+      "id": "fmt-excavacion",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Inspección diaria de excavación y zanja (NOM-031-STPS-2011, 11.2)",
+      "resumen": "Revisión al inicio y al término de cada jornada, después de lluvia intensa y después del paso de maquinaria pesada: talud o ademe, acopios a 2 m, escalera, barandal, agua, atmósfera, líneas enterradas y aéreas y circulación de maquinaria. Sin firma, nadie entra a la zanja.",
+      "agregada": "2026-10-28",
+      "campos": [
+        "Obra",
+        "Fecha y hora",
+        "Momento de la inspección (inicio de jornada / término / después de lluvia / después de maquinaria pesada)",
+        "Frente / tramo / ejes",
+        "Profundidad (m) y ancho de fondo (m)",
+        "Tipo de suelo según mecánica de suelos (roca, A, B, C) y talud o ademe usado",
+        "Ancho en corona y distancia de acopio – calculadora ObraLab 'Talud de excavación'",
+        "Trabajadores que entrarán y contratista",
+        "Inspecciona (nombre y firma)",
+        "Responsable de corregir y hora"
+      ],
+      "items": [
+        "Existe estudio de mecánica de suelos y el método de estabilización está en el análisis de riesgos de la tarea",
+        "Paredes sin grietas, desprendimientos ni abombamientos en la corona y en los taludes",
+        "Talud con inclinación no mayor a la de la Tabla 6 para el tipo de suelo (profundidad menor de 6 m)",
+        "Si hay riesgo de derrumbe: ademe, puntales o caja de zanja instalados y revisados hoy; en zanjas de más de 1.50 m sobresalen 20 cm del terreno",
+        "Bardas, edificios o postes colindantes apuntalados o con soporte; postes eléctricos asegurados o reubicados",
+        "Tierra producto de excavación y materiales a 2 m o más del borde",
+        "Maquinaria y camiones fuera de la distancia de seguridad definida para el borde; nadie dentro de la zanja mientras opera la máquina",
+        "Escalera o rampa en zanjas de 1.20 m o más, a no más de 7 m del punto de trabajo y sobresaliendo 90 cm del borde",
+        "Perímetro con cinta o malla (menos de 1.50 m) o barandal rígido de 90 cm (más de 1.50 m) y pasos o puentes para cruzar",
+        "Accesos separados para personal y para maquinaria, o delimitados con barreras",
+        "Sin acumulación ni aumento de nivel de agua; si lo hay, trabajos suspendidos y bombeo inmediato",
+        "Si la excavación funciona como espacio confinado: medición de oxígeno y gases antes de entrar y ventilación si hace falta",
+        "Cableado, tuberías de gas o agua existentes localizados y marcados; equipo eléctrico portátil a 24 V donde haya riesgo",
+        "Equipo con brazo a la distancia mínima de líneas aéreas de la Tabla 7 (ej. 3.10 m hasta 50 kV)",
+        "Iluminación suficiente para el turno",
+        "Excavación abierta solo el tiempo indispensable; fecha programada de relleno"
+      ],
+      "como_usar": [
+        "Llénalo cuatro veces cuando aplique: al iniciar y al terminar la jornada, después de lluvia intensa y después de que pase maquinaria pesada junto al borde.",
+        "Calcula antes el talud y la distancia de acopio con 'Talud de excavación y zanja' y anótalos en los datos generales; el residente compara en campo lo trazado contra lo calculado.",
+        "Cualquier 'No cumple' en talud, ademe, agua o atmósfera saca a todos de la zanja hasta corregirlo; anota responsable y hora de corrección.",
+        "Guarda el CSV o PDF junto con el análisis de riesgos y la constancia DC-3 del personal; sirve de evidencia ante inspección de la STPS.",
+        "Indicador: inspecciones realizadas contra las requeridas por día (meta 100 %) y hallazgos críticos por semana (debe bajar)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
+          "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
         }
       ]
     }
