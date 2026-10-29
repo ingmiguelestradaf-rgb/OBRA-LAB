@@ -1285,7 +1285,7 @@
       "tipo": "calculadora",
       "categoria": "Mano de obra",
       "titulo": "Rendimiento de cuadrilla",
-      "resumen": "Rendimiento real por jornal y días para terminar el volumen restante.",
+      "resumen": "Rendimiento real por jornal, días para terminar el volumen restante y costo real de mano de obra por unidad para compararlo con tu precio unitario.",
       "agregada": "2026-10-18",
       "entradas": [
         {
@@ -1311,6 +1311,12 @@
           "label": "Cantidad restante",
           "unidad": "unid.",
           "valor": 420
+        },
+        {
+          "id": "jornal",
+          "label": "Costo promedio del jornal (salario real de la cuadrilla)",
+          "unidad": "$/jornal",
+          "valor": 1000
         }
       ],
       "salidas": [
@@ -1332,12 +1338,20 @@
           "formula": "Math.ceil(restante/(ejecutado/dias))",
           "unidad": "días",
           "decimales": 0
+        },
+        {
+          "label": "Costo de mano de obra por unidad",
+          "formula": "jornal*dias*gente/ejecutado",
+          "unidad": "$/unid.",
+          "decimales": 2,
+          "destacar": true
         }
       ],
       "como_usar": [
         "Usa una unidad que coincida con tu presupuesto (m², m³, ml, pza).",
         "Compara el rendimiento por jornal contra el de tu análisis de precio unitario.",
-        "Si los días para terminar no caben en el programa, decide: más cuadrillas, tiempo extra o resecuenciar."
+        "Si los días para terminar no caben en el programa, decide: más cuadrillas, tiempo extra o resecuenciar.",
+        "Captura el costo promedio del jornal con la calculadora Factor de salario real y compara el costo de mano de obra por unidad contra la mano de obra de la tarjeta de precio unitario: si es mayor, el concepto está perdiendo dinero."
       ]
     },
     {
@@ -4356,6 +4370,404 @@
         {
           "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
           "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        }
+      ]
+    },
+    {
+      "id": "calc-salario-real",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Factor de salario real 2026 (frontera norte): costo real del jornal y de la hora",
+      "resumen": "Calcula el factor de salario real (Fsr = Tp/Tl × (1 + Ps), Reglamento LOPSRM art. 191) con los datos 2026: salario mínimo de la Zona Libre de la Frontera Norte $440.87, UMA $117.31, cuotas IMSS con la tabla CEAV patronal por rango, INFONAVIT 5 %, prima de riesgo de trabajo e impuesto sobre nómina de Baja California 4.25 %. Te da el costo real del jornal, el costo por hora con la jornada que elijas (48 h hoy, 46 h desde enero 2027) y el costo anual del trabajador para el patrón.",
+      "agregada": "2026-10-29",
+      "entradas": [
+        {
+          "id": "SD",
+          "label": "Salario diario nominal (tu tabulador: oficial, ayudante, fierrero…)",
+          "unidad": "$/día",
+          "valor": 600
+        },
+        {
+          "id": "SM",
+          "label": "Salario mínimo diario 2026 Zona Libre Frontera Norte",
+          "unidad": "$/día",
+          "valor": 440.87
+        },
+        {
+          "id": "UMA",
+          "label": "UMA diaria 2026 (desde 1 feb 2026)",
+          "unidad": "$/día",
+          "valor": 117.31
+        },
+        {
+          "id": "AG",
+          "label": "Días de aguinaldo (mínimo LFT 15)",
+          "unidad": "días",
+          "valor": 15
+        },
+        {
+          "id": "VAC",
+          "label": "Días de vacaciones (LFT: 12 el primer año, sube con antigüedad)",
+          "unidad": "días",
+          "valor": 12
+        },
+        {
+          "id": "PV",
+          "label": "Prima vacacional (mínimo LFT 25 %)",
+          "unidad": "%",
+          "valor": 25
+        },
+        {
+          "id": "DES",
+          "label": "Días de descanso semanal en el año (domingos)",
+          "unidad": "días",
+          "valor": 52
+        },
+        {
+          "id": "FES",
+          "label": "Días de descanso obligatorio LFT art. 74 en el año (2026: 7)",
+          "unidad": "días",
+          "valor": 7
+        },
+        {
+          "id": "NOL",
+          "label": "Días pagados no trabajados por costumbre y clima (Semana Santa, 3 de mayo, 12 dic, lluvia)",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "RT",
+          "label": "Prima de riesgo de trabajo de tu registro patronal (clase V nueva: 7.58875 %)",
+          "unidad": "%",
+          "valor": 7.58875
+        },
+        {
+          "id": "INF",
+          "label": "INFONAVIT (5 % del salario base)",
+          "unidad": "%",
+          "valor": 5
+        },
+        {
+          "id": "ISN",
+          "label": "Impuesto sobre nómina Baja California (4.25 %; 0 si lo cargas en indirectos)",
+          "unidad": "%",
+          "valor": 4.25
+        },
+        {
+          "id": "H",
+          "label": "Horas de la jornada semanal (48 en 2026, 46 en 2027, 44 en 2028)",
+          "unidad": "h/sem",
+          "valor": 48
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Días pagados al año (Tp)",
+          "formula": "(365+AG+VAC*PV/100)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días realmente trabajados (Tl)",
+          "formula": "(365-DES-VAC-FES-NOL)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Salario base de cotización (SBC)",
+          "formula": "SD*(365+AG+VAC*PV/100)/365",
+          "unidad": "$/día",
+          "decimales": 2
+        },
+        {
+          "label": "Cuota CEAV patronal según rango del SBC",
+          "formula": "(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)",
+          "unidad": "%",
+          "decimales": 3
+        },
+        {
+          "label": "Cargas patronales Ps (IMSS + INFONAVIT + nómina) sobre el SBC",
+          "formula": "100*((0.204*UMA+0.011*Math.max(SD*(365+AG+VAC*PV/100)/365-3*UMA,0)+(SD*(365+AG+VAC*PV/100)/365)*((1.05+0.70+1.75+1.00+2.00+(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)+RT+INF+ISN)/100)))/(SD*(365+AG+VAC*PV/100)/365)",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "FACTOR DE SALARIO REAL (Fsr)",
+          "formula": "((365+AG+VAC*PV/100)/(365-DES-VAC-FES-NOL))*(1+((0.204*UMA+0.011*Math.max(SD*(365+AG+VAC*PV/100)/365-3*UMA,0)+(SD*(365+AG+VAC*PV/100)/365)*((1.05+0.70+1.75+1.00+2.00+(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)+RT+INF+ISN)/100)))/(SD*(365+AG+VAC*PV/100)/365))",
+          "unidad": "",
+          "decimales": 4,
+          "destacar": true
+        },
+        {
+          "label": "Salario real: costo de cada jornal trabajado",
+          "formula": "SD*((365+AG+VAC*PV/100)/(365-DES-VAC-FES-NOL))*(1+((0.204*UMA+0.011*Math.max(SD*(365+AG+VAC*PV/100)/365-3*UMA,0)+(SD*(365+AG+VAC*PV/100)/365)*((1.05+0.70+1.75+1.00+2.00+(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)+RT+INF+ISN)/100)))/(SD*(365+AG+VAC*PV/100)/365))",
+          "unidad": "$/jornal",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Costo por hora efectiva (6 jornales por semana)",
+          "formula": "SD*((365+AG+VAC*PV/100)/(365-DES-VAC-FES-NOL))*(1+((0.204*UMA+0.011*Math.max(SD*(365+AG+VAC*PV/100)/365-3*UMA,0)+(SD*(365+AG+VAC*PV/100)/365)*((1.05+0.70+1.75+1.00+2.00+(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)+RT+INF+ISN)/100)))/(SD*(365+AG+VAC*PV/100)/365))*6/H",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "Aumento del costo por hora contra jornada de 48 h",
+          "formula": "(48/H-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Costo anual del trabajador para la empresa",
+          "formula": "SD*((365+AG+VAC*PV/100)/(365-DES-VAC-FES-NOL))*(1+((0.204*UMA+0.011*Math.max(SD*(365+AG+VAC*PV/100)/365-3*UMA,0)+(SD*(365+AG+VAC*PV/100)/365)*((1.05+0.70+1.75+1.00+2.00+(SD<=SM?3.15:(SD*(365+AG+VAC*PV/100)/365)/UMA<=1.5?3.676:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2?4.851:(SD*(365+AG+VAC*PV/100)/365)/UMA<=2.5?5.556:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3?6.026:(SD*(365+AG+VAC*PV/100)/365)/UMA<=3.5?6.361:(SD*(365+AG+VAC*PV/100)/365)/UMA<=4?6.613:7.513)+RT+INF+ISN)/100)))/(SD*(365+AG+VAC*PV/100)/365))*(365-DES-VAC-FES-NOL)",
+          "unidad": "$/año",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Captura el salario diario nominal de cada categoría de tu tabulador (oficial albañil, ayudante, fierrero, carpintero de cimbra); en Tijuana no puede ser menor a $440.87 por la Zona Libre de la Frontera Norte.",
+        "Cambia la prima de riesgo de trabajo por la de tu registro patronal (está en tu determinación anual; si la empresa es nueva en construcción usa 7.58875 %) y los días de vacaciones según la antigüedad promedio de la cuadrilla.",
+        "Ajusta los días no trabajados por costumbre y clima con tu historial de obra: Semana Santa, 3 de mayo, 12 de diciembre y días de lluvia que en Tijuana paran colados y excavaciones.",
+        "Usa el salario real (no el nominal) en tus análisis de precio unitario y en la calculadora Precio unitario; con la calculadora Rendimiento de cuadrilla obtienes el costo de mano de obra por m², m³ o kg.",
+        "Para obra que se ejecute en 2027 cambia las horas a 46: el jornal cuesta lo mismo pero cada hora sube 4.3 %; si el rendimiento por hora no mejora, súbelo al precio o al programa.",
+        "Revisa los resultados con tu contador: el ISN y las cuotas exactas dependen de las percepciones integradas; esta calculadora usa las tasas 2026 publicadas y el tope de 25 UMA no está considerado."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 191 – Factor de salario real: Tp días pagados, Tl días laborados, Ps obligaciones IMSS e INFONAVIT",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/191/index.html.md"
+        },
+        {
+          "titulo": "IDC Online – Salarios mínimos 2026: $440.87 diarios en la Zona Libre de la Frontera Norte, $315.04 resto del país (dic 2025)",
+          "url": "https://idconline.mx/laboral/2025/12/09/ya-es-oficial-el-monto-de-los-salarios-minimos-del-2026"
+        },
+        {
+          "titulo": "IDC Online – UMA 2026: $117.31 diarios, vigente desde el 1 de febrero de 2026 (DOF 9 ene 2026)",
+          "url": "https://idconline.mx/laboral/2026/01/09/valor-uma-2026-inegi-publica-nuevos-montos"
+        },
+        {
+          "titulo": "IDC Online – Factores de cuotas IMSS e INFONAVIT 2026: cuota fija 20.40 % UMA, ramos y tabla CEAV patronal por rango (feb 2026)",
+          "url": "https://idconline.mx/seguridad-social/2026/02/09/factores-de-las-cuotas-y-aportaciones-2026"
+        },
+        {
+          "titulo": "Siempre al Día – Prima de riesgo de trabajo 2026: prima media clase V 7.58875 %, mínima 0.50 %, máxima 15 %",
+          "url": "https://siemprealdia.co/mexico/derecho-laboral/prima-de-riesgo-de-trabajo/"
+        },
+        {
+          "titulo": "BHR México – Contribuciones locales 2026: impuesto sobre nómina en Baja California 4.25 % (1.8 % + sobretasas), sin cambio contra 2025",
+          "url": "https://www.bhrmx.com/wp-content/uploads/2026/01/CONTRIBUCIONES-LOCALES-CAMBIOS-RELEVANTES-2026-2.pdf"
+        },
+        {
+          "titulo": "Infobae – Reforma de 40 horas (DOF 3 mar 2026): 46 h en 2027, 44 h en 2028, 42 h en 2029, 40 h en 2030 sin reducir salario (may 2026)",
+          "url": "https://www.infobae.com/mexico/2026/05/13/reforma-laboral-40-horas-que-deben-hacer-las-empresas-antes-de-que-arranque-la-reduccion-en-enero-de-2027/"
+        }
+      ]
+    },
+    {
+      "id": "calc-precio-unitario",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Precio unitario: integración y utilidad real contra el precio pactado",
+      "resumen": "Integra un precio unitario como lo pide el Reglamento LOPSRM (art. 185): costo directo (materiales, mano de obra con salario real, herramienta menor y equipo) + indirectos + financiamiento + utilidad + cargos adicionales después de la utilidad (art. 220). Compara contra el precio del contrato o la cotización del subcontratista y te dice la utilidad real que queda. Sirve para precios extraordinarios, revisar cotizaciones y decidir si un concepto pierde dinero.",
+      "agregada": "2026-10-29",
+      "entradas": [
+        {
+          "id": "MAT",
+          "label": "Materiales por unidad (con desperdicio y flete)",
+          "unidad": "$/unid.",
+          "valor": 260
+        },
+        {
+          "id": "MO",
+          "label": "Mano de obra por unidad (salario real × jornales ÷ rendimiento)",
+          "unidad": "$/unid.",
+          "valor": 150
+        },
+        {
+          "id": "HM",
+          "label": "Herramienta menor y equipo de seguridad (% de la mano de obra)",
+          "unidad": "%",
+          "valor": 3
+        },
+        {
+          "id": "EQ",
+          "label": "Maquinaria y equipo por unidad (andamio, revolvedora, vibrador…)",
+          "unidad": "$/unid.",
+          "valor": 8
+        },
+        {
+          "id": "IND",
+          "label": "Indirectos de oficina y campo (% del costo directo)",
+          "unidad": "%",
+          "valor": 14
+        },
+        {
+          "id": "FIN",
+          "label": "Financiamiento (% de directo + indirecto)",
+          "unidad": "%",
+          "valor": 1.2
+        },
+        {
+          "id": "UT",
+          "label": "Utilidad (% de directo + indirecto + financiamiento)",
+          "unidad": "%",
+          "valor": 10
+        },
+        {
+          "id": "CA",
+          "label": "Cargos adicionales (5 al millar = 0.5 % en obra pública federal; 0 en privada)",
+          "unidad": "%",
+          "valor": 0.5
+        },
+        {
+          "id": "PC",
+          "label": "Precio pactado o cotizado a comparar (contrato o subcontratista)",
+          "unidad": "$/unid.",
+          "valor": 500
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Costo directo",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "Indirectos",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)*IND/100",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "Financiamiento",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*FIN/100",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "Utilidad",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100)*UT/100",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "Cargos adicionales",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100)*(1+UT/100)/(1-CA/100)*CA/100",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "PRECIO UNITARIO (sin IVA)",
+          "formula": "(MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100)*(1+UT/100)/(1-CA/100)",
+          "unidad": "$/unid.",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Factor de sobrecosto (PU ÷ costo directo)",
+          "formula": "((MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100)*(1+UT/100)/(1-CA/100))/(MAT+MO*(1+HM/100)+EQ)",
+          "unidad": "",
+          "decimales": 4
+        },
+        {
+          "label": "Diferencia del precio pactado contra el PU calculado",
+          "formula": "(PC/((MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100)*(1+UT/100)/(1-CA/100))-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "UTILIDAD REAL con el precio pactado",
+          "formula": "(PC*(1-CA/100)/((MAT+MO*(1+HM/100)+EQ)*(1+IND/100)*(1+FIN/100))-1)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            8,
+            3
+          ]
+        }
+      ],
+      "como_usar": [
+        "Arma el costo directo de una unidad del concepto (m², m³, kg, pza): materiales con su desperdicio, mano de obra con salario real de la calculadora Factor de salario real y equipo por hora ÷ rendimiento.",
+        "Pon tus porcentajes de indirectos, financiamiento y utilidad tal como están en la propuesta del contrato; en un precio extraordinario de obra pública se usan los mismos del contrato (art. 107 fracc. II).",
+        "Captura el precio pactado del catálogo o la cotización del subcontratista y lee la utilidad real: verde 8 % o más, amarillo 3 a 8 %, rojo abajo de 3 % (el concepto no paga sus riesgos).",
+        "Si es un concepto nuevo, imprime el resultado como tarjeta de soporte y anéxalo al formato Concepto extraordinario antes de ejecutar.",
+        "Revisa una vez al mes las 5 partidas más grandes con precios reales de material (CMIC reportó concreto premezclado +6.26 % y acero +5.96 % en un año): las que caigan en rojo van a negociación o a ajuste de costos."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 185 – El precio unitario se integra con costo directo, indirectos, financiamiento, utilidad y cargos adicionales",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/185/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 220 – Cargos adicionales: impuestos y derechos por la ejecución, se agregan después de la utilidad",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/220/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 107 – Conceptos no previstos: orden para fijar el precio, 30 días para presentarlo y conciliarlo, insumos nuevos hasta 25 %",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/107/index.html.md"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de materiales ene 2025–ene 2026: concreto premezclado 6.26 %, acero 5.96 %, cemento 5.40 % (feb 2026)",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        }
+      ]
+    },
+    {
+      "id": "fmt-concepto-extraordinario",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Concepto extraordinario o fuera de catálogo: solicitud y autorización antes de ejecutar",
+      "resumen": "Formato para que ningún trabajo nuevo se haga sin orden por escrito, precio soportado y nota de bitácora. Sigue el orden del Reglamento LOPSRM art. 107 (precios del contrato, análisis similares, propuesta del contratista u observación directa) y sus plazos: 30 días naturales para presentar el precio y 30 para conciliarlo. Funciona igual en obra privada como orden de cambio.",
+      "agregada": "2026-10-29",
+      "campos": [
+        "Obra / contrato / contratista",
+        "Folio del extraordinario y fecha de solicitud",
+        "Origen: cambio de proyecto, indicación de supervisión, condición imprevista, volumen excedente con otro procedimiento",
+        "Descripción del trabajo, unidad y cantidad estimada",
+        "Ubicación (frente, nivel, ejes) y plano o croquis de referencia",
+        "Nota de bitácora de la orden y quién la dio",
+        "Método de precio: I costos del contrato · II análisis similar del contrato · III propuesta del contratista · IV observación directa",
+        "Precio unitario propuesto y tarjeta de análisis anexa (calculadora Precio unitario)",
+        "Insumos nuevos cotizados en mercado y % que representan del precio (máximo 25 %)",
+        "Importe estimado y efecto en programa (días)",
+        "Fecha de presentación del precio / fecha límite de conciliación (+30 días naturales)",
+        "Solicitó (contratista) / Revisó (residente) / Autorizó (supervisión o cliente) con fecha"
+      ],
+      "items": [
+        "Existe orden por escrito y nota de bitácora ANTES de iniciar el trabajo",
+        "Se verificó que el concepto no está ya incluido en el alcance de otro precio del catálogo",
+        "Se fotografió la condición original antes de ejecutar",
+        "El precio se determinó en el orden del art. 107: primero costos y análisis del contrato, luego propuesta",
+        "Indirectos, financiamiento y utilidad son los mismos porcentajes del contrato",
+        "Los insumos cotizados fuera del contrato no rebasan el 25 % del nuevo precio y tienen 2 cotizaciones",
+        "Rendimientos de mano de obra y equipo sustentados (análisis similar u observación directa con registro diario)",
+        "Se registran diariamente consumos reales de material, jornales y horas máquina mientras dura el trabajo",
+        "El precio se presentó dentro de los 30 días naturales siguientes a la terminación del trabajo",
+        "Se registró el efecto en programa y, si cambia la fecha de término, se solicitó convenio",
+        "Hay convenio modificatorio u orden de cambio firmada antes de estimar el concepto",
+        "El generador del extraordinario se cobra por separado del concepto original (sin duplicar cantidades)"
+      ],
+      "como_usar": [
+        "En cuanto alguien pide un trabajo que no está en el catálogo, abre un folio en el celular, toma fotos y pide la nota de bitácora; sin orden por escrito no se ejecuta.",
+        "Calcula el precio con la calculadora Precio unitario usando los insumos y porcentajes del contrato; anota qué método del art. 107 usaste.",
+        "Mientras se hace el trabajo, lleva el registro diario de jornales, horas máquina y material: es tu soporte si el precio se discute.",
+        "Presenta el precio dentro de los 30 días naturales después de terminar y anota la fecha límite de conciliación; exporta a CSV para tu control de extraordinarios.",
+        "Mide cada mes: extraordinarios ejecutados sin autorización, importe pendiente de conciliar y días promedio entre solicitud y autorización."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 107 – Conceptos no previstos: orden para fijar el precio, 30 días para presentarlo y conciliarlo, insumos nuevos hasta 25 %",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/107/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 185 – El precio unitario se integra con costo directo, indirectos, financiamiento, utilidad y cargos adicionales",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/185/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 220 – Cargos adicionales: impuestos y derechos por la ejecución, se agregan después de la utilidad",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/220/index.html.md"
         }
       ]
     }

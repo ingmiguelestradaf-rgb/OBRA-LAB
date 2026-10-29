@@ -1,6 +1,64 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-29",
+      "titulo": "Costos: salario real 2026 en la frontera, precio unitario con utilidad real y extraordinarios autorizados",
+      "resumen": "Tres herramientas nuevas para saber cuánto cuesta de verdad la mano de obra y cuánto deja cada concepto. Factor de salario real calcula Fsr = Tp/Tl × (1 + Ps) (Reglamento LOPSRM art. 191) con datos 2026: salario mínimo de la Zona Libre de la Frontera Norte $440.87, UMA $117.31 (desde el 1 de febrero), cuota fija IMSS 20.40 % de la UMA, CEAV patronal por rango (7.513 % arriba de 4 UMA), INFONAVIT 5 %, prima de riesgo clase V 7.58875 % e impuesto sobre nómina de Baja California 4.25 %; en el ejemplo un oficial de $600 diarios cobra 383 días y trabaja 288, las cargas son 35.1 % del SBC, el Fsr da 1.7971 y cada jornal cuesta $1,078.29 ($134.79 por hora con 48 h). Incluye la jornada de la reforma de 40 horas (DOF 3 mar 2026): con 46 h en 2027 cada hora cuesta 4.3 % más. Precio unitario integra costo directo, indirectos, financiamiento, utilidad y cargos adicionales después de la utilidad (arts. 185 y 220): un muro con costo directo de $422.50 da un PU de $538.87, y si el contrato lo paga a $500 la utilidad real cae a 2.1 % (rojo). Concepto extraordinario es el formato de orden, precio y plazos del art. 107 (30 días para presentar, 30 para conciliar, insumos nuevos hasta 25 % del precio). Mejora: Rendimiento de cuadrilla ahora calcula el costo de mano de obra por unidad con el costo del jornal.",
+      "herramientas": [
+        "calc-salario-real",
+        "calc-precio-unitario",
+        "fmt-concepto-extraordinario",
+        "calc-rendimiento"
+      ],
+      "como_aplicarlo": "Esta semana calcula el Fsr de tus 4 categorías principales (oficial, ayudante, fierrero, carpintero) con la prima de riesgo real de la empresa y pon el salario real en Rendimiento de cuadrilla con lo medido en campo. Con ese costo revisa en Precio unitario las 5 partidas más grandes del contrato: las que den utilidad real en rojo van a negociación, ajuste de costos o cambio de procedimiento. Desde hoy ningún trabajo fuera de catálogo arranca sin folio de Concepto extraordinario con nota de bitácora. Mide 4 semanas: extraordinarios ejecutados sin autorización, importe pendiente de conciliar y número de partidas en rojo; si bajan, vuélvelo obligatorio para todos los contratistas.",
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 191 – Factor de salario real: Tp días pagados, Tl días laborados, Ps obligaciones IMSS e INFONAVIT",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/191/index.html.md"
+        },
+        {
+          "titulo": "IDC Online – Salarios mínimos 2026: $440.87 diarios en la Zona Libre de la Frontera Norte, $315.04 resto del país (dic 2025)",
+          "url": "https://idconline.mx/laboral/2025/12/09/ya-es-oficial-el-monto-de-los-salarios-minimos-del-2026"
+        },
+        {
+          "titulo": "IDC Online – UMA 2026: $117.31 diarios, vigente desde el 1 de febrero de 2026 (DOF 9 ene 2026)",
+          "url": "https://idconline.mx/laboral/2026/01/09/valor-uma-2026-inegi-publica-nuevos-montos"
+        },
+        {
+          "titulo": "IDC Online – Factores de cuotas IMSS e INFONAVIT 2026: cuota fija 20.40 % UMA, ramos y tabla CEAV patronal por rango (feb 2026)",
+          "url": "https://idconline.mx/seguridad-social/2026/02/09/factores-de-las-cuotas-y-aportaciones-2026"
+        },
+        {
+          "titulo": "Siempre al Día – Prima de riesgo de trabajo 2026: prima media clase V 7.58875 %, mínima 0.50 %, máxima 15 %",
+          "url": "https://siemprealdia.co/mexico/derecho-laboral/prima-de-riesgo-de-trabajo/"
+        },
+        {
+          "titulo": "BHR México – Contribuciones locales 2026: impuesto sobre nómina en Baja California 4.25 % (1.8 % + sobretasas), sin cambio contra 2025",
+          "url": "https://www.bhrmx.com/wp-content/uploads/2026/01/CONTRIBUCIONES-LOCALES-CAMBIOS-RELEVANTES-2026-2.pdf"
+        },
+        {
+          "titulo": "Infobae – Reforma de 40 horas (DOF 3 mar 2026): 46 h en 2027, 44 h en 2028, 42 h en 2029, 40 h en 2030 sin reducir salario (may 2026)",
+          "url": "https://www.infobae.com/mexico/2026/05/13/reforma-laboral-40-horas-que-deben-hacer-las-empresas-antes-de-que-arranque-la-reduccion-en-enero-de-2027/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 185 – El precio unitario se integra con costo directo, indirectos, financiamiento, utilidad y cargos adicionales",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/185/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 220 – Cargos adicionales: impuestos y derechos por la ejecución, se agregan después de la utilidad",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/220/index.html.md"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 107 – Conceptos no previstos: orden para fijar el precio, 30 días para presentarlo y conciliarlo, insumos nuevos hasta 25 %",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/107/index.html.md"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de materiales ene 2025–ene 2026: concreto premezclado 6.26 %, acero 5.96 %, cemento 5.40 % (feb 2026)",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-28",
       "titulo": "Seguridad: excavaciones con talud correcto e izajes con grúa calculados",
       "resumen": "Tres herramientas nuevas para los dos riesgos que más fatalidades dejan en obra después de las caídas: derrumbes de zanja y maniobras de izaje. Talud de excavación y zanja aplica la Tabla 6 de la NOM-031-STPS-2011 (roca vertical, suelo A 0.75:1 = 53°, B 1:1 = 45°, C 1.5:1 = 34°, solo hasta 6 m): en el ejemplo, una zanja de 2.5 m × 0.8 m × 30 m en suelo B abre 5.80 m en corona, son 247.5 m³ (187.5 m³ más que ademada) y el acopio va a 4.90 m del eje; además indica si la NOM pide escalera (desde 1.20 m) y barandal rígido (más de 1.50 m). Izaje con grúa calcula el ángulo real de la eslinga (sen θ = altura del gancho ÷ longitud), la tensión por pierna con la regla de 2 piernas efectivas de ASME B30.9 para cargas rígidas y el % de la tabla de carga contra un límite de maniobra crítica (75 % por defecto): en el ejemplo, 2,500 kg con 4 piernas de 3 m y gancho a 2.2 m dan 47° y 1,705 kg por pierna (85 % de una eslinga de 2,000 kg) y la grúa trabaja al 53 %. Inspección diaria de excavación es el formato del numeral 11.2 para inicio y fin de jornada, después de lluvia y de maquinaria pesada. Mejora: el Recorrido de seguridad semanal ahora revisa talud, acopio y escalera con estas reglas y agrega el punto de izajes calculados.",
