@@ -1,6 +1,44 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-30",
+      "titulo": "Herramientas digitales e IA: ¿se paga la herramienta?, recorrido 360° semanal y reporte diario por voz",
+      "resumen": "Tres herramientas para meter tecnología a la obra sin tirar dinero. ¿Vale la pena esta herramienta digital? suma equipo, licencias y capacitación contra horas técnicas liberadas y retrabajo evitado, ajustado por adopción real: con una Insta360 X5 (US$636.99 en la tienda oficial de México, consultado hoy), una licencia de US$50/mes, 8 meses de obra, 3 personas que ahorran 3 h/semana a $250/h, $5,000/mes de retrabajo evitado y 70 % de adopción, cuesta $23,684, ahorra $10,325 al mes, deja $58,916 netos (ROI 249 %) y se paga en 1.7 meses. Recorrido 360° semanal es el protocolo para que cada captura sea comparable (misma ruta, hora y altura) y quede evidencia de instalaciones y acero antes de cerrarse; DroneDeploy Ground acepta Insta360 X5/X4 y Ricoh Theta X, no tiene plan gratuito (prueba de 14 días, precio por cotización) y la alternativa gratuita es la carpeta por nivel-zona-fecha. Reporte diario dictado por voz con IA reproduce con el celular lo que Procore lanzó en mayo de 2026 (Daily Log Agent: notas de voz y fotos → borrador → revisión humana): guion de 3 minutos, prompt plantilla que no inventa datos y revisión obligatoria. Mejora: el Reporte diario ahora registra el enlace del recorrido 360°, el audio del dictado y la revisión del borrador hecho con IA.",
+      "herramientas": [
+        "calc-roi-digital",
+        "fmt-recorrido-360",
+        "met-reporte-voz-ia",
+        "fmt-reporte-diario"
+      ],
+      "como_aplicarlo": "Esta semana: 1) Hoy viernes dicta el reporte del día con el guion y el prompt del método de voz, y mide cuántos minutos te tomó contra el reporte escrito. 2) Marca la ruta 360° en el plano de un nivel y haz el primer recorrido (si no tienes cámara, empieza con la prueba gratis de 14 días o con fotos del celular en la misma ruta). 3) Después de 2 semanas captura las horas medidas en ¿Vale la pena esta herramienta digital?; si el ROI sale verde con 50 % de adopción, compra o contrata; si no, quédate con la versión gratuita.",
+      "fuentes": [
+        {
+          "titulo": "Procore – New Procore AI Experience Embeds Datagrid into Procore: Daily Log Agent junta fotos, correos y notas de voz para redactar el reporte diario con revisión humana; beta privada, precio por créditos no publicado (21 may 2026)",
+          "url": "https://www.procore.com/press/new-procore-ai-experience-embeds-datagrid-into-procore"
+        },
+        {
+          "titulo": "Tienda oficial Insta360 México – Insta360 X5 paquete estándar US$636.99, en existencia, envío estimado 2 días (consultado 30-oct-2026; la tienda no muestra precio en pesos)",
+          "url": "https://store.insta360.com/mx/product/x5"
+        },
+        {
+          "titulo": "DroneDeploy Ground – recorridos 360° sobre planos, comparación con BIM, archivos .INSV/.MP4; sin plan gratuito, prueba de 14 días sin tarjeta, precio por cotización (consultado 30-oct-2026)",
+          "url": "https://dronedeploy.com/product/dronedeploy-ground"
+        },
+        {
+          "titulo": "DroneDeploy – Hardware compatible: cámaras 360 recomendadas Insta360 X5, X4, ONE RS 1-inch y Ricoh Theta X",
+          "url": "https://www.dronedeploy.com/product/supported-hardware"
+        },
+        {
+          "titulo": "DroneDeploy – Precios: Ground y Ground Pro por cotización; Progress AI y Safety AI como complementos; prueba de 14 días",
+          "url": "https://www.dronedeploy.com/pricing"
+        },
+        {
+          "titulo": "El Imparcial – La IA redefine la industria de la construcción en Tijuana, columna de Elmer Peña Ruvalcaba, presidente de CMIC Tijuana, Tecate y Rosarito (13 dic 2025)",
+          "url": "https://www.elimparcial.com/tij/columnas/2025/12/13/la-ia-redefine-la-industria-de-la-construccion-en-tijuana/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-29",
       "titulo": "Costos: salario real 2026 en la frontera, precio unitario con utilidad real y extraordinarios autorizados",
       "resumen": "Tres herramientas nuevas para saber cuánto cuesta de verdad la mano de obra y cuánto deja cada concepto. Factor de salario real calcula Fsr = Tp/Tl × (1 + Ps) (Reglamento LOPSRM art. 191) con datos 2026: salario mínimo de la Zona Libre de la Frontera Norte $440.87, UMA $117.31 (desde el 1 de febrero), cuota fija IMSS 20.40 % de la UMA, CEAV patronal por rango (7.513 % arriba de 4 UMA), INFONAVIT 5 %, prima de riesgo clase V 7.58875 % e impuesto sobre nómina de Baja California 4.25 %; en el ejemplo un oficial de $600 diarios cobra 383 días y trabaja 288, las cargas son 35.1 % del SBC, el Fsr da 1.7971 y cada jornal cuesta $1,078.29 ($134.79 por hora con 48 h). Incluye la jornada de la reforma de 40 horas (DOF 3 mar 2026): con 46 h en 2027 cada hora cuesta 4.3 % más. Precio unitario integra costo directo, indirectos, financiamiento, utilidad y cargos adicionales después de la utilidad (arts. 185 y 220): un muro con costo directo de $422.50 da un PU de $538.87, y si el contrato lo paga a $500 la utilidad real cae a 2.1 % (rojo). Concepto extraordinario es el formato de orden, precio y plazos del art. 107 (30 días para presentar, 30 para conciliar, insumos nuevos hasta 25 % del precio). Mejora: Rendimiento de cuadrilla ahora calcula el costo de mano de obra por unidad con el costo del jornal.",

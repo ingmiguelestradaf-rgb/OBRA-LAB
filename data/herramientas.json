@@ -1530,8 +1530,10 @@
         "Actividades realizadas",
         "Materiales recibidos",
         "Vuelo de dron / captura de avance (sí/no y enlace)",
+        "Recorrido 360° de la semana (enlace)",
         "Incidencias / retrasos",
-        "Elaboró"
+        "Elaboró",
+        "Audio del dictado (archivo o enlace, si se usó reporte por voz)"
       ],
       "items": [
         "Fotografías del avance tomadas por frente",
@@ -1540,13 +1542,15 @@
         "Notas de bitácora electrónica registradas",
         "Si hubo vuelo de dron: checklist de vuelo llenado, GSD y enlace al ortomosaico del día registrados",
         "Si hubo visita del DRO, corresponsable o inspector urbano: folio de la nota de bitácora registrado",
-        "Si hay estimación en trámite: fechas de entrega, autorización, factura y pago anotadas (plazos 6/15/20 días)"
+        "Si hay estimación en trámite: fechas de entrega, autorización, factura y pago anotadas (plazos 6/15/20 días)",
+        "Si el reporte se hizo por dictado con IA: cantidades, nombres y horas revisados contra notas y campos 'NO DICTADO' completados o justificados"
       ],
       "como_usar": [
         "Llénalo al cierre de cada jornada; toma menos de 10 minutos.",
         "Sé específico en incidencias: hora, causa y quién la reporta. Te protege en reclamaciones.",
         "Guarda el CSV por fecha; al final del mes tienes tu historial completo.",
-        "Las fechas de visitas del DRO y de trámite de estimaciones alimentan el formato Visita del DRO y la calculadora de Plazos de estimación."
+        "Las fechas de visitas del DRO y de trámite de estimaciones alimentan el formato Visita del DRO y la calculadora de Plazos de estimación.",
+        "Para llenarlo más rápido usa el método Reporte diario dictado por voz con IA y pega aquí el borrador ya revisado."
       ]
     },
     {
@@ -2967,6 +2971,242 @@
         {
           "titulo": "Camtec (distribuidor) – Ficha DJI Mini 5 Pro: 1\", 8192×6144 px, 24 mm equiv., 249.9 g ±4 g",
           "url": "https://www.camtecphoto.com/en/product/dji-mini-5-pro"
+        }
+      ]
+    },
+    {
+      "id": "calc-roi-digital",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "¿Vale la pena esta herramienta digital? Costo total, ahorro y meses para recuperarla",
+      "resumen": "Antes de pagar una licencia o comprar una cámara 360°, dron o sensor, calcula cuánto cuesta en toda la obra (equipo + licencias + horas de capacitación) contra lo que ahorra (horas técnicas liberadas + retrabajo evitado), castigado por el % real de adopción. Te da beneficio neto, ROI y en cuántos meses se paga. Sirve para decidir con números y para justificarla ante la dirección.",
+      "agregada": "2026-10-30",
+      "entradas": [
+        {
+          "id": "EQ",
+          "label": "Equipo o compra única (ej. Insta360 X5 paquete estándar US$636.99)",
+          "unidad": "USD",
+          "valor": 636.99
+        },
+        {
+          "id": "LIC",
+          "label": "Licencia o suscripción mensual (0 si es gratuita)",
+          "unidad": "USD/mes",
+          "valor": 50
+        },
+        {
+          "id": "TC",
+          "label": "Tipo de cambio del día (captura el de tu banco o DOF)",
+          "unidad": "MXN/USD",
+          "valor": 18.5
+        },
+        {
+          "id": "MESES",
+          "label": "Meses que se usará en esta obra",
+          "unidad": "meses",
+          "valor": 8
+        },
+        {
+          "id": "PER",
+          "label": "Personas que la usan (residentes, sobrestante, control de obra)",
+          "unidad": "personas",
+          "valor": 3
+        },
+        {
+          "id": "HRS",
+          "label": "Horas ahorradas por persona por semana (medidas en la prueba piloto)",
+          "unidad": "h/sem",
+          "valor": 3
+        },
+        {
+          "id": "CH",
+          "label": "Costo por hora del personal técnico (sueldo real ÷ horas)",
+          "unidad": "$/h",
+          "valor": 250
+        },
+        {
+          "id": "RET",
+          "label": "Retrabajo, viajes o reclamaciones evitados por mes (estimado conservador)",
+          "unidad": "$/mes",
+          "valor": 5000
+        },
+        {
+          "id": "ADOP",
+          "label": "Adopción real (% del tiempo que de verdad se usa)",
+          "unidad": "%",
+          "valor": 70
+        },
+        {
+          "id": "CAP",
+          "label": "Horas de capacitación por persona",
+          "unidad": "h",
+          "valor": 6
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Costo total en la obra (equipo + licencias + capacitación)",
+          "formula": "(EQ+LIC*MESES)*TC+CAP*PER*CH",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Horas técnicas liberadas por mes",
+          "formula": "HRS*PER*52/12*ADOP/100",
+          "unidad": "h/mes",
+          "decimales": 1
+        },
+        {
+          "label": "Ahorro mensual (horas + retrabajo evitado, ajustado por adopción)",
+          "formula": "(HRS*PER*CH*52/12+RET)*ADOP/100",
+          "unidad": "$/mes",
+          "decimales": 0
+        },
+        {
+          "label": "BENEFICIO NETO en la obra",
+          "formula": "(HRS*PER*CH*52/12+RET)*ADOP/100*MESES-((EQ+LIC*MESES)*TC+CAP*PER*CH)",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "ROI (verde ≥ 100 %, amarillo 0–100 %, rojo pierde dinero)",
+          "formula": "100*((HRS*PER*CH*52/12+RET)*ADOP/100*MESES-((EQ+LIC*MESES)*TC+CAP*PER*CH))/((EQ+LIC*MESES)*TC+CAP*PER*CH)",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            100,
+            0
+          ]
+        },
+        {
+          "label": "Meses para recuperar la inversión inicial (999 = nunca se recupera)",
+          "formula": "((HRS*PER*CH*52/12+RET)*ADOP/100-LIC*TC)>0?(EQ*TC+CAP*PER*CH)/((HRS*PER*CH*52/12+RET)*ADOP/100-LIC*TC):999",
+          "unidad": "meses",
+          "decimales": 1
+        },
+        {
+          "label": "Holgura: meses de obra contra meses de recuperación",
+          "formula": "((HRS*PER*CH*52/12+RET)*ADOP/100-LIC*TC)>0?MESES-(EQ*TC+CAP*PER*CH)/((HRS*PER*CH*52/12+RET)*ADOP/100-LIC*TC):-MESES",
+          "unidad": "meses",
+          "decimales": 1,
+          "semaforo": [
+            2,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Captura el precio del equipo y la licencia tal como aparecen en el sitio oficial el día que decides (en USD si así cotizan) y el tipo de cambio de ese día; si es una prueba gratis (ej. 14 días de DroneDeploy) pon la licencia que pagarías después.",
+        "No inventes las horas ahorradas: haz una prueba piloto de 2 semanas en un solo frente y mide con reloj cuánto tardaba el reporte, el levantamiento o la revisión antes y después.",
+        "En retrabajo evitado anota solo lo que puedas defender (ej. un viaje de supervisión menos, un resane de instalación oculta detectado a tiempo); si dudas, déjalo en 0 y mira si aun así se paga.",
+        "Baja la adopción a 50 % si el personal tiene poca experiencia digital; si con 50 % el ROI sigue en verde, la herramienta es segura.",
+        "Si la holgura sale en rojo (se recupera después de terminar la obra) busca la alternativa gratuita o úsala en dos obras a la vez y divide el costo.",
+        "Guarda captura del resultado con la propuesta de compra; al terminar la obra vuelve a capturar las horas reales para confirmar si se adopta en la siguiente."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Tienda oficial Insta360 México – Insta360 X5 paquete estándar US$636.99, en existencia, envío estimado 2 días (consultado 30-oct-2026; la tienda no muestra precio en pesos)",
+          "url": "https://store.insta360.com/mx/product/x5"
+        },
+        {
+          "titulo": "DroneDeploy – Precios: Ground y Ground Pro por cotización; Progress AI y Safety AI como complementos; prueba de 14 días",
+          "url": "https://www.dronedeploy.com/pricing"
+        },
+        {
+          "titulo": "El Imparcial – La IA redefine la industria de la construcción en Tijuana, columna de Elmer Peña Ruvalcaba, presidente de CMIC Tijuana, Tecate y Rosarito (13 dic 2025)",
+          "url": "https://www.elimparcial.com/tij/columnas/2025/12/13/la-ia-redefine-la-industria-de-la-construccion-en-tijuana/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-recorrido-360",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Recorrido 360° semanal de avance: captura comparable semana contra semana",
+      "resumen": "Protocolo y checklist para documentar el avance caminando la obra con una cámara 360° en el casco o bastón: misma ruta, misma hora, mismos puntos de arranque en el plano. Queda un registro visual de cada muro y losa antes de cerrarse (instalaciones ocultas, acero antes del colado) que sirve para estimaciones, reclamaciones y entrega. Funciona con plataformas que ubican el video en el plano (DroneDeploy Ground, OpenSpace) o gratis con carpetas por fecha y punto.",
+      "agregada": "2026-10-30",
+      "campos": [
+        "Obra",
+        "Fecha y hora de inicio",
+        "Semana de obra",
+        "Capturó",
+        "Cámara (modelo) y modo (video 360° / foto por intervalos)",
+        "Plataforma o carpeta donde se sube (enlace)",
+        "Niveles y zonas recorridas",
+        "Ruta y punto de arranque en el plano (código del plano)",
+        "Duración del recorrido (min)",
+        "Fotos o tramos de video de instalaciones ocultas (cantidad)",
+        "Hallazgos detectados en la revisión (cantidad)",
+        "Revisó (residente)"
+      ],
+      "items": [
+        "Batería cargada, lente limpio y memoria con espacio (8K ocupa mucho: libera la tarjeta después de subir)",
+        "Cámara a la misma altura que la semana anterior (casco o bastón a ~1.70 m) y en el mismo modo de captura",
+        "Recorrido a la misma hora del día que el anterior (misma luz) y por la misma ruta marcada en el plano",
+        "Punto de arranque marcado en el plano dentro de la app o anotado en el nombre del archivo (Nivel-Zona-Fecha)",
+        "Paso lento y constante; pausa de 3 s en cada cruce de ejes, cubo de escalera y cuarto de instalaciones",
+        "Muros con instalaciones por cerrar (tablaroca, aplanado) y acero por colar capturados de cerca antes de cerrarse",
+        "Personas ajenas avisadas; no se capturan rostros de vecinos ni datos sensibles a propósito",
+        "Video subido y procesado el mismo día; enlace anotado en el Reporte diario",
+        "Revisión rápida del residente contra la semana anterior y contra planos: hallazgos con responsable y fecha",
+        "Respaldo en carpeta de la obra con acceso restringido (no en el celular personal únicamente)"
+      ],
+      "como_usar": [
+        "Marca en el plano de cada nivel una ruta fija con su punto de arranque y nombra los archivos Nivel-Zona-AAAAMMDD; si usas DroneDeploy Ground u OpenSpace, la app ubica el video en el plano por ti.",
+        "Cada viernes a la misma hora el residente camina la ruta con la cámara 360° (Insta360 X5 o X4, Ricoh Theta X; cualquier .INSV o .MP4) y llena este checklist en el celular.",
+        "El mismo día sube el video, revisa contra la semana anterior y anota hallazgos con responsable y fecha; pega el enlace en el Reporte diario.",
+        "Antes de cerrar muros o colar, captura de cerca las instalaciones y el acero: es la evidencia que te ahorra romper para buscar un tubo o defender una estimación.",
+        "Mide en 4 semanas: hallazgos detectados antes de cerrarse, visitas evitadas y minutos por recorrido; mete esos datos en la calculadora ¿Vale la pena esta herramienta digital? para decidir si pagas una plataforma o te quedas con la carpeta gratuita."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Tienda oficial Insta360 México – Insta360 X5 paquete estándar US$636.99, en existencia, envío estimado 2 días (consultado 30-oct-2026; la tienda no muestra precio en pesos)",
+          "url": "https://store.insta360.com/mx/product/x5"
+        },
+        {
+          "titulo": "DroneDeploy Ground – recorridos 360° sobre planos, comparación con BIM, archivos .INSV/.MP4; sin plan gratuito, prueba de 14 días sin tarjeta, precio por cotización (consultado 30-oct-2026)",
+          "url": "https://dronedeploy.com/product/dronedeploy-ground"
+        },
+        {
+          "titulo": "DroneDeploy – Hardware compatible: cámaras 360 recomendadas Insta360 X5, X4, ONE RS 1-inch y Ricoh Theta X",
+          "url": "https://www.dronedeploy.com/product/supported-hardware"
+        },
+        {
+          "titulo": "DroneDeploy – Precios: Ground y Ground Pro por cotización; Progress AI y Safety AI como complementos; prueba de 14 días",
+          "url": "https://www.dronedeploy.com/pricing"
+        },
+        {
+          "titulo": "OpenSpace – OpenSpace Basic: captura 360° con cámara en el casco ubicada en el plano (comunicado de ago 2021, lanzado solo en EE. UU.; condiciones actuales no verificadas)",
+          "url": "https://www.openspace.ai/?p=7658"
+        }
+      ]
+    },
+    {
+      "id": "met-reporte-voz-ia",
+      "tipo": "metodo",
+      "categoria": "Herramientas digitales",
+      "titulo": "Reporte diario dictado por voz con IA (borrador automático, revisión humana obligatoria)",
+      "resumen": "El residente dicta 3 minutos al cierre del día siguiendo un guion fijo; la transcripción se pega en un asistente de IA con un prompt plantilla que lo convierte en los campos del Reporte diario de ObraLab. Es el mismo flujo que Procore anunció en mayo de 2026 con su Daily Log Agent (fotos, correos y notas de voz → borrador → revisión humana), pero con herramientas que ya tienes en el celular.",
+      "agregada": "2026-10-30",
+      "beneficio": "Bajar el tiempo de llenado del reporte diario y que no se salte ningún día: menos huecos en el historial que defiende reclamaciones y atrasos. Indicador: minutos por reporte y % de días con reporte completo, medidos 2 semanas antes y 2 semanas después. Las cifras de ahorro de los proveedores no están verificadas; mídelas tú.",
+      "como_usar": [
+        "Guion fijo del dictado (3 min, en este orden): clima; personal propio y por contratista; equipo; actividades por frente con cantidad (m², m³, kg); materiales recibidos con remisión; incidencias con hora, causa y quién reporta; pendientes para mañana.",
+        "Graba la nota de voz con la grabadora o el dictado del teclado del celular (ambos transcriben en español sin costo) o directo en el asistente de IA que use tu empresa.",
+        "Pega la transcripción con este prompt: \"Convierte este dictado en un reporte diario de obra con los campos Obra, Fecha, Clima, Personal propio, Personal de contratistas, Equipo, Actividades realizadas, Materiales recibidos, Incidencias/retrasos. No inventes datos: si algo no se dijo escribe 'NO DICTADO'. Respeta cantidades y unidades tal cual.\"",
+        "Revisa el borrador contra tus notas: cantidades, nombres de contratistas, horas de incidencias y remisiones. La IA puede equivocarse con números y nombres; tú firmas el reporte, no la IA.",
+        "Copia los campos al Reporte diario de ObraLab, exporta el CSV y guarda el audio original junto con él como respaldo.",
+        "No subas contratos, planos ni datos personales a una cuenta personal de IA; usa la cuenta autorizada por la empresa y revisa si el contrato con el cliente restringe compartir información de la obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Procore – New Procore AI Experience Embeds Datagrid into Procore: Daily Log Agent junta fotos, correos y notas de voz para redactar el reporte diario con revisión humana; beta privada, precio por créditos no publicado (21 may 2026)",
+          "url": "https://www.procore.com/press/new-procore-ai-experience-embeds-datagrid-into-procore"
+        },
+        {
+          "titulo": "El Imparcial – La IA redefine la industria de la construcción en Tijuana, columna de Elmer Peña Ruvalcaba, presidente de CMIC Tijuana, Tecate y Rosarito (13 dic 2025)",
+          "url": "https://www.elimparcial.com/tij/columnas/2025/12/13/la-ia-redefine-la-industria-de-la-construccion-en-tijuana/"
         }
       ]
     },
