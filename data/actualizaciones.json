@@ -1,6 +1,42 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-10-31",
+      "titulo": "Lean y mejora continua: Pareto de no cumplimiento, Reporte A3 e inventario justo a tiempo",
+      "resumen": "Tres herramientas para cerrar el ciclo del Last Planner. Pareto de causas de no cumplimiento suma las tareas no cumplidas del mes en 7 causas fijas y dice cuál atacar: con 96 tareas comprometidas y 30 no cumplidas (PPC 69 %), la causa principal es predecesora/frente con 30 % y eliminarla sube el PPC a 78 %; el 77 % de las causas del ejemplo es controlable por la constructora (en 50 obras estudiadas por Lagos y Alarcón, IGLC 2021, fueron cerca de 2 de cada 3). Reporte A3 es la hoja única del LCI (plantilla gratuita) para resolver esa causa con dato, causa raíz, contramedidas, prueba en un frente y verificación. Inventario en obra y entregas justo a tiempo calcula días de material, punto de pedido y dinero detenido: 6,000 block con consumo de 800/día son 7.5 días de material; con entrega en 2 días, 1 día de colchón y entregas cada 2 días el máximo es 2,400 y el excedente de 3,600 piezas detiene $57,600 (precio de ejemplo) y cuesta unos $2,592 al mes. Mejoras: Ciclo PDCA, PPC semanal y Last Planner System ahora remiten al Pareto y al A3.",
+      "herramientas": [
+        "calc-pareto-cnc",
+        "fmt-a3",
+        "calc-inventario-jit",
+        "met-pdca",
+        "calc-ppc",
+        "met-last-planner"
+      ],
+      "como_aplicarlo": "Esta semana: 1) En la junta semanal del lunes clasifica cada tarea no cumplida con las 7 causas y captura el mes de octubre en el Pareto. 2) Abre un Reporte A3 solo para la causa principal y pruébalo en un frente durante 2 semanas. 3) Haz conteo físico de block o varilla, captura el consumo y el tiempo de entrega del proveedor, y marca el punto de pedido en el acopio.",
+      "fuentes": [
+        {
+          "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
+          "url": "https://iglc.net/Papers/Details/1938"
+        },
+        {
+          "titulo": "Lean Construction Institute – A3: Thinking, Reports & Templates, con plantilla A3 en blanco gratuita (actualizado 23 dic 2025)",
+          "url": "https://leanconstruction.org/lean-topics/a3/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Plantilla A3 en blanco (PDF gratuito)",
+          "url": "https://lean-construction-gcs.storage.googleapis.com/wp-content/uploads/2022/08/08161441/A3-LCI-Blank-Template.pdf"
+        },
+        {
+          "titulo": "De la Cruz, Salinas y Ulloa – Entrega a tiempo de materiales con Just-In-Time y kitting en vivienda multifamiliar: entrega de acero de 3 a 1 día (ICCSTE 2025, jul 2025)",
+          "url": "https://avestia.com/ICCSTE2025_Proceedings/files/paper/ICCSTE_315.pdf"
+        },
+        {
+          "titulo": "Mandić et al. – A3 y Lean en colocación de aislamiento de plafón en aeropuerto: productividad de 30 a 60 m²/cuadrilla/día (Preprints, feb 2024, sin revisión por pares)",
+          "url": "https://www.preprints.org/manuscript/202402.1373"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-30",
       "titulo": "Herramientas digitales e IA: ¿se paga la herramienta?, recorrido 360° semanal y reporte diario por voz",
       "resumen": "Tres herramientas para meter tecnología a la obra sin tirar dinero. ¿Vale la pena esta herramienta digital? suma equipo, licencias y capacitación contra horas técnicas liberadas y retrabajo evitado, ajustado por adopción real: con una Insta360 X5 (US$636.99 en la tienda oficial de México, consultado hoy), una licencia de US$50/mes, 8 meses de obra, 3 personas que ahorran 3 h/semana a $250/h, $5,000/mes de retrabajo evitado y 70 % de adopción, cuesta $23,684, ahorra $10,325 al mes, deja $58,916 netos (ROI 249 %) y se paga en 1.7 meses. Recorrido 360° semanal es el protocolo para que cada captura sea comparable (misma ruta, hora y altura) y quede evidencia de instalaciones y acero antes de cerrarse; DroneDeploy Ground acepta Insta360 X5/X4 y Ricoh Theta X, no tiene plan gratuito (prueba de 14 días, precio por cotización) y la alternativa gratuita es la carpeta por nivel-zona-fecha. Reporte diario dictado por voz con IA reproduce con el celular lo que Procore lanzó en mayo de 2026 (Daily Log Agent: notas de voz y fotos → borrador → revisión humana): guion de 3 minutos, prompt plantilla que no inventa datos y revisión obligatoria. Mejora: el Reporte diario ahora registra el enlace del recorrido 360°, el audio del dictado y la revisión del borrador hecho con IA.",

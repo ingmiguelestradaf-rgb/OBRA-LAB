@@ -1263,7 +1263,8 @@
         "Por cada tarea no cumplida anota la causa (material, diseño, mano de obra, clima, predecesora).",
         "Grafica el PPC semana a semana; la meta práctica es mantenerlo arriba de 80 %.",
         "El PCR (restricciones liberadas a tiempo) es indicador adelantado: si baja esta semana, el PPC bajará en las siguientes. Tómalo del formato Análisis de restricciones.",
-        "Un PPC sostenido arriba de ~88 % suele indicar que el equipo se compromete a poco; la referencia publicada es lograr 70 % o más de forma estable."
+        "Un PPC sostenido arriba de ~88 % suele indicar que el equipo se compromete a poco; la referencia publicada es lograr 70 % o más de forma estable.",
+        "Cada mes captura las causas en la calculadora 'Pareto de causas de no cumplimiento' para ver cuál pesa más y cuánto PPC recuperas si la eliminas."
       ],
       "fuentes": [
         {
@@ -1277,6 +1278,10 @@
         {
           "titulo": "IGLC – Use of Percent of Constraint Removal to Measure the Make Ready Process (Jang y Kim)",
           "url": "https://iglc.net/Papers/Details/497"
+        },
+        {
+          "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
+          "url": "https://iglc.net/Papers/Details/1938"
         }
       ]
     },
@@ -1727,7 +1732,7 @@
         "Junta diaria de 15 minutos al inicio de jornada para alinear el día.",
         "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento.",
         "En frentes repetitivos (niveles, departamentos, viviendas) arma el plan intermedio como tren takt con la calculadora 'Plan takt': cada contratista sabe en qué zona debe estar cada semana.",
-        "Clasifica las causas de no cumplimiento del PPC y verifícalas en sitio con el Recorrido Gemba; la causa más repetida del mes es la que se ataca primero."
+        "Clasifica las causas de no cumplimiento del PPC con la calculadora 'Pareto de causas de no cumplimiento', verifícalas en sitio con el Recorrido Gemba y resuelve la más repetida del mes con un Reporte A3."
       ],
       "fuentes": [
         {
@@ -1745,6 +1750,10 @@
         {
           "titulo": "Lean Construction Institute – Takt time: definición y fórmula de duración (Wagones + Zonas − 1) × Takt (actualizado ago 2025)",
           "url": "https://leanconstruction.org/lean-topics/takt-time/"
+        },
+        {
+          "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
+          "url": "https://iglc.net/Papers/Details/1938"
         }
       ]
     },
@@ -1777,7 +1786,14 @@
         "Busca la causa raíz con los 5 porqués junto con el contratista.",
         "Hacer: prueba la solución en un solo frente durante una semana.",
         "Verificar: compara el dato antes y después.",
-        "Actuar: si funcionó, agrégala al checklist correspondiente de ObraLab."
+        "Actuar: si funcionó, agrégala al checklist correspondiente de ObraLab.",
+        "Documenta el ciclo completo en una sola hoja con el formato 'Reporte A3': problema con dato, causa raíz verificada en sitio, contramedidas con responsable y fecha, y verificación antes/después."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – A3: Thinking, Reports & Templates, con plantilla A3 en blanco gratuita (actualizado 23 dic 2025)",
+          "url": "https://leanconstruction.org/lean-topics/a3/"
+        }
       ]
     },
     {
@@ -5008,6 +5024,351 @@
         {
           "titulo": "Reglamento LOPSRM art. 220 – Cargos adicionales: impuestos y derechos por la ejecución, se agregan después de la utilidad",
           "url": "https://mley.mx/Reg_LOPSRM/articulo/220/index.html.md"
+        }
+      ]
+    },
+    {
+      "id": "calc-pareto-cnc",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Pareto de causas de no cumplimiento (CNC) del plan semanal",
+      "resumen": "Capturas cuántas tareas no cumplidas tuvo cada causa en el mes (predecesora, material, mano de obra, equipo, información/diseño, cliente/cambios, clima) y te dice el peso de cada una, cuánto PPC se perdió y qué porcentaje depende de ti (causas controlables por el contratista principal). En 50 obras chilenas con 22,636 causas registradas, cerca de 2 de cada 3 eran controlables por el contratista principal (Lagos y Alarcón, IGLC 2021): ahí está la mejora más barata.",
+      "agregada": "2026-10-31",
+      "entradas": [
+        {
+          "id": "comp",
+          "label": "Tareas comprometidas en el periodo (suma de las semanas)",
+          "unidad": "tareas",
+          "valor": 96
+        },
+        {
+          "id": "pred",
+          "label": "No cumplidas por predecesora / frente no liberado",
+          "unidad": "tareas",
+          "valor": 9
+        },
+        {
+          "id": "mat",
+          "label": "No cumplidas por material (no llegó, faltó, mal surtido)",
+          "unidad": "tareas",
+          "valor": 7
+        },
+        {
+          "id": "mo",
+          "label": "No cumplidas por mano de obra (cuadrilla incompleta, ausentismo, rendimiento)",
+          "unidad": "tareas",
+          "valor": 5
+        },
+        {
+          "id": "eq",
+          "label": "No cumplidas por equipo o herramienta (bomba, grúa, revolvedora)",
+          "unidad": "tareas",
+          "valor": 2
+        },
+        {
+          "id": "info",
+          "label": "No cumplidas por información / diseño (plano, RFI sin respuesta)",
+          "unidad": "tareas",
+          "valor": 4
+        },
+        {
+          "id": "cli",
+          "label": "No cumplidas por cliente / cambio de alcance / pago",
+          "unidad": "tareas",
+          "valor": 2
+        },
+        {
+          "id": "clima",
+          "label": "No cumplidas por clima (lluvia, viento, Santa Ana)",
+          "unidad": "tareas",
+          "valor": 1
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Total de tareas no cumplidas",
+          "formula": "pred+mat+mo+eq+info+cli+clima",
+          "unidad": "tareas",
+          "decimales": 0
+        },
+        {
+          "label": "PPC del periodo",
+          "formula": "comp>0?100*(comp-(pred+mat+mo+eq+info+cli+clima))/comp:0",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "Causa principal: % del total (atácala primero)",
+          "formula": "100*Math.max(pred,mat,mo,eq,info,cli,clima)/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Predecesora / frente",
+          "formula": "100*pred/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Material",
+          "formula": "100*mat/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Mano de obra",
+          "formula": "100*mo/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Equipo / herramienta",
+          "formula": "100*eq/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Información / diseño",
+          "formula": "100*info/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Cliente / cambios",
+          "formula": "100*cli/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Clima",
+          "formula": "100*clima/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Controlable por la constructora (predecesora + material + mano de obra + equipo)",
+          "formula": "100*(pred+mat+mo+eq)/Math.max(1,pred+mat+mo+eq+info+cli+clima)",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "PPC posible si eliminas la causa principal",
+          "formula": "comp>0?100*(comp-(pred+mat+mo+eq+info+cli+clima)+Math.max(pred,mat,mo,eq,info,cli,clima))/comp:0",
+          "unidad": "%",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "En cada junta semanal del Last Planner anota UNA causa por tarea no cumplida, con estas 7 categorías fijas; si dudas entre dos, pregunta '¿qué tendría que haber pasado para cumplirla?'.",
+        "Al cierre del mes suma las tareas comprometidas de las 4 semanas y las no cumplidas por causa, y captúralas aquí (el ejemplo: 96 comprometidas, 30 no cumplidas → PPC 69 %).",
+        "Mira la causa principal: en el ejemplo es predecesora/frente con 30 %; quitarla subiría el PPC de 69 % a 78 %. Esa es la única que atacas este mes.",
+        "Si 'Controlable por la constructora' pasa de 60 %, el problema está en la preparación (lookahead y restricciones), no en el cliente: revisa el formato Análisis de restricciones y el PCR.",
+        "Abre un Reporte A3 para la causa principal y vuelve a capturar el mes siguiente: la mejora se mide en el % de esa causa y en el PPC."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
+          "url": "https://iglc.net/Papers/Details/1938"
+        },
+        {
+          "titulo": "Mastt – Last Planner System: los 5 niveles, PPC y registro de restricciones (jul 2026)",
+          "url": "https://www.mastt.com/blogs/last-planner-system"
+        }
+      ]
+    },
+    {
+      "id": "fmt-a3",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Reporte A3: resolver un problema recurrente en una sola hoja",
+      "resumen": "El A3 de Toyota adaptado a obra según la plantilla gratuita del Lean Construction Institute: en una hoja (tamaño A3, 11×17 in) se cuenta el problema con datos, la causa raíz, las contramedidas con responsable y fecha, y cómo se verifica que funcionó (PDCA). Sirve para la causa principal del Pareto de no cumplimiento, un retrabajo que se repite o un hallazgo de seguridad recurrente; se llena en 30 a 60 minutos con el contratista y se revisa a las 2 semanas.",
+      "agregada": "2026-10-31",
+      "campos": [
+        "Obra / frente / fecha / autor del A3 / contratista involucrado",
+        "1. Título del problema (una frase: qué, dónde) — ej. 'Colados de losa que se recorren por acero no liberado, niveles 3 a 5'",
+        "2. Antecedentes: por qué importa (días, $, PPC, seguridad) y desde cuándo pasa",
+        "3. Situación actual con dato y foto o croquis (ej. 4 de 6 colados recorridos en octubre, 1.5 días promedio)",
+        "4. Meta medible y fecha (ej. 0 colados recorridos por acero en noviembre)",
+        "5. Análisis de causa raíz: 5 porqués o espina de pescado, verificado en sitio (Gemba)",
+        "6. Contramedidas: qué, quién, cuándo (máximo 3)",
+        "7. Plan de prueba: frente, duración y quién mide",
+        "8. Verificación: dato antes contra dato después",
+        "9. Seguimiento / estandarización: qué checklist, formato o junta se cambia",
+        "Revisó y aprobó (superintendente) / fecha de revisión a 2 semanas"
+      ],
+      "items": [
+        "El problema se define con un dato medido, no con una opinión ('se atrasan los colados' no basta)",
+        "La situación actual se verificó en el frente (Gemba) y tiene evidencia: foto, croquis, bitácora o reporte diario",
+        "La meta es medible, tiene fecha y la acepta el contratista",
+        "La causa raíz llega a algo que se puede cambiar (proceso, secuencia, información), no a 'falta de compromiso' o a una persona",
+        "Cada contramedida tiene responsable con nombre y fecha; son 3 o menos",
+        "Se probó primero en un solo frente o nivel antes de extenderla a la obra",
+        "Se comparó el dato antes y después con el mismo método de medición",
+        "Si funcionó, se cambió el estándar (checklist de ObraLab, formato, junta) y se avisó a todas las cuadrillas",
+        "Si no funcionó, se regresó a la causa raíz (no se abandonó el A3)",
+        "Todo cabe en una hoja y lo entiende un cabo sin explicación"
+      ],
+      "como_usar": [
+        "Elige UN problema: la causa principal del Pareto de no cumplimiento, un defecto que aparece en 3 o más recorridos Gemba o un retrabajo con costo. No abras más de 2 A3 al mismo tiempo.",
+        "Llena 1 a 4 en la oficina de obra con los datos que ya tienes (PPC, reporte diario, generadores) y ve al frente a confirmar la situación actual antes de buscar causas.",
+        "Haz el análisis de causa (5 porqués) con el cabo y el contratista en el frente, en 20 minutos; anota contramedidas con nombre y fecha.",
+        "Prueba en un solo frente durante 1 a 2 semanas y llena la verificación con el mismo indicador (ej. % de esa causa en el Pareto, colados recorridos, m² rehechos).",
+        "Si la meta se cumplió, actualiza el checklist o formato correspondiente en ObraLab y exporta el A3 a PDF como evidencia; si no, regresa al paso 5 del A3."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – A3: Thinking, Reports & Templates, con plantilla A3 en blanco gratuita (actualizado 23 dic 2025)",
+          "url": "https://leanconstruction.org/lean-topics/a3/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Plantilla A3 en blanco (PDF gratuito)",
+          "url": "https://lean-construction-gcs.storage.googleapis.com/wp-content/uploads/2022/08/08161441/A3-LCI-Blank-Template.pdf"
+        },
+        {
+          "titulo": "Mandić et al. – A3 y Lean en colocación de aislamiento de plafón en aeropuerto: productividad de 30 a 60 m²/cuadrilla/día (Preprints, feb 2024, sin revisión por pares)",
+          "url": "https://www.preprints.org/manuscript/202402.1373"
+        }
+      ]
+    },
+    {
+      "id": "calc-inventario-jit",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Inventario en obra y entregas justo a tiempo: días de material, punto de pedido y dinero detenido",
+      "resumen": "El inventario es uno de los 8 desperdicios: material acopiado de más ocupa espacio, se daña, se roba y detiene dinero. Con el consumo diario, el tiempo de entrega del proveedor y cada cuántos días quieres recibir, calcula cuántos días de material tienes, el punto de pedido (cuándo llamar al proveedor), el inventario máximo recomendado y cuánto te cuesta al mes el excedente. Funciona para block, varilla, cemento, tablaroca o cualquier material que se consume parejo.",
+      "agregada": "2026-10-31",
+      "entradas": [
+        {
+          "id": "S",
+          "label": "Material en obra hoy (conteo físico)",
+          "unidad": "pzas / kg / sacos",
+          "valor": 6000
+        },
+        {
+          "id": "C",
+          "label": "Consumo diario promedio (del rendimiento real de la cuadrilla)",
+          "unidad": "por día",
+          "valor": 800
+        },
+        {
+          "id": "P",
+          "label": "Precio unitario puesto en obra (usa tu cotización; ejemplo)",
+          "unidad": "$/unidad",
+          "valor": 16
+        },
+        {
+          "id": "L",
+          "label": "Tiempo de entrega del proveedor (de pedido a descarga)",
+          "unidad": "días",
+          "valor": 2
+        },
+        {
+          "id": "SS",
+          "label": "Días de seguridad (colchón por variación)",
+          "unidad": "días",
+          "valor": 1
+        },
+        {
+          "id": "I",
+          "label": "Cada cuántos días quieres recibir entrega",
+          "unidad": "días",
+          "valor": 2
+        },
+        {
+          "id": "T",
+          "label": "Costo financiero del dinero (tasa mensual)",
+          "unidad": "%/mes",
+          "valor": 1.5
+        },
+        {
+          "id": "M",
+          "label": "Merma por daño o robo del material acopiado (estimado; mídelo con tu conteo)",
+          "unidad": "%/mes",
+          "valor": 3
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Días de material en obra",
+          "formula": "S/C",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Punto de pedido: pide cuando queden",
+          "formula": "C*(L+SS)",
+          "unidad": "unidades",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Tamaño de cada entrega",
+          "formula": "C*I",
+          "unidad": "unidades",
+          "decimales": 0
+        },
+        {
+          "label": "Inventario máximo recomendado (entrega + seguridad)",
+          "formula": "C*(I+SS)",
+          "unidad": "unidades",
+          "decimales": 0
+        },
+        {
+          "label": "Excedente sobre el máximo",
+          "formula": "Math.max(0,S-C*(I+SS))",
+          "unidad": "unidades",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Dinero detenido en material acopiado",
+          "formula": "S*P",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Dinero detenido solo en el excedente",
+          "formula": "Math.max(0,S-C*(I+SS))*P",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo mensual del excedente (financiero + merma)",
+          "formula": "Math.max(0,S-C*(I+SS))*P*(T+M)/100",
+          "unidad": "$/mes",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "¿Pedir hoy? (1 = sí, 0 = todavía no)",
+          "formula": "S<=C*(L+SS)?1:0",
+          "unidad": "",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Haz conteo físico del material en el acopio (no el del vale de almacén) y toma el consumo diario del rendimiento real de la cuadrilla: ej. 2 cuadrillas × 400 block/día = 800.",
+        "Pregunta al proveedor su tiempo real de entrega (de la llamada a la descarga) y decide cada cuántos días quieres recibir según el espacio de acopio y el acceso de la obra.",
+        "Lee 'Punto de pedido': cuando el conteo baje a esa cantidad, se llama al proveedor. Píntalo con una marca en la tarima o en el muro del almacén (control visual tipo kanban).",
+        "Si hay excedente, no pidas más hasta consumirlo y negocia entregas más chicas y frecuentes; en el ejemplo, 3,600 block de más detienen $57,600 y cuestan unos $2,592 al mes.",
+        "Mide antes y después: días de material en obra, merma real (conteo contra consumo) y tareas no cumplidas por material en el Pareto de no cumplimiento."
+      ],
+      "fuentes": [
+        {
+          "titulo": "De la Cruz, Salinas y Ulloa – Entrega a tiempo de materiales con Just-In-Time y kitting en vivienda multifamiliar: entrega de acero de 3 a 1 día (ICCSTE 2025, jul 2025)",
+          "url": "https://avestia.com/ICCSTE2025_Proceedings/files/paper/ICCSTE_315.pdf"
+        },
+        {
+          "titulo": "Construction Dive / LCI – Los 8 desperdicios en obra: inventario y transporte (sep 2024)",
+          "url": "https://www.constructiondive.com/news/gemba-walk-guide-lean-construction-how-to/726442"
         }
       ]
     }
