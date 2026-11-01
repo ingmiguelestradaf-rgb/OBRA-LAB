@@ -1,0 +1,32 @@
+name: App Android (APK)
+on:
+  push:
+    branches: [main]
+    paths: ['android/**', '.github/workflows/android.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+      - name: Construir APK
+        run: gradle -p android assembleRelease --no-daemon --stacktrace
+      - name: Publicar APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk ObraLab.apk
+          gh release delete app-android -y --cleanup-tag || true
+          gh release create app-android ObraLab.apk --latest \
+            --title "ObraLab para Android" \
+            --notes "Descarga ObraLab.apk en tu teléfono Android y ábrelo para instalar. Las herramientas nuevas llegan solas cada día; no necesitas reinstalar."

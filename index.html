@@ -48,7 +48,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .brand h1{margin:0;font:800 26px/1 var(--display);font-stretch:118%;letter-spacing:-.01em}
 .brand h1 b{color:var(--accent-ink);font-weight:800}
 .brand small{font:500 12px var(--mono);color:var(--muted)}
-.install{background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);border-radius:6px;padding:6px 12px;font:700 13px var(--body);cursor:pointer}
+.install{text-decoration:none;background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);border-radius:6px;padding:6px 12px;font:700 13px var(--body);cursor:pointer}
 .ios-tip{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--ink);color:var(--surface);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .ios-tip button{float:right;background:none;border:0;color:var(--surface);font:700 18px var(--body);cursor:pointer;margin:-6px -6px 0 8px}
 .theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:6px 10px;font:500 12px var(--mono);cursor:pointer}
@@ -233,6 +233,7 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 <header class="top">
   <div class="wrap">
     <div class="brand"><h1>Obra<b>Lab</b></h1><small id="stamp">cargando…</small></div>
+    <a class="install" id="apk" href="https://github.com/ingmiguelestradaf-rgb/OBRA-LAB/releases/latest/download/ObraLab.apk" hidden>App Android</a>
     <button class="install" id="install" type="button" hidden>Instalar app</button>
     <button class="theme" id="theme" type="button">Tema</button>
     <nav class="tabs" role="tablist" id="tabs"></nav>
@@ -243,6 +244,16 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 </main>
 <footer><div class="wrap">ObraLab · mejora continua para control de obra · Ing. Miguel Estrada · Se actualiza diariamente.</div></footer>
 
+<script>
+// Dentro del APK de Android: los CSV se guardan en Descargas y "Imprimir" abre el diálogo de PDF del teléfono
+if(window.ObraAndroid){
+  const oc=HTMLAnchorElement.prototype.click;
+  HTMLAnchorElement.prototype.click=function(){
+    if(this.download&&/^blob:/.test(this.href)){const n=this.download;fetch(this.href).then(r=>r.text()).then(t=>window.ObraAndroid.saveFile(n,"text/csv","\ufeff"+t.replace(/^\ufeff/,"")));return}
+    return oc.call(this)};
+  window.print=()=>window.ObraAndroid.print();
+}
+</script>
 <script src="modulos/acero.js"></script>
 <script src="modulos/escalera.js"></script>
 <script src="modulos/materiales.js"></script>
@@ -390,7 +401,9 @@ addEventListener("hashchange",()=>{const h=location.hash.slice(1),t=DATA.find(d=
   const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
   const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
   if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
-  if(standalone)return;
+  const apk=$("#apk");
+  if(/android/i.test(navigator.userAgent)&&!window.ObraAndroid&&!standalone)apk.hidden=false;
+  if(standalone||window.ObraAndroid)return;
   addEventListener("beforeinstallprompt",e=>{e.preventDefault();evt=e;btn.hidden=false});
   addEventListener("appinstalled",()=>{btn.hidden=true;evt=null});
   if(ios)btn.hidden=false;

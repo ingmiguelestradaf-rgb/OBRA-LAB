@@ -1,0 +1,24 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'mx.obralab.app'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'mx.obralab.app'
+        minSdk 24
+        targetSdk 34
+        versionCode((System.getenv('GITHUB_RUN_NUMBER') ?: '1') as Integer)
+        versionName "1.0." + (System.getenv('GITHUB_RUN_NUMBER') ?: '0')
+    }
+    signingConfigs {
+        release {
+            storeFile file('../obralab.keystore')
+            storePassword 'obralab2026'
+            keyAlias 'obralab'
+            keyPassword 'obralab2026'
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.release }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}

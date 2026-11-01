@@ -18,6 +18,7 @@ Abre la app desde GitHub Pages: `https://ingmiguelestradaf-rgb.github.io/OBRA-LA
 ## Instalar en el teléfono
 
 - **Android (Chrome):** abre la dirección, toca **Instalar app** arriba a la derecha, o en el menú ⋮ elige **Instalar app**.
+- **Android (APK):** descarga `ObraLab.apk` desde https://github.com/ingmiguelestradaf-rgb/OBRA-LAB/releases/latest/download/ObraLab.apk y ábrelo para instalar. Lo genera GitHub Actions (`.github/workflows/android.yml`) a partir de `android/`; es un contenedor de la app web, así que las herramientas nuevas llegan sin reinstalar.
 - **iPhone / iPad:** abre la dirección en **Safari** (no desde la app de GitHub ni otro navegador), toca **Compartir** y elige **Agregar a pantalla de inicio**.
 
 Una vez instalada abre sin señal en obra; cuando hay conexión descarga sola las herramientas nuevas.
