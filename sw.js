@@ -1,5 +1,5 @@
 /* ObraLab · service worker: funciona sin señal en obra y trae lo nuevo cuando hay conexión */
-const VERSION = "obralab-v2";
+const VERSION = "obralab-v3";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "modulos/acero.js", "modulos/escalera.js", "modulos/materiales.js",
   "data/herramientas.json", "data/actualizaciones.json", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
