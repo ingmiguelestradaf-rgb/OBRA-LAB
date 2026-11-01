@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ObraLab</title>
 <meta name="description" content="Herramientas, formatos y métodos de control de obra en mejora continua para ingenieros y arquitectos.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1A2124">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ObraLab">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -40,6 +48,9 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .brand h1{margin:0;font:800 26px/1 var(--display);font-stretch:118%;letter-spacing:-.01em}
 .brand h1 b{color:var(--accent-ink);font-weight:800}
 .brand small{font:500 12px var(--mono);color:var(--muted)}
+.install{background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);border-radius:6px;padding:6px 12px;font:700 13px var(--body);cursor:pointer}
+.ios-tip{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--ink);color:var(--surface);border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.ios-tip button{float:right;background:none;border:0;color:var(--surface);font:700 18px var(--body);cursor:pointer;margin:-6px -6px 0 8px}
 .theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:6px 10px;font:500 12px var(--mono);cursor:pointer}
 nav.tabs{display:flex;gap:4px;overflow-x:auto;width:100%;scrollbar-width:none}
 nav.tabs button{flex:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:600 14px var(--body);font-stretch:105%;padding:8px 12px 7px;cursor:pointer}
@@ -222,6 +233,7 @@ footer{color:var(--muted);font-size:13px;padding-block:0 32px}
 <header class="top">
   <div class="wrap">
     <div class="brand"><h1>Obra<b>Lab</b></h1><small id="stamp">cargando…</small></div>
+    <button class="install" id="install" type="button" hidden>Instalar app</button>
     <button class="theme" id="theme" type="button">Tema</button>
     <nav class="tabs" role="tablist" id="tabs"></nav>
   </div>
@@ -372,6 +384,23 @@ function bindChips(){document.querySelectorAll("[data-go]").forEach(b=>b.onclick
 addEventListener("hashchange",()=>{const h=location.hash.slice(1),t=DATA.find(d=>d.id===h);
   if(t&&t.id!==sel){tab=t.tipo;sel=t.id;document.body.classList.add("viewing");render()}
   else if(TABS.some(x=>x.id===h)&&h!==tab){tab=h;sel=null;document.body.classList.remove("viewing");render()}});
+// instalación como app
+(function(){
+  const btn=$("#install");let evt=null;
+  const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  if(standalone)return;
+  addEventListener("beforeinstallprompt",e=>{e.preventDefault();evt=e;btn.hidden=false});
+  addEventListener("appinstalled",()=>{btn.hidden=true;evt=null});
+  if(ios)btn.hidden=false;
+  btn.onclick=async()=>{
+    if(evt){evt.prompt();await evt.userChoice.catch(()=>{});evt=null;btn.hidden=true;return}
+    if(document.querySelector(".ios-tip"))return;
+    const tip=document.createElement("div");tip.className="ios-tip";tip.setAttribute("role","dialog");
+    tip.innerHTML='<button type="button" aria-label="Cerrar">×</button>'+(ios?'<b>Instalar en iPhone o iPad:</b> abre esta página en <b>Safari</b>, toca el botón <b>Compartir</b> (cuadro con flecha hacia arriba) y elige <b>Agregar a pantalla de inicio</b>.':'<b>Instalar:</b> abre el menú del navegador (⋮) y elige <b>Instalar app</b> o <b>Agregar a pantalla principal</b>.');
+    tip.querySelector("button").onclick=()=>tip.remove();document.body.appendChild(tip)};
+})();
 load().catch(e=>{$("#main").innerHTML=`<p class="empty">No se pudieron cargar los datos (${esc(e.message)}). Abre la app desde GitHub Pages o un servidor local.</p>`});
 </script>
 </body>

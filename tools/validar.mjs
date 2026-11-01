@@ -42,5 +42,12 @@ for (const u of U) {
   if (!u.fecha || !u.titulo || !u.resumen) errs.push(`actualización ${u.fecha}: faltan datos`);
   for (const id of u.herramientas || []) if (!ids.has(id)) errs.push(`actualización ${u.fecha}: id desconocido ${id}`);
 }
+for (const f of ["manifest.webmanifest", "sw.js", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"])
+  if (!existsSync(new URL("../" + f, import.meta.url))) errs.push(`falta ${f} (necesario para instalar la app en el teléfono)`);
+{
+  const sw = readFileSync(new URL("../sw.js", import.meta.url), "utf8");
+  for (const m of MODULOS.size ? readdirSync(new URL("../modulos/", import.meta.url)).filter((x) => x.endsWith(".js")) : [])
+    if (!sw.includes(`modulos/${m}`)) errs.push(`sw.js: agrega "modulos/${m}" a SHELL para que funcione sin señal`);
+}
 if (errs.length) { console.error("ERRORES:\n" + errs.join("\n")); process.exit(1); }
 console.log(`OK · ${H.length} herramientas · ${U.length} actualizaciones`);

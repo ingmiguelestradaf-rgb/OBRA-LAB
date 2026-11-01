@@ -15,6 +15,14 @@ Abre la app desde GitHub Pages: `https://ingmiguelestradaf-rgb.github.io/OBRA-LA
 - **Formatos**: llénalos en el celular o tablet, exporta a CSV o imprime a PDF.
 - **Métodos** y **Herramientas digitales**: pasos concretos para implementarlos.
 
+## Instalar en el teléfono
+
+- **Android (Chrome):** abre la dirección, toca **Instalar app** arriba a la derecha, o en el menú ⋮ elige **Instalar app**.
+- **iPhone / iPad:** abre la dirección en **Safari** (no desde la app de GitHub ni otro navegador), toca **Compartir** y elige **Agregar a pantalla de inicio**.
+
+Una vez instalada abre sin señal en obra; cuando hay conexión descarga sola las herramientas nuevas.
+Archivos de instalación: `manifest.webmanifest`, `sw.js` e `icons/`. Si agregas un módulo nuevo en `modulos/`, súmalo también a la lista `SHELL` de `sw.js`.
+
 ## Cómo crece la app
 
 Todo el contenido vive en dos archivos; la app no necesita compilarse.
