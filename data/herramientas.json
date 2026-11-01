@@ -1164,7 +1164,8 @@
         "Captura los días naturales de cada tramo y el importe autorizado que no te han pagado; la tasa 1.38 % mensual es la de prórroga de la LIF 2026, cámbiala en enero cuando salga la LIF 2027.",
         "Si los días de presentación pasan de 6, la estimación es tuya: entrégala dentro del plazo o pasa al siguiente periodo. Si la revisión pasa de 15 días, déjalo asentado en bitácora el mismo día 16.",
         "Si el pago pasa de 20 días, presenta por escrito la solicitud de gastos financieros (el art. 55 los concede solo a solicitud del contratista) con el criterio conservador como mínimo y anexa este cálculo.",
-        "Para obra privada no aplica la ley: usa la calculadora para negociar intereses moratorios solo si tu contrato los pacta; en ambos casos confirma el criterio de días con tu jurídico antes de reclamar."
+        "Para obra privada no aplica la ley: usa la calculadora para negociar intereses moratorios solo si tu contrato los pacta; en ambos casos confirma el criterio de días con tu jurídico antes de reclamar.",
+        "Revisa también la lista semanal del formato Bitácora electrónica obligatoria: ahí se asientan las fechas de cada estimación junto con convenios, subcontratos y ajustes."
       ],
       "fuentes": [
         {
@@ -1693,7 +1694,8 @@
         "Pendientes de la nota anterior cerrados o con nueva fecha",
         "Fotografías de la visita ligadas al folio de la nota",
         "Si hay suspensión temporal: notificada a la autoridad",
-        "Al terminar la obra: aviso de terminación presentado para obtener la constancia"
+        "Al terminar la obra: aviso de terminación presentado para obtener la constancia",
+        "Si además es obra pública, la bitácora electrónica del contrato está al día (formato Bitácora electrónica obligatoria)"
       ],
       "como_usar": [
         "Imprime o abre el formato antes de la visita del DRO y llena obra, licencia y folio; ten la bitácora y planos autorizados a la mano.",
@@ -1714,6 +1716,351 @@
         {
           "titulo": "Garrigues – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica obligatoria y nueva plataforma que sustituye a CompraNet",
           "url": "https://www.garrigues.com/es_ES/noticia/mexico-reforma-ley-obras-publicas-incluyendo-creacion-nueva-plataforma-contrataciones"
+        }
+      ]
+    },
+    {
+      "id": "calc-convenio-modificatorio",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Convenios modificatorios y subcontratación (LOPSRM reformada 2025): regla del 50 %, 45 días y tope de 49 %",
+      "resumen": "Con el importe y plazo original contra los vigentes te dice cuánto ha variado el contrato, si pasaste el 50 % que da derecho a pedir el ajuste de indirectos y financiamiento (art. 59 Bis), cuántos días te quedan para solicitarlo después de la recepción física (15 naturales), cuántos quedan para firmar el convenio (45 naturales, art. 59) y si tus subcontratos rebasan el 49 % del importe del contrato.",
+      "agregada": "2026-11-01",
+      "entradas": [
+        {
+          "id": "M0",
+          "label": "Importe original del contrato (sin IVA)",
+          "unidad": "$",
+          "valor": 18500000
+        },
+        {
+          "id": "M1",
+          "label": "Importe vigente con convenios y modificaciones (sin IVA)",
+          "unidad": "$",
+          "valor": 28900000
+        },
+        {
+          "id": "P0",
+          "label": "Plazo original de ejecución",
+          "unidad": "días",
+          "valor": 240
+        },
+        {
+          "id": "P1",
+          "label": "Plazo vigente de ejecución",
+          "unidad": "días",
+          "valor": 300
+        },
+        {
+          "id": "S",
+          "label": "Importe total subcontratado (todos los subcontratos)",
+          "unidad": "$",
+          "valor": 9800000
+        },
+        {
+          "id": "DD",
+          "label": "Días naturales desde que se determinó la modificación sin convenio firmado (0 si ya está firmado)",
+          "unidad": "días",
+          "valor": 30
+        },
+        {
+          "id": "DR",
+          "label": "Días naturales transcurridos desde el acta de recepción física (0 si no se ha recibido)",
+          "unidad": "días",
+          "valor": 6
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Variación del importe contra el original",
+          "formula": "Math.abs(M1-M0)/M0*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Variación del plazo contra el original",
+          "formula": "Math.abs(P1-P0)/P0*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Mayor variación (importe o plazo)",
+          "formula": "Math.max(Math.abs(M1-M0)/M0,Math.abs(P1-P0)/P0)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "¿Supera el 50 %? (1 = sí, puedes solicitar ajuste de indirectos y financiamiento; 0 = no)",
+          "formula": "Math.max(Math.abs(M1-M0)/M0,Math.abs(P1-P0)/P0)>0.5?1:0",
+          "unidad": "",
+          "decimales": 0
+        },
+        {
+          "label": "Días que te quedan para solicitar el ajuste (15 naturales desde la recepción física)",
+          "formula": "Math.max(Math.abs(M1-M0)/M0,Math.abs(P1-P0)/P0)>0.5?(DR>0?15-DR:15):0",
+          "unidad": "días",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            6,
+            1
+          ]
+        },
+        {
+          "label": "Días que quedan para firmar el convenio (45 naturales desde que se determinó)",
+          "formula": "DD>0?45-DD:45",
+          "unidad": "días",
+          "decimales": 0,
+          "semaforo": [
+            11,
+            1
+          ]
+        },
+        {
+          "label": "Subcontratado como % del importe vigente del contrato",
+          "formula": "S/M1*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Margen antes del tope de 49 % (puntos porcentuales)",
+          "formula": "49-S/M1*100",
+          "unidad": "pts",
+          "decimales": 1,
+          "semaforo": [
+            5,
+            0
+          ]
+        },
+        {
+          "label": "Importe que aún puedes subcontratar sin pasar el 49 %",
+          "formula": "0.49*M1-S",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Toma el importe y el plazo del contrato original y los vigentes (suma todos los convenios y modificaciones), sin IVA; captura también el total de tus subcontratos firmados.",
+        "Si la mayor variación pasa de 50 %, anota HOY en bitácora que el contrato rebasó ese límite y prepara el análisis de indirectos y financiamiento: tienes solo 15 días naturales desde el acta de recepción física para solicitarlo; después se pierde el derecho.",
+        "Si hay una modificación ya determinada (orden, nota de bitácora, oficio) sin convenio, captura los días transcurridos: el art. 59 da máximo 45 días naturales para firmarlo; en amarillo pide por escrito la fecha de firma.",
+        "Antes de firmar un subcontrato nuevo revisa el margen: en rojo pasas el 49 % del importe del contrato; además cada parte subcontratada necesita autorización previa del titular del área ejecutora (art. 47) salvo que las bases ya la permitan, y no puedes subcontratar a otro licitante del mismo procedimiento.",
+        "Imprime el resultado y anéxalo a la solicitud o al expediente del convenio. Confirma con tu jurídico si el 49 % se mide sobre el importe original o el vigente; aquí se calcula sobre el vigente. Contratos firmados antes del 17-04-2025 siguen con la ley anterior; en obra privada aplica lo que diga tu contrato."
+      ],
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 59 (reformado DOF 16-04-2025) – Modificaciones por razones fundadas y explícitas; convenio en máximo 45 días naturales; extraordinarios con precio conciliado antes de pagarse",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59/"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Bis (adicionado DOF 16-04-2025) – Variación superior al 50 % del importe o plazo: ajuste de indirectos y financiamiento, solicitarlo dentro de 15 días naturales de la recepción física",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-bis/"
+        },
+        {
+          "titulo": "LOPSRM art. 47 (reformado DOF 16-04-2025) – Subcontratación solo con autorización previa del titular del área ejecutora; el contratista sigue siendo el único responsable",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-47/"
+        },
+        {
+          "titulo": "Cuatrecasas (abr 2025) – Aspectos relevantes de la reforma LOPSRM: bitácora electrónica obligatoria, subcontratación máxima 49 %, factor de actualización a 60 días, regla del 50 %",
+          "url": "https://cuatrecasas.com/resources/aspectos-relevantes-de-las-reformas-a-la-ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas-680bc39336c6c059057402.pdf"
+        },
+        {
+          "titulo": "Von Wobeser y Sierra – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica por programa de la Secretaría Anticorrupción y Buen Gobierno; contratos previos al 17-04-2025 siguen con la ley anterior",
+          "url": "https://www.vonwobeser.com/index.php/publicacion?p_id=1962"
+        }
+      ]
+    },
+    {
+      "id": "calc-actualizacion-inicio",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Inicio tardío: ¿aplica factor de actualización (precio unitario, 60 días) o actualización única (precio alzado, 120 días)?",
+      "resumen": "Cuando la obra arranca meses después de presentar la propuesta, los precios ya no alcanzan. La reforma 2025 de la LOPSRM permite un factor de actualización en precios unitarios si el inicio es superior a 60 días contados desde el día siguiente al fin del mes de las proposiciones, y una sola actualización en precio alzado si se inicia después de 120 días naturales de las proposiciones (pedirla dentro de 15 días del inicio). La calculadora cuenta los días y estima el importe con índices INEGI.",
+      "agregada": "2026-11-01",
+      "entradas": [
+        {
+          "id": "D60",
+          "label": "Precio unitario: días naturales del día siguiente al fin del mes de presentación de proposiciones (o de aceptación de la cotización) al inicio real",
+          "unidad": "días",
+          "valor": 97
+        },
+        {
+          "id": "D120",
+          "label": "Precio alzado: días naturales de la presentación de proposiciones al inicio real (0 si el contrato es a precio unitario)",
+          "unidad": "días",
+          "valor": 0
+        },
+        {
+          "id": "DI",
+          "label": "Días naturales transcurridos desde el inicio de los trabajos",
+          "unidad": "días",
+          "valor": 8
+        },
+        {
+          "id": "I0",
+          "label": "Índice INEGI del mes de las proposiciones (INPP de construcción, del tipo de obra)",
+          "unidad": "índice",
+          "valor": 100
+        },
+        {
+          "id": "I1",
+          "label": "Índice INEGI del mes de inicio de los trabajos",
+          "unidad": "índice",
+          "valor": 104.2
+        },
+        {
+          "id": "MP",
+          "label": "Importe del contrato pendiente de ejecutar al inicio (sin IVA)",
+          "unidad": "$",
+          "valor": 12600000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Precio unitario: días por encima de 60 (si es mayor que 0 puedes solicitar factor de actualización)",
+          "formula": "Math.max(0,D60-60)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Precio alzado: días por encima de 120 (si es mayor que 0 aplica una sola actualización)",
+          "formula": "Math.max(0,D120-120)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Precio alzado: días que quedan para solicitar la actualización (15 naturales desde el inicio)",
+          "formula": "D120>120?15-DI:0",
+          "unidad": "días",
+          "decimales": 0,
+          "semaforo": [
+            6,
+            1
+          ]
+        },
+        {
+          "label": "Factor estimado con índices INEGI (I1 / I0)",
+          "formula": "I1/I0",
+          "unidad": "",
+          "decimales": 4,
+          "destacar": true
+        },
+        {
+          "label": "Incremento estimado del importe pendiente",
+          "formula": "(I1/I0-1)*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Importe adicional estimado a solicitar",
+          "formula": "(D60>60||D120>120)?MP*(I1/I0-1):0",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Busca en tu contrato la fecha de presentación y apertura de proposiciones (o la de notificación de aceptación de la cotización) y la fecha real de inicio asentada en la nota de apertura de bitácora; cuenta los días naturales.",
+        "Precio unitario: cuenta desde el día siguiente al último día del mes de las proposiciones. Precio alzado: cuenta desde la presentación de proposiciones. Captura solo el que aplica y deja el otro en 0.",
+        "Descarga del INEGI el índice nacional de precios productor de construcción del tipo de obra para el mes de proposiciones y el de inicio; los índices 100 y 104.2 del ejemplo son ilustrativos, cámbialos por los publicados.",
+        "Si sale días por encima del límite, solicita por escrito el factor o la actualización y déjalo en bitácora; en precio alzado tienes solo 15 días naturales desde el inicio, después se pierde.",
+        "El factor real lo determina la dependencia con los lineamientos de la Secretaría; usa este cálculo como estimación para tu solicitud y tu flujo, no como cifra final. Contratos anteriores al 17-04-2025 siguen la ley anterior."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Cuatrecasas (abr 2025) – Aspectos relevantes de la reforma LOPSRM: bitácora electrónica obligatoria, subcontratación máxima 49 %, factor de actualización a 60 días, regla del 50 %",
+          "url": "https://cuatrecasas.com/resources/aspectos-relevantes-de-las-reformas-a-la-ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas-680bc39336c6c059057402.pdf"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Ter (adicionado DOF 16-04-2025) – Precio alzado: una sola actualización si se inicia después de 120 días de las proposiciones; pedirla dentro de 15 días del inicio, con índices INEGI",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-ter/"
+        },
+        {
+          "titulo": "Von Wobeser y Sierra – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica por programa de la Secretaría Anticorrupción y Buen Gobierno; contratos previos al 17-04-2025 siguen con la ley anterior",
+          "url": "https://www.vonwobeser.com/index.php/publicacion?p_id=1962"
+        },
+        {
+          "titulo": "Justia México – Texto vigente LOPSRM, última reforma publicada DOF 14-11-2025",
+          "url": "https://mexico.justia.com/federales/leyes/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-bitacora-electronica",
+      "tipo": "formato",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Bitácora electrónica obligatoria en obra pública (LOPSRM reformada 2025): apertura, notas clave y cierre",
+      "resumen": "Desde la reforma del 16-04-2025 la bitácora de cada contrato de obra o servicio es electrónica y obligatoria, en el programa de la Secretaría Anticorrupción y Buen Gobierno; solo en casos excepcionales la Secretaría autoriza medios convencionales. Este formato asegura que la apertura y las notas que valen dinero (subcontratos, modificaciones, convenios de 45 días, inicio tardío, ajuste del 50 %, estimaciones) queden asentadas a tiempo.",
+      "agregada": "2026-11-01",
+      "campos": [
+        "Dependencia o entidad / número de contrato / modalidad (precio unitario, precio alzado, mixto)",
+        "Fecha de firma del contrato (¿antes o después del 17-04-2025?)",
+        "Fecha de presentación de proposiciones o aceptación de cotización",
+        "Fecha de apertura de bitácora y fecha real de inicio de trabajos",
+        "Residente de obra (dependencia): nombre y e.firma vigente hasta",
+        "Superintendente (contratista): nombre y e.firma vigente hasta",
+        "Supervisión externa (si hay): nombre y e.firma vigente hasta",
+        "Importe y plazo original / vigente",
+        "Subcontratos autorizados (empresa, partida, importe, oficio de autorización)",
+        "Número y fecha de la última nota revisada",
+        "Pendientes con fecha límite (convenio, ajuste, estimación, extraordinario)",
+        "Revisó / fecha"
+      ],
+      "items": [
+        "El contrato se firmó después del 17-04-2025 (si fue antes, se rige por la ley anterior y su bitácora)",
+        "La bitácora es electrónica en el programa de la Secretaría; si es convencional, existe la autorización excepcional por escrito",
+        "Residente, superintendente y supervisión tienen e.firma vigente que no vence antes del finiquito",
+        "La nota de apertura asienta fecha de inicio, firmantes autorizados y datos del contrato",
+        "Si el inicio fue tardío (más de 60 días en precio unitario o 120 en precio alzado), hay nota y solicitud de actualización en plazo",
+        "Cada subcontrato tiene nota con la autorización previa del titular del área (o la referencia a las bases que lo permiten)",
+        "El total subcontratado no rebasa el 49 % del importe del contrato",
+        "Cada modificación tiene nota con razones fundadas y explícitas el mismo día en que se determina",
+        "Los convenios se firman dentro de los 45 días naturales desde que se determinó la modificación",
+        "Los conceptos no previstos tienen precio conciliado y autorizado antes de estimarse",
+        "Las fechas de entrega, autorización y pago de cada estimación están asentadas (6, 15 y 20 días)",
+        "Si importe o plazo variaron más de 50 %, la solicitud de ajuste de indirectos y financiamiento se presentó dentro de los 15 días de la recepción física",
+        "Las notas pendientes de firma o respuesta no se quedan abiertas de una semana a otra",
+        "Al cierre: nota de terminación, acta de recepción física y cierre de bitácora con el finiquito"
+      ],
+      "como_usar": [
+        "Al arrancar un contrato de obra pública llena los datos generales y verifica la vigencia de la e.firma de cada firmante; si alguna vence antes del finiquito, renuévala desde ahora en el SAT.",
+        "Cada lunes, antes de la junta, revisa la lista con la bitácora electrónica abierta en la tablet y marca Cumple / No / N/A; anota en pendientes cada fecha límite que corra.",
+        "Usa la calculadora Convenios modificatorios para los 45 días, el 49 % y el 50 %, Inicio tardío para los 60/120 días, y Plazos de estimación para los 6/15/20 días; la fecha que dé cada una se asienta en bitácora el mismo día.",
+        "Exporta el CSV semanal con el número de la última nota en el nombre y guárdalo en el expediente del contrato: es tu soporte para estimaciones, convenios y reclamaciones.",
+        "Mide cada mes: notas con firma pendiente más de 7 días, solicitudes presentadas fuera de plazo y convenios firmados después de los 45 días; la meta es cero."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Cuatrecasas (abr 2025) – Aspectos relevantes de la reforma LOPSRM: bitácora electrónica obligatoria, subcontratación máxima 49 %, factor de actualización a 60 días, regla del 50 %",
+          "url": "https://cuatrecasas.com/resources/aspectos-relevantes-de-las-reformas-a-la-ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas-680bc39336c6c059057402.pdf"
+        },
+        {
+          "titulo": "Von Wobeser y Sierra – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica por programa de la Secretaría Anticorrupción y Buen Gobierno; contratos previos al 17-04-2025 siguen con la ley anterior",
+          "url": "https://www.vonwobeser.com/index.php/publicacion?p_id=1962"
+        },
+        {
+          "titulo": "Expansión Obras (may 2025) – La Ley de Obras se transforma: bitácora electrónica obligatoria, plataforma única de contratación (art. 74) y responsabilidad de supervisoras",
+          "url": "https://obras.expansion.mx/construccion/2025/05/23/nueva-ley-de-obras-incrementa-opacidad-proyectos-militares"
+        },
+        {
+          "titulo": "LOPSRM art. 47 (reformado DOF 16-04-2025) – Subcontratación solo con autorización previa del titular del área ejecutora; el contratista sigue siendo el único responsable",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-47/"
+        },
+        {
+          "titulo": "LOPSRM art. 59 (reformado DOF 16-04-2025) – Modificaciones por razones fundadas y explícitas; convenio en máximo 45 días naturales; extraordinarios con precio conciliado antes de pagarse",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59/"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Bis (adicionado DOF 16-04-2025) – Variación superior al 50 % del importe o plazo: ajuste de indirectos y financiamiento, solicitarlo dentro de 15 días naturales de la recepción física",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-bis/"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Ter (adicionado DOF 16-04-2025) – Precio alzado: una sola actualización si se inicia después de 120 días de las proposiciones; pedirla dentro de 15 días del inicio, con índices INEGI",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-ter/"
+        },
+        {
+          "titulo": "Justia México – Texto vigente LOPSRM, última reforma publicada DOF 14-11-2025",
+          "url": "https://mexico.justia.com/federales/leyes/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/"
         }
       ]
     },
@@ -5003,7 +5350,8 @@
         "El precio se presentó dentro de los 30 días naturales siguientes a la terminación del trabajo",
         "Se registró el efecto en programa y, si cambia la fecha de término, se solicitó convenio",
         "Hay convenio modificatorio u orden de cambio firmada antes de estimar el concepto",
-        "El generador del extraordinario se cobra por separado del concepto original (sin duplicar cantidades)"
+        "El generador del extraordinario se cobra por separado del concepto original (sin duplicar cantidades)",
+        "Obra pública (LOPSRM reformada 2025): el precio del concepto no previsto quedó conciliado y autorizado antes de su pago, y el convenio se firma dentro de 45 días naturales desde que se determinó la modificación (art. 59)"
       ],
       "como_usar": [
         "En cuanto alguien pide un trabajo que no está en el catálogo, abre un folio en el celular, toma fotos y pide la nota de bitácora; sin orden por escrito no se ejecuta.",
@@ -5024,6 +5372,10 @@
         {
           "titulo": "Reglamento LOPSRM art. 220 – Cargos adicionales: impuestos y derechos por la ejecución, se agregan después de la utilidad",
           "url": "https://mley.mx/Reg_LOPSRM/articulo/220/index.html.md"
+        },
+        {
+          "titulo": "LOPSRM art. 59 (reformado DOF 16-04-2025) – Modificaciones por razones fundadas y explícitas; convenio en máximo 45 días naturales; extraordinarios con precio conciliado antes de pagarse",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59/"
         }
       ]
     },

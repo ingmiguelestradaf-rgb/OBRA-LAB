@@ -1,6 +1,46 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-01",
+      "titulo": "Normatividad y documentación: convenios y subcontratos con la LOPSRM reformada, inicio tardío y bitácora electrónica obligatoria",
+      "resumen": "La reforma a la LOPSRM (DOF 16-04-2025; texto vigente con última reforma DOF 14-11-2025) cambió fechas y límites que valen dinero. Convenios modificatorios y subcontratación calcula la variación del contrato y avisa si pasa el 50 % (art. 59 Bis: ajuste de indirectos y financiamiento, solo 15 días naturales desde la recepción física), los 45 días para firmar el convenio (art. 59) y el tope de 49 % subcontratado: con $18.5 M original y $28.9 M vigente la variación es 56.2 %, te quedan 9 días para solicitar el ajuste y el subcontrato de $9.8 M es 33.9 % (margen de 15.1 puntos). Inicio tardío cuenta los días para el factor de actualización en precio unitario (más de 60) o la actualización única en precio alzado (más de 120, pedir dentro de 15 días del inicio) y estima el importe con índices INEGI: con 97 días y un índice que sube 4.2 %, $12.6 M pendientes darían unos $529,200 a solicitar (índices de ejemplo). Bitácora electrónica obligatoria es la revisión semanal de apertura, e.firma de firmantes y notas clave. Mejoras: Concepto extraordinario agrega la regla de precio conciliado antes del pago y los 45 días; Visita del DRO y Plazos de estimación remiten a la bitácora electrónica. No se agregó ComprasMX como recurso porque no se pudo verificar su dirección oficial desde el sitio del gobierno.",
+      "herramientas": [
+        "calc-convenio-modificatorio",
+        "calc-actualizacion-inicio",
+        "fmt-bitacora-electronica",
+        "fmt-concepto-extraordinario",
+        "fmt-bitacora-dro",
+        "calc-plazos-estimacion"
+      ],
+      "como_aplicarlo": "Esta semana: 1) En cada contrato de obra pública captura importe y plazo original y vigente en Convenios modificatorios; si pasas el 50 % o hay modificación sin convenio, asiéntalo hoy en bitácora con la fecha límite. 2) Revisa la fecha de proposiciones contra la de inicio en Inicio tardío y, si aplica, presenta la solicitud. 3) El lunes pasa la lista de Bitácora electrónica obligatoria y renueva cualquier e.firma que venza antes del finiquito.",
+      "fuentes": [
+        {
+          "titulo": "Cuatrecasas (abr 2025) – Aspectos relevantes de la reforma LOPSRM: bitácora electrónica obligatoria, subcontratación máxima 49 %, factor de actualización a 60 días, regla del 50 %",
+          "url": "https://cuatrecasas.com/resources/aspectos-relevantes-de-las-reformas-a-la-ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas-680bc39336c6c059057402.pdf"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Bis (adicionado DOF 16-04-2025) – Variación superior al 50 % del importe o plazo: ajuste de indirectos y financiamiento, solicitarlo dentro de 15 días naturales de la recepción física",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-bis/"
+        },
+        {
+          "titulo": "LOPSRM art. 59 Ter (adicionado DOF 16-04-2025) – Precio alzado: una sola actualización si se inicia después de 120 días de las proposiciones; pedirla dentro de 15 días del inicio, con índices INEGI",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59-ter/"
+        },
+        {
+          "titulo": "LOPSRM art. 47 (reformado DOF 16-04-2025) – Subcontratación solo con autorización previa del titular del área ejecutora; el contratista sigue siendo el único responsable",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-47/"
+        },
+        {
+          "titulo": "Von Wobeser y Sierra – Reforma a la LOPSRM (DOF 16-04-2025): bitácora electrónica por programa de la Secretaría Anticorrupción y Buen Gobierno; contratos previos al 17-04-2025 siguen con la ley anterior",
+          "url": "https://www.vonwobeser.com/index.php/publicacion?p_id=1962"
+        },
+        {
+          "titulo": "Justia México – Texto vigente LOPSRM, última reforma publicada DOF 14-11-2025",
+          "url": "https://mexico.justia.com/federales/leyes/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-10-31",
       "titulo": "Lean y mejora continua: Pareto de no cumplimiento, Reporte A3 e inventario justo a tiempo",
       "resumen": "Tres herramientas para cerrar el ciclo del Last Planner. Pareto de causas de no cumplimiento suma las tareas no cumplidas del mes en 7 causas fijas y dice cuál atacar: con 96 tareas comprometidas y 30 no cumplidas (PPC 69 %), la causa principal es predecesora/frente con 30 % y eliminarla sube el PPC a 78 %; el 77 % de las causas del ejemplo es controlable por la constructora (en 50 obras estudiadas por Lagos y Alarcón, IGLC 2021, fueron cerca de 2 de cada 3). Reporte A3 es la hoja única del LCI (plantilla gratuita) para resolver esa causa con dato, causa raíz, contramedidas, prueba en un frente y verificación. Inventario en obra y entregas justo a tiempo calcula días de material, punto de pedido y dinero detenido: 6,000 block con consumo de 800/día son 7.5 días de material; con entrega en 2 días, 1 día de colchón y entregas cada 2 días el máximo es 2,400 y el excedente de 3,600 piezas detiene $57,600 (precio de ejemplo) y cuesta unos $2,592 al mes. Mejoras: Ciclo PDCA, PPC semanal y Last Planner System ahora remiten al Pareto y al A3.",
