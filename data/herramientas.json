@@ -773,7 +773,8 @@
         "Si SPI(t) baja de 0.95 o la duración pronosticada rebasa la contractual, revisa la ruta crítica y llévalo a la junta con contratistas con la fecha pronosticada, no solo el %.",
         "Un TSPI mayor a 1.10 significa que tendrías que trabajar más de 10 % más rápido que lo planeado el resto de la obra: es momento de reprogramar o reforzar cuadrillas, y de dejarlo asentado en bitácora.",
         "Guarda el pronóstico semanal: si la duración pronosticada sube 3 semanas seguidas, la tendencia es real y no un mal corte.",
-        "Si el TSPI te pide acelerar, no decidas 'meterle horas extra' de memoria: pásalo por la calculadora Recuperar atraso para comparar horas extra contra cuadrilla adicional con la productividad real y el pago doble o triple de la reforma de jornada."
+        "Si el TSPI te pide acelerar, no decidas 'meterle horas extra' de memoria: pásalo por la calculadora Recuperar atraso para comparar horas extra contra cuadrilla adicional con la productividad real y el pago doble o triple de la reforma de jornada.",
+        "Si la fecha pronosticada queda a menos de 2 semanas del plazo, pasa el tramo de ruta crítica que falta a 'Probabilidad de terminar a tiempo (PERT)' para saber qué tan probable es cumplir y cuánto colchón falta."
       ],
       "fuentes": [
         {
@@ -2794,6 +2795,36 @@
       ]
     },
     {
+      "id": "dig-projectlibre",
+      "tipo": "recurso",
+      "categoria": "Control de avance",
+      "titulo": "ProjectLibre: programa de obra con Gantt, ruta crítica y valor ganado, gratis y compatible con MS Project",
+      "resumen": "Programa de escritorio de código abierto para hacer y actualizar el programa de obra: Gantt, diagrama de red, EDT (WBS), recursos con histograma y valor ganado. Abre archivos de Microsoft Project, así que sirve para revisar el programa del cliente o del subcontratista sin pagar licencia. Útil ahora que Microsoft retiró Project Online el 30 de septiembre de 2026.",
+      "agregada": "2026-11-02",
+      "beneficio": "Tener el programa de obra vivo (línea base contra real) en la PC de obra sin costo de licencia, para correr el TIA de una prórroga, revisar la ruta crítica antes de la junta de los lunes y alimentar las calculadoras de valor ganado y PERT. Indicador: semanas con programa actualizado a tiempo y días entre corte de avance y programa actualizado.",
+      "plataforma": "Windows, macOS y Linux (escritorio, requiere Java incluido en el instalador); interfaz en español. ProjectLibre Cloud en navegador.",
+      "costo": "Escritorio: gratis, licencia de código abierto CPAL 1.0; versión 1.9.8 publicada en SourceForge (ficha actualizada 13-jul-2026, consultada 2-nov-2026). ProjectLibre Cloud (suscripción para equipos): precio NO verificado, el sitio oficial no se pudo consultar en esta revisión. Contexto: Microsoft Project Online se retiró el 30-sep-2026 según publicaciones de socios de Microsoft; no se pudo leer la página oficial de Microsoft en esta revisión.",
+      "url": "https://sourceforge.net/projects/projectlibre/",
+      "como_usar": [
+        "Descarga ProjectLibre desde SourceForge o projectlibre.com (no de sitios de terceros) e instálalo en la PC de la oficina de obra.",
+        "Abre el programa del cliente (.mpp o .xml de MS Project) o captura el tuyo: partidas por frente y nivel, duraciones en días y ligas fin-inicio; revisa que ninguna actividad quede sin sucesora.",
+        "Guarda la línea base antes de arrancar y desde ahí actualiza cada semana el % y las fechas reales con los datos del 'Corte semanal de avance físico'.",
+        "Usa la vista Gantt con ruta crítica para la junta del lunes; pasa el tramo crítico restante a la calculadora 'Probabilidad de terminar a tiempo (PERT)'.",
+        "Cuando haya un evento ajeno, guarda una copia del archivo, inserta el fragnet y llena el formato 'Análisis de impacto en el programa (TIA)'.",
+        "Prueba PDCA de 4 semanas en un frente: si el programa queda actualizado cada lunes antes de la junta, se adopta para toda la obra; si no, regresa a Excel y anota la causa."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ProjectLibre en SourceForge (versión 1.9.8, ficha actualizada 13-jul-2026)",
+          "url": "https://sourceforge.net/projects/projectlibre/"
+        },
+        {
+          "titulo": "Velosio: Microsoft Project Online retirement, what to do before September 30, 2026",
+          "url": "https://www.velosio.com/blog/microsoft-project-online-retirement-what-to-do-before-september-30-2026/"
+        }
+      ]
+    },
+    {
       "id": "calc-claro-caida",
       "tipo": "calculadora",
       "categoria": "Seguridad",
@@ -4204,7 +4235,8 @@
         "Revisa el resultado contra el tope: la ley no permite penas superiores al monto de la garantía de cumplimiento, en su conjunto. Si la dependencia te está calculando sobre el importe total del contrato y no sobre lo no ejecutado, ahí tienes el argumento por escrito.",
         "Compara la pena por semana contra lo que costaría recuperar el atraso (calculadora Recuperar atraso): si la pena semanal es mayor que el sobrecosto de acelerar, acelerar se paga solo y así lo presentas a la dirección.",
         "Documenta la causa de cada día de atraso en bitácora y en el reporte diario: lluvia, falta de frente, cambio de proyecto, RFI sin respuesta o falta de pago. La pena procede solo por causas imputables al contratista y no aplica en caso fortuito o fuerza mayor acreditados; si no está en bitácora, no se acredita.",
-        "Si firmas convenio que modifica el programa, vuelve a correr el cálculo con el programa nuevo: el atraso se mide contra el programa convenido vigente, no contra el original."
+        "Si firmas convenio que modifica el programa, vuelve a correr el cálculo con el programa nuevo: el atraso se mide contra el programa convenido vigente, no contra el original.",
+        "Si el atraso viene de una causa ajena (planos, cambios, suspensión, permisos), documenta los días con el formato 'Análisis de impacto en el programa (TIA)' y solicita la prórroga antes de que corran las penas."
       ],
       "fuentes": [
         {
@@ -4289,6 +4321,252 @@
         {
           "titulo": "Reglamento de la LOPSRM art. 88 – El grado de atraso se mide con el avance físico contra el programa de ejecución convenido",
           "url": "https://mley.mx/Reg_LOPSRM/articulo/88/"
+        }
+      ]
+    },
+    {
+      "id": "calc-pert-probabilidad",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Probabilidad de terminar a tiempo (PERT de tres duraciones) y colchón de programa",
+      "resumen": "Para el tramo de ruta crítica que falta, cada responsable da tres duraciones (optimista, más probable, pesimista). La calculadora da la duración esperada, la incertidumbre, la probabilidad real de cumplir la fecha y cuántos días de colchón necesitas para 90 % de confianza. Con el ejemplo, el programa 'más probable' dice 67 días contra 70 disponibles (parece holgado), pero la duración esperada es 71.2 días y la probabilidad de cumplir es solo 40 %: hacen falta 7 días más de colchón o recuperar en la actividad más incierta.",
+      "agregada": "2026-11-02",
+      "entradas": [
+        {
+          "id": "o1",
+          "label": "Actividad 1 (Estructura nivel 3): optimista",
+          "unidad": "días",
+          "valor": 18
+        },
+        {
+          "id": "m1",
+          "label": "Actividad 1: más probable",
+          "unidad": "días",
+          "valor": 22
+        },
+        {
+          "id": "p1",
+          "label": "Actividad 1: pesimista",
+          "unidad": "días",
+          "valor": 32
+        },
+        {
+          "id": "o2",
+          "label": "Actividad 2 (Muros e instalaciones): optimista",
+          "unidad": "días",
+          "valor": 12
+        },
+        {
+          "id": "m2",
+          "label": "Actividad 2: más probable",
+          "unidad": "días",
+          "valor": 15
+        },
+        {
+          "id": "p2",
+          "label": "Actividad 2: pesimista",
+          "unidad": "días",
+          "valor": 24
+        },
+        {
+          "id": "o3",
+          "label": "Actividad 3 (Acabados): optimista",
+          "unidad": "días",
+          "valor": 20
+        },
+        {
+          "id": "m3",
+          "label": "Actividad 3: más probable",
+          "unidad": "días",
+          "valor": 25
+        },
+        {
+          "id": "p3",
+          "label": "Actividad 3: pesimista",
+          "unidad": "días",
+          "valor": 40
+        },
+        {
+          "id": "o4",
+          "label": "Actividad 4 (Limpieza y entrega): optimista",
+          "unidad": "días",
+          "valor": 4
+        },
+        {
+          "id": "m4",
+          "label": "Actividad 4: más probable",
+          "unidad": "días",
+          "valor": 5
+        },
+        {
+          "id": "p4",
+          "label": "Actividad 4: pesimista",
+          "unidad": "días",
+          "valor": 9
+        },
+        {
+          "id": "plazo",
+          "label": "Días disponibles hasta la fecha de término contractual",
+          "unidad": "días",
+          "valor": 70
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Suma de duraciones 'más probables' (lo que dice el programa normal)",
+          "formula": "m1+m2+m3+m4",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Duración esperada del tramo crítico (O+4M+P)/6",
+          "formula": "((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6)",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Desviación estándar del tramo (raíz de la suma de varianzas)",
+          "formula": "Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Probabilidad de terminar dentro del plazo",
+          "formula": "(0.5*(1+Math.sign(((plazo-((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6))/Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001)))*Math.sqrt(1-Math.exp(-2*((plazo-((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6))/Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001))*((plazo-((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6))/Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001))/Math.PI))))*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            50
+          ]
+        },
+        {
+          "label": "Días necesarios para 90 % de confianza",
+          "formula": "((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6)+1.2816*Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Colchón que falta (+) o sobra (−) contra el plazo para 90 %",
+          "formula": "((o1+4*m1+p1)/6+(o2+4*m2+p2)/6+(o3+4*m3+p3)/6+(o4+4*m4+p4)/6)+1.2816*Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001)-plazo",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Actividad 1: % de la incertidumbre total",
+          "formula": "Math.pow((p1-o1)/6,2)/Math.pow(Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001),2)*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Actividad 2: % de la incertidumbre total",
+          "formula": "Math.pow((p2-o2)/6,2)/Math.pow(Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001),2)*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Actividad 3: % de la incertidumbre total",
+          "formula": "Math.pow((p3-o3)/6,2)/Math.pow(Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001),2)*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Actividad 4: % de la incertidumbre total",
+          "formula": "Math.pow((p4-o4)/6,2)/Math.pow(Math.max(Math.sqrt(Math.pow((p1-o1)/6,2)+Math.pow((p2-o2)/6,2)+Math.pow((p3-o3)/6,2)+Math.pow((p4-o4)/6,2)),0.0001),2)*100",
+          "unidad": "%",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Del programa actualizado toma las actividades (o paquetes) de la ruta crítica que faltan hasta la entrega; agrúpalas en máximo 4. Si sobran casillas, captura 0 en las tres duraciones.",
+        "En la junta semanal pide a cada responsable (residente, subcontratista) sus tres duraciones en días: optimista (todo sale bien), más probable y pesimista (lluvia de temporada en Tijuana, falta de material, retrabajo). No aceptes pesimista igual a la más probable.",
+        "Captura los días que faltan a la fecha contractual de término (o la fecha comprometida al cliente).",
+        "Si la probabilidad sale en rojo (menos de 50 %) o el colchón para 90 % es positivo, ataca primero la actividad con mayor % de incertidumbre: liberar restricciones, segundo turno o cuadrilla extra (evalúa costo con 'Recuperar atraso').",
+        "Vuelve a correrla cada lunes con las duraciones actualizadas y anota la probabilidad en el reporte semanal; indicador PDCA: probabilidad de cumplir semana contra semana durante 4 semanas.",
+        "Limitación: supone actividades independientes y una sola ruta crítica (fórmula PERT clásica, probabilidad con aproximación normal, error menor a 0.5 puntos). Si hay una ruta casi crítica en paralelo, el riesgo real es mayor: córrela también para esa ruta."
+      ],
+      "fuentes": [
+        {
+          "titulo": "MetricGate: Project scheduling with CPM and PERT (27-may-2026)",
+          "url": "https://metricgate.com/docs/project-scheduling-cpm-pert/"
+        },
+        {
+          "titulo": "Rework: Three-Point Estimation (PERT): formula and examples",
+          "url": "https://resources.rework.com/libraries/project-management/three-point-estimation"
+        }
+      ]
+    },
+    {
+      "id": "fmt-analisis-impacto",
+      "tipo": "formato",
+      "categoria": "Control de avance",
+      "titulo": "Análisis de impacto en el programa (TIA) para solicitar prórroga por causa no imputable",
+      "resumen": "Formato para documentar, el mismo mes en que ocurre, cuántos días de atraso causa un evento ajeno al contratista (planos tardíos, cambio de proyecto, suspensión, permiso, suministro del cliente) con el método de análisis prospectivo de impacto en tiempo de AACE (RP 52R-06): fragnet insertado en la última actualización aceptada del programa, recálculo de ruta crítica y diferencia en la fecha de término. Es el soporte técnico de la solicitud de prórroga o de convenio de plazo y protege contra penas por atraso.",
+      "agregada": "2026-11-02",
+      "campos": [
+        "Obra",
+        "Contrato / orden de trabajo",
+        "Cliente / dependencia y residente o supervisor",
+        "Folio del análisis (TIA-001, 002…)",
+        "Evento que causa el impacto (descripción breve)",
+        "Origen del evento (cliente, proyectista, autoridad, fuerza mayor, contratista)",
+        "Fecha en que se conoció el evento y nota de bitácora donde se asentó",
+        "Programa base utilizado: nombre del archivo y fecha de la última actualización aceptada ANTES del evento",
+        "Fecha de término en el programa sin impacto",
+        "Holgura total de las actividades afectadas antes del impacto",
+        "Fragnet: actividades nuevas o modificadas (clave, descripción, duración, predecesora y sucesora lógicas)",
+        "Fecha de término en el programa con el fragnet insertado",
+        "Días de impacto en la fecha de término (con impacto − sin impacto), en días naturales o hábiles según el contrato",
+        "Ruta crítica antes y después (actividades)",
+        "Atrasos concurrentes del contratista en el mismo periodo (si hay) y su efecto",
+        "Medidas de mitigación propuestas y su costo",
+        "Días de prórroga solicitados y nueva fecha de término propuesta",
+        "Documentos anexos (notas de bitácora, oficios, correos, fotos, minutas, archivos del programa)",
+        "Elaboró / programador o residente",
+        "Revisó / superintendente",
+        "Recibió / supervisión o cliente (firma y fecha)"
+      ],
+      "items": [
+        "Se usó la última actualización del programa aceptada por el cliente antes del evento, no una posterior que ya trae el atraso",
+        "El programa sin impacto tiene lógica completa: sin fechas impuestas ni actividades colgadas (toda actividad tiene predecesora y sucesora)",
+        "El fragnet es el mínimo que describe el evento y se liga por lógica real, no por fechas",
+        "El evento quedó asentado en bitácora en su fecha, con referencia al oficio o correo",
+        "Se verificó que las actividades afectadas estaban en ruta crítica o que el evento consumió toda su holgura",
+        "Si la fecha de término no se movió, no se solicita prórroga (el evento cabía en la holgura) y así se anota",
+        "Se revisaron y declararon atrasos propios concurrentes en el mismo periodo",
+        "Las unidades (días naturales u hábiles) coinciden con las del contrato",
+        "Se guardaron los dos archivos del programa (sin y con impacto) con nombre y fecha",
+        "Se propusieron medidas de mitigación antes de pedir días",
+        "La solicitud se entregó dentro del plazo que marca el contrato para avisar o reclamar",
+        "Se recabó firma de recibido de la supervisión o del cliente"
+      ],
+      "como_usar": [
+        "En cuanto aparezca el evento (plano que no llega, cambio, suspensión), asiéntalo en bitácora y abre un folio TIA ese mismo día.",
+        "Copia el archivo de la última actualización aceptada del programa (antes del evento) y anota su fecha de término y la holgura de las actividades afectadas.",
+        "Arma el fragnet: las actividades nuevas o la espera (por ejemplo 'Espera de plano estructural revisado, 12 días') ligadas por lógica a las actividades que detiene. Insértalo en la copia y recalcula.",
+        "Anota la nueva fecha de término y la diferencia en días. Si no cambia, el evento cupo en la holgura: archívalo sin pedir prórroga.",
+        "Completa la lista de verificación, anexa evidencia y entrega la solicitud dentro del plazo contractual; usa 'Penas convencionales y retenciones por atraso' para mostrar al cliente cuánto dinero está en juego.",
+        "Indicador PDCA: días entre el evento y la entrega del TIA (meta: menos de 10 días) y % de días solicitados que el cliente reconoce."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Rimkus: Time Impact Analysis for construction delay claims (AACE RP 52R-06), ago-2026",
+          "url": "https://rimkus.com/article/time-impact-analysis/"
+        },
+        {
+          "titulo": "SmartPM: Time impact analysis in construction (31-jul-2026)",
+          "url": "https://smartpm.com/blog/time-impact-analysis-in-construction"
+        },
+        {
+          "titulo": "Vertex: The Time Impact Analysis method of quantifying construction delays",
+          "url": "https://vertexeng.com/insights/the-time-impact-analysis-method-of-quantifying-construction-delays/"
+        },
+        {
+          "titulo": "AACE International: RP 52R-06 Prospective Time Impact Analysis (ficha oficial)",
+          "url": "https://www.pathlms.com/aace/courses/2928/documents/3835"
         }
       ]
     },

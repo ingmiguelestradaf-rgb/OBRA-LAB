@@ -1,6 +1,53 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-02",
+      "titulo": "Control de avance: probabilidad real de terminar a tiempo, análisis de impacto (TIA) para prórrogas y programa de obra gratis",
+      "resumen": "Probabilidad de terminar a tiempo aplica PERT de tres duraciones al tramo de ruta crítica que falta: con el ejemplo (estructura N3, muros e instalaciones, acabados y entrega) el programa 'más probable' suma 67 días contra 70 disponibles, pero la duración esperada es 71.2 días, la probabilidad de cumplir es 40 % y faltan 7.1 días de colchón para 90 % de confianza; además dice qué actividad concentra la incertidumbre (acabados, 52 %). Análisis de impacto en el programa (TIA) documenta con el método prospectivo de AACE RP 52R-06 los días que causa un evento ajeno al contratista, como soporte de la prórroga. ProjectLibre es el programa de obra gratuito (escritorio, código abierto) con Gantt, ruta crítica y valor ganado que abre archivos de MS Project; viene a cuento porque Microsoft retiró Project Online el 30-sep-2026. Mejoras: Programa ganado remite a PERT cuando el pronóstico queda cerca del plazo y Penas por atraso remite al TIA para pedir prórroga antes de que corran las penas. Precio de ProjectLibre Cloud no verificado.",
+      "herramientas": [
+        "calc-pert-probabilidad",
+        "fmt-analisis-impacto",
+        "dig-projectlibre",
+        "calc-programa-ganado",
+        "calc-penas-atraso"
+      ],
+      "como_aplicarlo": "1) En la junta de este lunes pide a cada responsable tres duraciones de lo que falta en ruta crítica y córrelas en Probabilidad de terminar a tiempo; si sale en rojo, ataca la actividad con mayor % de incertidumbre. 2) Si hoy tienes un atraso por planos, cambios o permisos, abre un folio TIA y asiéntalo en bitácora. 3) Instala ProjectLibre en la PC de obra y carga la línea base para actualizarla cada lunes durante 4 semanas.",
+      "fuentes": [
+        {
+          "titulo": "MetricGate: Project scheduling with CPM and PERT (27-may-2026)",
+          "url": "https://metricgate.com/docs/project-scheduling-cpm-pert/"
+        },
+        {
+          "titulo": "Rework: Three-Point Estimation (PERT): formula and examples",
+          "url": "https://resources.rework.com/libraries/project-management/three-point-estimation"
+        },
+        {
+          "titulo": "Rimkus: Time Impact Analysis for construction delay claims (AACE RP 52R-06), ago-2026",
+          "url": "https://rimkus.com/article/time-impact-analysis/"
+        },
+        {
+          "titulo": "SmartPM: Time impact analysis in construction (31-jul-2026)",
+          "url": "https://smartpm.com/blog/time-impact-analysis-in-construction"
+        },
+        {
+          "titulo": "Vertex: The Time Impact Analysis method of quantifying construction delays",
+          "url": "https://vertexeng.com/insights/the-time-impact-analysis-method-of-quantifying-construction-delays/"
+        },
+        {
+          "titulo": "AACE International: RP 52R-06 Prospective Time Impact Analysis (ficha oficial)",
+          "url": "https://www.pathlms.com/aace/courses/2928/documents/3835"
+        },
+        {
+          "titulo": "ProjectLibre en SourceForge (versión 1.9.8, ficha actualizada 13-jul-2026)",
+          "url": "https://sourceforge.net/projects/projectlibre/"
+        },
+        {
+          "titulo": "Velosio: Microsoft Project Online retirement, what to do before September 30, 2026",
+          "url": "https://www.velosio.com/blog/microsoft-project-online-retirement-what-to-do-before-september-30-2026/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-01",
       "titulo": "Normatividad y documentación: convenios y subcontratos con la LOPSRM reformada, inicio tardío y bitácora electrónica obligatoria",
       "resumen": "La reforma a la LOPSRM (DOF 16-04-2025; texto vigente con última reforma DOF 14-11-2025) cambió fechas y límites que valen dinero. Convenios modificatorios y subcontratación calcula la variación del contrato y avisa si pasa el 50 % (art. 59 Bis: ajuste de indirectos y financiamiento, solo 15 días naturales desde la recepción física), los 45 días para firmar el convenio (art. 59) y el tope de 49 % subcontratado: con $18.5 M original y $28.9 M vigente la variación es 56.2 %, te quedan 9 días para solicitar el ajuste y el subcontrato de $9.8 M es 33.9 % (margen de 15.1 puntos). Inicio tardío cuenta los días para el factor de actualización en precio unitario (más de 60) o la actualización única en precio alzado (más de 120, pedir dentro de 15 días del inicio) y estima el importe con índices INEGI: con 97 días y un índice que sube 4.2 %, $12.6 M pendientes darían unos $529,200 a solicitar (índices de ejemplo). Bitácora electrónica obligatoria es la revisión semanal de apertura, e.firma de firmantes y notas clave. Mejoras: Concepto extraordinario agrega la regla de precio conciliado antes del pago y los 45 días; Visita del DRO y Plazos de estimación remiten a la bitácora electrónica. No se agregó ComprasMX como recurso porque no se pudo verificar su dirección oficial desde el sitio del gobierno.",
