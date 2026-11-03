@@ -1,6 +1,45 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-03",
+      "titulo": "Calidad: corazones cuando fallan los cilindros, varilla 'delgada' en báscula y recepción de acero con certificado",
+      "resumen": "Corazones de concreto evalúa con el criterio de ACI 318 (promedio de 3 corazones ≥ 0.85 f'c y ninguno < 0.75 f'c) si una zona con cilindros bajos se acepta: con el ejemplo (f'c 250; corazones 228, 215 y 204) el promedio es 215.7 kg/cm² = 86.3 % y el más bajo 81.6 %, dictamen 1. Varilla 'delgada' compara la masa pesada en obra contra la nominal: #4 de 12 m que pesa 11.55 kg da 0.963 kg/m, −3.2 % (dentro de ±6 %), y el lote de 100 piezas con 1,170 kg queda en −1.95 % (dentro de ±3.5 %) con 23.3 kg menos que el nominal. Recepción de varilla en obra cierra el ciclo: certificado del lote, marcas de laminación, masa, estado superficial y almacenamiento, con trazabilidad al elemento. Mejoras: Aceptación de f'c remite a Corazones cuando el dictamen es 0, y Peso de varilla remite a la verificación de masa. Tolerancias de masa tomadas de la ficha de Ternium (mayo 2026); no se pudo consultar el texto completo de la NMX-B-506-CANACERO-2019.",
+      "herramientas": [
+        "calc-corazones",
+        "calc-masa-varilla",
+        "fmt-recepcion-varilla",
+        "calc-aceptacion-fc",
+        "calc-varilla"
+      ],
+      "como_aplicarlo": "1) En la próxima entrega de acero pesa una pieza de cada número y llena 'Recepción de varilla en obra'; sin certificado del lote, se aparta. 2) Pide hoy al proveedor de acero que todo pedido traiga el certificado de calidad. 3) Si tienes un resultado de cilindros bajo pendiente, define la zona representada y pide 3 corazones; evalúalos con la calculadora antes de hablar de demolición o refuerzo.",
+      "fuentes": [
+        {
+          "titulo": "NRMCA – CIP 10 Resistencia del concreto en la estructura (ACI 318: promedio de 3 corazones ≥ 85 % de f'c y ninguno < 75 %; diámetro mínimo 85 mm, L/D ≥ 1.5, no perforar la parte superior del elemento)",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP10es.pdf"
+        },
+        {
+          "titulo": "NRMCA – FAQ Concrete Materials 2024 (cuándo investigar resultados bajos, 3 corazones por zona, sellados en bolsa y ensayados entre 5 y 7 días después de mojarlos)",
+          "url": "https://nrmca.org/wp-content/uploads/FAQ_Concrete_Materials2024.pdf"
+        },
+        {
+          "titulo": "Conpre Concretos – Cómo interpretar resultados de pruebas de compresión (NMX-C-155, jun 2026)",
+          "url": "https://conpreconcretos.com/blog/interpretar-resultados-pruebas-compresion-concreto.html"
+        },
+        {
+          "titulo": "Ternium – Ficha técnica Varilla, edición 02 mayo 2026 (masas nominales; tolerancia de masa ±6.0 % por pieza y ±3.5 % por lote según NMX-B-506; marcas de laminación)",
+          "url": "https://mx.ternium.com/media/hqdbmaup/varilla.pdf"
+        },
+        {
+          "titulo": "Ficha técnica Varilla corrugada G42 NMX-B-506 (fluencia mín. 42 kg/mm², tensión 63 kg/mm², alargamiento mín. 9 % #3–#6, doblado a 180°)",
+          "url": "https://cdn.shopify.com/s/files/1/0432/5851/1512/files/Ficha_Tecnica_G42_NMX-B-506.pdf"
+        },
+        {
+          "titulo": "Secretaría de Economía – Catálogo Mexicano de Normas: NMX-B-506-CANACERO-2019 (varilla corrugada para refuerzo de concreto)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nmx-b-506-canacero-2019/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-02",
       "titulo": "Control de avance: probabilidad real de terminar a tiempo, análisis de impacto (TIA) para prórrogas y programa de obra gratis",
       "resumen": "Probabilidad de terminar a tiempo aplica PERT de tres duraciones al tramo de ruta crítica que falta: con el ejemplo (estructura N3, muros e instalaciones, acabados y entrega) el programa 'más probable' suma 67 días contra 70 disponibles, pero la duración esperada es 71.2 días, la probabilidad de cumplir es 40 % y faltan 7.1 días de colchón para 90 % de confianza; además dice qué actividad concentra la incertidumbre (acabados, 52 %). Análisis de impacto en el programa (TIA) documenta con el método prospectivo de AACE RP 52R-06 los días que causa un evento ajeno al contratista, como soporte de la prórroga. ProjectLibre es el programa de obra gratuito (escritorio, código abierto) con Gantt, ruta crítica y valor ganado que abre archivos de MS Project; viene a cuento porque Microsoft retiró Project Online el 30-sep-2026. Mejoras: Programa ganado remite a PERT cuando el pronóstico queda cerca del plazo y Penas por atraso remite al TIA para pedir prórroga antes de que corran las penas. Precio de ProjectLibre Cloud no verificado.",

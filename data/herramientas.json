@@ -138,7 +138,8 @@
         "Captura el número de varilla (#3 = 3/8\", #4 = 1/2\", etc.).",
         "Usa la longitud de corte de tu despiece, incluyendo ganchos y traslapes.",
         "Suma el total por diámetro y compáralo contra las remisiones del proveedor para controlar desperdicio.",
-        "Para cuantificar elementos completos (estribos, bastones, parrillas) usa el Cuantificador de acero por elemento."
+        "Para cuantificar elementos completos (estribos, bastones, parrillas) usa el Cuantificador de acero por elemento.",
+        "Para comprobar que la varilla que llegó no viene 'delgada', pesa una pieza y compárala con la calculadora 'Varilla delgada: masa real contra nominal' (tolerancia ±6 % por pieza y ±3.5 % por lote)."
       ]
     },
     {
@@ -157,6 +158,151 @@
         "Bastones y corridas: la longitud acepta fórmulas como L/3, L/4+0.30 o Lx; se suman ganchos de 90° y traslapes automáticos cuando pasan de 12 m.",
         "Losas, zapatas y muros: elige parrilla Sencilla o Doble con un clic; el lecho superior se crea igual al inferior y lo puedes modificar.",
         "Revisa Criterios de cuantificación (traslape, ganchos, desperdicio) contra las notas de tu plano y exporta el despiece a CSV o imprímelo."
+      ]
+    },
+    {
+      "id": "calc-masa-varilla",
+      "tipo": "calculadora",
+      "categoria": "Acero",
+      "titulo": "Varilla 'delgada': masa real contra nominal por pieza y por lote (tolerancia NMX-B-506)",
+      "resumen": "Pesa una varilla y el lote completo en báscula y compara contra la masa nominal (0.994 kg/m la #4). Detecta varilla fuera de tolerancia (±6 % por pieza, ±3.5 % por lote según la ficha de Ternium con base en NMX-B-506), que trae menos área de acero de la que supone el cálculo y, si se compra por pieza, menos kilos de los que pagas.",
+      "agregada": "2026-11-03",
+      "entradas": [
+        {
+          "id": "num",
+          "label": "Número de varilla (#3, #4, #5…; octavos de pulgada)",
+          "unidad": "#",
+          "valor": 4
+        },
+        {
+          "id": "L",
+          "label": "Largo medido de la pieza pesada",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "W",
+          "label": "Peso de la pieza en báscula",
+          "unidad": "kg",
+          "valor": 11.55
+        },
+        {
+          "id": "n",
+          "label": "Piezas del lote (misma remisión, mismo número)",
+          "unidad": "pzas",
+          "valor": 100
+        },
+        {
+          "id": "Ll",
+          "label": "Largo de cada pieza del lote",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "Wl",
+          "label": "Peso del lote (ticket de báscula; 0 si no se pesó)",
+          "unidad": "kg",
+          "valor": 1170
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Diámetro nominal",
+          "formula": "num*25.4/8",
+          "unidad": "mm",
+          "decimales": 1
+        },
+        {
+          "label": "Masa nominal",
+          "formula": "0.0061654*Math.pow(num*25.4/8,2)",
+          "unidad": "kg/m",
+          "decimales": 3
+        },
+        {
+          "label": "Masa real de la pieza",
+          "formula": "W/L",
+          "unidad": "kg/m",
+          "decimales": 3
+        },
+        {
+          "label": "Desviación de la pieza contra nominal",
+          "formula": "(W/L/(0.0061654*Math.pow(num*25.4/8,2))-1)*100",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra tolerancia de pieza ±6 % (verde ≥ 1; amarillo ≥ 0)",
+          "formula": "6-Math.abs((W/L/(0.0061654*Math.pow(num*25.4/8,2))-1)*100)",
+          "unidad": "puntos %",
+          "decimales": 2,
+          "semaforo": [
+            1,
+            0
+          ]
+        },
+        {
+          "label": "Peso nominal del lote",
+          "formula": "n*Ll*0.0061654*Math.pow(num*25.4/8,2)",
+          "unidad": "kg",
+          "decimales": 1
+        },
+        {
+          "label": "Desviación del lote (0 si no se pesó)",
+          "formula": "Wl>0?(Wl/(n*Ll*0.0061654*Math.pow(num*25.4/8,2))-1)*100:0",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra tolerancia de lote ±3.5 % (verde ≥ 1; amarillo ≥ 0)",
+          "formula": "3.5-Math.abs(Wl>0?(Wl/(n*Ll*0.0061654*Math.pow(num*25.4/8,2))-1)*100:0)",
+          "unidad": "puntos %",
+          "decimales": 2,
+          "semaforo": [
+            1,
+            0
+          ]
+        },
+        {
+          "label": "Acero que falta en el lote contra nominal (0 = completo)",
+          "formula": "Wl>0?Math.max(0,n*Ll*0.0061654*Math.pow(num*25.4/8,2)-Wl):0",
+          "unidad": "kg",
+          "decimales": 1
+        },
+        {
+          "label": "Dictamen (1 = pieza y lote dentro de tolerancia; 0 = apartar el lote y pedir certificado y reposición)",
+          "formula": "(Math.abs((W/L/(0.0061654*Math.pow(num*25.4/8,2))-1)*100)<=6&&Math.abs(Wl>0?(Wl/(n*Ll*0.0061654*Math.pow(num*25.4/8,2))-1)*100:0)<=3.5)?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        }
+      ],
+      "como_usar": [
+        "Al llegar el camión elige al azar una varilla de cada número; mídela con cinta (al centímetro) y pésala en una báscula de plataforma calibrada. Si el lote pasó por báscula pública o de la acería, usa ese ticket como peso del lote.",
+        "Captura número, largo y peso; la masa nominal sale de la fórmula 0.0061654 × d² (d en mm), que coincide con la tabla de Ternium (#3 0.560, #4 0.994, #5 1.552 kg/m).",
+        "Dictamen 1: recibe el lote y anota el resultado en 'Recepción de varilla en obra'. Dictamen 0: aparta el lote, pesa 2 piezas más del mismo número y, si se confirma, pide al proveedor el certificado de calidad del lote y la reposición o la nota de crédito por los kilos faltantes.",
+        "Si compras por pieza (ferretería o casa de materiales), la desviación negativa es dinero: los kilos que faltan multiplicados por el precio por kilo implícito de la pieza.",
+        "Ojo: la ficha G42 de otro fabricante solo indica tolerancia de −6 %; la de Ternium (mayo 2026) indica ±6.0 % por pieza y ±3.5 % por lote. Si tu especificación o el certificado citan otra tolerancia, manda la del proyecto. No se pudo consultar el texto completo de la NMX-B-506-CANACERO-2019 (norma de pago).",
+        "Indicador: % de lotes fuera de tolerancia por proveedor y kg faltantes por mes; muéstralo en la junta con el proveedor de acero."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Ternium – Ficha técnica Varilla, edición 02 mayo 2026 (masas nominales; tolerancia de masa ±6.0 % por pieza y ±3.5 % por lote según NMX-B-506; marcas de laminación)",
+          "url": "https://mx.ternium.com/media/hqdbmaup/varilla.pdf"
+        },
+        {
+          "titulo": "Ficha técnica Varilla corrugada G42 NMX-B-506 (fluencia mín. 42 kg/mm², tensión 63 kg/mm², alargamiento mín. 9 % #3–#6, doblado a 180°)",
+          "url": "https://cdn.shopify.com/s/files/1/0432/5851/1512/files/Ficha_Tecnica_G42_NMX-B-506.pdf"
+        },
+        {
+          "titulo": "Secretaría de Economía – Catálogo Mexicano de Normas: NMX-B-506-CANACERO-2019 (varilla corrugada para refuerzo de concreto)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nmx-b-506-canacero-2019/"
+        }
       ]
     },
     {
@@ -323,7 +469,7 @@
       "como_usar": [
         "Captura el f'c del plano y los resultados a 28 días de los dos cilindros de cada muestreo (cada 'prueba' es el promedio de 2 cilindros de la misma olla). Usa siempre las 3 últimas pruebas consecutivas del mismo f'c.",
         "Deja la tolerancia en 0 para usar el criterio NMX-C-155 / ACI 318: ninguna prueba más de 35 kg/cm² abajo de f'c (10 % si f'c > 350). Si tu especificación o el DRO piden otro valor (p. ej. concreto clase 2 de las NTC), escríbelo aquí.",
-        "Dictamen 0: no aceptes ni rechaces el elemento de inmediato; pide al laboratorio el cilindro testigo de 56 días, revisa remisiones, revenimiento y curado de esa olla y, si persiste, extrae corazones (NMX-C-169) en el elemento afectado.",
+        "Dictamen 0: no aceptes ni rechaces el elemento de inmediato; pide al laboratorio el cilindro testigo de 56 días, revisa remisiones, revenimiento y curado de esa olla y, si persiste, extrae 3 corazones (NMX-C-169) en el elemento afectado y evalúalos con la calculadora 'Corazones de concreto' (promedio ≥ 0.85 f'c y ninguno < 0.75 f'c).",
         "Si la dispersión entre gemelos pasa de 8 %, el problema suele ser de muestreo, cabeceo o curado de los cilindros, no del concreto: revisa el procedimiento del laboratorio antes de reclamar a la planta.",
         "Lleva el registro prueba por prueba en el formato Liberación de colado y anota en bitácora cada dictamen; indicador: % de pruebas que cumplen por proveedor y por mes.",
         "Si una prueba sale baja, busca en los formatos 'Recepción de olla y muestreo' la olla de esos cilindros: minutos desde la carga, revenimiento y agua agregada suelen explicar el resultado antes de culpar a la planta."
@@ -4862,6 +5008,124 @@
       ]
     },
     {
+      "id": "calc-corazones",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Corazones de concreto: ¿el elemento se acepta cuando fallaron los cilindros? (ACI 318, 85 % / 75 %)",
+      "resumen": "Cuando una prueba de cilindros sale baja, el elemento no se demuele por eso: se extraen 3 corazones de la zona representada y se evalúan con el criterio de ACI 318 (promedio ≥ 0.85 f'c y ninguno < 0.75 f'c). Esta calculadora da el dictamen, cuánto falta y qué corazón manda.",
+      "agregada": "2026-11-03",
+      "entradas": [
+        {
+          "id": "fc",
+          "label": "f'c especificado del elemento",
+          "unidad": "kg/cm²",
+          "valor": 250
+        },
+        {
+          "id": "c1",
+          "label": "Corazón 1 (resistencia corregida que reporta el laboratorio)",
+          "unidad": "kg/cm²",
+          "valor": 228
+        },
+        {
+          "id": "c2",
+          "label": "Corazón 2",
+          "unidad": "kg/cm²",
+          "valor": 215
+        },
+        {
+          "id": "c3",
+          "label": "Corazón 3",
+          "unidad": "kg/cm²",
+          "valor": 204
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Promedio de los 3 corazones",
+          "formula": "(c1+c2+c3)/3",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Límite del promedio (0.85 f'c)",
+          "formula": "0.85*fc",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Promedio / f'c (verde ≥ 85 %; amarillo ≥ 80 %: decide el estructurista)",
+          "formula": "(c1+c2+c3)/3/fc*100",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            85,
+            80
+          ]
+        },
+        {
+          "label": "Límite individual (0.75 f'c)",
+          "formula": "0.75*fc",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Corazón más bajo / f'c (verde ≥ 75 %; amarillo ≥ 70 %)",
+          "formula": "Math.min(c1,c2,c3)/fc*100",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            75,
+            70
+          ]
+        },
+        {
+          "label": "Resistencia que le falta al promedio (0 = cumple)",
+          "formula": "Math.max(0,0.85*fc-(c1+c2+c3)/3)",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Dictamen (1 = estructuralmente adecuado por ACI 318; 0 = no cumple: revisión estructural, prueba de carga o refuerzo)",
+          "formula": "((c1+c2+c3)/3>=0.85*fc&&Math.min(c1,c2,c3)>=0.75*fc)?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        }
+      ],
+      "como_usar": [
+        "Úsala solo cuando 'Aceptación de resistencia f'c' dio dictamen 0 por la prueba individual y ya revisaste que el muestreo, curado y ensaye de los cilindros fueron correctos (con 'Recepción de olla' ubicas qué elemento recibió esa olla).",
+        "Pide al laboratorio 3 corazones de la zona representada por la prueba baja: diámetro mínimo 85 mm (más grande si el agregado pasa de 25 mm), longitud de al menos 1.5 veces el diámetro, sin cortar varilla (localízala antes con detector) y no de la parte superior del elemento, que sale 10 a 20 % más débil.",
+        "Exige que los corazones se sellen en bolsa al extraerlos y se ensayen entre 5 y 7 días después de mojarlos (NRMCA / ASTM C42), y que el informe traiga la resistencia ya corregida por relación L/D; esos valores son los que se capturan aquí.",
+        "Dictamen 1: el concreto de esa zona se considera estructuralmente adecuado; asiéntalo en bitácora con el informe del laboratorio y rellena los barrenos con mortero sin contracción.",
+        "Dictamen 0: no demuelas por tu cuenta; entrega el informe al estructurista y al DRO para revisión por cálculo, prueba de carga o refuerzo, y reclama a la planta con la trazabilidad de la remisión.",
+        "Indicador: número de zonas investigadas por mes y costo de cada investigación (corazones + reparación); la meta es que bajen con el formato de recepción de olla y el control de agua agregada."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NRMCA – CIP 10 Resistencia del concreto en la estructura (ACI 318: promedio de 3 corazones ≥ 85 % de f'c y ninguno < 75 %; diámetro mínimo 85 mm, L/D ≥ 1.5, no perforar la parte superior del elemento)",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP10es.pdf"
+        },
+        {
+          "titulo": "NRMCA – FAQ Concrete Materials 2024 (cuándo investigar resultados bajos, 3 corazones por zona, sellados en bolsa y ensayados entre 5 y 7 días después de mojarlos)",
+          "url": "https://nrmca.org/wp-content/uploads/FAQ_Concrete_Materials2024.pdf"
+        },
+        {
+          "titulo": "ACI – FAQ: criterios de aceptación de resistencia (ACI 318-19, 26.12)",
+          "url": "https://www.concrete.org/frequentlyaskedquestions.aspx?faqid=13"
+        },
+        {
+          "titulo": "Conpre Concretos – Cómo interpretar resultados de pruebas de compresión (NMX-C-155, jun 2026)",
+          "url": "https://conpreconcretos.com/blog/interpretar-resultados-pruebas-compresion-concreto.html"
+        }
+      ]
+    },
+    {
       "id": "fmt-recepcion-olla",
       "tipo": "formato",
       "categoria": "Concreto",
@@ -5864,6 +6128,65 @@
         {
           "titulo": "Mandić et al. – A3 y Lean en colocación de aislamiento de plafón en aeropuerto: productividad de 30 a 60 m²/cuadrilla/día (Preprints, feb 2024, sin revisión por pares)",
           "url": "https://www.preprints.org/manuscript/202402.1373"
+        }
+      ]
+    },
+    {
+      "id": "fmt-recepcion-varilla",
+      "tipo": "formato",
+      "categoria": "Acero",
+      "titulo": "Recepción de varilla en obra: certificado, marcas de laminación, masa y almacenamiento (NMX-B-506)",
+      "resumen": "Formato por entrega de acero de refuerzo para aceptar o apartar un lote antes de habilitarlo: certificado de calidad del lote, marcas de laminación (fabricante, número, grado 42), masa por metro, estado superficial y almacenamiento, con trazabilidad hasta el elemento donde se colocó.",
+      "agregada": "2026-11-03",
+      "campos": [
+        "Obra",
+        "Fecha y hora de llegada",
+        "Proveedor / acería (fabricante)",
+        "No. de remisión o factura",
+        "No. de colada o lote del certificado",
+        "Números de varilla y kg por número (remisión)",
+        "Grado (42 u otro) y norma del certificado (NMX-B-506 / ASTM A615)",
+        "Peso en báscula del lote (kg) y ticket",
+        "Resultado de 'Varilla delgada: masa real' (dictamen y % por número)",
+        "Zona de almacenamiento asignada",
+        "Elementos donde se usará (eje / nivel)",
+        "Decisión: aceptado / apartado / rechazado y motivo",
+        "Recibió (almacenista) y revisó (residente)"
+      ],
+      "items": [
+        "La remisión coincide con el pedido: números de varilla, cantidades, longitud (12 m o corte especial) y grado",
+        "Llegó el certificado de calidad del lote (fluencia, tensión, alargamiento y doblado) y su número de colada corresponde a las etiquetas de los paquetes",
+        "Fluencia del certificado ≥ 4,200 kg/cm² (42 kg/mm²) y tensión ≥ 6,300 kg/cm² para grado 42; alargamiento ≥ 9 % en #3 a #6",
+        "Cada varilla trae las marcas de laminación legibles: símbolo del fabricante, número de designación y grado (42); se tomó foto de las marcas",
+        "Las corrugaciones son uniformes, sin varillas lisas, aplanadas, con grietas ni dobleces de fábrica",
+        "Masa por metro de una pieza al azar por número dentro de ±6 % y del lote dentro de ±3.5 % (calculadora 'Varilla delgada')",
+        "Diámetro aparente correcto: una #4 no se confunde con #3 ni una #5 con #4 (revisar el número laminado, no 'a ojo')",
+        "Óxido superficial ligero aceptable; sin escamas sueltas, picaduras ni pérdida de sección; sin aceite, pintura, lodo ni concreto adherido",
+        "Descargada sin arrastrar ni aventar; atados con su etiqueta, separados por número y por lote",
+        "Almacenada sobre polines o tarimas a 15 cm o más del suelo, protegida de lluvia y lodo, en zona marcada con número de varilla",
+        "Varilla de lotes apartados o rechazados separada y marcada con cinta roja para que no se habilite por error",
+        "Remisión, ticket de báscula, certificado y fotos archivados con este formato y anotados en el control de acero de la obra"
+      ],
+      "como_usar": [
+        "Pide al proveedor, al hacer el pedido, que el certificado de calidad del lote venga con la remisión; sin certificado el lote se recibe como 'apartado' y no se habilita.",
+        "Al llegar el camión, el almacenista llena el formato en el celular mientras se descarga: revisa remisión, etiquetas y toma foto de las marcas de laminación de cada número.",
+        "Pesa una pieza por número con la calculadora 'Varilla delgada: masa real contra nominal' y anota el dictamen; si sale 0 aparta el lote.",
+        "El residente revisa el certificado (fluencia, tensión, alargamiento) contra los valores de grado 42 y firma la decisión.",
+        "Al habilitar, anota en 'Elementos donde se usará' el eje y nivel; con eso cualquier problema posterior se rastrea hasta el lote y su certificado.",
+        "Indicador: % de entregas con certificado completo y % de lotes apartados por proveedor; meta: 100 % con certificado en 4 semanas."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Ternium – Ficha técnica Varilla, edición 02 mayo 2026 (masas nominales; tolerancia de masa ±6.0 % por pieza y ±3.5 % por lote según NMX-B-506; marcas de laminación)",
+          "url": "https://mx.ternium.com/media/hqdbmaup/varilla.pdf"
+        },
+        {
+          "titulo": "Ficha técnica Varilla corrugada G42 NMX-B-506 (fluencia mín. 42 kg/mm², tensión 63 kg/mm², alargamiento mín. 9 % #3–#6, doblado a 180°)",
+          "url": "https://cdn.shopify.com/s/files/1/0432/5851/1512/files/Ficha_Tecnica_G42_NMX-B-506.pdf"
+        },
+        {
+          "titulo": "Secretaría de Economía – Catálogo Mexicano de Normas: NMX-B-506-CANACERO-2019 (varilla corrugada para refuerzo de concreto)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nmx-b-506-canacero-2019/"
         }
       ]
     },
