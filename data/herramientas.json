@@ -1734,14 +1734,16 @@
         "Botiquín y rutas de evacuación señalizadas",
         "Constancias DC-3 y exámenes médicos vigentes del personal que trabaja en altura",
         "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)",
-        "Izajes con grúa con cálculo de eslingas y % de tabla de carga hecho antes de levantar; radio de acción acordonado y un solo señalero"
+        "Izajes con grúa con cálculo de eslingas y % de tabla de carga hecho antes de levantar; radio de acción acordonado y un solo señalero",
+        "Cisternas, fosas, cárcamos y pozos señalizados y tapados; nadie dentro sin 'Permiso de entrada a espacio confinado' vigente, vigía afuera y ventilador funcionando"
       ],
       "como_usar": [
         "Haz el recorrido con un representante de cada contratista.",
         "Cada 'No cumple' debe tener responsable y fecha de corrección en la observación.",
         "Compara semana contra semana: el número de hallazgos debe bajar.",
         "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana.",
-        "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar."
+        "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar.",
+        "Una entrada a cisterna, fosa o cárcamo sin permiso o sin medición de gases es hallazgo crítico: saca al personal, mide y ventila con 'Ventilación de espacio confinado'. Al cierre de mes captura los casos en 'Indicadores de accidentabilidad'."
       ],
       "fuentes": [
         {
@@ -5498,7 +5500,7 @@
         "Perímetro con cinta o malla (menos de 1.50 m) o barandal rígido de 90 cm (más de 1.50 m) y pasos o puentes para cruzar",
         "Accesos separados para personal y para maquinaria, o delimitados con barreras",
         "Sin acumulación ni aumento de nivel de agua; si lo hay, trabajos suspendidos y bombeo inmediato",
-        "Si la excavación funciona como espacio confinado: medición de oxígeno y gases antes de entrar y ventilación si hace falta",
+        "Si la excavación funciona como espacio confinado: medición de oxígeno (19.5–23.5 %), inflamables (< 10 % LII) y tóxicos antes de entrar, ventilación calculada y 'Permiso de entrada a espacio confinado' firmado",
         "Cableado, tuberías de gas o agua existentes localizados y marcados; equipo eléctrico portátil a 24 V donde haya riesgo",
         "Equipo con brazo a la distancia mínima de líneas aéreas de la Tabla 7 (ej. 3.10 m hasta 50 kV)",
         "Iluminación suficiente para el turno",
@@ -5515,6 +5517,308 @@
         {
           "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud en el trabajo (DOF): numeral 11.2 y Tabla 6 de taludes, Tabla 7 de distancias a líneas eléctricas",
           "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        }
+      ]
+    },
+    {
+      "id": "fmt-espacio-confinado",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Permiso de entrada a espacio confinado: cisternas, fosas, cárcamos y pozos de visita (NOM-033-STPS-2015)",
+      "resumen": "Autorización por turno para entrar a cisternas, fosas sépticas, cárcamos, registros profundos, pozos de visita, tanques o huecos de elevador cerrados. Clasifica el espacio en Tipo I o Tipo II con las lecturas del detector (oxígeno 19.5–23.5 %, inflamables < 10 % del LII, tóxicos < nivel de acción) y no deja entrar sin vigía, ventilación, arnés con línea de rescate y plan de rescate.",
+      "agregada": "2026-11-04",
+      "campos": [
+        "Obra",
+        "Espacio confinado (cisterna, fosa, cárcamo, pozo, tanque…) y ubicación / ejes",
+        "Trabajo a realizar (impermeabilizar, colar, soldar, limpiar, conectar…) y si es trabajo en caliente",
+        "Fecha, hora de inicio y hora de vencimiento (máximo un turno; se renueva por turno)",
+        "Detector de gases: marca, número de serie y fecha de la última calibración / prueba de respuesta (bump test)",
+        "Lectura inicial ARRIBA / EN MEDIO / FONDO: O₂ (%), LII (%), CO (ppm), H₂S (ppm) y hora",
+        "Clasificación resultante: Tipo I (cumple los 3 criterios) o Tipo II (falla al menos uno)",
+        "Frecuencia de muestreo durante el trabajo (Tipo II: monitoreo continuo con detector en cada trabajador)",
+        "Ventilación: ventilador (m³/min), longitud de ducto y tiempo de purga – calculadora ObraLab 'Ventilación de espacio confinado'",
+        "Aislamiento: válvulas cerradas o tuberías cegadas, bombas y circuitos bloqueados y etiquetados (quién y cuándo)",
+        "Trabajadores que entran (nombre, DC-3, visto bueno médico) y tiempo máximo de permanencia",
+        "Vigía (nombre y firma) y medio de comunicación con los que están dentro",
+        "Rescate: trípode o punto de anclaje, malacate o línea de rescate, quién rescata y teléfono de emergencia",
+        "Hora real de entrada y salida de cada trabajador",
+        "Responsable de los trabajos (firma) y quien autoriza (firma)",
+        "Cierre del permiso: hora, todos fuera, espacio cerrado o señalizado"
+      ],
+      "items": [
+        "Se revisó si el trabajo se puede hacer desde afuera; entrar es la última opción",
+        "El espacio está señalizado y con acceso controlado; nadie entra sin este permiso vigente",
+        "Detector de lectura directa, con alarma e intrínsecamente seguro, calibrado y probado hoy",
+        "Se midió antes de entrar en la parte superior, media y fondo, sin que el que mide se meta al espacio",
+        "Oxígeno entre 19.5 % y 23.5 %",
+        "Inflamables / explosivos por debajo del 10 % del LII (si llega a 10 % o más, se suspende el trabajo)",
+        "Tóxicos (CO, H₂S, vapores de solventes, impermeabilizantes o selladores) por debajo del nivel de acción (0.5 del VLE de la NOM-010-STPS)",
+        "Ventilación natural o forzada funcionando antes y durante el trabajo; nunca se ventila con oxígeno puro",
+        "Ventilador y planta de combustión lejos de la boca y en contra del viento (sin que el escape entre al espacio)",
+        "Tuberías, válvulas, bombas y tableros que alimentan el espacio aislados, bloqueados y etiquetados",
+        "Si no se logra atmósfera respirable: equipo con línea de aire o equipo autónomo; los cartuchos no sirven con falta de oxígeno",
+        "Cada trabajador dentro con arnés y línea de rescate (que no estorbe ni sea un riesgo)",
+        "Herramienta eléctrica y lámparas a prueba de explosión o de bajo voltaje donde puede haber inflamables",
+        "Trabajos de soldadura o corte con instrucciones específicas y permiso de trabajo en caliente (NOM-027-STPS)",
+        "Vigía afuera en todo momento, con comunicación con los de adentro; no entra a rescatar sin equipo",
+        "Equipo y personal de rescate listos antes de entrar; teléfono de emergencia a la mano",
+        "Nadie trabaja solo y nadie excede un turno u 8 horas dentro",
+        "Al terminar o suspender: todos fuera, permiso cancelado y espacio tapado o señalizado"
+      ],
+      "como_usar": [
+        "Haz un inventario de espacios confinados de la obra (cisterna, fosa séptica, cárcamo de bombeo, registros de más de 1.20 m, pozos de visita, tanques, huecos cerrados) y márcalos en el plano de seguridad.",
+        "Antes de cada entrada mide desde afuera arriba, en medio y en el fondo; anota las lecturas y clasifica: Tipo I si cumple oxígeno, inflamables y tóxicos; Tipo II si falla uno. En Tipo II todos los que entran llevan detector y el monitoreo es continuo.",
+        "Calcula la ventilación con 'Ventilación de espacio confinado' y no autorices la entrada hasta que pase el tiempo de purga y una segunda lectura salga bien.",
+        "Firma el permiso solo con vigía, arnés con línea de rescate, trípode o anclaje y rescatista asignados; el permiso vence al final del turno.",
+        "Indicador: entradas con permiso contra entradas realizadas (meta 100 %) y lecturas fuera de rango detectadas antes de entrar (cada una es un accidente evitado; regístralas en 'Indicadores de accidentabilidad')."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-033-STPS-2015 Espacios confinados (texto publicado en el DOF el 31/08/2015): Tabla 1, numerales 8.4, 8.6 y 9.1",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5405659"
+        },
+        {
+          "titulo": "NOM-033-STPS-2015 – PDF del DOF (Secretaría de Economía, Plataforma PLATIICA)",
+          "url": "https://platiica.economia.gob.mx/wp-content/uploads/sites/2/PDF_Normas_Publicas/033stps2015.pdf"
+        },
+        {
+          "titulo": "STPS – NOM-031-STPS-2011 Construcción (DOF): excavaciones que funcionan como espacio confinado",
+          "url": "https://dof.gob.mx/normasOficiales/4376/stps/stps.htm"
+        }
+      ]
+    },
+    {
+      "id": "calc-purga-confinado",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Ventilación de espacio confinado: cambios de aire y tiempo de purga antes de entrar",
+      "resumen": "Con las medidas de la cisterna o fosa, el caudal del ventilador y la lectura inicial del detector, calcula los cambios de aire por hora y cuántos minutos ventilar para bajar el contaminante a la concentración objetivo (ecuación de dilución t = K·V/Q·ln(C₀/C)). El cálculo NO sustituye la segunda medición: solo dice cuánto esperar antes de volver a medir.",
+      "agregada": "2026-11-04",
+      "entradas": [
+        {
+          "id": "la",
+          "label": "Largo interior del espacio",
+          "unidad": "m",
+          "valor": 4
+        },
+        {
+          "id": "an",
+          "label": "Ancho interior del espacio",
+          "unidad": "m",
+          "valor": 3
+        },
+        {
+          "id": "al",
+          "label": "Altura interior (del fondo a la tapa o losa)",
+          "unidad": "m",
+          "valor": 2.5
+        },
+        {
+          "id": "qn",
+          "label": "Caudal nominal del ventilador (ficha del fabricante; 1,000 cfm ≈ 28.3 m³/min)",
+          "unidad": "m³/min",
+          "valor": 28.3
+        },
+        {
+          "id": "pd",
+          "label": "Pérdida por ducto largo y codos (estimada; consulta la curva del fabricante)",
+          "unidad": "%",
+          "valor": 30
+        },
+        {
+          "id": "k",
+          "label": "Factor de mezcla K (1 = mezcla perfecta; usa 3 a 10, más alto si el ducto no llega al fondo o hay rincones)",
+          "unidad": "",
+          "valor": 5
+        },
+        {
+          "id": "c0",
+          "label": "Lectura inicial del contaminante (ppm de CO, H₂S, o % del LII)",
+          "unidad": "",
+          "valor": 40
+        },
+        {
+          "id": "cf",
+          "label": "Concentración objetivo en las mismas unidades (por debajo del nivel de acción o muy por debajo del 10 % LII)",
+          "unidad": "",
+          "valor": 5
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Volumen del espacio",
+          "formula": "la*an*al",
+          "unidad": "m³",
+          "decimales": 1
+        },
+        {
+          "label": "Caudal efectivo que llega al espacio",
+          "formula": "qn*(1-pd/100)",
+          "unidad": "m³/min",
+          "decimales": 1
+        },
+        {
+          "label": "Cambios de aire por hora",
+          "formula": "qn*(1-pd/100)*60/(la*an*al)",
+          "unidad": "cambios/h",
+          "decimales": 1
+        },
+        {
+          "label": "Minutos para un cambio de aire",
+          "formula": "(la*an*al)/(qn*(1-pd/100))",
+          "unidad": "min",
+          "decimales": 1
+        },
+        {
+          "label": "Tiempo de purga antes de volver a medir",
+          "formula": "k*(la*an*al)/(qn*(1-pd/100))*Math.log(Math.max(c0,cf)/cf)",
+          "unidad": "min",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Cambios de aire equivalentes en la purga",
+          "formula": "k*Math.log(Math.max(c0,cf)/cf)",
+          "unidad": "cambios",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Mide largo, ancho y altura interior de la cisterna, fosa o cárcamo y captura el caudal del ventilador tomado de su placa o ficha (no de memoria).",
+        "Estima la pérdida por ducto: cada codo y cada tramo largo reduce el caudal; si el ducto está aplastado o roto, repáralo antes de calcular. Coloca la boca del ducto cerca del fondo, del lado opuesto a la salida de aire.",
+        "Captura la lectura inicial más alta del detector (arriba, medio o fondo) y la concentración objetivo en las mismas unidades: ppm para CO o H₂S, % del LII para inflamables.",
+        "Ventila el tiempo de purga calculado y vuelve a medir arriba, en medio y en el fondo; solo si las lecturas cumplen se firma el 'Permiso de entrada a espacio confinado'. El ventilador sigue encendido mientras haya gente dentro.",
+        "Con el ejemplo (cisterna de 4 × 3 × 2.5 m = 30 m³, ventilador de 28.3 m³/min con 30 % de pérdida, K = 5, de 40 a 5 unidades) salen 39.6 cambios/h y 16 minutos de purga. Indicador: % de entradas con purga calculada y segunda lectura registrada (meta 100 %)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-033-STPS-2015 Espacios confinados (texto publicado en el DOF el 31/08/2015): Tabla 1, numerales 8.4, 8.6 y 9.1",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5405659"
+        },
+        {
+          "titulo": "MEL Safety Institute (2026) – Ventilación de espacios confinados: cálculo del tiempo de espera para los cambios de aire",
+          "url": "https://melsafetyinstitute.org/wp-content/uploads/2026/06/MSI-Shift-Briefing-Confined-Space-Ventilation-Calculating-Wait-Time-for-Air-Changes.pdf"
+        },
+        {
+          "titulo": "Guía CIH – Purga transitoria y factor de mezcla K (ecuación de dilución, ACGIH Industrial Ventilation)",
+          "url": "https://open-exam-prep.com/study-guides/cih/ventilation-air-cleaning/transient-purging-air-distribution"
+        }
+      ]
+    },
+    {
+      "id": "calc-indicadores-accidentabilidad",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Indicadores de accidentabilidad de la obra: índice de frecuencia, gravedad, TRIR y casi accidentes",
+      "resumen": "Convierte los accidentes del mes en indicadores comparables entre obras y contratistas: horas-hombre trabajadas, índice de frecuencia (accidentes con incapacidad por millón de horas), índice de gravedad (días perdidos por mil horas), duración media de la incapacidad, tasa TRIR de OSHA (por 200,000 horas, la que piden clientes estadounidenses y maquiladoras) y casi accidentes reportados por cada caso. Sirve para medir antes y después de cualquier herramienta de seguridad.",
+      "agregada": "2026-11-04",
+      "entradas": [
+        {
+          "id": "tr",
+          "label": "Trabajadores promedio en el periodo (propios y de contratistas)",
+          "unidad": "personas",
+          "valor": 60
+        },
+        {
+          "id": "dt",
+          "label": "Días trabajados en el periodo",
+          "unidad": "días",
+          "valor": 26
+        },
+        {
+          "id": "hd",
+          "label": "Horas efectivas por día (incluye tiempo extra)",
+          "unidad": "h",
+          "valor": 8
+        },
+        {
+          "id": "ac",
+          "label": "Accidentes con incapacidad (al menos un día perdido)",
+          "unidad": "casos",
+          "valor": 2
+        },
+        {
+          "id": "dp",
+          "label": "Días perdidos por esos accidentes (días de incapacidad)",
+          "unidad": "días",
+          "valor": 18
+        },
+        {
+          "id": "rg",
+          "label": "Casos registrables totales (con incapacidad + trabajo restringido + atención médica más allá de primeros auxilios)",
+          "unidad": "casos",
+          "valor": 5
+        },
+        {
+          "id": "ca",
+          "label": "Casi accidentes e incidentes sin lesión reportados",
+          "unidad": "reportes",
+          "valor": 12
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Horas-hombre trabajadas",
+          "formula": "tr*dt*hd",
+          "unidad": "HH",
+          "decimales": 0
+        },
+        {
+          "label": "Índice de frecuencia (accidentes con incapacidad por 1,000,000 HH)",
+          "formula": "ac*1e6/(tr*dt*hd)",
+          "unidad": "",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Índice de gravedad (días perdidos por 1,000 HH)",
+          "formula": "dp*1000/(tr*dt*hd)",
+          "unidad": "",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Duración media de la incapacidad",
+          "formula": "ac>0?dp/ac:0",
+          "unidad": "días/caso",
+          "decimales": 1
+        },
+        {
+          "label": "TRIR OSHA (casos registrables por 200,000 HH)",
+          "formula": "rg*2e5/(tr*dt*hd)",
+          "unidad": "",
+          "decimales": 1
+        },
+        {
+          "label": "Casi accidentes reportados por cada caso registrable (más es mejor cultura de reporte)",
+          "formula": "ca/Math.max(1,rg)",
+          "unidad": "",
+          "decimales": 1,
+          "semaforo": [
+            5,
+            2
+          ]
+        }
+      ],
+      "como_usar": [
+        "Al cierre de cada mes saca de las listas de asistencia el promedio de trabajadores y los días trabajados de tu personal y de cada contratista; si tienes el total de horas de nómina, usa 1 trabajador y captura ese total como 'horas por día' con 1 día.",
+        "Cuenta los accidentes con incapacidad y sus días perdidos con los avisos ST-7 / incapacidades del IMSS; los registrables incluyen además los casos con trabajo restringido o atención médica (no solo primeros auxilios).",
+        "Captura los casi accidentes reportados en el periodo (de la junta de 5 minutos, recorridos y 'Permiso de entrada a espacio confinado' con lecturas fuera de rango).",
+        "Calcula los indicadores por obra y por contratista; grafica el índice de frecuencia y el de gravedad mes contra mes y revísalos en la junta de obra. Un contratista con frecuencia alta entra al recorrido de seguridad semanal con prioridad.",
+        "Con el ejemplo (60 trabajadores, 26 días, 8 h = 12,480 HH; 2 accidentes con 18 días perdidos; 5 registrables; 12 casi accidentes) salen IF 160.3, IG 1.44, 9 días por caso, TRIR 80.1 y 2.4 reportes por caso. Usa 'Prima de riesgo de trabajo IMSS' para traducir esos días a pesos."
+      ],
+      "fuentes": [
+        {
+          "titulo": "INSST (España) – NTP 1211: Estadísticas de accidentabilidad en la empresa (índices de frecuencia, gravedad y duración media)",
+          "url": "https://www.insst.es/documentacion/colecciones-tecnicas/ntp-notas-tecnicas-de-prevencion/37-serie-ntp-numeros-1191-a-1214-ano-2024/ntp-1211-estadisticas-de-accidentabilidad-en-la-empresa-2024"
+        },
+        {
+          "titulo": "U.S. Bureau of Labor Statistics – Cálculo de tasas de incidencia (N/EH × 200,000)",
+          "url": "https://www.bls.gov/iif/overview/incidence-rate-calculation.htm"
+        },
+        {
+          "titulo": "IDC Online (enero 2026) – Construcción, cuarta industria con más accidentes de trabajo en 2024 según el IMSS (44,474 casos)",
+          "url": "https://idconline.mx/seguridad-social/2026/01/28/mexico-el-tercer-pais-con-mayor-indice-de-accidentes-laborales"
         }
       ]
     },

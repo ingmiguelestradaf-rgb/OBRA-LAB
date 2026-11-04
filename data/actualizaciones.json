@@ -1,6 +1,37 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-04",
+      "titulo": "Seguridad: cisternas y fosas sin intoxicados (permiso de espacio confinado y ventilación calculada) e indicadores de accidentabilidad",
+      "resumen": "Permiso de entrada a espacio confinado aplica la NOM-033-STPS-2015 a cisternas, fosas, cárcamos y pozos: clasificación Tipo I / Tipo II con oxígeno 19.5–23.5 %, inflamables < 10 % del LII y tóxicos < nivel de acción, vigencia de un turno, vigía, arnés con línea de rescate y monitoreo continuo en Tipo II. Ventilación de espacio confinado calcula con la ecuación de dilución cuánto ventilar antes de volver a medir: cisterna de 30 m³ con ventilador de 28.3 m³/min y 30 % de pérdida da 39.6 cambios/h y 16 min de purga para bajar de 40 a 5 (K = 5). Indicadores de accidentabilidad convierte los casos del mes en índice de frecuencia, gravedad y TRIR: 60 trabajadores × 26 días × 8 h = 12,480 HH, con 2 accidentes y 18 días perdidos da IF 160.3 e IG 1.44. Contexto: el IMSS reportó 44,474 accidentes de trabajo en construcción en 2024 (cuarta industria). Mejoras: el Recorrido de seguridad semanal agrega espacios confinados como hallazgo crítico y la Inspección diaria de excavación ya trae los límites de gases. Nota: el umbral de 10 % del LII es del texto definitivo del DOF (el proyecto de 2014 decía 20 %); el factor K y la pérdida por ducto son estimaciones de ingeniería, por eso la segunda medición es obligatoria. No se revisaron precios de software en esta entrega.",
+      "herramientas": [
+        "fmt-espacio-confinado",
+        "calc-purga-confinado",
+        "calc-indicadores-accidentabilidad",
+        "fmt-seguridad",
+        "fmt-excavacion"
+      ],
+      "como_aplicarlo": "1) Hoy recorre la obra y marca en el plano cada cisterna, fosa, cárcamo o pozo; tápalos y señalízalos. 2) Antes de la próxima entrada verifica que haya detector de 4 gases calibrado y trípode o línea de rescate; calcula la purga y llena el permiso. 3) El 1 de diciembre calcula los indicadores de accidentabilidad de noviembre por contratista y úsalos como línea base para medir si bajan.",
+      "fuentes": [
+        {
+          "titulo": "NOM-033-STPS-2015 Espacios confinados (texto publicado en el DOF el 31/08/2015): Tabla 1, numerales 8.4, 8.6 y 9.1",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5405659"
+        },
+        {
+          "titulo": "MEL Safety Institute (2026) – Tiempo de espera por cambios de aire en espacios confinados",
+          "url": "https://melsafetyinstitute.org/wp-content/uploads/2026/06/MSI-Shift-Briefing-Confined-Space-Ventilation-Calculating-Wait-Time-for-Air-Changes.pdf"
+        },
+        {
+          "titulo": "IDC Online (enero 2026) – Accidentes de trabajo en construcción según IMSS",
+          "url": "https://idconline.mx/seguridad-social/2026/01/28/mexico-el-tercer-pais-con-mayor-indice-de-accidentes-laborales"
+        },
+        {
+          "titulo": "INSST – NTP 1211 Estadísticas de accidentabilidad",
+          "url": "https://www.insst.es/documentacion/colecciones-tecnicas/ntp-notas-tecnicas-de-prevencion/37-serie-ntp-numeros-1191-a-1214-ano-2024/ntp-1211-estadisticas-de-accidentabilidad-en-la-empresa-2024"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-03",
       "titulo": "Calidad: corazones cuando fallan los cilindros, varilla 'delgada' en báscula y recepción de acero con certificado",
       "resumen": "Corazones de concreto evalúa con el criterio de ACI 318 (promedio de 3 corazones ≥ 0.85 f'c y ninguno < 0.75 f'c) si una zona con cilindros bajos se acepta: con el ejemplo (f'c 250; corazones 228, 215 y 204) el promedio es 215.7 kg/cm² = 86.3 % y el más bajo 81.6 %, dictamen 1. Varilla 'delgada' compara la masa pesada en obra contra la nominal: #4 de 12 m que pesa 11.55 kg da 0.963 kg/m, −3.2 % (dentro de ±6 %), y el lote de 100 piezas con 1,170 kg queda en −1.95 % (dentro de ±3.5 %) con 23.3 kg menos que el nominal. Recepción de varilla en obra cierra el ciclo: certificado del lote, marcas de laminación, masa, estado superficial y almacenamiento, con trazabilidad al elemento. Mejoras: Aceptación de f'c remite a Corazones cuando el dictamen es 0, y Peso de varilla remite a la verificación de masa. Tolerancias de masa tomadas de la ficha de Ternium (mayo 2026); no se pudo consultar el texto completo de la NMX-B-506-CANACERO-2019.",
