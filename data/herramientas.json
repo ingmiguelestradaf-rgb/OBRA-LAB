@@ -6040,7 +6040,7 @@
         },
         {
           "id": "EQ",
-          "label": "Maquinaria y equipo por unidad (andamio, revolvedora, vibrador…)",
+          "label": "Maquinaria y equipo por unidad (costo horario ÷ rendimiento: calculadora Costo horario de maquinaria)",
           "unidad": "$/unid.",
           "valor": 8
         },
@@ -6052,7 +6052,7 @@
         },
         {
           "id": "FIN",
-          "label": "Financiamiento (% de directo + indirecto)",
+          "label": "Financiamiento (% de directo + indirecto; calcúlalo con Costo de financiamiento de la obra)",
           "unidad": "%",
           "valor": 1.2
         },
@@ -6222,6 +6222,419 @@
         {
           "titulo": "LOPSRM art. 59 (reformado DOF 16-04-2025) – Modificaciones por razones fundadas y explícitas; convenio en máximo 45 días naturales; extraordinarios con precio conciliado antes de pagarse",
           "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-59/"
+        }
+      ]
+    },
+    {
+      "id": "calc-costo-horario",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Costo horario de maquinaria (Reglamento LOPSRM) y ¿rentar o tener la máquina propia?",
+      "resumen": "Integra el costo horario directo de una máquina propia (retroexcavadora, minicargador, compactador, revolvedora) como lo pide el Reglamento LOPSRM: depreciación D = (Vm − Vr)/Ve, inversión Im = (Vm + Vr)·i/(2·Hea), seguros Sm = (Vm + Vr)·s/(2·Hea), mantenimiento Mn = Ko·D, combustible, lubricantes, llantas Pn/Vn y operador Sr/Ht. Lo compara contra la renta seca de la misma máquina, te da el costo por m³ con el rendimiento real y las horas al año a partir de las cuales tener la máquina sale más barato que rentarla. Ejemplo: retroexcavadora con Vm $2,600,000, diésel a $25.89/L en Tijuana y tasa de 12.8 % da $938/h propia contra $1,121/h rentada; tenerla propia conviene solo si trabaja más de ~700 h efectivas al año.",
+      "agregada": "2026-11-05",
+      "entradas": [
+        {
+          "id": "Vm",
+          "label": "Valor de la máquina nueva, sin llantas ni accesorios (cotización actual)",
+          "unidad": "$",
+          "valor": 2600000
+        },
+        {
+          "id": "VR",
+          "label": "Valor de rescate al final de su vida económica (% de Vm)",
+          "unidad": "%",
+          "valor": 20
+        },
+        {
+          "id": "Ve",
+          "label": "Vida económica en horas efectivas (manual del fabricante o historial)",
+          "unidad": "h",
+          "valor": 12000
+        },
+        {
+          "id": "Hea",
+          "label": "Horas efectivas que trabaja al año",
+          "unidad": "h/año",
+          "valor": 1500
+        },
+        {
+          "id": "i",
+          "label": "Tasa de interés anual: indicador + puntos del banco (ej. TIIE 28 días 6.76 % + 6)",
+          "unidad": "%",
+          "valor": 12.8
+        },
+        {
+          "id": "s",
+          "label": "Prima anual de seguro (% del valor; tu póliza)",
+          "unidad": "%",
+          "valor": 2.5
+        },
+        {
+          "id": "Ko",
+          "label": "Coeficiente de mantenimiento mayor + menor Ko (0.6 a 1.0 típico; ajústalo con tu historial)",
+          "unidad": "",
+          "valor": 0.8
+        },
+        {
+          "id": "Gh",
+          "label": "Consumo de diésel por hora efectiva (manual o bitácora de cargas)",
+          "unidad": "L/h",
+          "valor": 8
+        },
+        {
+          "id": "Pc",
+          "label": "Precio del diésel puesto en obra (Tijuana ~$25.89/L al 5 nov 2026)",
+          "unidad": "$/L",
+          "valor": 25.89
+        },
+        {
+          "id": "Lb",
+          "label": "Lubricantes, filtros y grasa por hora",
+          "unidad": "$/h",
+          "valor": 30
+        },
+        {
+          "id": "Pn",
+          "label": "Juego de llantas nuevas (0 si es de orugas)",
+          "unidad": "$",
+          "valor": 60000
+        },
+        {
+          "id": "Vn",
+          "label": "Vida de las llantas",
+          "unidad": "h",
+          "valor": 2000
+        },
+        {
+          "id": "Sr",
+          "label": "Salario real del operador por turno (calculadora Factor de salario real)",
+          "unidad": "$/turno",
+          "valor": 1400
+        },
+        {
+          "id": "Ht",
+          "label": "Horas efectivas de trabajo de la máquina por turno",
+          "unidad": "h",
+          "valor": 7
+        },
+        {
+          "id": "Rd",
+          "label": "Renta seca por día (sin operador ni diésel), cotización local",
+          "unidad": "$/día",
+          "valor": 5000
+        },
+        {
+          "id": "He",
+          "label": "Horas efectivas que de verdad trabaja la rentada por día",
+          "unidad": "h/día",
+          "valor": 7
+        },
+        {
+          "id": "R",
+          "label": "Rendimiento real de la máquina en esta actividad (m³/h, m²/h…)",
+          "unidad": "unid./h",
+          "valor": 25
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Depreciación D",
+          "formula": "((Vm-Vm*VR/100)/Ve)",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "Inversión + seguros (Im + Sm)",
+          "formula": "((Vm+Vm*VR/100)*(i+s)/100/(2*Hea))",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "Mantenimiento Mn = Ko·D",
+          "formula": "((Vm-Vm*VR/100)/Ve)*Ko",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "Combustible Co = Gh·Pc",
+          "formula": "(Gh*Pc)",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "Operación Po = Sr/Ht",
+          "formula": "(Sr/Ht)",
+          "unidad": "$/h",
+          "decimales": 2
+        },
+        {
+          "label": "COSTO HORARIO MÁQUINA PROPIA (Phm)",
+          "formula": "((((Vm-Vm*VR/100)/Ve)*(1+Ko)+((Vm+Vm*VR/100)*(i+s)/100/(2*Hea)))+(Gh*Pc)+Lb+(Pn/Vn)+(Sr/Ht))",
+          "unidad": "$/h",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Costo horario RENTADA (renta + diésel + operador)",
+          "formula": "(Rd/He+(Gh*Pc)+(Sr/Ht))",
+          "unidad": "$/h",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Ahorro de la propia contra la rentada (negativo = conviene rentar)",
+          "formula": "((Rd/He+(Gh*Pc)+(Sr/Ht))/((((Vm-Vm*VR/100)/Ve)*(1+Ko)+((Vm+Vm*VR/100)*(i+s)/100/(2*Hea)))+(Gh*Pc)+Lb+(Pn/Vn)+(Sr/Ht))-1)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            5,
+            0
+          ]
+        },
+        {
+          "label": "Costo de máquina por unidad de obra (propia)",
+          "formula": "((((Vm-Vm*VR/100)/Ve)*(1+Ko)+((Vm+Vm*VR/100)*(i+s)/100/(2*Hea)))+(Gh*Pc)+Lb+(Pn/Vn)+(Sr/Ht))/R",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "Costo de máquina por unidad de obra (rentada)",
+          "formula": "(Rd/He+(Gh*Pc)+(Sr/Ht))/R",
+          "unidad": "$/unid.",
+          "decimales": 2
+        },
+        {
+          "label": "HORAS AL AÑO para que tenerla convenga (0 = la renta siempre gana)",
+          "formula": "((Rd/He-((Vm-Vm*VR/100)/Ve)*(1+Ko)-(Pn/Vn)-Lb)>0?((Vm+Vm*VR/100)*(i+s)/100/2)/(Rd/He-((Vm-Vm*VR/100)/Ve)*(1+Ko)-(Pn/Vn)-Lb):0)",
+          "unidad": "h/año",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Pide la cotización actual de la máquina (sin llantas) y anota el consumo de diésel por hora del manual o, mejor, de tu bitácora de cargas: litros cargados ÷ horas de horómetro.",
+        "Pon la tasa como indicador + puntos del banco (TIIE 28 días 6.76 % el 5 nov 2026 según Banxico, más lo que te cobre tu crédito) y la prima de tu póliza; el Reglamento pide que la tasa esté referida a un indicador y se actualice con los ajustes de costos.",
+        "Captura la renta seca diaria que te cotizan en Tijuana y las horas EFECTIVAS que trabaja la máquina rentada (no las 8 h del contrato: descuenta traslados, esperas y comida).",
+        "Mete el rendimiento real medido en obra (m³ excavados ÷ horas de horómetro) para tener el costo de máquina por m³ que va a la tarjeta de precio unitario.",
+        "Decide: si tus horas reales al año quedan abajo de las horas de equilibrio, renta; si quedan arriba y la máquina tiene trabajo seguro en otras obras, comprar se paga.",
+        "Cada mes compara el costo horario real (facturas de diésel, refacciones y operador ÷ horas de horómetro) contra el calculado: si se desvía más de 10 %, corrige Ko, Gh o el rendimiento."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 194 – Costo horario de maquinaria: costos fijos, consumos y operación por hora efectiva; equipo especial puede sustituirse por la renta",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/194/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 196 – Depreciación lineal: Vm valor nuevo sin llantas, Vr rescate, Ve vida económica en horas",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/196/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 197 – Inversión: tasa i referida a un indicador económico más los puntos del crédito",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/197/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 198 – Seguros: prima anual promedio s sobre el valor de la máquina",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/198/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 199 – Mantenimiento mayor y menor Mn = Ko·D",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/199/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 204 y 206 – Llantas N = Pn/Vn y salarios de operación Po = Sr/Ht",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/206/"
+        },
+        {
+          "titulo": "MercadosMéxico con datos de Banxico – Tasa objetivo 6.50 %, TIIE 28 días 6.76 % y TIIE de fondeo 6.51 % (consultado 5 nov 2026, antes del anuncio de política monetaria de ese día)",
+          "url": "https://mercadosmexico.com/tasa-banxico"
+        },
+        {
+          "titulo": "GasolinaMX – Precio del diésel en Tijuana: $25.89/L (consultado 5 nov 2026; la página tiene datos inconsistentes, confirma con tu proveedor)",
+          "url": "https://www.gasolinamx.com/estado/baja-california-norte/tijuana"
+        }
+      ]
+    },
+    {
+      "id": "calc-financiamiento",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Costo de financiamiento de la obra: flujo día por día, capital de trabajo y % para el precio unitario",
+      "resumen": "Simula día por día el flujo de efectivo de un contrato: anticipo, gasto uniforme con crédito de proveedores, estimaciones mensuales que se cobran D días después del corte (con amortización de anticipo y fondo de garantía) y la devolución del fondo. Calcula los intereses de cada día con saldo negativo y te da el costo de financiamiento en $, el porcentaje que debe llevar el precio unitario, el capital de trabajo máximo que tienes que poner y el día en que ocurre. Ejemplo: $12 M en 8 meses, anticipo 30 %, cobro a 45 días y tasa 12.8 % dan 0.60 % de financiamiento y $2.5 M de capital máximo; sin anticipo sube a 1.85 % y $3.4 M.",
+      "agregada": "2026-11-05",
+      "entradas": [
+        {
+          "id": "C",
+          "label": "Costo directo + indirectos del contrato (sin financiamiento, utilidad ni IVA)",
+          "unidad": "$",
+          "valor": 12000000
+        },
+        {
+          "id": "n",
+          "label": "Plazo de ejecución",
+          "unidad": "meses",
+          "valor": 8
+        },
+        {
+          "id": "PA",
+          "label": "Anticipo otorgado",
+          "unidad": "%",
+          "valor": 30
+        },
+        {
+          "id": "DA",
+          "label": "Días después del inicio en que llega el anticipo (0 si llega antes de arrancar)",
+          "unidad": "días",
+          "valor": 0
+        },
+        {
+          "id": "D",
+          "label": "Días entre el corte mensual de la estimación y el pago (revisión + trámite + pago)",
+          "unidad": "días",
+          "valor": 45
+        },
+        {
+          "id": "CP",
+          "label": "Días de crédito promedio de proveedores y subcontratistas",
+          "unidad": "días",
+          "valor": 15
+        },
+        {
+          "id": "FG",
+          "label": "Fondo de garantía retenido en cada estimación (0 si hay fianza)",
+          "unidad": "%",
+          "valor": 5
+        },
+        {
+          "id": "DF",
+          "label": "Días que tardan en devolver el fondo de garantía después de la última estimación",
+          "unidad": "días",
+          "valor": 60
+        },
+        {
+          "id": "i",
+          "label": "Tasa anual de tu crédito o costo de oportunidad (indicador + puntos)",
+          "unidad": "%",
+          "valor": 12.8
+        },
+        {
+          "id": "FP",
+          "label": "% de financiamiento que trae tu precio unitario o propuesta",
+          "unidad": "%",
+          "valor": 1.2
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Costo financiero del contrato",
+          "formula": "(()=>{const T=Math.round(n*30),g=C/T,ci=i/36500;let s=0,c=0,mn=0,dm=0;const L=T+Math.max(D,CP)+DF+31;for(let d=0;d<=L;d++){if(d===DA)s+=C*PA/100;if(d>=1+CP&&d<=T+CP)s-=g;if(d>D&&(d-D)%30===0&&(d-D)/30<=n)s+=C/n*(1-PA/100-FG/100);if(d===T+D+DF)s+=C*FG/100;if(s<mn){mn=s;dm=d}if(s<0)c-=s*ci}return c})()",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "% DE FINANCIAMIENTO (sobre directo + indirecto)",
+          "formula": "(()=>{const T=Math.round(n*30),g=C/T,ci=i/36500;let s=0,c=0,mn=0,dm=0;const L=T+Math.max(D,CP)+DF+31;for(let d=0;d<=L;d++){if(d===DA)s+=C*PA/100;if(d>=1+CP&&d<=T+CP)s-=g;if(d>D&&(d-D)%30===0&&(d-D)/30<=n)s+=C/n*(1-PA/100-FG/100);if(d===T+D+DF)s+=C*FG/100;if(s<mn){mn=s;dm=d}if(s<0)c-=s*ci}return 100*c/C})()",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Capital de trabajo máximo que debes poner",
+          "formula": "(()=>{const T=Math.round(n*30),g=C/T,ci=i/36500;let s=0,c=0,mn=0,dm=0;const L=T+Math.max(D,CP)+DF+31;for(let d=0;d<=L;d++){if(d===DA)s+=C*PA/100;if(d>=1+CP&&d<=T+CP)s-=g;if(d>D&&(d-D)%30===0&&(d-D)/30<=n)s+=C/n*(1-PA/100-FG/100);if(d===T+D+DF)s+=C*FG/100;if(s<mn){mn=s;dm=d}if(s<0)c-=s*ci}return -mn})()",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Día del saldo más negativo (desde el inicio)",
+          "formula": "(()=>{const T=Math.round(n*30),g=C/T,ci=i/36500;let s=0,c=0,mn=0,dm=0;const L=T+Math.max(D,CP)+DF+31;for(let d=0;d<=L;d++){if(d===DA)s+=C*PA/100;if(d>=1+CP&&d<=T+CP)s-=g;if(d>D&&(d-D)%30===0&&(d-D)/30<=n)s+=C/n*(1-PA/100-FG/100);if(d===T+D+DF)s+=C*FG/100;if(s<mn){mn=s;dm=d}if(s<0)c-=s*ci}return dm})()",
+          "unidad": "día",
+          "decimales": 0
+        },
+        {
+          "label": "Margen del % de tu precio contra el calculado (negativo = te falta)",
+          "formula": "FP-(()=>{const T=Math.round(n*30),g=C/T,ci=i/36500;let s=0,c=0,mn=0,dm=0;const L=T+Math.max(D,CP)+DF+31;for(let d=0;d<=L;d++){if(d===DA)s+=C*PA/100;if(d>=1+CP&&d<=T+CP)s-=g;if(d>D&&(d-D)%30===0&&(d-D)/30<=n)s+=C/n*(1-PA/100-FG/100);if(d===T+D+DF)s+=C*FG/100;if(s<mn){mn=s;dm=d}if(s<0)c-=s*ci}return 100*c/C})()",
+          "unidad": "pp",
+          "decimales": 2,
+          "semaforo": [
+            0.2,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Captura el costo directo + indirectos de tu presupuesto (sin utilidad), el plazo y las condiciones del contrato: anticipo, fondo de garantía y en cuántos días pagan de verdad (usa tu historial con ese cliente, no lo que dice el contrato).",
+        "Pon los días de crédito que te dan tus proveedores de concreto, acero y subcontratistas; cada 15 días de crédito bajan el capital que pones.",
+        "Usa como tasa la de tu línea de crédito (indicador + puntos) o, si financias con capital propio, tu costo de oportunidad.",
+        "Lee el % de financiamiento y compáralo con el de tu propuesta: si sale en rojo, el precio no cubre el dinero que vas a poner; negocia anticipo, pago a 30 días o mete el ajuste en extraordinarios.",
+        "Lleva el capital de trabajo máximo y el día en que ocurre a tu flujo de caja: es la cifra que debes tener disponible en banco o en línea de crédito ese mes.",
+        "Modelo simplificado para planear: gasto uniforme, estimación mensual y sin IVA; para obra pública revisa la integración formal del costo por financiamiento con el Reglamento LOPSRM y tu contador."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 197 – La tasa de interés debe referirse a un indicador económico más los puntos del crédito y se actualiza con los ajustes de costos",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/197/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 143 – Amortización proporcional del anticipo en cada estimación",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
+        },
+        {
+          "titulo": "MercadosMéxico con datos de Banxico – Tasa objetivo 6.50 %, TIIE 28 días 6.76 % (consultado 5 nov 2026, antes del anuncio de política monetaria de ese día)",
+          "url": "https://mercadosmexico.com/tasa-banxico"
+        },
+        {
+          "titulo": "EFE vía Yahoo Noticias (4 nov 2026) – Banxico decide el 5 de noviembre; consenso: mantener 6.5 %, algunos esperan recorte de 25 pb",
+          "url": "https://es-us.noticias.yahoo.com/banco-m%C3%A9xico-prepara-reuni%C3%B3n-expectativa-193013177.html"
+        }
+      ]
+    },
+    {
+      "id": "fmt-destajos",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Pago semanal de destajos y subcontratos: medición, retenciones y anticipos sin pagar de más",
+      "resumen": "Formato para cerrar cada semana el pago a destajistas y subcontratistas con la misma disciplina que exige el cliente en tus estimaciones: cantidad medida en campo (no reportada), precio del contrato de destajo, amortización de anticipos y préstamos, retención de garantía y descuento por trabajos rechazados. Evita el sobrepago, el error más caro del costo de mano de obra: pagar avance que todavía no se le estima al cliente.",
+      "agregada": "2026-11-05",
+      "campos": [
+        "Obra / frente / semana (del – al)",
+        "Destajista o subcontratista, RFC y número de contrato u orden de trabajo",
+        "Concepto de destajo, unidad y precio unitario pactado",
+        "Cantidad acumulada anterior / cantidad medida esta semana / acumulado actual",
+        "Croquis o ejes medidos y foto del avance",
+        "Importe bruto de la semana",
+        "Amortización de anticipo o préstamo (% pactado) y saldo pendiente",
+        "Retención de garantía (%) y acumulado retenido",
+        "Descuentos: trabajos rechazados, material dañado, herramienta o equipo prestado",
+        "Neto a pagar",
+        "Avance acumulado del destajo contra lo estimado al cliente del mismo concepto (%)",
+        "Midió (residente) / Revisó (superintendente) / Recibe (destajista) con fecha"
+      ],
+      "items": [
+        "La cantidad se midió en campo con el destajista presente, no se tomó de su reporte",
+        "Lo medido tiene liberación de calidad (checklist o formato de liberación firmado)",
+        "El acumulado pagado al destajista no rebasa el acumulado estimado al cliente del mismo concepto",
+        "Se descontó el anticipo o préstamo en la proporción pactada y el saldo coincide con el control",
+        "Se aplicó la retención de garantía pactada",
+        "Se descontaron trabajos rechazados o retrabajos atribuibles al destajista",
+        "Hay contrato o pedido firmado con precio, alcance y forma de pago",
+        "El subcontratista entregó comprobante de pago de IMSS del periodo (subcontratación de obras especializadas registrada en REPSE)",
+        "La factura o recibo coincide con el neto autorizado",
+        "Las cantidades de la semana alimentan el generador de la estimación al cliente"
+      ],
+      "como_usar": [
+        "El viernes por la mañana mide con cada destajista los trabajos liberados de la semana y llena el formato en el celular con foto y ejes.",
+        "Revisa contra el generador del cliente: si el destajo va adelante de lo que puedes estimar, paga solo hasta lo estimable y deja el resto como saldo de la siguiente semana.",
+        "Aplica amortizaciones, retención y descuentos; firma el residente, revisa el superintendente y exporta a CSV para administración antes del pago del sábado.",
+        "Mide cada mes el % de sobrepago (pagado al destajista − estimado al cliente) ÷ estimado y el número de retrabajos descontados; la meta es sobrepago 0."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 143 – Amortización proporcional del anticipo en cada estimación (mismo criterio para anticipos a destajistas)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/143/index.html.md"
+        },
+        {
+          "titulo": "Obraflow – Estimaciones de obra: integración, números generadores y errores que causan rechazo (2026)",
+          "url": "https://obraflow.mx/estimaciones-de-obra/"
         }
       ]
     },

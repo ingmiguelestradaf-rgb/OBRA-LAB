@@ -1,6 +1,40 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-05",
+      "titulo": "Costos: costo horario de maquinaria (¿rentar o comprar?), costo de financiamiento de la obra y pago de destajos sin sobrepago",
+      "resumen": "Costo horario de maquinaria integra el costo por hora efectiva como el Reglamento LOPSRM (depreciación, inversión, seguros, mantenimiento Ko·D, diésel, llantas y operador) y lo compara con la renta seca: retroexcavadora de $2.6 M con diésel a $25.89/L en Tijuana y tasa de 12.8 % (TIIE 28 días 6.76 % + 6 puntos) cuesta $938/h propia contra $1,121/h rentada a $5,000/día, y tenerla propia solo conviene arriba de ~700 h efectivas al año. Costo de financiamiento simula el flujo día por día: contrato de $12 M en 8 meses, anticipo 30 %, cobro a 45 días y 15 días de crédito de proveedores da 0.60 % de financiamiento y $2.5 M de capital de trabajo máximo; sin anticipo sube a 1.85 % y $3.4 M. Pago semanal de destajos evita pagar al destajista más de lo que ya puedes estimarle al cliente. Mejora: la calculadora Precio unitario ahora remite a estas dos para llenar equipo y financiamiento. Notas: la tasa de Banxico (6.50 %) se tomó antes del anuncio de política monetaria del 5 nov; el precio del diésel viene de un agregador con datos inconsistentes, confírmalo con tu proveedor; la renta de $5,000/día y el valor de la máquina son de ejemplo, no cotizaciones verificadas; los art. 214–216 del Reglamento (financiamiento) no se pudieron consultar hoy, por eso la calculadora se presenta como modelo de planeación.",
+      "herramientas": [
+        "calc-costo-horario",
+        "calc-financiamiento",
+        "fmt-destajos",
+        "calc-precio-unitario"
+      ],
+      "como_aplicarlo": "1) Hoy toma la máquina que más horas trabaja en tu obra, saca litros cargados ÷ horas de horómetro de la última semana y corre el costo horario contra la renta que te cotizan. 2) Corre el costo de financiamiento con los días REALES que tarda en pagarte el cliente y compáralo con el % de tu precio; si sale en rojo, llévalo a la junta con el cliente. 3) Este viernes paga los destajos con el formato nuevo y mide el sobrepago contra lo estimado.",
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 194 a 206 – Costo horario de maquinaria (mley.mx)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/194/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 197 – Tasa de interés referida a un indicador económico",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/197/"
+        },
+        {
+          "titulo": "MercadosMéxico con datos de Banxico – Tasa objetivo y TIIE (consultado 5 nov 2026)",
+          "url": "https://mercadosmexico.com/tasa-banxico"
+        },
+        {
+          "titulo": "EFE vía Yahoo Noticias (4 nov 2026) – Expectativa de la decisión de Banxico",
+          "url": "https://es-us.noticias.yahoo.com/banco-m%C3%A9xico-prepara-reuni%C3%B3n-expectativa-193013177.html"
+        },
+        {
+          "titulo": "GasolinaMX – Diésel en Tijuana (consultado 5 nov 2026)",
+          "url": "https://www.gasolinamx.com/estado/baja-california-norte/tijuana"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-04",
       "titulo": "Seguridad: cisternas y fosas sin intoxicados (permiso de espacio confinado y ventilación calculada) e indicadores de accidentabilidad",
       "resumen": "Permiso de entrada a espacio confinado aplica la NOM-033-STPS-2015 a cisternas, fosas, cárcamos y pozos: clasificación Tipo I / Tipo II con oxígeno 19.5–23.5 %, inflamables < 10 % del LII y tóxicos < nivel de acción, vigencia de un turno, vigía, arnés con línea de rescate y monitoreo continuo en Tipo II. Ventilación de espacio confinado calcula con la ecuación de dilución cuánto ventilar antes de volver a medir: cisterna de 30 m³ con ventilador de 28.3 m³/min y 30 % de pérdida da 39.6 cambios/h y 16 min de purga para bajar de 40 a 5 (K = 5). Indicadores de accidentabilidad convierte los casos del mes en índice de frecuencia, gravedad y TRIR: 60 trabajadores × 26 días × 8 h = 12,480 HH, con 2 accidentes y 18 días perdidos da IF 160.3 e IG 1.44. Contexto: el IMSS reportó 44,474 accidentes de trabajo en construcción en 2024 (cuarta industria). Mejoras: el Recorrido de seguridad semanal agrega espacios confinados como hallazgo crítico y la Inspección diaria de excavación ya trae los límites de gases. Nota: el umbral de 10 % del LII es del texto definitivo del DOF (el proyecto de 2014 decía 20 %); el factor K y la pérdida por ducto son estimaciones de ingeniería, por eso la segunda medición es obligatoria. No se revisaron precios de software en esta entrega.",
