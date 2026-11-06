@@ -2913,7 +2913,8 @@
         "Coloca de 4 a 6 puntos de control (dianas de 50 × 50 cm en blanco y negro) en las esquinas y al centro del área, y levántalos con estación total o GPS RTK; anota coordenadas en el Checklist de vuelo.",
         "Vuela la misión con los parámetros de la calculadora 'Plan de vuelo fotogramétrico' (GSD 1–2 cm/px para volúmenes), sube las fotos y procesa con la opción de volúmenes / modelo digital de superficie (DSM) activada.",
         "En el mapa dibuja un polígono alrededor del acopio o del corte; usa plano base 'Triangulate' si los bordes se ven y 'Custom' con la cota de proyecto para cortes. Exporta el resultado y el ortomosaico con fecha.",
-        "Prueba PDCA de 2 semanas: compara el volumen de WebODM contra tus secciones topográficas o contra los viajes de camión del mismo corte; si la diferencia es menor a 3 %, adopta el vuelo semanal como soporte de generadores de terracerías."
+        "Prueba PDCA de 2 semanas: compara el volumen de WebODM contra tus secciones topográficas o contra los viajes de camión del mismo corte; si la diferencia es menor a 3 %, adopta el vuelo semanal como soporte de generadores de terracerías.",
+        "Antes de adoptar el volumen del dron para acopios, mide uno de los montones con la calculadora 'Volumen de acopio con cinta y altura' el mismo día: si ambos difieren menos de 5 %, el procesamiento está bien configurado."
       ],
       "fuentes": [
         {
@@ -3749,6 +3750,224 @@
         {
           "titulo": "El Imparcial – La IA redefine la industria de la construcción en Tijuana, columna de Elmer Peña Ruvalcaba, presidente de CMIC Tijuana, Tecate y Rosarito (13 dic 2025)",
           "url": "https://www.elimparcial.com/tij/columnas/2025/12/13/la-ia-redefine-la-industria-de-la-construccion-en-tijuana/"
+        }
+      ]
+    },
+    {
+      "id": "calc-volumen-acopio",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "Volumen de acopio de arena, grava o relleno con cinta y altura: m³, toneladas, viajes y cuadre contra remisiones",
+      "resumen": "Mide un montón de material en 5 minutos con flexómetro o cinta (largo y ancho de la base y altura de la cresta) y calcula el volumen como prisma triangular más dos medios conos en las puntas (si es redondo pon largo = ancho y queda un cono). Te da m³, toneladas con el peso volumétrico suelto, viajes de camión equivalentes y cuánto cuadra contra lo que dicen las remisiones menos lo consumido. También calcula el ángulo de talud resultante para detectar una medición mal hecha. Sirve para validar el volumen que da la app del celular o el dron (WebODM) antes de confiar en ellos.",
+      "agregada": "2026-11-06",
+      "entradas": [
+        {
+          "id": "L",
+          "label": "Largo de la base del montón (punta a punta, al pie)",
+          "unidad": "m",
+          "valor": 8
+        },
+        {
+          "id": "B",
+          "label": "Ancho de la base (al pie, en la parte más ancha; si es redondo = diámetro)",
+          "unidad": "m",
+          "valor": 4
+        },
+        {
+          "id": "H",
+          "label": "Altura de la cresta sobre el piso (estadal + nivel de mano o regla y nivel)",
+          "unidad": "m",
+          "valor": 1.6
+        },
+        {
+          "id": "PVS",
+          "label": "Peso volumétrico suelto del material (pésalo: cubeta de volumen conocido en báscula)",
+          "unidad": "kg/m³",
+          "valor": 1500
+        },
+        {
+          "id": "CAM",
+          "label": "Capacidad del camión con que te surten (ej. volteo de 7 m³)",
+          "unidad": "m³",
+          "valor": 7
+        },
+        {
+          "id": "EXP",
+          "label": "Inventario esperado: m³ de remisiones − m³ consumidos teóricos desde la última medición",
+          "unidad": "m³",
+          "valor": 21
+        },
+        {
+          "id": "PRE",
+          "label": "Precio del material puesto en obra",
+          "unidad": "$/m³",
+          "valor": 450
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Volumen medido del acopio",
+          "formula": "(B*H*(L-B)/2+Math.PI*B*B*H/12)",
+          "unidad": "m³",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Toneladas en el acopio",
+          "formula": "(B*H*(L-B)/2+Math.PI*B*B*H/12)*PVS/1000",
+          "unidad": "t",
+          "decimales": 1
+        },
+        {
+          "label": "Viajes de camión equivalentes",
+          "formula": "(B*H*(L-B)/2+Math.PI*B*B*H/12)/CAM",
+          "unidad": "viajes",
+          "decimales": 1
+        },
+        {
+          "label": "Diferencia contra inventario esperado (negativo = falta material)",
+          "formula": "(B*H*(L-B)/2+Math.PI*B*B*H/12)-EXP",
+          "unidad": "m³",
+          "decimales": 2
+        },
+        {
+          "label": "Diferencia en dinero (negativo = material que no aparece)",
+          "formula": "((B*H*(L-B)/2+Math.PI*B*B*H/12)-EXP)*PRE",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Cuadre contra remisiones (verde ≥ 95 %, amarillo 90–95 %, rojo < 90 %: investiga)",
+          "formula": "100-Math.abs((B*H*(L-B)/2+Math.PI*B*B*H/12)-EXP)/EXP*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "Ángulo de talud resultante (arena y grava suelta quedan entre 30° y 40°; fuera de 25–45° revisa la medición)",
+          "formula": "Math.atan(2*H/B)*180/Math.PI",
+          "unidad": "°",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Mide al pie del montón, no a media altura: largo punta a punta y ancho en la parte más ancha con cinta; la altura, con estadal en la cresta y nivel de mano (o regla de aluminio nivelada desde la cresta). Si el montón es irregular, divídelo en dos y suma.",
+        "Saca el peso volumétrico suelto una vez por proveedor: llena una cubeta de 19 L al ras sin compactar, pésala, réstale la cubeta y divide entre 0.019 (ej. 28.5 kg ÷ 0.019 = 1,500 kg/m³).",
+        "En inventario esperado pon los m³ de las remisiones desde la última medición más lo que había, menos lo que ya consumiste en teoría (calculadora de dosificación o de muros/repellos).",
+        "Si el cuadre sale en rojo revisa primero el ángulo de talud (medición mal hecha), luego el camión: mide la caja del volteo (largo × ancho × altura de carga) en la siguiente entrega frente al chofer.",
+        "Para validar una app de celular o el dron: mide el mismo acopio con esta calculadora y con la app el mismo día; si la diferencia es menor a 5 % ya puedes usar la app para acopios grandes. Los fabricantes advierten que el LiDAR del iPhone solo alcanza unos 3–4.5 m y subestima montones altos: para esos usa fotogrametría (fotos alrededor) o dron.",
+        "Mide cada viernes a la misma hora y guarda captura con fecha; es el soporte para reclamar al proveedor o al destajista y para el corte de inventario del mes."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Stockpile Reports – Por qué SR Measure no usa el LiDAR del iPhone: alcance efectivo de 10–15 ft (3–4.5 m), cima del montón incompleta y volumen subestimado en montones de 14 ft; prueba del propio fabricante, sin % de error publicado (4 sep 2025, actualizado oct 2026)",
+          "url": "https://www.stockpilereports.com/blog/iphone-lidar-vs-photogrammetry-stockpile-measurement.html"
+        },
+        {
+          "titulo": "App Store – SR Measure (Stockpile Reports): medición de acopios con fotos del iPhone 12 o posterior; precio en México no verificado",
+          "url": "https://apps.apple.com/us/app/sr-measure/id1569961235"
+        },
+        {
+          "titulo": "ISPRS Archives XLVIII-M-10-2025 (2026) – Artículo sobre medición de volumen de acopios con sensores de bajo costo",
+          "url": "https://isprs-archives.copernicus.org/articles/XLVIII-M-10-2025/91/2026/"
+        },
+        {
+          "titulo": "WebODM – Cómo calcular volúmenes con dron (precisión 1–2 % con puntos de control)",
+          "url": "https://docs.webodm.net/how-to/calculate-volumes"
+        }
+      ]
+    },
+    {
+      "id": "fmt-planos-qr",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Planos vigentes en obra con código QR: lista maestra, revisiones y retiro de planos obsoletos",
+      "resumen": "Cada plano impreso en obra lleva un código QR que abre la carpeta compartida con la última revisión; el residente lo escanea antes de trazar, armar o colar y confirma que la revisión impresa coincide. Es el mismo principio que traen plataformas como PlanRadar (QR al último plano), pero con Google Drive, OneDrive o Dropbox y el generador de QR de tu preferencia. Este formato es la auditoría semanal: lista maestra, sello de vigencia y retiro de obsoletos.",
+      "agregada": "2026-11-06",
+      "campos": [
+        "Obra",
+        "Fecha de revisión",
+        "Responsable de control documental",
+        "Carpeta compartida de planos vigentes (liga)",
+        "Disciplina revisada (estructura, arquitectura, IHS, eléctrica, gas, HVAC)",
+        "Versión de la lista maestra",
+        "Frentes recorridos",
+        "Planos obsoletos retirados (número y revisión)",
+        "Firma del residente",
+        "Firma del DRO / supervisor (si aplica)"
+      ],
+      "items": [
+        "Existe lista maestra de planos con número, título, revisión vigente, fecha y quién la emitió",
+        "La carpeta compartida tiene SOLO la revisión vigente de cada plano; las anteriores están en subcarpeta 'Obsoletos'",
+        "El nombre de archivo sigue una regla fija (ej. EST-03_Losa-N2_Rev-C_2026-11-06.pdf)",
+        "Cada plano impreso en obra tiene el QR que abre la carpeta o el archivo vigente (no un archivo fijo que luego se reemplaza con otro nombre)",
+        "Escaneé el QR de cada plano en los frentes recorridos y la revisión impresa coincide con la vigente",
+        "Los planos impresos tienen sello 'VIGENTE' con fecha, o 'CANCELADO' con raya en diagonal los retirados",
+        "Los planos obsoletos se retiraron de mesas, casetas de contratistas y del taller de habilitado de acero",
+        "Cada cambio de revisión se notificó por escrito (correo o nota de bitácora) a contratistas y habilitador con acuse",
+        "Los cambios que afectan estructura llevan firma del corresponsable / DRO antes de ejecutarse",
+        "Los contratistas tienen acceso de solo lectura a la carpeta (no pueden borrar ni subir archivos)",
+        "Las RFIs contestadas que modifican el plano están ligadas a la revisión que las incorpora",
+        "Hay al menos un juego impreso vigente para trabajar sin señal en los frentes con mala cobertura"
+      ],
+      "como_usar": [
+        "Arma la lista maestra (puede ser una hoja de cálculo) y una carpeta compartida por disciplina; liga cada QR a la CARPETA de la disciplina o a un acceso directo que siempre apunte a la última revisión, así el QR impreso no cambia aunque cambie el plano.",
+        "Genera el QR con el generador de tu nube o cualquier generador estático gratuito (evita los QR 'dinámicos' de prueba que caducan) y pégalo en la esquina del cuadro de datos de cada plano impreso.",
+        "Cada viernes recorre los frentes con este formato: escanea los QR, compara la revisión impresa contra la vigente y retira en el momento los obsoletos.",
+        "Cuando llegue una revisión nueva: sube el PDF, mueve la anterior a 'Obsoletos', actualiza la lista maestra, avisa por escrito y anota en bitácora la fecha de entrega a cada contratista.",
+        "Indicador: número de planos obsoletos encontrados en campo por semana y retrabajos por plano equivocado; meta 0 en 4 semanas. Exporta el CSV como evidencia para el expediente del DRO."
+      ],
+      "fuentes": [
+        {
+          "titulo": "PlanRadar Ayuda – Consultar la última versión del plano con un código QR",
+          "url": "https://helpcenter-prd.planradar.com/en/check-the-latest-plan-version-with-a-qr-code/"
+        },
+        {
+          "titulo": "LINEAR (AutoCAD / Revit V26) – Códigos QR en planos para enlazar documentación",
+          "url": "https://www.linear.eu/en/services/knowledge-base-autocad/v26/output/creating-output-with-autocad/plotting-and-printing-projects/about-qr-codes-on-plans/"
+        },
+        {
+          "titulo": "Universidad de Washington / PacTrans – Factibilidad de QR para control documental en construcción",
+          "url": "https://depts.washington.edu/pactrans/research/projects/investigating-the-feasibility-of-using-qr-quick-response-codes-for-construction-document-control-in-highway-construction-year-2-2013-14/"
+        }
+      ]
+    },
+    {
+      "id": "met-ia-revision-planos",
+      "tipo": "metodo",
+      "categoria": "Herramientas digitales",
+      "titulo": "Revisión de planos y especificaciones con IA antes de ejecutar: contradicciones, RFIs y respuestas con número de hoja",
+      "resumen": "Sube el juego de planos y especificaciones (PDF con texto) al asistente de IA autorizado por la empresa y hazle preguntas cerradas por frente de la próxima semana: f'c, recubrimientos, traslapes, niveles, cédulas de puertas, especificaciones de impermeabilizante. La regla de oro: la IA solo puede responder citando hoja y detalle, y todo se verifica abriendo el plano. Lo que no cuadra se vuelve RFI antes de que llegue la cuadrilla. Es lo que Procore lanzó en 2026 como agentes de búsqueda profunda en documentos, hecho con el asistente que ya tengas.",
+      "agregada": "2026-11-06",
+      "beneficio": "Encontrar contradicciones entre planos y especificaciones antes de habilitar acero o colar, y levantar las RFIs con 1–2 semanas de anticipación en lugar de pararse en campo. Indicador: RFIs levantadas antes de ejecutar contra RFIs levantadas con la cuadrilla esperando, y retrabajos por plano mal interpretado; mide 4 semanas antes y 4 después. Las cifras de ahorro de los proveedores (ej. 50 % menos trabajo en RFIs) no están verificadas en obra; mídelas tú.",
+      "como_usar": [
+        "Prepara el material: solo planos y especificaciones VIGENTES (usa la lista maestra del formato de planos con QR), en PDF con texto seleccionable; si son escaneos, la IA leerá mal números pequeños. Usa la cuenta de IA autorizada por la empresa y revisa que el contrato no prohíba compartir los planos.",
+        "Prompt base: \"Eres revisor de planos. Responde SOLO con lo que aparece en los documentos y cita siempre número de plano, hoja y detalle. Si no lo encuentras o hay dos valores distintos, dilo y no lo supongas.\"",
+        "Pregunta por el frente de la semana siguiente, con preguntas cerradas: '¿Qué f'c, recubrimiento y traslape lleva la losa del nivel 2 y en qué hoja está?', '¿Coinciden los niveles de piso terminado entre arquitectura y estructura?', '¿Qué cambia entre la Rev B y la Rev C de EST-03?'.",
+        "Verifica cada respuesta abriendo la hoja citada; si la cita no existe o el dato no coincide, descártala (la IA puede inventar citas). Solo lo verificado pasa a tu lista.",
+        "Lo que tenga contradicción real se vuelve RFI por escrito al proyectista con hoja y detalle de ambos lados, y se anota en el análisis de restricciones (lookahead) como restricción a liberar antes del inicio.",
+        "Nunca uses la respuesta de la IA como liberación: la liberación de colado y los cambios estructurales los firma el residente / DRO sobre el plano, no sobre el chat."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Business Wire – New Procore AI Experience Embeds Datagrid into Procore: agentes de IA que buscan y trabajan sobre documentos del proyecto (21 may 2026)",
+          "url": "https://www.businesswire.com/news/home/20260521183451/en/New-Procore-AI-Experience-Embeds-Datagrid-into-Procore"
+        },
+        {
+          "titulo": "ENR – Procore releases new AI agents after Datagrid integration (2026)",
+          "url": "https://www.enr.com/articles/63042-procore-releases-new-ai-agents-after-datagrid-integration"
+        },
+        {
+          "titulo": "Construction Management (CIOB) – Procore agentic AI tackles deep search and contract reviews (2026)",
+          "url": "https://constructionmanagement.co.uk/procore-agentic-ai-tackles-deep-search-and-contract-reviews/"
+        },
+        {
+          "titulo": "Business Wire – Procore Advances the Future of Construction with New AI Innovations at Groundbreak 2025 (15 oct 2025)",
+          "url": "https://www.businesswire.com/news/home/20251015796723/en/Procore-Advances-the-Future-of-Construction-with-New-AI-Innovations-at-Groundbreak-2025"
         }
       ]
     },

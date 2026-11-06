@@ -1,6 +1,36 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-06",
+      "titulo": "Herramientas digitales e IA: acopios medidos y cuadrados contra remisiones, planos vigentes con QR y revisión de planos con IA citando hoja",
+      "resumen": "Volumen de acopio calcula con cinta y altura el volumen de un montón de arena, grava o relleno (prisma + medios conos), lo pasa a toneladas y viajes, lo cuadra contra remisiones menos consumo y revisa el ángulo de talud: un montón de 8 × 4 × 1.6 m da 19.5 m³ (29.3 t), contra 21 m³ esperados cuadra al 92.9 % y faltan $674 de material. Sirve también para validar la app del celular o el dron; el fabricante de SR Measure advierte que el LiDAR del iPhone solo alcanza 3–4.5 m y subestima montones altos (prueba del propio fabricante, sin % de error publicado). Planos vigentes con QR: cada plano impreso abre la carpeta con la última revisión y el formato audita cada semana obsoletos en campo. Revisión de planos con IA: preguntas cerradas por frente, respuesta obligada con hoja y detalle, verificación humana y lo que no cuadra se vuelve RFI en el lookahead. Mejora: WebODM ahora indica validar su volumen con la calculadora de acopio. No verificado hoy: precios de Fieldwire y de SR Measure en México (la página de precios no se pudo consultar); ninguna herramienta nueva requiere pago.",
+      "herramientas": [
+        "calc-volumen-acopio",
+        "fmt-planos-qr",
+        "met-ia-revision-planos",
+        "dig-webodm"
+      ],
+      "como_aplicarlo": "1) Hoy mide el acopio de arena o grava más grande de la obra con la calculadora y compáralo con las remisiones de la semana. 2) Pega un QR a la carpeta de planos vigentes en los planos de estructura del frente activo y haz el primer recorrido del formato este viernes. 3) Antes del lunes, hazle a la IA 5 preguntas cerradas sobre el frente de la próxima semana, verifica cada cita en el plano y levanta como RFI lo que no cuadre.",
+      "fuentes": [
+        {
+          "titulo": "Stockpile Reports – iPhone LiDAR vs fotogrametría para acopios (actualizado oct 2026)",
+          "url": "https://www.stockpilereports.com/blog/iphone-lidar-vs-photogrammetry-stockpile-measurement.html"
+        },
+        {
+          "titulo": "PlanRadar Ayuda – Última versión del plano con código QR",
+          "url": "https://helpcenter-prd.planradar.com/en/check-the-latest-plan-version-with-a-qr-code/"
+        },
+        {
+          "titulo": "Business Wire – New Procore AI Experience Embeds Datagrid into Procore (21 may 2026)",
+          "url": "https://www.businesswire.com/news/home/20260521183451/en/New-Procore-AI-Experience-Embeds-Datagrid-into-Procore"
+        },
+        {
+          "titulo": "ENR – Procore releases new AI agents after Datagrid integration (2026)",
+          "url": "https://www.enr.com/articles/63042-procore-releases-new-ai-agents-after-datagrid-integration"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-05",
       "titulo": "Costos: costo horario de maquinaria (¿rentar o comprar?), costo de financiamiento de la obra y pago de destajos sin sobrepago",
       "resumen": "Costo horario de maquinaria integra el costo por hora efectiva como el Reglamento LOPSRM (depreciación, inversión, seguros, mantenimiento Ko·D, diésel, llantas y operador) y lo compara con la renta seca: retroexcavadora de $2.6 M con diésel a $25.89/L en Tijuana y tasa de 12.8 % (TIIE 28 días 6.76 % + 6 puntos) cuesta $938/h propia contra $1,121/h rentada a $5,000/día, y tenerla propia solo conviene arriba de ~700 h efectivas al año. Costo de financiamiento simula el flujo día por día: contrato de $12 M en 8 meses, anticipo 30 %, cobro a 45 días y 15 días de crédito de proveedores da 0.60 % de financiamiento y $2.5 M de capital de trabajo máximo; sin anticipo sube a 1.85 % y $3.4 M. Pago semanal de destajos evita pagar al destajista más de lo que ya puedes estimarle al cliente. Mejora: la calculadora Precio unitario ahora remite a estas dos para llenar equipo y financiamiento. Notas: la tasa de Banxico (6.50 %) se tomó antes del anuncio de política monetaria del 5 nov; el precio del diésel viene de un agregador con datos inconsistentes, confírmalo con tu proveedor; la renta de $5,000/día y el valor de la máquina son de ejemplo, no cotizaciones verificadas; los art. 214–216 del Reglamento (financiamiento) no se pudieron consultar hoy, por eso la calculadora se presenta como modelo de planeación.",
