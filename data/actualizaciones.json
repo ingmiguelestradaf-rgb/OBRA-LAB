@@ -1,6 +1,41 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-07",
+      "titulo": "Lean y mejora continua: menos frentes abiertos para terminar antes, junta diaria de 15 minutos y primera ejecución antes de repetir",
+      "resumen": "Frentes abiertos y tiempo de ciclo aplica la Ley de Little: con 24 departamentos abiertos y 3 terminados por semana, cada depto tarda 8 semanas aunque solo lleva 25 días de trabajo real (eficiencia de flujo 52 %); para un ciclo de 5 semanas bastan 15 abiertos, y cerrar los 9 de más libera $1.8 millones que cuestan $27,000 al mes (costo por unidad de ejemplo; usa el tuyo). Junta diaria de arranque: 15 minutos de pie en el frente con metas, cumplimiento de ayer, restricciones con dueño, riesgo del día, entregas y pizarrón Más / Delta, según el LCI (actualizado feb 2026) y el boletín del LCI del 29 oct 2026. Primera ejecución (first-run study): se hace una unidad de prueba con la cuadrilla real 2 semanas antes, se cronometra, se mide contra tolerancias y queda una pieza muestra firmada. Mejoras: Last Planner ahora remite a la junta diaria, a la primera ejecución y al límite de frentes abiertos; Plan takt toma el rendimiento de la primera ejecución. La cifra de 30 % más productividad con juntas diarias que publica el LCI no trae estudio citado, por eso no se usa. Ninguna herramienta nueva requiere pago.",
+      "herramientas": [
+        "calc-wip-flujo",
+        "fmt-junta-diaria",
+        "fmt-primera-ejecucion",
+        "met-last-planner",
+        "calc-takt"
+      ],
+      "como_aplicarlo": "1) Este lunes cuenta las unidades abiertas y las terminadas por semana, captura la calculadora y congela la apertura de unidades nuevas hasta llegar a la cifra recomendada. 2) Desde el lunes haz la junta de las 7:00 con el formato y el pizarrón Más / Delta; mide su duración y el % de metas diarias cumplidas. 3) Elige una actividad repetitiva que arranque en 2 a 4 semanas y programa su primera ejecución con el formato.",
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Daily Huddle: 10 a 15 minutos, de pie, en el frente; roles de facilitador, último planificador y escriba (actualizado 24 feb 2026)",
+          "url": "https://leanconstruction.org/lean-topics/daily-huddle/"
+        },
+        {
+          "titulo": "LCI Weekly, 29 oct 2026 – 'Make Morning Huddles More Effective': pizarrón Más/Delta para convertir problemas en acciones con dueño (Southland Industries)",
+          "url": "https://leanconstruction.org/newsletters/october-29-2026/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Tracks del 28.º LCI Congress (Atlanta, 12–16 oct 2026): 'Field-First Lean: Tools, Flow, and Daily Improvement' (sep 2026)",
+          "url": "https://leanconstruction.org/blog/dive-into-the-2026-lci-congress-conference-tracks/"
+        },
+        {
+          "titulo": "Jason Schroeder (Elevate Construction) – Production Laws in a Takt-ed System: Ley de Little, lotes chicos y limitar trabajo en proceso (actualizado jun 2026)",
+          "url": "https://theleanbuilder.com/production-laws-in-a-takt-ed-system/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery: 'First-run Study' (prueba con PDCA, semanas antes de la ejecución) y 'Work in Process'",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-06",
       "titulo": "Herramientas digitales e IA: acopios medidos y cuadrados contra remisiones, planos vigentes con QR y revisión de planos con IA citando hoja",
       "resumen": "Volumen de acopio calcula con cinta y altura el volumen de un montón de arena, grava o relleno (prisma + medios conos), lo pasa a toneladas y viajes, lo cuadra contra remisiones menos consumo y revisa el ángulo de talud: un montón de 8 × 4 × 1.6 m da 19.5 m³ (29.3 t), contra 21 m³ esperados cuadra al 92.9 % y faltan $674 de material. Sirve también para validar la app del celular o el dron; el fabricante de SR Measure advierte que el LiDAR del iPhone solo alcanza 3–4.5 m y subestima montones altos (prueba del propio fabricante, sin % de error publicado). Planos vigentes con QR: cada plano impreso abre la carpeta con la última revisión y el formato audita cada semana obsoletos en campo. Revisión de planos con IA: preguntas cerradas por frente, respuesta obligada con hoja y detalle, verificación humana y lo que no cuadra se vuelve RFI en el lookahead. Mejora: WebODM ahora indica validar su volumen con la calculadora de acopio. No verificado hoy: precios de Fieldwire y de SR Measure en México (la página de precios no se pudo consultar); ninguna herramienta nueva requiere pago.",

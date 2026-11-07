@@ -2225,10 +2225,11 @@
         "Plan maestro: hitos principales del programa general.",
         "Plan intermedio (lookahead) de 6 semanas: registra las restricciones de cada actividad en el formato Análisis de restricciones (planos, material, permisos, frente libre, predecesora).",
         "Junta semanal: cada contratista se compromete solo a lo que no tiene restricciones.",
-        "Junta diaria de 15 minutos al inicio de jornada para alinear el día.",
+        "Junta diaria de 15 minutos al inicio de jornada, en el frente y de pie, con el formato 'Junta diaria de arranque' (metas de hoy, cumplimiento de ayer, restricciones, seguridad, entregas y Más / Delta).",
         "Al cierre de semana calcula el PPC y analiza las causas de no cumplimiento.",
         "En frentes repetitivos (niveles, departamentos, viviendas) arma el plan intermedio como tren takt con la calculadora 'Plan takt': cada contratista sabe en qué zona debe estar cada semana.",
-        "Clasifica las causas de no cumplimiento del PPC con la calculadora 'Pareto de causas de no cumplimiento', verifícalas en sitio con el Recorrido Gemba y resuelve la más repetida del mes con un Reporte A3."
+        "Clasifica las causas de no cumplimiento del PPC con la calculadora 'Pareto de causas de no cumplimiento', verifícalas en sitio con el Recorrido Gemba y resuelve la más repetida del mes con un Reporte A3.",
+        "Antes de arrancar una actividad repetitiva, hazla una vez con el formato 'Primera ejecución' y limita las unidades abiertas con la calculadora 'Frentes abiertos y tiempo de ciclo'."
       ],
       "fuentes": [
         {
@@ -2250,6 +2251,10 @@
         {
           "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
           "url": "https://iglc.net/Papers/Details/1938"
+        },
+        {
+          "titulo": "Lean Construction Institute – Daily Huddle: 10 a 15 minutos, de pie, en el frente; roles de facilitador, último planificador y escriba (actualizado 24 feb 2026)",
+          "url": "https://leanconstruction.org/lean-topics/daily-huddle/"
         }
       ]
     },
@@ -4094,7 +4099,8 @@
         "Captura el rendimiento real de una cuadrilla del oficio más lento (sácalo de la calculadora 'Rendimiento de cuadrilla'). Si la holgura sale en rojo, agrega cuadrillas o reduce la cantidad por zona antes de arrancar.",
         "Dibuja el tren en una sábana (zonas en filas, semanas en columnas) y pégala en la oficina de obra; en la junta semanal de Last Planner cada contratista revisa que su zona siguiente esté libre de restricciones.",
         "Cada día el residente marca en la sábana si cada vagón terminó su zona en el takt; un vagón atrasado se ataca ese mismo día (takt control), sin dejar que el siguiente oficio entre a una zona incompleta.",
-        "Indicador: % de entregas de zona a tiempo y días ganados reales contra el programa. Prueba 4 semanas en un solo frente y adopta si la entrega a tiempo supera 80 %."
+        "Indicador: % de entregas de zona a tiempo y días ganados reales contra el programa. Prueba 4 semanas en un solo frente y adopta si la entrega a tiempo supera 80 %.",
+        "Toma la duración de cada vagón del rendimiento medido en la 'Primera ejecución' (no del tabulador) y revisa con 'Frentes abiertos y tiempo de ciclo' que no tengas más zonas abiertas de las que el tren necesita."
       ],
       "fuentes": [
         {
@@ -7258,6 +7264,273 @@
         {
           "titulo": "Construction Dive / LCI – Los 8 desperdicios en obra: inventario y transporte (sep 2024)",
           "url": "https://www.constructiondive.com/news/gemba-walk-guide-lean-construction-how-to/726442"
+        }
+      ]
+    },
+    {
+      "id": "calc-wip-flujo",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Frentes abiertos y tiempo de ciclo (Ley de Little): cuántos departamentos, viviendas o niveles tener en proceso",
+      "resumen": "Abrir más frentes no termina la obra antes: si las cuadrillas entregan las mismas unidades por semana, cada frente abierto de más solo alarga lo que tarda cada unidad en terminarse y deja dinero detenido en obra a medio hacer. Con la Ley de Little (tiempo de ciclo = unidades en proceso ÷ unidades terminadas por semana) calcula cuánto tarda hoy cada unidad, qué tanto de ese tiempo es trabajo real (eficiencia de flujo), cuántas unidades conviene tener abiertas para tu ciclo objetivo y cuánto dinero liberas al cerrar frentes. Sirve para departamentos, viviendas en serie, niveles de un edificio, baños o cualquier unidad repetitiva.",
+      "agregada": "2026-11-07",
+      "entradas": [
+        {
+          "id": "W",
+          "label": "Unidades en proceso hoy (iniciadas y no terminadas: deptos, viviendas, niveles)",
+          "unidad": "unidades",
+          "valor": 24
+        },
+        {
+          "id": "R",
+          "label": "Unidades terminadas por semana (promedio de las últimas 4 semanas)",
+          "unidad": "unid/semana",
+          "valor": 3
+        },
+        {
+          "id": "D",
+          "label": "Días laborables por semana",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "Tt",
+          "label": "Días de trabajo real por unidad si las cuadrillas se siguieran sin esperas (suma del plan takt o de los rendimientos)",
+          "unidad": "días",
+          "valor": 25
+        },
+        {
+          "id": "L",
+          "label": "Tiempo de ciclo objetivo por unidad",
+          "unidad": "semanas",
+          "valor": 5
+        },
+        {
+          "id": "C",
+          "label": "Costo ya invertido promedio por unidad en proceso (≈ mitad del costo directo de la unidad; ejemplo)",
+          "unidad": "$/unidad",
+          "valor": 200000
+        },
+        {
+          "id": "T",
+          "label": "Costo financiero del dinero (tasa mensual)",
+          "unidad": "%/mes",
+          "valor": 1.5
+        },
+        {
+          "id": "N",
+          "label": "Unidades que faltan por terminar en total (en proceso + no iniciadas)",
+          "unidad": "unidades",
+          "valor": 60
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Tiempo de ciclo actual por unidad (W ÷ R)",
+          "formula": "W/R",
+          "unidad": "semanas",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Tiempo de ciclo actual en días laborables",
+          "formula": "W/R*D",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Ciclo mínimo posible sin esperas",
+          "formula": "Tt/D",
+          "unidad": "semanas",
+          "decimales": 1
+        },
+        {
+          "label": "Eficiencia de flujo (trabajo real ÷ tiempo de ciclo)",
+          "formula": "Math.min(100,Tt/(W/R*D)*100)",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            60,
+            40
+          ]
+        },
+        {
+          "label": "Unidades en proceso recomendadas para el ciclo objetivo (R × L)",
+          "formula": "Math.ceil(R*L)",
+          "unidad": "unidades",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Unidades abiertas de más (no abras nuevas hasta bajar a la cifra recomendada)",
+          "formula": "Math.max(0,W-Math.ceil(R*L))",
+          "unidad": "unidades",
+          "decimales": 0
+        },
+        {
+          "label": "Dinero detenido en unidades a medio hacer",
+          "formula": "W*C",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Dinero que se libera al cerrar el exceso",
+          "formula": "Math.max(0,W-Math.ceil(R*L))*C",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo financiero mensual del exceso",
+          "formula": "Math.max(0,W-Math.ceil(R*L))*C*T/100",
+          "unidad": "$/mes",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Semanas para terminar lo que falta al ritmo actual (N ÷ R; solo baja si sube R)",
+          "formula": "N/R",
+          "unidad": "semanas",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Cuenta en el recorrido las unidades iniciadas y no terminadas (cualquier unidad con al menos una actividad empezada y sin entregar) y saca del reporte semanal cuántas se terminaron en promedio en las últimas 4 semanas.",
+        "Captura los días de trabajo real por unidad sumando las duraciones del plan takt o de los rendimientos de cada cuadrilla (ej. 25 días) y el ciclo objetivo que necesitas (ej. 5 semanas).",
+        "Lee el resultado: en el ejemplo, 24 deptos abiertos ÷ 3 por semana = 8 semanas por depto, con eficiencia de flujo de 52 %; para 5 semanas bastan 15 abiertos, sobran 9 y hay $1.8 millones detenidos que cuestan $27,000 al mes.",
+        "No abras unidades nuevas hasta bajar a la cifra recomendada: concentra cuadrillas en terminar (regla 'termina antes de empezar') y libera las restricciones de la unidad más atrasada en la junta diaria.",
+        "Para terminar antes la obra hay que subir las unidades terminadas por semana (cuadrilla cuello de botella, takt más corto), no abrir más frentes; la última salida te dice cuánto falta al ritmo actual.",
+        "Repite el cálculo cada viernes con el corte de avance y grafica tiempo de ciclo y unidades en proceso; la meta es que ambos bajen mientras las unidades terminadas por semana se mantienen o suben."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Jason Schroeder (Elevate Construction) – Production Laws in a Takt-ed System: Ley de Little, lotes chicos y limitar trabajo en proceso (actualizado jun 2026)",
+          "url": "https://theleanbuilder.com/production-laws-in-a-takt-ed-system/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Focus on Flow: entregas sin esperas entre cuadrillas; kanban para limitar el trabajo en proceso",
+          "url": "https://leanconstruction.org/lean-topics/focus-on-flow/"
+        },
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery: 'First-run Study' (prueba con PDCA, semanas antes de la ejecución) y 'Work in Process'",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        },
+        {
+          "titulo": "Lean Construction Institute – Tracks del 28.º LCI Congress (Atlanta, 12–16 oct 2026): 'Field-First Lean: Tools, Flow, and Daily Improvement' (sep 2026)",
+          "url": "https://leanconstruction.org/blog/dive-into-the-2026-lci-congress-conference-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-junta-diaria",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Junta diaria de arranque de 15 minutos con pizarrón Más / Delta (huddle de cuadrillas)",
+      "resumen": "La junta de las 7:00 con los cabos, en el frente y de pie, ordenada como la recomienda el Lean Construction Institute: meta de cada cuadrilla para hoy, cumplimiento de ayer, restricciones nuevas con dueño, riesgo del día y entregas. Cierra con un pizarrón Más / Delta (qué funcionó ayer, qué cambiamos hoy con responsable), como lo presentó Southland Industries en el boletín del LCI de octubre de 2026. Lo que no se resuelve en un minuto se va al 'estacionamiento' para después. Conecta el plan semanal del Last Planner con lo que pasa cada día y alimenta el Pareto de no cumplimiento.",
+      "agregada": "2026-11-07",
+      "campos": [
+        "Obra / frente o zona / fecha / hora de inicio y de término",
+        "Facilitador (residente o superintendente) y escriba (quien anota)",
+        "Cabos o contratistas presentes: empresa, cuadrilla y número de trabajadores hoy",
+        "Meta de hoy por cuadrilla: actividad, cantidad y zona (sale del plan semanal) — ej. 'Tablaroca: 60 m² muro, depto 302'",
+        "Cumplimiento de ayer por cuadrilla: Sí / No, cantidad real y causa de no cumplimiento (usa las categorías del Pareto CNC)",
+        "Restricciones nuevas: qué falta (plano, material, frente, equipo, permiso), quién la libera y a qué hora",
+        "Seguridad del día: riesgo principal y permisos que deben estar vigentes (altura, excavación, espacio confinado, izaje, caliente)",
+        "Entregas y maniobras de hoy con hora: ollas, bomba, varilla, grúa, retiro de escombro",
+        "Interferencias: zonas compartidas entre cuadrillas y quién entra primero",
+        "MÁS (+): qué salió bien ayer y se repite",
+        "DELTA (Δ): qué se cambia hoy, responsable y hora en que se revisa",
+        "Estacionamiento: temas que se tratan fuera de la junta (tema, quién, cuándo)"
+      ],
+      "items": [
+        "Empezó a la hora fija, de pie y en el frente (no en la oficina)",
+        "Duró 15 minutos o menos",
+        "Asistieron todos los cabos o contratistas que trabajan hoy en el frente (si son más de 15–20 personas, se dividió por zona)",
+        "Cada cuadrilla dijo su meta de hoy con cantidad y zona",
+        "Se revisó el cumplimiento de ayer con dato y se anotó la causa de cada incumplimiento",
+        "Cada restricción nueva quedó con responsable y hora",
+        "Se dijo el riesgo principal del día y se confirmó que los permisos están vigentes",
+        "Las entregas y maniobras del día quedaron con hora y lugar de descarga",
+        "Los Delta de ayer se cerraron o se reprogramaron con fecha",
+        "No se regañó a nadie ni se discutió un problema largo: se mandó al estacionamiento",
+        "La hoja o foto del pizarrón quedó guardada como evidencia del día"
+      ],
+      "como_usar": [
+        "Fija la hora (ej. 7:00) y el lugar en el frente con un pizarrón blanco dividido en: metas de hoy, restricciones, seguridad, entregas y Más / Delta.",
+        "El facilitador pregunta en orden a cada cabo: ¿qué cumpliste ayer?, ¿qué vas a hacer hoy y dónde?, ¿qué te falta para hacerlo? El escriba llena el formato en el celular mientras tanto.",
+        "Cierra con el riesgo del día, las entregas con hora y un Más y un Delta; lo que se alargue más de un minuto se anota en el estacionamiento y se resuelve después con los involucrados.",
+        "Toma foto del pizarrón, exporta el formato a CSV y al viernes usa las causas anotadas para el PPC y el Pareto de causas de no cumplimiento.",
+        "Mide 2 semanas antes y 2 semanas después: duración de la junta, % de metas diarias cumplidas, PPC semanal y restricciones que se descubrieron ya con la cuadrilla en el frente."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Daily Huddle: 10 a 15 minutos, de pie, en el frente; roles de facilitador, último planificador y escriba (actualizado 24 feb 2026)",
+          "url": "https://leanconstruction.org/lean-topics/daily-huddle/"
+        },
+        {
+          "titulo": "LCI Field Crew Huddle – Daily Huddle: buenas prácticas para la junta de cuadrillas; los problemas largos se resuelven fuera de la junta (actualizado 20 ago 2025)",
+          "url": "https://fieldcrewhuddle.leanconstruction.org/daily-huddle/"
+        },
+        {
+          "titulo": "LCI Weekly, 29 oct 2026 – 'Make Morning Huddles More Effective': pizarrón Más/Delta para convertir problemas en acciones con dueño (Southland Industries)",
+          "url": "https://leanconstruction.org/newsletters/october-29-2026/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-primera-ejecucion",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Primera ejecución (first-run study): probar y aprobar la primera pieza antes de repetirla en toda la obra",
+      "resumen": "Antes de hacer 60 baños, 40 departamentos o 10 losas iguales, se ejecuta UNO con la cuadrilla que lo hará, se cronometra, se revisa contra tolerancias y se corrige el método (secuencia, herramienta, kit de material, plantilla) con ciclo PDCA. El Lean Construction Institute la define como una ejecución de prueba hecha al menos unas semanas antes de la producción, cuando todavía hay tiempo de conseguir lo que falte. El resultado es una pieza muestra aprobada y firmada en el frente y un rendimiento real para el plan takt y el plan semanal; evita repetir el mismo defecto en todas las unidades.",
+      "agregada": "2026-11-07",
+      "campos": [
+        "Obra / actividad / zona o unidad de prueba / fecha de la prueba / fecha en que arranca la producción (mínimo 2 semanas después)",
+        "Contratista, cabo y oficiales que ejecutan (los mismos que harán la producción)",
+        "Participantes: superintendente, residente, calidad, seguridad, supervisión o cliente, proveedor",
+        "Criterios de aceptación escritos: plano y detalle, especificación, tolerancias (plomo, nivel, escuadra, acabado)",
+        "PLANEAR: secuencia paso a paso, cuadrilla (categorías y número), herramienta, equipo, materiales y desperdicio esperado",
+        "PLANEAR: duración estimada (h) y rendimiento del programa o del precio unitario (unid/jornada)",
+        "HACER: hora de inicio y término, cantidad ejecutada y rendimiento real (unid/jornada)",
+        "HACER: esperas y problemas observados (minuto, causa) con fotos o video",
+        "VERIFICAR: medición contra tolerancias y defectos encontrados",
+        "VERIFICAR: riesgos de seguridad y ergonomía observados",
+        "ACTUAR: cambios al método (secuencia, herramienta, kit de material, plantilla, prearmado)",
+        "Estándar resultante: hoja de método con fotos y pieza muestra; dónde se publica",
+        "Decisión: aprobada para producción / repetir prueba (fecha) · firmas"
+      ],
+      "items": [
+        "Se hizo con al menos 2 semanas de anticipación a la producción",
+        "La ejecutaron el cabo y los oficiales que harán la producción, no una cuadrilla 'de lujo'",
+        "Los criterios de aceptación se escribieron y firmaron antes de empezar",
+        "Se cronometró o grabó la ejecución y se anotaron las esperas",
+        "Se comparó el rendimiento real contra el del programa o del precio unitario",
+        "La pieza cumple tolerancias y especificación",
+        "Se revisaron riesgos de seguridad y ergonomía de la secuencia",
+        "Los cambios al método quedaron por escrito con fotos",
+        "La pieza aprobada quedó marcada y firmada en el frente como muestra",
+        "El rendimiento probado se usó para ajustar el plan takt y el plan semanal",
+        "Si no pasó, se repitió la prueba antes de arrancar la producción"
+      ],
+      "como_usar": [
+        "En el análisis de restricciones elige las actividades repetitivas que arrancan en 2 a 4 semanas (ej. primer baño, primer muro de tablaroca con instalaciones, primera losa con la cimbra nueva) y programa su primera ejecución.",
+        "Un día antes, reúne al cabo, al proveedor y a calidad para escribir los criterios de aceptación y la secuencia propuesta; prepara el material como kit completo.",
+        "Durante la prueba cronometra cada paso con el celular, anota esperas y toma fotos; al terminar mide plomo, nivel y escuadra contra las tolerancias.",
+        "En 30 minutos con la cuadrilla decide qué se cambia del método, escríbelo con fotos y marca la pieza como muestra aprobada (o repite la prueba).",
+        "Usa el rendimiento real en la calculadora de plan takt y en el plan semanal, y mide en las primeras 5 unidades de producción: defectos por unidad, retrabajos y rendimiento contra la prueba."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery: 'First-run Study' (prueba con PDCA, semanas antes de la ejecución) y 'Work in Process'",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        },
+        {
+          "titulo": "LCI Congress 2026 – Themes and Tracks (PDF, ene 2026): trabajo estándar, a prueba de errores y mejora diaria en campo",
+          "url": "https://congress.leanconstruction.org/wp-content/uploads/2026/01/2026-LCI-Congress-Themes-and-Tracks-v1.pdf"
+        },
+        {
+          "titulo": "Lean Construction Institute – Tracks del 28.º LCI Congress (Atlanta, 12–16 oct 2026): 'Field-First Lean: Tools, Flow, and Daily Improvement' (sep 2026)",
+          "url": "https://leanconstruction.org/blog/dive-into-the-2026-lci-congress-conference-tracks/"
         }
       ]
     }
