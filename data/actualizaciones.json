@@ -1,6 +1,43 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-08",
+      "titulo": "Normatividad y documentación: mano de obra mínima IMSS 2026 por m² contra tu SUA y expediente IMSS / REPSE de la obra al día",
+      "resumen": "Mano de obra mínima IMSS compara, al avance de hoy, los salarios que llevas reportados en el SUA contra lo que el IMSS espera con los costos por m² 2026 (Acuerdo ACDO.AS2.HCT.270126/9.P.DIR, DOF 06-02-2026, vigente desde el 1 de febrero; todos los costos de obra privada subieron 3.69 % y los factores de obra pública siguen igual desde 2015). Ejemplo: edificio habitacional tipo medio de 2,400 m² al 80 % debería llevar $2.77 millones de salarios; con $2.35 millones reportados vas en 84.8 % y hay unos $147,000 de cuotas en riesgo de determinación presuntiva. Expediente IMSS y REPSE: revisión mensual de registro en SIROC, listado del SUA, opinión de cumplimiento y, por subcontratista, REPSE vigente, nóminas, cuotas e informes ICSOE / SISUB; la próxima ventana cuatrimestral es del 1 al 17 de enero de 2027. Mejora: Pago semanal de destajos ahora pide REPSE vigente y alta en SIROC antes de pagar. Aviso: no se pudo leer la tabla oficial 2026 del DOF (bloqueada para consulta automática); el costo de ejemplo ($1,443/m²) es el de 2025 × 1.0369 y debe confirmarse en el DOF. Los plazos de registro y aviso de terminación en SIROC no se pudieron verificar en el sitio del IMSS: confírmalos con tu contador.",
+      "herramientas": [
+        "calc-mano-obra-imss",
+        "fmt-expediente-imss-repse",
+        "fmt-destajos"
+      ],
+      "como_aplicarlo": "1) Esta semana pide al contador el acumulado del SUA de la obra y captura la calculadora con tu superficie, tipo de obra y avance; si sale amarillo o rojo, revisa altas y subcontratistas no ligados. 2) El lunes llena el expediente IMSS y REPSE con una fila por subcontratista y retén pagos con documentos incompletos. 3) Verifica cada REPSE en el padrón de la STPS y agenda el recordatorio del ICSOE / SISUB del 17 de enero de 2027.",
+      "fuentes": [
+        {
+          "titulo": "KPMG México, Flash (feb 2026) – IMSS publica costos y factores de mano de obra pública y privada 2026: Acuerdo ACDO.AS2.HCT.270126/9.P.DIR, DOF 06-02-2026, vigente desde 01-02-2026, aumento de 3.69 % (UMA)",
+          "url": "https://kpmg.com/mx/es/tendencias/2026/02/flash-imss-costos-y-factores-de-mano-de-obra-publica-y-privada-en-2026.html"
+        },
+        {
+          "titulo": "CASS Abogados, Circular 03/2026 – Costos y factores de mano de obra en construcción desde feb 2026: costos por m² de obra privada actualizados 3.69 %; factores de obra pública sin cambio desde abril 2015; base para determinar cuotas cuando no se acreditan trabajadores y salarios (RSSOTC art. 18)",
+          "url": "https://www.cass-abogados.com/post/circular-03-2026-costos-y-factores-de-mano-de-obra-en-construcci%C3%B3n-aplicables-a-partir-de-febrero"
+        },
+        {
+          "titulo": "DOF 06-02-2026 – Acuerdo ACDO.AS2.HCT.270126/9.P.DIR del H. Consejo Técnico del IMSS (texto oficial con las dos tablas del Anexo Único; consúltalo para el valor exacto de tu tipo de obra)",
+          "url": "https://www.diariooficial.gob.mx/nota_detalle.php?codigo=5779543&fecha=06%2F02%2F2026"
+        },
+        {
+          "titulo": "Praxium (act. 28-09-2026) – Guía REPSE 2026: ICSOE y SISUB en los primeros 17 días naturales de enero, mayo y septiembre; vigencia de 3 años y renovación 3 meses antes; requisitos de deducción (LISR 27-V, LIVA 5-II); multa de 2,000 a 50,000 UMA",
+          "url": "https://praxiumconsultores.com/blog/repse-guia-completa-2026"
+        },
+        {
+          "titulo": "EC Rubio vía Mondaq (24-06-2026) – Obligaciones de empresas con REPSE: informe del cuatrimestre enero–abril 2026 del 1 al 17 de mayo ante ICSOE y SISUB; el incumplimiento puede llevar a suspensión o cancelación del registro",
+          "url": "https://www.mondaq.com/mexico/outsourcing/1805770/companies-with-repse-registration-obligations-januaryapril-2026"
+        },
+        {
+          "titulo": "ContaDigital – SIROC: el propietario registra la obra y liga a subcontratistas; semáforos de inactividad y de opinión de cumplimiento (CFF 32-D); listado mensual de trabajadores por obra vía SUA (Acuerdo IMSS DOF 13-07-2017)",
+          "url": "https://www.contadigital.mx/posts/siroc"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-07",
       "titulo": "Lean y mejora continua: menos frentes abiertos para terminar antes, junta diaria de 15 minutos y primera ejecución antes de repetir",
       "resumen": "Frentes abiertos y tiempo de ciclo aplica la Ley de Little: con 24 departamentos abiertos y 3 terminados por semana, cada depto tarda 8 semanas aunque solo lleva 25 días de trabajo real (eficiencia de flujo 52 %); para un ciclo de 5 semanas bastan 15 abiertos, y cerrar los 9 de más libera $1.8 millones que cuestan $27,000 al mes (costo por unidad de ejemplo; usa el tuyo). Junta diaria de arranque: 15 minutos de pie en el frente con metas, cumplimiento de ayer, restricciones con dueño, riesgo del día, entregas y pizarrón Más / Delta, según el LCI (actualizado feb 2026) y el boletín del LCI del 29 oct 2026. Primera ejecución (first-run study): se hace una unidad de prueba con la cuadrilla real 2 semanas antes, se cronometra, se mide contra tolerancias y queda una pieza muestra firmada. Mejoras: Last Planner ahora remite a la junta diaria, a la primera ejecución y al límite de frentes abiertos; Plan takt toma el rendimiento de la primera ejecución. La cifra de 30 % más productividad con juntas diarias que publica el LCI no trae estudio citado, por eso no se usa. Ninguna herramienta nueva requiere pago.",

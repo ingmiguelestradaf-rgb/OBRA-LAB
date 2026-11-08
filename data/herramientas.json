@@ -2214,6 +2214,193 @@
       ]
     },
     {
+      "id": "calc-mano-obra-imss",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Mano de obra mínima que el IMSS espera en tu obra (costos por m² 2026, RSSOTC art. 18) contra lo que llevas reportado en el SUA",
+      "resumen": "El IMSS publica cada año cuánto debe costar la mano de obra por m² según el tipo de obra privada (y un % sobre el importe en obra pública). Si los salarios que reportas en el SUA ligados a la obra quedan abajo, esa diferencia es la base con la que te pueden determinar cuotas presuntivas al cierre. Esta calculadora compara, al avance de hoy, lo esperado contra lo reportado y te dice cuánto dinero en cuotas está en riesgo, antes de que llegue la revisión.",
+      "agregada": "2026-11-08",
+      "entradas": [
+        {
+          "id": "A",
+          "label": "Superficie construida de la obra (de la licencia)",
+          "unidad": "m²",
+          "valor": 2400
+        },
+        {
+          "id": "C",
+          "label": "Costo de mano de obra IMSS por m² para tu tipo de obra (ej. edificio habitacional tipo medio 2026 ≈ $1,443: $1,392 de 2025 × 1.0369; confirma en el DOF 06-02-2026)",
+          "unidad": "$/m²",
+          "valor": 1443
+        },
+        {
+          "id": "Q",
+          "label": "Obra pública: importe del contrato sin IVA (0 si es obra privada)",
+          "unidad": "$",
+          "valor": 0
+        },
+        {
+          "id": "FMO",
+          "label": "Obra pública: factor de mano de obra del IMSS para el tipo de obra (ej. construcciones no residenciales 29.5 %)",
+          "unidad": "%",
+          "valor": 29.5
+        },
+        {
+          "id": "AV",
+          "label": "Avance físico de la obra a la fecha",
+          "unidad": "%",
+          "valor": 80
+        },
+        {
+          "id": "SR",
+          "label": "Salarios base de cotización acumulados reportados en el SUA para esta obra (tu empresa + subcontratistas ligados en SIROC)",
+          "unidad": "$",
+          "valor": 2350000
+        },
+        {
+          "id": "CP",
+          "label": "Cuotas IMSS + INFONAVIT (patronal y obrera) sobre el salario base, de tu SUA o de la calculadora Factor de salario real (ejemplo, usa el tuyo)",
+          "unidad": "%",
+          "valor": 35
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Mano de obra total que espera el IMSS para la obra",
+          "formula": "Q>0?Q*FMO/100:A*C",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Mano de obra esperada al avance de hoy",
+          "formula": "(Q>0?Q*FMO/100:A*C)*AV/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Salarios reportados contra lo esperado al avance",
+          "formula": "SR/((Q>0?Q*FMO/100:A*C)*AV/100)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            100,
+            90
+          ]
+        },
+        {
+          "label": "Salarios faltantes por acreditar al avance (0 = vas cubierto)",
+          "formula": "Math.max((Q>0?Q*FMO/100:A*C)*AV/100-SR,0)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Cuotas en riesgo de determinación presuntiva (estimado, sin recargos ni multas)",
+          "formula": "Math.max((Q>0?Q*FMO/100:A*C)*AV/100-SR,0)*CP/100",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Salario reportado por m² avanzado (obra privada; compáralo con el costo IMSS por m²)",
+          "formula": "Q>0?0:SR/(A*AV/100)",
+          "unidad": "$/m²",
+          "decimales": 0
+        },
+        {
+          "label": "Salarios que faltan por reportar para cerrar la obra al 100 %",
+          "formula": "Math.max((Q>0?Q*FMO/100:A*C)-SR,0)",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Abre el Acuerdo ACDO.AS2.HCT.270126/9.P.DIR (DOF 06-02-2026) y toma el costo por m² de tu tipo de obra; si aún no lo tienes, usa el de 2025 × 1.0369 (el IMSS actualizó todos los costos 3.69 %). Valores 2025 de referencia: casa tipo medio $1,469, edificio habitacional tipo medio $1,392, edificio de oficinas y locales $1,576, nave industrial $1,094, bodega $735, barda $554.",
+        "Pide a tu contador el acumulado de salarios base de cotización del SUA de los trabajadores ligados a esta obra, el tuyo y el de cada subcontratista registrado en SIROC; captúralo con el avance físico del último corte.",
+        "Con el ejemplo (2,400 m² × $1,443 = $3,463,200 esperados; al 80 % son $2,770,560; reportados $2,350,000) vas en 84.8 % (rojo): faltan $420,560 de salarios y hay unos $147,196 de cuotas en riesgo al 35 %.",
+        "En amarillo o rojo revisa antes del cierre: trabajadores que no se ligaron a la obra, subcontratistas sin registro en SIROC (sus salarios no cuentan para ti), destajos pagados sin alta y meses sin listado. Corrige con altas y movimientos, no al final.",
+        "Repite cada mes con el corte de avance y guarda el resultado en el expediente IMSS de la obra (formato Expediente IMSS y REPSE). Meta: 100 % o más en cada corte. En obra pública captura el importe del contrato y el factor de tu tipo de obra; la superficie ya no se usa. Confirma con tu contador o el IMSS cómo aplican en tu caso; es una herramienta de control, no un dictamen."
+      ],
+      "fuentes": [
+        {
+          "titulo": "KPMG México, Flash (feb 2026) – IMSS publica costos y factores de mano de obra pública y privada 2026: Acuerdo ACDO.AS2.HCT.270126/9.P.DIR, DOF 06-02-2026, vigente desde 01-02-2026, aumento de 3.69 % (UMA)",
+          "url": "https://kpmg.com/mx/es/tendencias/2026/02/flash-imss-costos-y-factores-de-mano-de-obra-publica-y-privada-en-2026.html"
+        },
+        {
+          "titulo": "CASS Abogados, Circular 03/2026 – Costos y factores de mano de obra en construcción desde feb 2026: costos por m² de obra privada actualizados 3.69 %; factores de obra pública sin cambio desde abril 2015; base para determinar cuotas cuando no se acreditan trabajadores y salarios (RSSOTC art. 18)",
+          "url": "https://www.cass-abogados.com/post/circular-03-2026-costos-y-factores-de-mano-de-obra-en-construcci%C3%B3n-aplicables-a-partir-de-febrero"
+        },
+        {
+          "titulo": "DOF 06-02-2026 – Acuerdo ACDO.AS2.HCT.270126/9.P.DIR del H. Consejo Técnico del IMSS (texto oficial con las dos tablas del Anexo Único; consúltalo para el valor exacto de tu tipo de obra)",
+          "url": "https://www.diariooficial.gob.mx/nota_detalle.php?codigo=5779543&fecha=06%2F02%2F2026"
+        },
+        {
+          "titulo": "Asesoría IMSS Construcción – Tabla 2025 de costos de mano de obra por m² (obra privada) y factores de obra pública (base que se actualizó 3.69 % para 2026)",
+          "url": "https://asesoriaimssconstruccionycursos.mx/publican-actualizacion-de-costos-de-mano-de-obra-por-metro-2-para-obra-privada/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-expediente-imss-repse",
+      "tipo": "formato",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Expediente IMSS y REPSE de la obra: registro en SIROC, listados del SUA y subcontratistas con REPSE, ICSOE y SISUB al día",
+      "resumen": "Revisión mensual de la documentación laboral de la obra para que el IMSS no te determine cuotas presuntivas y para que lo pagado a subcontratistas de obra especializada sea deducible: obra registrada y subcontratistas ligados en SIROC, listado mensual de trabajadores, opinión de cumplimiento, REPSE vigente de cada subcontratista y sus informes cuatrimestrales (próxima ventana: 1 al 17 de enero de 2027).",
+      "agregada": "2026-11-08",
+      "campos": [
+        "Obra / ubicación / número de licencia de construcción",
+        "Tipo de obra según la tabla IMSS y superficie construida (m²)",
+        "Propietario y registro patronal / número de registro de obra en SIROC",
+        "Fechas de inicio y de terminación programada",
+        "Mes revisado / avance físico (%)",
+        "Salarios reportados en SUA acumulados y % contra lo esperado (calculadora Mano de obra mínima IMSS)",
+        "Subcontratista (razón social, partida, número de REPSE y vencimiento, ¿ligado en SIROC?)",
+        "Último informe ICSOE / SISUB presentado por cada subcontratista (cuatrimestre y fecha)",
+        "Pendientes con responsable y fecha",
+        "Revisó (residente / administrador) y contador"
+      ],
+      "items": [
+        "La obra está registrada en SIROC y el número de registro está en el expediente y en la bitácora",
+        "Cada subcontratista recibió el número de registro de la obra y se ligó a ella en SIROC",
+        "El listado mensual de trabajadores de la obra se envió por el SUA",
+        "Todos los trabajadores en lista de raya o con destajo tienen alta en el IMSS ligada a esta obra",
+        "Los salarios reportados en SUA cubren la mano de obra esperada al avance (calculadora en verde)",
+        "La opinión de cumplimiento IMSS (y SAT) de la empresa es positiva este mes (el semáforo de SIROC la revisa)",
+        "Cada subcontratista de obra especializada tiene REPSE vigente; copia en el expediente y vencimiento a más de 3 meses (si está a menos, que ya tramite la renovación)",
+        "El contrato con cada subcontratista es por escrito, describe la obra especializada y el número aproximado de trabajadores",
+        "Se recabaron del subcontratista los CFDI de nómina, el pago de cuotas IMSS, aportaciones INFONAVIT y entero de ISR retenido de los trabajadores de la obra del periodo",
+        "Cada subcontratista presentó ICSOE (IMSS) y SISUB (INFONAVIT) del último cuatrimestre (17 de enero, mayo y septiembre)",
+        "Ningún pago de estimación o destajo a subcontratista se liberó sin los puntos anteriores completos",
+        "Ninguna empresa da personal sin REPSE a la obra (subcontratación de personal prohibida)",
+        "Al terminar: aviso de terminación de la obra en SIROC y cierre del expediente con la conciliación final de salarios"
+      ],
+      "como_usar": [
+        "El primer lunes de cada mes llena los datos de la obra y una fila por subcontratista; pide al contador el número de registro SIROC, el acumulado del SUA y la opinión de cumplimiento.",
+        "Marca Cumple / No / N/A punto por punto; todo 'No' lleva responsable y fecha, y el administrador retiene el pago de la estimación o del destajo de ese subcontratista hasta cerrarlo.",
+        "Verifica cada REPSE en el padrón público de la STPS (repse.stps.gob.mx) y anota el vencimiento; si vence en menos de 3 meses pide por escrito la renovación (el registro dura 3 años).",
+        "En diciembre recuerda a cada subcontratista el informe ICSOE y SISUB de septiembre–diciembre 2026, que vence el 17 de enero de 2027, y pide el acuse en cuanto lo presente.",
+        "Mide cada mes: subcontratistas con expediente completo / total (meta 100 %), pagos retenidos por falta de documentos y % de salarios reportados contra lo esperado. Exporta el CSV y guárdalo con la bitácora; es tu defensa ante una revisión del IMSS o del SAT."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ContaDigital – SIROC: el propietario registra la obra y liga a subcontratistas; semáforos de inactividad y de opinión de cumplimiento (CFF 32-D); listado mensual de trabajadores por obra vía SUA (Acuerdo IMSS DOF 13-07-2017)",
+          "url": "https://www.contadigital.mx/posts/siroc"
+        },
+        {
+          "titulo": "Praxium (act. 28-09-2026) – Guía REPSE 2026: ICSOE y SISUB en los primeros 17 días naturales de enero, mayo y septiembre; vigencia de 3 años y renovación 3 meses antes; requisitos de deducción (LISR 27-V, LIVA 5-II); multa de 2,000 a 50,000 UMA",
+          "url": "https://praxiumconsultores.com/blog/repse-guia-completa-2026"
+        },
+        {
+          "titulo": "EC Rubio vía Mondaq (24-06-2026) – Obligaciones de empresas con REPSE: informe del cuatrimestre enero–abril 2026 del 1 al 17 de mayo ante ICSOE y SISUB; el incumplimiento puede llevar a suspensión o cancelación del registro",
+          "url": "https://www.mondaq.com/mexico/outsourcing/1805770/companies-with-repse-registration-obligations-januaryapril-2026"
+        },
+        {
+          "titulo": "CASS Abogados, Circular 03/2026 – Costos y factores de mano de obra en construcción desde feb 2026: costos por m² de obra privada actualizados 3.69 %; factores de obra pública sin cambio desde abril 2015; base para determinar cuotas cuando no se acreditan trabajadores y salarios (RSSOTC art. 18)",
+          "url": "https://www.cass-abogados.com/post/circular-03-2026-costos-y-factores-de-mano-de-obra-en-construcci%C3%B3n-aplicables-a-partir-de-febrero"
+        }
+      ]
+    },
+    {
       "id": "met-last-planner",
       "tipo": "metodo",
       "categoria": "Last Planner",
@@ -6842,7 +7029,7 @@
         "Se aplicó la retención de garantía pactada",
         "Se descontaron trabajos rechazados o retrabajos atribuibles al destajista",
         "Hay contrato o pedido firmado con precio, alcance y forma de pago",
-        "El subcontratista entregó comprobante de pago de IMSS del periodo (subcontratación de obras especializadas registrada en REPSE)",
+        "El subcontratista entregó comprobante de pago de IMSS e INFONAVIT del periodo, tiene REPSE vigente y está ligado a la obra en SIROC (ver formato Expediente IMSS y REPSE)",
         "La factura o recibo coincide con el neto autorizado",
         "Las cantidades de la semana alimentan el generador de la estimación al cliente"
       ],
