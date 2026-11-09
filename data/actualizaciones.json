@@ -1,6 +1,35 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-09",
+      "titulo": "Control de avance: el programa de obra ante la jornada de 46 horas del 1 de enero de 2027, festivos y lluvia, y lista para arrancar el año con registro electrónico de jornada",
+      "resumen": "Desde el 1 de enero de 2027 la jornada máxima baja de 48 a 46 horas con el mismo salario (LFT reformada, DOF 01-05-2026) y el registro electrónico de entrada y salida se vuelve obligatorio (multa de 250 a 5,000 UMA). Un programa hecho con 48 h se queda corto 4.3 % en toda la mano de obra que siga viva en enero. Programa que cruza el 1 de enero de 2027 convierte las HH pendientes de cada actividad en días con 48 y 46 h, suma festivos y lluvia y dice cuánta holgura queda y cuántos trabajadores sostienen la fecha. Ejemplo: 6,000 HH con 20 trabajadores pasan de 37.5 a 39.1 días hábiles; con 2 festivos y 4 días de lluvia no descontados, una holgura de 3 días queda en −4.6 (rojo) y hacen falta 23 trabajadores para no moverte de fecha. Ajuste a la jornada de 46 horas es la lista de 15 puntos para cerrar antes del 31 de diciembre: programa, horarios por cuadrilla, destajos y subcontratos, salarios sin reducción y registro de jornada. Mejora: Recuperar atraso ahora remite a la nueva calculadora cuando el atraso viene del cambio de jornada.",
+      "herramientas": [
+        "calc-jornada-46-programa",
+        "fmt-transicion-jornada-46",
+        "calc-recuperacion-atraso"
+      ],
+      "como_aplicarlo": "1) Esta semana filtra en el programa las actividades de mano de obra posteriores al 31 de diciembre y córrelas en la calculadora; la que salga en rojo, decide hoy cuadrilla adicional o resecuencia. 2) Llena el formato de ajuste con contratistas y destajistas y deja nota en bitácora con la nueva fecha de cada frente. 3) Prueba el registro electrónico de jornada con una cuadrilla en la primera quincena de diciembre para que el 4 de enero ya registre a toda la obra.",
+      "fuentes": [
+        {
+          "titulo": "DOF 01-05-2026 – Decreto de reforma a la LFT en materia de reducción de la jornada (art. 59: 40 h semanales; transitorio segundo: 48 h en 2026, 46 h desde el 1 de enero de 2027, 44 h en 2028, 42 h en 2029 y 40 h en 2030; transitorio cuarto: tope de horas extra de 9 h/semana en 2026 y 2027; art. 69: un día de descanso por cada seis; art. 132 fr. XXXIV: registro electrónico de jornada; transitorio quinto: sus disposiciones rigen desde el 1 de enero de 2027; transitorio séptimo: sin reducción de salarios)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft/LFT_ref52_01may26.pdf"
+        },
+        {
+          "titulo": "Greenberg Traurig (8 may 2026) – Reforma a la LFT: reducción gradual de la jornada laboral (calendario, tope de 9 horas extra en 2027 y pago con 200 % más del excedente)",
+          "url": "https://www.gtlaw.com/en/insights/2026/5/reforma-a-la-ley-federal-del-trabajo---reduccion"
+        },
+        {
+          "titulo": "CR Rasgado Abogados (12 ago 2026) – Jornada de 46 horas en 2027: lo que la empresa debe tener resuelto antes del 1 de enero (registro de jornada, multa de 250 a 5,000 UMA, art. 994 fr. IV Bis)",
+          "url": "https://rasgadoabogados.com/blog/jornada-46-horas-2027-registro-de-jornada/"
+        },
+        {
+          "titulo": "LFT art. 74 – Días de descanso obligatorio (1 ene, primer lunes de febrero, tercer lunes de marzo, 1 may, 16 sep, tercer lunes de noviembre, 1 oct cada seis años, 25 dic y jornada electoral) y art. 75 (salario doble adicional si se labora)",
+          "url": "https://mley.mx/LFT/articulo/74/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-08",
       "titulo": "Normatividad y documentación: mano de obra mínima IMSS 2026 por m² contra tu SUA y expediente IMSS / REPSE de la obra al día",
       "resumen": "Mano de obra mínima IMSS compara, al avance de hoy, los salarios que llevas reportados en el SUA contra lo que el IMSS espera con los costos por m² 2026 (Acuerdo ACDO.AS2.HCT.270126/9.P.DIR, DOF 06-02-2026, vigente desde el 1 de febrero; todos los costos de obra privada subieron 3.69 % y los factores de obra pública siguen igual desde 2015). Ejemplo: edificio habitacional tipo medio de 2,400 m² al 80 % debería llevar $2.77 millones de salarios; con $2.35 millones reportados vas en 84.8 % y hay unos $147,000 de cuotas en riesgo de determinación presuntiva. Expediente IMSS y REPSE: revisión mensual de registro en SIROC, listado del SUA, opinión de cumplimiento y, por subcontratista, REPSE vigente, nóminas, cuotas e informes ICSOE / SISUB; la próxima ventana cuatrimestral es del 1 al 17 de enero de 2027. Mejora: Pago semanal de destajos ahora pide REPSE vigente y alta en SIROC antes de pagar. Aviso: no se pudo leer la tabla oficial 2026 del DOF (bloqueada para consulta automática); el costo de ejemplo ($1,443/m²) es el de 2025 × 1.0369 y debe confirmarse en el DOF. Los plazos de registro y aviso de terminación en SIROC no se pudieron verificar en el sitio del IMSS: confírmalos con tu contador.",

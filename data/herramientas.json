@@ -4638,6 +4638,7 @@
       ],
       "como_usar": [
         "Convierte el atraso a horas-hombre: toma del programa las actividades que debieron estar terminadas, saca sus cantidades pendientes y multiplícalas por el rendimiento de tu cuadrilla (la calculadora Rendimiento de cuadrilla te da las HH por unidad). Si traes el atraso en semanas, úsalo con la calculadora Programa ganado para dimensionar el importe y de ahí las HH.",
+        "Si el atraso viene de que el programa se hizo con 48 h y la actividad sigue después del 1 de enero de 2027, dimensiónalo primero con la calculadora Programa que cruza el 1 de enero de 2027 (jornada de 46 h, festivos y lluvia) y captura aquí jornada ordinaria 46.",
         "Captura el índice de productividad según la semana de horas extra que llevas, no según lo que quieres creer: 0.95 la primera semana de 50 h, 0.91 la primera de 60 h, y baja a 0.72 y 0.61 si llevas 10 semanas seguidas. Si ya traes varias semanas con extras, usa el valor bajo.",
         "Revisa el tope legal: en 2026 son 9 horas extra a la semana, repartidas en máximo 4 horas al día y 4 días; lo que pase del tope se paga con 200 % más y la jornada ordinaria más extra nunca puede pasar de 12 horas al día.",
         "Compara las dos columnas: costo total con horas extra contra costo con cuadrilla adicional. Si el indicador 'de cada peso cuánto se convierte en obra' sale en amarillo o rojo, estás pagando casi todo en prima y no en avance.",
@@ -5127,6 +5128,234 @@
         {
           "titulo": "AACE International: RP 52R-06 Prospective Time Impact Analysis (ficha oficial)",
           "url": "https://www.pathlms.com/aace/courses/2928/documents/3835"
+        }
+      ]
+    },
+    {
+      "id": "calc-jornada-46-programa",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Programa que cruza el 1 de enero de 2027: días que agrega la jornada de 46 horas, festivos y lluvia, y cuadrilla para no moverte de fecha",
+      "resumen": "Desde el 1 de enero de 2027 la jornada máxima baja de 48 a 46 horas (LFT reformada, DOF 01-05-2026) con el mismo salario: la misma cuadrilla hace 4.2 % menos obra por semana. Convierte las horas-hombre pendientes de una actividad o frente en días hábiles con 48 h y con 46 h, suma festivos y días de lluvia que tu programa no descontó, y te dice cuánta holgura te queda, cuántos trabajadores necesitas para sostener el ritmo y cuántas horas extra cabrían dentro del tope de 9 h/semana.",
+      "agregada": "2026-11-09",
+      "entradas": [
+        {
+          "id": "hh",
+          "label": "Horas-hombre pendientes de la actividad o frente después del 1 de enero de 2027",
+          "unidad": "HH",
+          "valor": 6000
+        },
+        {
+          "id": "trab",
+          "label": "Trabajadores asignados",
+          "unidad": "personas",
+          "valor": 20
+        },
+        {
+          "id": "jor_ant",
+          "label": "Jornada semanal con la que se hizo el programa",
+          "unidad": "h/sem",
+          "valor": 48
+        },
+        {
+          "id": "jor_nva",
+          "label": "Jornada semanal máxima vigente (2027: 46; 2028: 44; 2029: 42; 2030: 40)",
+          "unidad": "h/sem",
+          "valor": 46
+        },
+        {
+          "id": "he",
+          "label": "Horas extra por trabajador por semana que piensas programar (tope 2027: 9)",
+          "unidad": "h/sem",
+          "valor": 0
+        },
+        {
+          "id": "dias_sem",
+          "label": "Días laborables por semana (6, o 5.5 si el sábado es medio día)",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "fest",
+          "label": "Festivos de ley dentro del periodo que el programa no descontó (2027: 1 ene, 1 feb, 15 mar)",
+          "unidad": "días",
+          "valor": 2
+        },
+        {
+          "id": "lluvia",
+          "label": "Días que esperas perder por lluvia (tu registro de bitácora de la temporada pasada)",
+          "unidad": "días",
+          "valor": 4
+        },
+        {
+          "id": "holg",
+          "label": "Holgura total de la actividad en el programa vigente (0 si es ruta crítica)",
+          "unidad": "días hábiles",
+          "valor": 3
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Días hábiles con la jornada del programa",
+          "formula": "hh/(trab*jor_ant/dias_sem)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días hábiles con la jornada nueva (más horas extra si las capturaste)",
+          "formula": "hh/(trab*(jor_nva+Math.min(he,9))/dias_sem)",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Días hábiles que agrega (o quita) el cambio de jornada",
+          "formula": "hh/(trab*(jor_nva+Math.min(he,9))/dias_sem)-hh/(trab*jor_ant/dias_sem)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días hábiles a programar con festivos y lluvia",
+          "formula": "hh/(trab*(jor_nva+Math.min(he,9))/dias_sem)+fest+lluvia",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Semanas calendario de la actividad",
+          "formula": "(hh/(trab*(jor_nva+Math.min(he,9))/dias_sem)+fest+lluvia)/dias_sem",
+          "unidad": "semanas",
+          "decimales": 1
+        },
+        {
+          "label": "Holgura que te queda (negativo = la fecha de término se mueve)",
+          "formula": "holg-(hh/(trab*(jor_nva+Math.min(he,9))/dias_sem)-hh/(trab*jor_ant/dias_sem))-fest-lluvia",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -3
+          ]
+        },
+        {
+          "label": "Trabajadores necesarios para terminar en los días del programa original (absorbiendo festivos y lluvia)",
+          "formula": "Math.ceil(hh/((jor_nva+Math.min(he,9))/dias_sem)/Math.max(hh/(trab*jor_ant/dias_sem)+holg-fest-lluvia,1))",
+          "unidad": "personas",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Trabajadores para sostener solo el ritmo de 48 h (sin festivos ni lluvia)",
+          "formula": "Math.ceil(trab*jor_ant/(jor_nva+Math.min(he,9)))",
+          "unidad": "personas",
+          "decimales": 0
+        },
+        {
+          "label": "Horas extra por trabajador por semana que reponen el cambio de jornada",
+          "formula": "Math.max(jor_ant-jor_nva,0)",
+          "unidad": "h/sem",
+          "decimales": 0
+        },
+        {
+          "label": "Horas extra capturadas por encima del tope de 9 h (no se cuentan; se pagarían con 200 % más)",
+          "formula": "Math.max(he-9,0)",
+          "unidad": "h/sem",
+          "decimales": 0
+        },
+        {
+          "label": "Jornada diaria ordinaria promedio con la jornada nueva",
+          "formula": "jor_nva/dias_sem",
+          "unidad": "h/día",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Abre el programa y filtra las actividades de mano de obra que siguen vivas después del 31 de diciembre (acabados, instalaciones, albañilería, herrería). Para cada una saca las horas-hombre pendientes: cantidad pendiente × HH por unidad de tu tarjeta o de la calculadora Rendimiento de cuadrilla (un jornal = 8 h).",
+        "Captura trabajadores, días por semana y la holgura total que te da el programa (en ProjectLibre o MS Project es la columna Holgura total; 0 en ruta crítica). En festivos pon solo los que tu programa no descontó: en el periodo de cierre 2026 recuerda el lunes 16 de noviembre y el 25 de diciembre, y en 2027 el 1 de enero, el lunes 1 de febrero y el lunes 15 de marzo.",
+        "En días de lluvia usa tu propio registro: cuenta en bitácora o en el reporte diario cuántos días se pararon frentes exteriores entre noviembre y marzo la temporada pasada. No se encontró una normal oficial de días de lluvia por mes para Tijuana verificable hoy; no la inventes, usa tu dato.",
+        "Lee la holgura que te queda: verde, la actividad absorbe el cambio; amarillo (hasta 3 días negativos), mete los trabajadores que indica la calculadora o horas extra dentro del tope de 9 h; rojo, la fecha de término se mueve: avísalo hoy con nota de bitácora y revisa si procede prórroga con el formato Análisis de impacto (TIA).",
+        "Antes de decidir horas extra, pasa el caso por Recuperar atraso: en 2027 el tope sigue en 9 h/semana (máximo 4 h al día y 4 días), lo que exceda se paga con 200 % más y la jornada total no puede pasar de 12 h diarias. Para el costo de cada hora con 46 h usa Factor de salario real.",
+        "Prueba PDCA de 4 semanas desde el 4 de enero: compara HH programadas contra HH registradas por cuadrilla (el registro electrónico de jornada ya es obligatorio desde el 1 de enero) y la cantidad instalada; si el rendimiento real por hora no cambió, la duración que te dio la calculadora es la buena para el resto de la obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "DOF 01-05-2026 – Decreto de reforma a la LFT en materia de reducción de la jornada (art. 59: 40 h semanales; transitorio segundo: 48 h en 2026, 46 h desde el 1 de enero de 2027, 44 h en 2028, 42 h en 2029 y 40 h en 2030; transitorio cuarto: tope de horas extra de 9 h/semana en 2026 y 2027; art. 69: un día de descanso por cada seis; art. 132 fr. XXXIV: registro electrónico de jornada; transitorio quinto: sus disposiciones rigen desde el 1 de enero de 2027; transitorio séptimo: sin reducción de salarios)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft/LFT_ref52_01may26.pdf"
+        },
+        {
+          "titulo": "Greenberg Traurig (8 may 2026) – Reforma a la LFT: reducción gradual de la jornada laboral (calendario, tope de 9 horas extra en 2027 y pago con 200 % más del excedente)",
+          "url": "https://www.gtlaw.com/en/insights/2026/5/reforma-a-la-ley-federal-del-trabajo---reduccion"
+        },
+        {
+          "titulo": "LFT art. 74 – Días de descanso obligatorio (1 ene, primer lunes de febrero, tercer lunes de marzo, 1 may, 16 sep, tercer lunes de noviembre, 1 oct cada seis años, 25 dic y jornada electoral) y art. 75 (salario doble adicional si se labora)",
+          "url": "https://mley.mx/LFT/articulo/74/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-transicion-jornada-46",
+      "tipo": "formato",
+      "categoria": "Control de avance",
+      "titulo": "Ajuste del programa, cuadrillas y contratos a la jornada de 46 horas antes del 1 de enero de 2027 (con registro electrónico de jornada)",
+      "resumen": "Lista de verificación de una hoja para que la obra arranque 2027 con el programa reprogramado a 46 horas, los contratistas y destajistas avisados, el horario de cada cuadrilla definido y el registro electrónico de entrada y salida funcionando (art. 132 fr. XXXIV LFT, obligatorio desde el 1 de enero de 2027; multa de 250 a 5,000 UMA). Evita que el atraso de enero se descubra hasta el corte de febrero.",
+      "agregada": "2026-11-09",
+      "campos": [
+        "Obra",
+        "Contrato / cliente",
+        "Fecha de revisión",
+        "Fecha de término contractual vigente",
+        "Actividades de mano de obra que siguen después del 31 de diciembre (número y HH pendientes)",
+        "Días hábiles que agrega la jornada de 46 h (de la calculadora)",
+        "Holgura total más baja después del ajuste (días)",
+        "Nueva fecha de término pronosticada",
+        "Horario por cuadrilla para 2027 (entrada, comida, salida, días)",
+        "Sistema de registro electrónico de jornada elegido (reloj checador, app, biométrico)",
+        "Contratistas y destajistas notificados (nombre y fecha)",
+        "Responsable del ajuste",
+        "Revisó / superintendente",
+        "Folio de nota de bitácora"
+      ],
+      "items": [
+        "El programa vigente se revisó actividad por actividad y las de mano de obra posteriores al 31 de diciembre se recalcularon con 46 h por semana (no se dejó la duración de 48 h)",
+        "Se descontaron los festivos de ley del periodo: lunes 16 de noviembre y 25 de diciembre de 2026; 1 de enero, lunes 1 de febrero y lunes 15 de marzo de 2027",
+        "Se registraron en el programa los días de lluvia esperados para frentes exteriores con el dato propio de la temporada pasada",
+        "La ruta crítica después del ajuste está identificada y se sabe cuántos días se movió la fecha de término",
+        "Si la fecha se mueve: se decidió entre cuadrilla adicional, horas extra dentro del tope de 9 h/semana o resecuenciar, con responsable y fecha",
+        "Si el cambio no es imputable a la empresa (por ejemplo, contrato firmado antes de la reforma), se documentó el impacto y se evaluó solicitar prórroga o convenio con el formato Análisis de impacto (TIA)",
+        "El horario 2027 de cada cuadrilla suma máximo 46 h ordinarias a la semana, con un día de descanso por cada seis de trabajo",
+        "Las horas extra planeadas no pasan de 9 por semana, ni de 4 al día, ni de 4 días; la jornada total no pasa de 12 h diarias",
+        "El salario semanal de los trabajadores no se redujo por la jornada menor (transitorio séptimo)",
+        "Los contratos y pedidos de destajo y subcontrato se revisaron: precio por unidad, rendimiento esperado y fecha de terminación ajustada por escrito",
+        "Los subcontratistas confirmaron por escrito su propio ajuste de jornada y de cuadrillas",
+        "Está instalado y probado el registro electrónico de jornada con hora de inicio y término por trabajador, incluidos los de subcontratistas que entran a la obra",
+        "El registro de jornada se cruza cada semana con la lista de raya y con las HH del reporte diario",
+        "Se actualizaron los precios unitarios o el presupuesto de mano de obra con el costo por hora de 46 h (calculadora Factor de salario real)",
+        "Se avisó al cliente o supervisión por nota de bitácora el ajuste del programa y sus causas"
+      ],
+      "como_usar": [
+        "Esta semana llena los datos generales con la calculadora Programa que cruza el 1 de enero de 2027: corre una línea por cada actividad de mano de obra viva después del 31 de diciembre y anota aquí el total de días que se agregan y la holgura más baja.",
+        "Recorre los puntos con el administrativo de obra y cada contratista: marca Cumple / No / N/A y en observaciones pon responsable y fecha. Los puntos del registro electrónico y del horario por cuadrilla deben quedar en Cumple antes del 31 de diciembre.",
+        "Elige el registro de jornada: un reloj checador biométrico en el acceso o una app de asistencia en el celular del cabo. Pruébalo en la primera quincena de diciembre con una cuadrilla y revisa que guarde entrada y salida por trabajador y que puedas exportarlo si te lo pide la autoridad.",
+        "Notifica por escrito a contratistas y destajistas el horario 2027 y la nueva fecha de cada frente, y deja nota en bitácora con el resumen del ajuste; exporta el formato en CSV o PDF y archívalo con el programa reprogramado.",
+        "Revisión PDCA el 15 de enero: compara las HH registradas por el sistema contra las HH programadas y el avance medido en el Corte semanal de avance; si la desviación pasa de 5 %, ajusta de nuevo el programa."
+      ],
+      "fuentes": [
+        {
+          "titulo": "DOF 01-05-2026 – Decreto de reforma a la LFT en materia de reducción de la jornada (art. 59: 40 h semanales; transitorio segundo: 48 h en 2026, 46 h desde el 1 de enero de 2027, 44 h en 2028, 42 h en 2029 y 40 h en 2030; transitorio cuarto: tope de horas extra de 9 h/semana en 2026 y 2027; art. 69: un día de descanso por cada seis; art. 132 fr. XXXIV: registro electrónico de jornada; transitorio quinto: sus disposiciones rigen desde el 1 de enero de 2027; transitorio séptimo: sin reducción de salarios)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft/LFT_ref52_01may26.pdf"
+        },
+        {
+          "titulo": "CR Rasgado Abogados (12 ago 2026) – Jornada de 46 horas en 2027: lo que la empresa debe tener resuelto antes del 1 de enero (registro de jornada, multa de 250 a 5,000 UMA, art. 994 fr. IV Bis)",
+          "url": "https://rasgadoabogados.com/blog/jornada-46-horas-2027-registro-de-jornada/"
+        },
+        {
+          "titulo": "Greenberg Traurig (8 may 2026) – Reforma a la LFT: reducción gradual de la jornada laboral (calendario, tope de 9 horas extra en 2027 y pago con 200 % más del excedente)",
+          "url": "https://www.gtlaw.com/en/insights/2026/5/reforma-a-la-ley-federal-del-trabajo---reduccion"
+        },
+        {
+          "titulo": "LFT art. 74 – Días de descanso obligatorio (1 ene, primer lunes de febrero, tercer lunes de marzo, 1 may, 16 sep, tercer lunes de noviembre, 1 oct cada seis años, 25 dic y jornada electoral) y art. 75 (salario doble adicional si se labora)",
+          "url": "https://mley.mx/LFT/articulo/74/"
         }
       ]
     },
