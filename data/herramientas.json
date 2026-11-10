@@ -1654,7 +1654,7 @@
         "Juntas de colado definidas y tratadas",
         "Bomba, vibradores y personal confirmados",
         "Laboratorio confirmado para revenimiento y cilindros",
-        "Pronóstico de clima revisado; curado programado",
+        "Pronóstico de clima revisado y tasa de evaporación calculada a la hora del colado (calculadora de evaporación); si sale amarillo o rojo, llenar 'Colado con viento Santa Ana o calor'; curado programado con material en obra",
         "Puntos de muestreo de cilindros definidos y, si aplica, sensores de madurez amarrados y activados",
         "Responsable de llenar 'Recepción de olla y muestreo' por cada olla asignado, y datos de cemento y agua retenida pedidos a la planta"
       ],
@@ -5651,6 +5651,141 @@
       ]
     },
     {
+      "id": "calc-evaporacion-colado",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Evaporación en la losa recién colada: ¿se va a agrietar con este viento? (Santa Ana, calor y aire seco)",
+      "resumen": "Calcula la tasa de evaporación del agua en la superficie del concreto fresco con temperatura del concreto, del aire, humedad relativa y viento (ecuación de Uno / nomograma ACI). Te dice si estás en verde (< 0.5 kg/m²/h), amarillo (0.5 a 1.0, precaución) o rojo (> 1.0, protección obligatoria: grietas por contracción plástica esperadas), cuántos litros pierde la losa cada hora y cuánto bajas el riesgo con barrera de viento y concreto más frío. Pensada para los días de condición Santa Ana en Tijuana, cuando la humedad cae debajo de 20 % y el viento seco pasa de 30 km/h.",
+      "agregada": "2026-11-10",
+      "entradas": [
+        {
+          "id": "tc",
+          "label": "Temperatura del concreto en la descarga (termómetro en la muestra)",
+          "unidad": "°C",
+          "valor": 30
+        },
+        {
+          "id": "ta",
+          "label": "Temperatura del aire (a 1.2–1.8 m, a la sombra, del lado del viento)",
+          "unidad": "°C",
+          "valor": 28
+        },
+        {
+          "id": "hr",
+          "label": "Humedad relativa del aire",
+          "unidad": "%",
+          "valor": 25
+        },
+        {
+          "id": "v",
+          "label": "Velocidad del viento a 0.5 m sobre la losa (anemómetro o app de clima)",
+          "unidad": "km/h",
+          "valor": 30
+        },
+        {
+          "id": "vb",
+          "label": "Viento detrás de la barrera (malla sombra / lona / muro); si no hay barrera, igual al de arriba",
+          "unidad": "km/h",
+          "valor": 8
+        },
+        {
+          "id": "tc2",
+          "label": "Temperatura del concreto que puedes pedir a la planta (agua fría / hielo / colar de madrugada)",
+          "unidad": "°C",
+          "valor": 24
+        },
+        {
+          "id": "area",
+          "label": "Área expuesta de la losa o firme",
+          "unidad": "m²",
+          "valor": 120
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Tasa de evaporación en las condiciones actuales",
+          "formula": "Math.max(0,5*(Math.pow(tc+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(v+4)*1e-6)",
+          "unidad": "kg/m²/h",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra 1.0 kg/m²/h (verde = E ≤ 0.5; amarillo = 0.5 a 1.0; rojo = más de 1.0: protección obligatoria)",
+          "formula": "1-Math.max(0,5*(Math.pow(tc+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(v+4)*1e-6)",
+          "unidad": "kg/m²/h",
+          "decimales": 2,
+          "semaforo": [
+            0.5,
+            0
+          ]
+        },
+        {
+          "label": "Agua que pierde el área expuesta cada hora (1 kg/m² ≈ 1 mm de lámina)",
+          "formula": "Math.max(0,5*(Math.pow(tc+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(v+4)*1e-6)*area",
+          "unidad": "L/h",
+          "decimales": 0
+        },
+        {
+          "label": "Tasa de evaporación con barrera de viento y concreto más frío",
+          "formula": "Math.max(0,5*(Math.pow(tc2+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(vb+4)*1e-6)",
+          "unidad": "kg/m²/h",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen con medidas (verde = E ≤ 0.5; amarillo = 0.5 a 1.0; rojo = más de 1.0)",
+          "formula": "1-Math.max(0,5*(Math.pow(tc2+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(vb+4)*1e-6)",
+          "unidad": "kg/m²/h",
+          "decimales": 2,
+          "semaforo": [
+            0.5,
+            0
+          ]
+        },
+        {
+          "label": "Reducción del agua evaporada con las medidas",
+          "formula": "Math.max(0,5*(Math.pow(tc+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(v+4)*1e-6)>0?(1-Math.max(0,5*(Math.pow(tc2+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(vb+4)*1e-6)/Math.max(0,5*(Math.pow(tc+18,2.5)-hr/100*Math.pow(ta+18,2.5))*(v+4)*1e-6))*100:0",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Viento máximo sobre la losa para quedar en 0.5 kg/m²/h con el concreto más frío (999 = cualquier viento)",
+          "formula": "(Math.pow(tc2+18,2.5)-hr/100*Math.pow(ta+18,2.5))>0?Math.max(0,0.5/(5e-6*(Math.pow(tc2+18,2.5)-hr/100*Math.pow(ta+18,2.5)))-4):999",
+          "unidad": "km/h",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "La víspera del colado revisa el pronóstico (temperatura, humedad y viento por hora) y corre la calculadora con la hora del colado; si sale rojo, pasa el colado a la madrugada o al día siguiente, o deja lista la barrera de viento y el curado antes de llamar a la planta.",
+        "El día del colado mide en sitio: temperatura del concreto en la primera olla (NMX-C-435 / ASTM C1064), aire y humedad con termohigrómetro a la sombra a 1.2–1.8 m y viento con anemómetro a 0.5 m sobre la losa, del lado de donde sopla. El viento del aeropuerto o de la app suele no ser el de tu losa.",
+        "Repite la medición cada hora o cuando cambie el viento y anota el valor en el formato 'Colado con viento Santa Ana o calor'. En amarillo: atomizar niebla (no chorro) sobre la losa, cubrir entre pasadas de llana y curar en cuanto se pueda. En rojo: además barrera de viento y concreto más frío; si no baja de 1.0, suspende el acabado a cielo abierto.",
+        "Si el concreto tiene poca exudación (a/c baja, mucho cemento o microsílice, firme delgado o sobre polietileno) toma el amarillo como rojo: NRMCA advierte que esas mezclas se agrietan aun con evaporación baja.",
+        "Indicador: metros lineales de grieta plástica por cada 100 m² colados y % de colados con lectura de evaporación registrada. Mide 4 colados antes y 4 después de aplicar el plan; meta: cero grietas plásticas y 100 % de colados con lectura."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Kestrel – How to Prevent Plastic Shrinkage Cracks: ecuación métrica E = 5([Tc+18]^2.5 − r[Ta+18]^2.5)(V+4)×10⁻⁶ (kg/m²/h; °C; r = HR/100; V en km/h medido a 0.5 m sobre la superficie; aire y humedad a 1.2–1.8 m, a la sombra); arriba de 1.0 kg/m²/h se esperan grietas, de 0.5 a 1.0 pueden aparecer",
+          "url": "https://kestrelmeters.com/blog/how-to-prevent-plastic-shrinkage-cracks"
+        },
+        {
+          "titulo": "FHWA – Guía de curado de pavimentos de concreto, cap. 5: arriba de 1.0 kg/m²/h la protección de la superficie es obligatoria; 0.5 kg/m²/h amerita precaución; en pavimentos hasta 0.3 kg/m²/h puede causar pérdidas críticas",
+          "url": "https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/pccp/05038/005.cfm"
+        },
+        {
+          "titulo": "NRMCA – CIP 5 Agrietamiento por contracción plástica (en español): viento > 8 km/h, baja humedad y calor; barreras de viento y sol, atomizar agua, humedecer base y cimbra, cubrir entre acabados, curar de inmediato al menos 3 días, fibras sintéticas; mezclas con poca exudación se agrietan aun con evaporación baja",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP5es.pdf"
+        },
+        {
+          "titulo": "ACI 305R-20 Guía para colar concreto en clima caluroso (vista previa oficial): define la tasa de evaporación E en kg/m²/h y el viento medido a 0.5 m sobre la superficie; pide junta previa al colado y plan de protección contra pérdida de humedad",
+          "url": "https://www.concrete.org/Portals/0/Files/PDF/Previews/305R-20_preview.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
       "id": "calc-corazones",
       "tipo": "calculadora",
       "categoria": "Concreto",
@@ -5839,6 +5974,70 @@
         {
           "titulo": "NRMCA – CIP 26 Adición de agua en la obra (ASTM C94: solo al llegar y antes de descargar más de 0.2 m³, sin exceder revenimiento ni a/c máximos; 30 revoluciones a velocidad de mezclado; ≈ 5 L/m³ sube ~2.5 cm el revenimiento)",
           "url": "https://nrmca.org/wp-content/uploads/2020/04/CIP26es.pdf"
+        }
+      ]
+    },
+    {
+      "id": "fmt-colado-viento-calor",
+      "tipo": "formato",
+      "categoria": "Concreto",
+      "titulo": "Colado con viento Santa Ana o calor: plan de protección contra grietas plásticas y curado (ACI 305R / NRMCA CIP 5)",
+      "resumen": "Lista de verificación y registro horario para colar losas, firmes y muros cuando hay viento seco, calor o humedad baja: decisión de colar o reprogramar, barreras de viento y sol, base y cimbra humedecidas, niebla, cubierta entre acabados y curado inmediato. Deja evidencia de la tasa de evaporación medida, útil ante una reclamación por grietas o una revisión del DRO.",
+      "agregada": "2026-11-10",
+      "campos": [
+        "Obra",
+        "Elemento / eje / nivel y área a colar (m²)",
+        "Fecha y hora programada del colado",
+        "Proveedor, f'c, a/c y aditivos (retardante, fibras)",
+        "Pronóstico revisado (fuente y hora): temperatura, humedad y viento",
+        "Lectura 1 – hora, T concreto, T aire, HR, viento a 0.5 m y E (kg/m²/h)",
+        "Lectura 2 – hora, T concreto, T aire, HR, viento y E",
+        "Lectura 3 – hora, T concreto, T aire, HR, viento y E",
+        "Lectura 4 – hora, T concreto, T aire, HR, viento y E",
+        "Decisión: colar / colar con medidas / reprogramar y quién decidió",
+        "Método de curado (membrana, mantas húmedas, riego) y días",
+        "Hora de inicio del curado",
+        "Grietas observadas al día siguiente (ubicación y metros lineales)",
+        "Residente, supervisión y DRO enterado"
+      ],
+      "items": [
+        "Se corrió la calculadora 'Evaporación en la losa recién colada' con el pronóstico la víspera y se decidió hora del colado con ese resultado",
+        "Si el pronóstico marca condición Santa Ana (viento seco > 30 km/h, humedad < 20 %), el colado se pasó a madrugada / noche o se reprogramó",
+        "Se pidió a la planta concreto con temperatura máxima pactada (agua fría o hielo) y, si aplica, retardante de fraguado o fibras sintéticas",
+        "Barrera de viento colocada del lado de donde sopla (malla sombra doble, lona o muro temporal) y barrera de sol si hay radiación directa",
+        "Base, cimbra y acero humedecidos antes del colado, sin charcos ni agua libre",
+        "Si hay polietileno bajo el firme, se revisó el riesgo extra (más exudación arriba) y se tomaron las medidas del amarillo como rojo",
+        "Equipo de niebla (aspersora / nebulizador) listo y probado; se atomiza al aire sobre la losa, sin chorro ni agua encharcada",
+        "Cuadrilla y equipo de acabado suficientes para colocar y terminar rápido; nadie espera con el concreto descubierto",
+        "Entre pasadas de llana la superficie se cubre con polietileno, mantas húmedas o se aplica retardante de evaporación; no se rocía agua para 'ayudar' a la llana",
+        "Tasa de evaporación medida en sitio al menos cada hora y anotada; con lectura en rojo se aplicaron todas las medidas o se suspendió el acabado",
+        "Curado iniciado inmediatamente después del acabado final (membrana a la dosis de la ficha técnica o mantas húmedas) y mantenido húmedo al menos 3 días; los días totales según la especificación del proyecto",
+        "Grietas que aparecieron durante el acabado se cerraron re-trabajando la superficie y se reforzaron las medidas",
+        "Al día siguiente se revisó la superficie, se midieron metros lineales de grieta y se anotó en bitácora con foto"
+      ],
+      "como_usar": [
+        "La víspera llena el encabezado y los primeros tres puntos con el pronóstico y el resultado de la calculadora de evaporación; si sale rojo, decide ahí mismo reprogramar o colar de madrugada.",
+        "Antes de la primera olla revisa barreras, humedecido de base y cimbra, niebla y curado listos (puntos 4 a 8); lo que no esté, no se cuela.",
+        "Durante el colado registra una lectura de evaporación por hora en los campos de Lectura 1 a 4 y aplica las medidas que pida el color.",
+        "Al terminar anota hora de inicio de curado y al día siguiente mide grietas con foto; exporta a CSV o PDF y anexa a la nota de bitácora del colado.",
+        "Indicador: m de grieta plástica por 100 m² y % de colados con plan llenado; compara 4 colados antes y 4 después."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NRMCA – CIP 5 Agrietamiento por contracción plástica (en español): viento > 8 km/h, baja humedad y calor; barreras de viento y sol, atomizar agua, humedecer base y cimbra, cubrir entre acabados, curar de inmediato al menos 3 días, fibras sintéticas; mezclas con poca exudación se agrietan aun con evaporación baja",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP5es.pdf"
+        },
+        {
+          "titulo": "ACI 305R-20 Guía para colar concreto en clima caluroso (vista previa oficial): define la tasa de evaporación E en kg/m²/h y el viento medido a 0.5 m sobre la superficie; pide junta previa al colado y plan de protección contra pérdida de humedad",
+          "url": "https://www.concrete.org/Portals/0/Files/PDF/Previews/305R-20_preview.pdf"
+        },
+        {
+          "titulo": "FHWA – Guía de curado de pavimentos de concreto, cap. 5: arriba de 1.0 kg/m²/h la protección de la superficie es obligatoria; 0.5 kg/m²/h amerita precaución; en pavimentos hasta 0.3 kg/m²/h puede causar pérdidas críticas",
+          "url": "https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/pccp/05038/005.cfm"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
         }
       ]
     },

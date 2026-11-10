@@ -1,6 +1,39 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-10",
+      "titulo": "Calidad: losas sin grietas plásticas en días de Santa Ana — tasa de evaporación calculada y plan de protección y curado del colado",
+      "resumen": "En la temporada de vientos de Santa Ana el aire seco y caliente evapora el agua de la superficie del concreto más rápido de lo que sube la exudación, y la losa se agrieta antes de fraguar. 'Evaporación en la losa recién colada' calcula esa tasa con temperatura del concreto, aire, humedad y viento (ecuación de Uno / nomograma ACI) y la pone en semáforo: verde < 0.5, amarillo 0.5–1.0, rojo > 1.0 kg/m²/h. Ejemplo: concreto a 30 °C, aire a 28 °C, humedad 25 % y viento de 30 km/h da 2.10 kg/m²/h (rojo; 252 L/h perdidos en 120 m²); con barrera que baja el viento a 8 km/h y concreto a 24 °C baja a 0.47 (verde, 78 % menos). 'Colado con viento Santa Ana o calor' es la lista de 13 puntos con lecturas por hora para decidir colar o reprogramar, proteger y curar, y dejar evidencia. Mejora: la Liberación de colado ahora pide calcular la evaporación y remite al nuevo formato.",
+      "herramientas": [
+        "calc-evaporacion-colado",
+        "fmt-colado-viento-calor",
+        "fmt-precolado"
+      ],
+      "como_aplicarlo": "1) Para el próximo colado de losa o firme corre la calculadora la víspera con el pronóstico por hora; si sale rojo, cuela de madrugada o deja lista la barrera de viento y pide concreto más frío. 2) El día del colado mide temperatura, humedad y viento en la losa cada hora y llena el formato; en amarillo niebla y cubierta entre acabados, en rojo además barrera o suspensión. 3) Al día siguiente mide metros de grieta por 100 m² y compáralo con los últimos colados para decidir si el plan se vuelve obligatorio.",
+      "fuentes": [
+        {
+          "titulo": "Kestrel – How to Prevent Plastic Shrinkage Cracks: ecuación métrica E = 5([Tc+18]^2.5 − r[Ta+18]^2.5)(V+4)×10⁻⁶ (kg/m²/h; °C; r = HR/100; V en km/h medido a 0.5 m sobre la superficie; aire y humedad a 1.2–1.8 m, a la sombra); arriba de 1.0 kg/m²/h se esperan grietas, de 0.5 a 1.0 pueden aparecer",
+          "url": "https://kestrelmeters.com/blog/how-to-prevent-plastic-shrinkage-cracks"
+        },
+        {
+          "titulo": "FHWA – Guía de curado de pavimentos de concreto, cap. 5: arriba de 1.0 kg/m²/h la protección de la superficie es obligatoria; 0.5 kg/m²/h amerita precaución; en pavimentos hasta 0.3 kg/m²/h puede causar pérdidas críticas",
+          "url": "https://www.fhwa.dot.gov/publications/research/infrastructure/pavements/pccp/05038/005.cfm"
+        },
+        {
+          "titulo": "NRMCA – CIP 5 Agrietamiento por contracción plástica (en español): viento > 8 km/h, baja humedad y calor; barreras de viento y sol, atomizar agua, humedecer base y cimbra, cubrir entre acabados, curar de inmediato al menos 3 días, fibras sintéticas; mezclas con poca exudación se agrietan aun con evaporación baja",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP5es.pdf"
+        },
+        {
+          "titulo": "ACI 305R-20 Guía para colar concreto en clima caluroso (vista previa oficial): define la tasa de evaporación E en kg/m²/h y el viento medido a 0.5 m sobre la superficie; pide junta previa al colado y plan de protección contra pérdida de humedad",
+          "url": "https://www.concrete.org/Portals/0/Files/PDF/Previews/305R-20_preview.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-09",
       "titulo": "Control de avance: el programa de obra ante la jornada de 46 horas del 1 de enero de 2027, festivos y lluvia, y lista para arrancar el año con registro electrónico de jornada",
       "resumen": "Desde el 1 de enero de 2027 la jornada máxima baja de 48 a 46 horas con el mismo salario (LFT reformada, DOF 01-05-2026) y el registro electrónico de entrada y salida se vuelve obligatorio (multa de 250 a 5,000 UMA). Un programa hecho con 48 h se queda corto 4.3 % en toda la mano de obra que siga viva en enero. Programa que cruza el 1 de enero de 2027 convierte las HH pendientes de cada actividad en días con 48 y 46 h, suma festivos y lluvia y dice cuánta holgura queda y cuántos trabajadores sostienen la fecha. Ejemplo: 6,000 HH con 20 trabajadores pasan de 37.5 a 39.1 días hábiles; con 2 festivos y 4 días de lluvia no descontados, una holgura de 3 días queda en −4.6 (rojo) y hacen falta 23 trabajadores para no moverte de fecha. Ajuste a la jornada de 46 horas es la lista de 15 puntos para cerrar antes del 31 de diciembre: programa, horarios por cuadrilla, destajos y subcontratos, salarios sin reducción y registro de jornada. Mejora: Recuperar atraso ahora remite a la nueva calculadora cuando el atraso viene del cambio de jornada.",
