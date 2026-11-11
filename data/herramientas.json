@@ -1725,7 +1725,7 @@
         "Arnés y línea de vida en trabajos en altura",
         "Todo trabajo a más de 1.80 m tiene Permiso de trabajo en altura firmado y vigente, con claro libre calculado",
         "Anclajes arriba de la argolla D, nunca abajo de los pies; sin líneas de vida improvisadas ni extendidas",
-        "Andamios con base firme, rodapiés y barandal",
+        "Andamios con base firme (placa base y durmiente), plataforma completa, rodapiés y barandal; si la altura pasa de 4 veces la base, amarrados al edificio según 'Andamio tubular: relación altura/base 4:1'",
         "Bordes de losa y huecos protegidos",
         "Excavaciones con talud o ademe según la Tabla 6, acopio a 2 m o más del borde, escalera desde 1.20 m y 'Inspección diaria de excavación' del día firmada",
         "Orden y limpieza en áreas de trabajo y circulaciones",
@@ -1735,7 +1735,8 @@
         "Constancias DC-3 y exámenes médicos vigentes del personal que trabaja en altura",
         "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)",
         "Izajes con grúa con cálculo de eslingas y % de tabla de carga hecho antes de levantar; radio de acción acordonado y un solo señalero",
-        "Cisternas, fosas, cárcamos y pozos señalizados y tapados; nadie dentro sin 'Permiso de entrada a espacio confinado' vigente, vigía afuera y ventilador funcionando"
+        "Cisternas, fosas, cárcamos y pozos señalizados y tapados; nadie dentro sin 'Permiso de entrada a espacio confinado' vigente, vigía afuera y ventilador funcionando",
+        "Soldadura, corte o esmerilado fuera del taller con 'Permiso de trabajo en caliente' vigente, sin combustibles en 10 m, extintor ABC a menos de 7 m y vigilante de fuego"
       ],
       "como_usar": [
         "Haz el recorrido con un representante de cada contratista.",
@@ -1743,7 +1744,8 @@
         "Compara semana contra semana: el número de hallazgos debe bajar.",
         "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana.",
         "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar.",
-        "Una entrada a cisterna, fosa o cárcamo sin permiso o sin medición de gases es hallazgo crítico: saca al personal, mide y ventila con 'Ventilación de espacio confinado'. Al cierre de mes captura los casos en 'Indicadores de accidentabilidad'."
+        "Una entrada a cisterna, fosa o cárcamo sin permiso o sin medición de gases es hallazgo crítico: saca al personal, mide y ventila con 'Ventilación de espacio confinado'. Al cierre de mes captura los casos en 'Indicadores de accidentabilidad'.",
+        "Un andamio que pasa de 4:1 sin amarres o sobrecargado, o una soldadura sin permiso de trabajo en caliente, es hallazgo crítico: baja al personal o apaga el equipo y corrige con 'Andamio tubular' o 'Permiso de trabajo en caliente' antes de reanudar."
       ],
       "fuentes": [
         {
@@ -1753,6 +1755,14 @@
         {
           "titulo": "NOM-031-STPS-2011 – Construcción, condiciones de seguridad y salud (DOF)",
           "url": "https://dof.gob.mx/normasOficiales/4212/stps/stps.htm"
+        },
+        {
+          "titulo": "OSHA 29 CFR 1926.451 (andamios, construcción): (a)(1) cada andamio soporta su peso y al menos 4 veces la carga máxima prevista; (b)(2) plataforma de 46 cm mínimo; (c)(1) con relación altura/base mayor a 4:1 se amarra o arriostra: primer amarre a la altura 4:1, luego cada 6.1 m (andamios de 0.91 m de ancho o menos) o 7.9 m (más anchos), a no más de 9.1 m en horizontal, y el amarre superior a no más de la altura 4:1 desde arriba; (c)(2) placas base y durmientes sobre apoyo firme",
+          "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+        },
+        {
+          "titulo": "NOM-027-STPS-2008 Soldadura y corte (PDF STPS): 4.8 y 5.8 autorización por escrito; 8 a) extintor ABC a no más de 7 m; 8 d) bitácora de revisión de equipos; 8 e) sin reguladores reconstruidos; 8 h) ventilación antes y durante; 10.3 b) sin combustibles en un radio no menor a 10 m; 10.5 espacios confinados (O₂ 19.5–23.5 %, cilindros afuera); 10.6 contenido de la autorización y copia conservada al menos un año",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680160/NOM-027-STPS-2008.pdf"
         }
       ]
     },
@@ -3326,7 +3336,8 @@
         "Área inferior delimitada y señalizada; herramienta amarrada para evitar caída de objetos",
         "Sin tormenta eléctrica ni viento fuerte; iluminación suficiente",
         "Plan de rescate explicado al equipo: quién rescata, con qué equipo, teléfono de emergencia y hospital; tiempo de respuesta definido para el trabajador suspendido",
-        "Botiquín acorde con el riesgo disponible en el nivel de trabajo"
+        "Botiquín acorde con el riesgo disponible en el nivel de trabajo",
+        "Si se trabaja desde andamio: relación altura/base revisada (amarres si pasa de 4:1) y carga en plataforma dentro de la capacidad del fabricante – calculadora 'Andamio tubular'"
       ],
       "como_usar": [
         "Llena un permiso por tarea y por turno antes de subir; lo autoriza el residente o el responsable de seguridad, no el propio cuadrillero.",
@@ -8146,6 +8157,246 @@
         {
           "titulo": "Lean Construction Institute – Tracks del 28.º LCI Congress (Atlanta, 12–16 oct 2026): 'Field-First Lean: Tools, Flow, and Daily Improvement' (sep 2026)",
           "url": "https://leanconstruction.org/blog/dive-into-the-2026-lci-congress-conference-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "calc-andamio-estabilidad",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Andamio tubular: relación altura/base 4:1, amarres al edificio y carga en la plataforma",
+      "resumen": "Antes de subir gente al andamio dice si se sostiene solo o hay que amarrarlo al edificio (relación altura/base mayor a 4:1), cuántos niveles y cuántos amarres lleva, y qué porcentaje de la capacidad de la plataforma ocupan los trabajadores y el material acopiado (block, mortero, herramienta). Criterio de OSHA 1926.451 como referencia técnica; la NOM-009-STPS-2011 pide usarlo e inspeccionarlo conforme al fabricante, cuyo instructivo manda si es más estricto.",
+      "agregada": "2026-11-11",
+      "entradas": [
+        {
+          "id": "h",
+          "label": "Altura total del andamio (del apoyo al último nivel de plataforma)",
+          "unidad": "m",
+          "valor": 7.5
+        },
+        {
+          "id": "b",
+          "label": "Dimensión menor de la base (incluye estabilizadores o 'outriggers' si se colocan)",
+          "unidad": "m",
+          "valor": 1.5
+        },
+        {
+          "id": "lv",
+          "label": "Largo del tramo de andamio a lo largo de la fachada",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "ac",
+          "label": "Amarres ya colocados y revisados",
+          "unidad": "pza",
+          "valor": 0
+        },
+        {
+          "id": "nt",
+          "label": "Trabajadores sobre la misma plataforma",
+          "unidad": "pers",
+          "valor": 2
+        },
+        {
+          "id": "pt",
+          "label": "Peso por trabajador con herramienta y EPP",
+          "unidad": "kg",
+          "valor": 100
+        },
+        {
+          "id": "mat",
+          "label": "Material acopiado en la plataforma (block, mortero, cubetas, varilla…)",
+          "unidad": "kg",
+          "valor": 200
+        },
+        {
+          "id": "cap",
+          "label": "Capacidad de carga de la plataforma según placa o ficha del fabricante (no de memoria)",
+          "unidad": "kg",
+          "valor": 450
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Relación altura / base",
+          "formula": "h/b",
+          "unidad": ":1",
+          "decimales": 2
+        },
+        {
+          "label": "Altura máxima sin amarrar (4 × base)",
+          "formula": "4*b",
+          "unidad": "m",
+          "decimales": 2
+        },
+        {
+          "label": "Dictamen sin amarres (1 = se sostiene solo; 0 = amarrar o arriostrar antes de subir)",
+          "formula": "h/b<=4?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        },
+        {
+          "label": "Separación vertical máxima entre amarres (6.1 m si la base mide 0.91 m o menos; 7.9 m si es más ancha)",
+          "formula": "b<=0.91?6.1:7.9",
+          "unidad": "m",
+          "decimales": 1
+        },
+        {
+          "label": "Niveles de amarre (el primero a la altura 4:1; el último a no más de 4 × base del tope)",
+          "formula": "h/b>4?Math.max(1,Math.ceil((h-8*b)/(b<=0.91?6.1:7.9))+1):0",
+          "unidad": "niveles",
+          "decimales": 0
+        },
+        {
+          "label": "Amarres por nivel (en los extremos y a no más de 9.1 m)",
+          "formula": "h/b>4?Math.ceil(lv/9.1)+1:0",
+          "unidad": "pza",
+          "decimales": 0
+        },
+        {
+          "label": "Amarres faltantes",
+          "formula": "Math.max(0,(h/b>4?Math.max(1,Math.ceil((h-8*b)/(b<=0.91?6.1:7.9))+1)*(Math.ceil(lv/9.1)+1):0)-ac)",
+          "unidad": "pza",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Carga total sobre la plataforma",
+          "formula": "nt*pt+mat",
+          "unidad": "kg",
+          "decimales": 0
+        },
+        {
+          "label": "Uso de la capacidad de la plataforma",
+          "formula": "(nt*pt+mat)/cap*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Capacidad libre (verde ≥ 20 %; amarillo ≥ 0 %; rojo = sobrecargada, bajar material)",
+          "formula": "100-(nt*pt+mat)/cap*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            20,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Mide la altura total del andamio y la dimensión MENOR de su base (normalmente el ancho del marco); si le pusiste estabilizadores, mide de punta a punta de ellos. Captura el largo del tramo a lo largo de la fachada.",
+        "Lee la capacidad de la plataforma en la placa o ficha del fabricante o del arrendador y captúrala; cuenta trabajadores y pesa o estima el material que se sube (un block de 15 × 20 × 40 pesa del orden de 12 a 15 kg; confírmalo con tu proveedor).",
+        "Si el dictamen sale 0, no se sube nadie hasta colocar los amarres que indica la calculadora (al edificio, con taquete o anclaje a elemento estructural, nunca a barandales, tubería o cancelería) o arriostrar con estabilizadores que bajen la relación a 4:1 o menos.",
+        "Si la capacidad libre sale roja, baja material o reparte la carga en otro nivel o tramo; en amarillo, sube material solo por tandas. Revisa también: plataforma completa de al menos 46 cm de ancho, barandal superior de 0.97 a 1.15 m, barandal intermedio, rodapié, placas base sobre durmiente y suelo firme.",
+        "Ejemplo: andamio de 7.5 m con base de 1.5 m (5.0:1) en 12 m de fachada → hay que amarrar: 1 nivel a 6 m con 3 amarres; 2 trabajadores (200 kg) + 200 kg de block en plataforma de 450 kg = 89 % de uso, 11 % libre (amarillo).",
+        "Indicador: andamios revisados con esta calculadora y con tarjeta de inspección del día contra andamios armados (meta 100 %). En días de Santa Ana con ráfagas fuertes suspende el trabajo en andamios altos según el instructivo del fabricante y revisa amarres al reanudar."
+      ],
+      "fuentes": [
+        {
+          "titulo": "OSHA 29 CFR 1926.451 (andamios, construcción): (a)(1) cada andamio soporta su peso y al menos 4 veces la carga máxima prevista; (b)(2) plataforma de 46 cm mínimo; (c)(1) con relación altura/base mayor a 4:1 se amarra o arriostra: primer amarre a la altura 4:1, luego cada 6.1 m (andamios de 0.91 m de ancho o menos) o 7.9 m (más anchos), a no más de 9.1 m en horizontal, y el amarre superior a no más de la altura 4:1 desde arriba; (c)(2) placas base y durmientes sobre apoyo firme",
+          "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+        },
+        {
+          "titulo": "OSHA – Scaffolding eTool, requisitos generales (capacidad, estabilidad, plataformas y barandales de 0.97 a 1.15 m)",
+          "url": "https://www.osha.gov/etools/scaffolding/general-requirements"
+        },
+        {
+          "titulo": "STPS – Guía informativa NOM-009-STPS-2011 trabajos en altura (andamios: usar e inspeccionar conforme al fabricante; aplica a partir de 1.80 m)",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807421/GUIA_INFORMATIVA_NOM-009.pdf"
+        },
+        {
+          "titulo": "Ley Federal del Trabajo, art. 994 fracc. V: multa de 250 a 5,000 UMA al patrón que no observe las normas de seguridad e higiene",
+          "url": "https://mley.mx/LFT/articulo/994/"
+        },
+        {
+          "titulo": "INEGI – Comunicado 1/26 (8 ene 2026): UMA diaria 2026 = $117.31, vigente desde el 1 de febrero de 2026 (250–5,000 UMA ≈ $29,328 a $586,550)",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/uma/uma2026.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-trabajo-caliente",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Permiso de trabajo en caliente: soldadura, corte con oxiacetileno y esmeril (NOM-027-STPS-2008)",
+      "resumen": "Autorización por escrito para soldar, cortar o esmerilar fuera de un taller designado (estructura metálica, herrería, barandales, anclajes, cortes de varilla con disco, impermeabilización con soplete). Contiene lo que pide la NOM-027 en 10.6: actividad, lugar, horario, quién ejecuta, quién autoriza y quién vigila, condiciones peligrosas, medidas y EPP; verifica que no haya combustibles en 10 m a la redonda y extintor ABC a menos de 7 m, y deja vigilancia de fuego al terminar. Especialmente importante en días de Santa Ana: el viento lleva chispas lejos.",
+      "agregada": "2026-11-11",
+      "campos": [
+        "Obra",
+        "Número de permiso, fecha, hora de inicio y hora de término (máximo un turno)",
+        "Descripción de la actividad (soldar, cortar, esmerilar, soplete) y lugar exacto: nivel, ejes, frente",
+        "¿Es en altura, en espacio confinado o en área no designada? (si es en altura o confinado, anexar ese permiso)",
+        "Trabajador que ejecuta: nombre, firma y constancia de capacitación (DC-3)",
+        "Responsable que autoriza: nombre y firma",
+        "Vigilante de fuego: nombre, puesto y firma",
+        "Firma de enterado del responsable de mantenimiento / residente del área",
+        "Equipo: máquina de soldar o equipo oxicombustible; fecha de la última revisión en bitácora",
+        "Condiciones peligrosas encontradas (combustibles, huecos en losa, cables, gas, viento)",
+        "Medidas de protección y EPP (careta con filtro adecuado, guantes, mangas, peto, polainas, respirador)",
+        "Viento al inicio (km/h) y decisión: trabajar, proteger o suspender",
+        "Extintor: tipo ABC, capacidad (kg) y distancia al punto de trabajo (m)",
+        "Hora en que terminó el trabajo y hora en que terminó la vigilancia de fuego",
+        "Cierre: firma de quien vigiló y de quien autoriza; copia a cada firmante (la del responsable se guarda al menos un año)"
+      ],
+      "items": [
+        "Se revisó si el corte o la unión puede hacerse en frío o en un área designada; el trabajo en caliente fuera de ella es la excepción",
+        "Permiso por escrito firmado ANTES de encender equipo",
+        "Sin materiales combustibles en un radio de 10 m (madera de cimbra, cartón, poliestireno, impermeabilizante, solventes, basura); lo que no se puede mover está cubierto con lona ignífuga o manta húmeda",
+        "Huecos en losa, ductos, shafts y juntas por donde caen chispas tapados o con vigilancia en el nivel de abajo",
+        "Extintor tipo ABC cargado y vigente a no más de 7 m del punto de trabajo",
+        "Área delimitada con mamparas o cortinas para proteger a otros trabajadores de chispas y radiación",
+        "Ventilación natural o forzada antes y durante el trabajo (humos de soldadura, galvanizado o pintura)",
+        "Cilindros de oxígeno y gas combustible de pie, encadenados, con capuchón al moverlos y lejos de chispas y escoria",
+        "Reguladores, mangueras y válvulas sin fugas ni daños; sin reguladores reconstruidos; arrestaflamas instalados",
+        "Máquina de soldar con conexión a tierra y cables sin empalmes ni aislamiento dañado",
+        "Si es en altura: arnés y línea de vida protegidos contra chispas y calor, con 'Permiso de trabajo en altura'",
+        "Si es en espacio confinado: oxígeno 19.5–23.5 %, cilindros y fuente de poder afuera, vigía y 'Permiso de entrada a espacio confinado'",
+        "Con viento fuerte (Santa Ana) se protege el área contra el arrastre de chispas o se suspende",
+        "Vigilante de fuego presente durante todo el trabajo y después de terminar (NFPA 51B 2019: al menos 1 hora) revisando el nivel de abajo y los lados",
+        "Al cerrar: equipo apagado, válvulas de cilindros cerradas, área revisada sin brasas y permiso firmado de cierre"
+      ],
+      "como_usar": [
+        "Define con el contratista de herrería o estructura qué áreas son 'designadas' (taller de habilitado) y exige este permiso para cualquier soldadura, corte o esmerilado fuera de ellas.",
+        "Antes de encender, el vigilante y el que autoriza recorren 10 m a la redonda (y el nivel de abajo si hay huecos): retiran o cubren combustibles, colocan el extintor ABC a menos de 7 m y anotan viento y condiciones peligrosas.",
+        "El trabajador, quien autoriza, el vigilante y el residente firman; si es en altura o en cisterna, anexa ese permiso. El permiso se pega a la vista en el frente.",
+        "Al terminar, el vigilante se queda al menos una hora revisando, anota la hora de cierre y firma; guarda la copia del responsable un año (la STPS la puede pedir; la multa por no observar normas de seguridad va de 250 a 5,000 UMA, $29,328 a $586,550 con la UMA 2026).",
+        "Indicador: trabajos en caliente con permiso contra trabajos en caliente vistos en recorrido (meta 100 %) y conatos de incendio por mes (meta 0); regístralos en 'Indicadores de accidentabilidad'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-027-STPS-2008 Soldadura y corte (PDF STPS): 4.8 y 5.8 autorización por escrito; 8 a) extintor ABC a no más de 7 m; 8 d) bitácora de revisión de equipos; 8 e) sin reguladores reconstruidos; 8 h) ventilación antes y durante; 10.3 b) sin combustibles en un radio no menor a 10 m; 10.5 espacios confinados (O₂ 19.5–23.5 %, cilindros afuera); 10.6 contenido de la autorización y copia conservada al menos un año",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680160/NOM-027-STPS-2008.pdf"
+        },
+        {
+          "titulo": "NFPA 51B edición 2019 – cambios en la vigilancia de fuego (fire watch) y el monitoreo posterior al trabajo en caliente",
+          "url": "https://safteng.net/nfpa-51b-2019-updates-to-fire-watch-and-fire-monitoring-requirements/"
+        },
+        {
+          "titulo": "Walmart de México – Procedimiento de trabajo en caliente para contratistas de obra SH-PROC-SC-005-25 (dic 2025): ejemplo de permiso que exige un cliente grande",
+          "url": "https://www.walmartmexico.com/content/dam/walmart-mexico/documents/bienes-raices/dic-2025/5.%20SH-PROC-SC-005-25%20Procedimiento%20Trabajo%20en%20Caliente.pdf"
+        },
+        {
+          "titulo": "Ley Federal del Trabajo, art. 994 fracc. V: multa de 250 a 5,000 UMA al patrón que no observe las normas de seguridad e higiene",
+          "url": "https://mley.mx/LFT/articulo/994/"
+        },
+        {
+          "titulo": "INEGI – Comunicado 1/26 (8 ene 2026): UMA diaria 2026 = $117.31, vigente desde el 1 de febrero de 2026 (250–5,000 UMA ≈ $29,328 a $586,550)",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/uma/uma2026.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
         }
       ]
     }

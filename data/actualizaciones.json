@@ -1,6 +1,44 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-11",
+      "titulo": "Seguridad: andamios que no se voltean (relación 4:1, amarres y carga en plataforma) y permiso de trabajo en caliente para soldar y cortar sin incendios",
+      "resumen": "Dos riesgos de las obras en fase de estructura metálica, herrería y fachadas. 'Andamio tubular' dice si el andamio se sostiene solo o hay que amarrarlo (altura mayor a 4 veces la base, criterio OSHA 1926.451), cuántos niveles y amarres lleva y qué porcentaje de la capacidad de la plataforma ocupan gente y material. Ejemplo: andamio de 7.5 m con base de 1.5 m (5.0:1) en 12 m de fachada → 1 nivel a 6 m con 3 amarres; 2 trabajadores + 200 kg de block en plataforma de 450 kg = 89 % de uso (amarillo). 'Permiso de trabajo en caliente' trae lo que pide la NOM-027-STPS-2008 (10.6): autorización por escrito con actividad, horario, quién ejecuta, autoriza y vigila; sin combustibles en 10 m, extintor ABC a menos de 7 m, ventilación, cilindros seguros y vigilancia de fuego al terminar (NFPA 51B: al menos 1 hora). En temporada de Santa Ana el viento arrastra chispas y empuja andamios: ambos formatos piden registrar el viento. Multa por no observar normas de seguridad (LFT art. 994 V): 250 a 5,000 UMA = $29,328 a $586,550 con la UMA 2026 de $117.31. Mejoras: el 'Recorrido de seguridad semanal' ahora revisa amarres de andamio y permisos de trabajo en caliente como hallazgos críticos, y el 'Permiso de trabajo en altura' pide la revisión del andamio.",
+      "herramientas": [
+        "calc-andamio-estabilidad",
+        "fmt-trabajo-caliente",
+        "fmt-seguridad",
+        "fmt-permiso-altura"
+      ],
+      "como_aplicarlo": "1) Hoy recorre los andamios armados: mide altura y base, corre la calculadora y amarra o arriostra los que pasen de 4:1 antes de que suba nadie; pon a la vista la capacidad de cada plataforma. 2) Reúne a herreros y estructuristas, define el taller como área designada y exige el permiso de trabajo en caliente fuera de él, con extintor ABC y vigilante. 3) En el recorrido semanal cuenta andamios sin amarre y soldaduras sin permiso; la meta es 0 en dos semanas y decide entonces si queda como regla del contrato de los subcontratistas.",
+      "fuentes": [
+        {
+          "titulo": "OSHA 29 CFR 1926.451 (andamios, construcción): (a)(1) cada andamio soporta su peso y al menos 4 veces la carga máxima prevista; (b)(2) plataforma de 46 cm mínimo; (c)(1) con relación altura/base mayor a 4:1 se amarra o arriostra: primer amarre a la altura 4:1, luego cada 6.1 m (andamios de 0.91 m de ancho o menos) o 7.9 m (más anchos), a no más de 9.1 m en horizontal, y el amarre superior a no más de la altura 4:1 desde arriba; (c)(2) placas base y durmientes sobre apoyo firme",
+          "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451"
+        },
+        {
+          "titulo": "NOM-027-STPS-2008 Soldadura y corte (PDF STPS): 4.8 y 5.8 autorización por escrito; 8 a) extintor ABC a no más de 7 m; 8 d) bitácora de revisión de equipos; 8 e) sin reguladores reconstruidos; 8 h) ventilación antes y durante; 10.3 b) sin combustibles en un radio no menor a 10 m; 10.5 espacios confinados (O₂ 19.5–23.5 %, cilindros afuera); 10.6 contenido de la autorización y copia conservada al menos un año",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680160/NOM-027-STPS-2008.pdf"
+        },
+        {
+          "titulo": "NFPA 51B edición 2019 – cambios en la vigilancia de fuego (fire watch) y el monitoreo posterior al trabajo en caliente",
+          "url": "https://safteng.net/nfpa-51b-2019-updates-to-fire-watch-and-fire-monitoring-requirements/"
+        },
+        {
+          "titulo": "Ley Federal del Trabajo, art. 994 fracc. V: multa de 250 a 5,000 UMA al patrón que no observe las normas de seguridad e higiene",
+          "url": "https://mley.mx/LFT/articulo/994/"
+        },
+        {
+          "titulo": "INEGI – Comunicado 1/26 (8 ene 2026): UMA diaria 2026 = $117.31, vigente desde el 1 de febrero de 2026 (250–5,000 UMA ≈ $29,328 a $586,550)",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/uma/uma2026.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-10",
       "titulo": "Calidad: losas sin grietas plásticas en días de Santa Ana — tasa de evaporación calculada y plan de protección y curado del colado",
       "resumen": "En la temporada de vientos de Santa Ana el aire seco y caliente evapora el agua de la superficie del concreto más rápido de lo que sube la exudación, y la losa se agrieta antes de fraguar. 'Evaporación en la losa recién colada' calcula esa tasa con temperatura del concreto, aire, humedad y viento (ecuación de Uno / nomograma ACI) y la pone en semáforo: verde < 0.5, amarillo 0.5–1.0, rojo > 1.0 kg/m²/h. Ejemplo: concreto a 30 °C, aire a 28 °C, humedad 25 % y viento de 30 km/h da 2.10 kg/m²/h (rojo; 252 L/h perdidos en 120 m²); con barrera que baja el viento a 8 km/h y concreto a 24 °C baja a 0.47 (verde, 78 % menos). 'Colado con viento Santa Ana o calor' es la lista de 13 puntos con lecturas por hora para decidir colar o reprogramar, proteger y curar, y dejar evidencia. Mejora: la Liberación de colado ahora pide calcular la evaporación y remite al nuevo formato.",
