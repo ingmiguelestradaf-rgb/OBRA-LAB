@@ -1,6 +1,41 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-12",
+      "titulo": "Costos: sobrecosto de materiales separado en precio y consumo, indirectos de campo ante atrasos y suspensiones, y cierre mensual de costos por partida",
+      "resumen": "Tres herramientas para saber cuánto va a costar la obra antes del finiquito. 'Sobrecosto de un insumo' separa la desviación de concreto, acero o block en lo que es de compras (precio) y lo que es de campo (consumo) y compara el desperdicio real contra el de tu precio unitario: 180 m³ teóricos con 3 % contra 192 m³ remisionados y $110/m³ más caro = $37,290 de sobrecosto, $21,120 por precio y $16,170 por consumo (desperdicio real 6.7 %). 'Indirectos de campo' compara lo gastado contra lo cobrado con el avance, proyecta el resultado con el atraso y calcula el costo de cada semana extra y el indirecto de una suspensión como soporte de gastos no recuperables (Reglamento LOPSRM arts. 145, 146 y 149). 'Cierre mensual de costos por partida' cruza presupuesto, comprometido, ejercido y por ejercer para dar el costo al término y obliga a explicar cada desviación mayor a 3 %. Contexto: el INPP del sector Construcción subió 5.79 % anual a julio de 2026 (INEGI) y desde abril de 2026 las obras con recursos públicos deben usar acero hecho en México. Mejoras: 'Valor ganado' ahora indica cómo buscar la causa de un CPI en rojo y 'Ajuste de costos' aclara que solo recupera la parte por precio.",
+      "herramientas": [
+        "calc-desviacion-insumo",
+        "calc-indirectos-campo",
+        "fmt-cierre-costos",
+        "calc-valor-ganado",
+        "calc-ajuste-costos"
+      ],
+      "como_aplicarlo": "1) Esta semana corre 'Sobrecosto de un insumo' con las remisiones de concreto y varilla de octubre contra el generador de lo estimado. 2) Pide a administración el indirecto de campo gastado a la fecha y corre 'Indirectos de campo' con tu avance estimado y el atraso que traes. 3) Arma el primer 'Cierre mensual de costos' con noviembre, presenta solo las partidas con más de 3 % de desviación y en diciembre compara cuánto se movió la proyección; si se movió menos de 2 %, adóptalo como cierre fijo.",
+      "fuentes": [
+        {
+          "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de insumos ene 2025–ene 2026 (12 feb 2026): construcción 3.95 %, edificación residencial 4.59 %, bloques de concreto 7.45 %, concreto premezclado 6.26 %, perfiles de acero 5.96 %, cemento 5.40 %; advierte que el INPP es precio de productor, no lo que paga la constructora",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "Expansión (29 abr 2026) – Obras con recursos públicos deberán usar acero producido en México; SICT estima 150,000 t de acero de refuerzo en 2026; siderurgia al 55 % de capacidad",
+          "url": "https://expansion.mx/empresas/2026/04/29/acero-hecho-en-mexico-proyectos-publicos-frena-avance-china"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 146 – Gastos no recuperables por suspensión: rentas de equipo (o fletes de retiro y regreso), mano de obra programada que permanece en sitio registrada en bitácora, e indirectos generados durante la suspensión (art. 213), con programas y costos originales ajustados",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/146/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 149 – Suspensión por caso fortuito o fuerza mayor: solo veladores y vigilancia, personal técnico y administrativo estrictamente necesario y mano de obra que permanece en sitio (sin rentas de equipo)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/149/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-11",
       "titulo": "Seguridad: andamios que no se voltean (relación 4:1, amarres y carga en plataforma) y permiso de trabajo en caliente para soldar y cortar sin incendios",
       "resumen": "Dos riesgos de las obras en fase de estructura metálica, herrería y fachadas. 'Andamio tubular' dice si el andamio se sostiene solo o hay que amarrarlo (altura mayor a 4 veces la base, criterio OSHA 1926.451), cuántos niveles y amarres lleva y qué porcentaje de la capacidad de la plataforma ocupan gente y material. Ejemplo: andamio de 7.5 m con base de 1.5 m (5.0:1) en 12 m de fachada → 1 nivel a 6 m con 3 amarres; 2 trabajadores + 200 kg de block en plataforma de 450 kg = 89 % de uso (amarillo). 'Permiso de trabajo en caliente' trae lo que pide la NOM-027-STPS-2008 (10.6): autorización por escrito con actividad, horario, quién ejecuta, autoriza y vigila; sin combustibles en 10 m, extintor ABC a menos de 7 m, ventilación, cilindros seguros y vigilancia de fuego al terminar (NFPA 51B: al menos 1 hora). En temporada de Santa Ana el viento arrastra chispas y empuja andamios: ambos formatos piden registrar el viento. Multa por no observar normas de seguridad (LFT art. 994 V): 250 a 5,000 UMA = $29,328 a $586,550 con la UMA 2026 de $117.31. Mejoras: el 'Recorrido de seguridad semanal' ahora revisa amarres de andamio y permisos de trabajo en caliente como hallazgos críticos, y el 'Permiso de trabajo en altura' pide la revisión del andamio.",

@@ -808,7 +808,8 @@
         "El AC es lo realmente pagado o estimado a contratistas y proveedores.",
         "SPI o CPI menores a 0.95 en verde-amarillo, menores a 0.90 en rojo: lleva el dato a la junta semanal con la causa.",
         "Para saber en qué semana terminas (no solo cuánto vas), usa la calculadora Programa ganado con el mismo corte.",
-        "Si el SPI o el CPI salen en rojo, cuantifica la consecuencia: la calculadora Penas convencionales y retenciones te dice cuánto cuesta cada día de atraso en obra pública y cuánto dejas de cobrar en la estimación en proceso."
+        "Si el SPI o el CPI salen en rojo, cuantifica la consecuencia: la calculadora Penas convencionales y retenciones te dice cuánto cuesta cada día de atraso en obra pública y cuánto dejas de cobrar en la estimación en proceso.",
+        "Si el CPI sale en rojo, busca la causa: corre 'Sobrecosto de un insumo' para concreto, acero y block (¿precio o consumo?) e 'Indirectos de campo' (¿el atraso te está comiendo el indirecto?), y anótalo en el Cierre mensual de costos por partida."
       ]
     },
     {
@@ -1200,7 +1201,8 @@
         "Busca los índices del mes de la propuesta y del mes a ajustar en el INPP de INEGI (índices de actualización de costos de obras públicas por insumo); para mano de obra puedes usar el salario de tu tabulador o el incremento de CONASAMI.",
         "Captura el importe a ajustar: lo pendiente de ejecutar según el programa vigente, o la estimación del periodo. Si el atraso es tuyo, usa los índices del mes en que debió ejecutarse (salvo que el del mes real sea menor).",
         "El factor se aplica al costo directo y los indirectos, financiamiento y utilidad conservan sus porcentajes, por eso se multiplica el importe a precio unitario; la parte cubierta por el anticipo no se ajusta.",
-        "Entrega la solicitud con la tabla de índices y sus fuentes. En obra pública el procedimiento (art. 57 fracc. I, II o III) lo fija el contrato y la dependencia revisa con sus matrices; en obra privada solo procede si hay cláusula de escalatoria."
+        "Entrega la solicitud con la tabla de índices y sus fuentes. En obra pública el procedimiento (art. 57 fracc. I, II o III) lo fija el contrato y la dependencia revisa con sus matrices; en obra privada solo procede si hay cláusula de escalatoria.",
+        "Antes de solicitar, revisa con 'Sobrecosto de un insumo' cuánto del sobrecosto es por precio: solo esa parte la cubre el ajuste de costos; el sobreconsumo no se recupera por esta vía."
       ],
       "fuentes": [
         {
@@ -1218,6 +1220,10 @@
         {
           "titulo": "CMIC – Índice Nacional de Precios Productor (consulta de índices para ajuste)",
           "url": "https://www.cmic.org.mx/comisiones/tematicas/costosyp/indicadoresbm/inpp.htm"
+        },
+        {
+          "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
         }
       ]
     },
@@ -7486,6 +7492,326 @@
         {
           "titulo": "Obraflow – Estimaciones de obra: integración, números generadores y errores que causan rechazo (2026)",
           "url": "https://obraflow.mx/estimaciones-de-obra/"
+        }
+      ]
+    },
+    {
+      "id": "calc-desviacion-insumo",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Sobrecosto de un insumo (concreto, acero, block): ¿se te fue por precio o por consumo?",
+      "resumen": "Separa el sobrecosto de un material en dos causas con responsables distintos: variación por PRECIO (compras, escalatoria, aranceles) y variación por CONSUMO (desperdicio en obra, sobre-excavación, cimbra deformada, varilla mal habilitada). Compara el desperdicio real contra el que trae tu precio unitario. Ejemplo (precios de ejemplo, no de mercado): 180 m³ teóricos de f'c 250 con 3 % de desperdicio a $2,450/m³ contra 192 m³ remisionados a $2,560/m³ → sobrecosto $37,290: $21,120 por precio y $16,170 por consumo; desperdicio real 6.7 % contra 3 % (rojo).",
+      "agregada": "2026-11-12",
+      "entradas": [
+        {
+          "id": "Qt",
+          "label": "Cantidad teórica del avance (de planos o generador: m³, kg, piezas)",
+          "unidad": "u",
+          "valor": 180
+        },
+        {
+          "id": "Dp",
+          "label": "Desperdicio incluido en tu precio unitario o presupuesto",
+          "unidad": "%",
+          "valor": 3
+        },
+        {
+          "id": "Pp",
+          "label": "Precio presupuestado del insumo (sin IVA)",
+          "unidad": "$/u",
+          "valor": 2450
+        },
+        {
+          "id": "Qr",
+          "label": "Cantidad real recibida o consumida (remisiones, báscula, vales de almacén)",
+          "unidad": "u",
+          "valor": 192
+        },
+        {
+          "id": "Pr",
+          "label": "Precio real promedio pagado (facturas sin IVA, con fletes y cargos extra)",
+          "unidad": "$/u",
+          "valor": 2560
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Costo presupuestado de lo ejecutado (con desperdicio permitido)",
+          "formula": "Qt*(1+Dp/100)*Pp",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo real",
+          "formula": "Qr*Pr",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "SOBRECOSTO TOTAL (negativo = ahorro)",
+          "formula": "Qr*Pr-Qt*(1+Dp/100)*Pp",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "…por precio (compras / escalatoria)",
+          "formula": "(Pr-Pp)*Qr",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "…por consumo (desperdicio en obra)",
+          "formula": "(Qr-Qt*(1+Dp/100))*Pp",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Alza de precio contra presupuesto",
+          "formula": "(Pr/Pp-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Desperdicio real contra teórico",
+          "formula": "(Qr/Qt-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Margen de desperdicio (permitido − real; negativo = te pasaste)",
+          "formula": "Dp-(Qr/Qt-1)*100",
+          "unidad": "pp",
+          "decimales": 1,
+          "semaforo": [
+            0,
+            -2
+          ]
+        }
+      ],
+      "como_usar": [
+        "Cada cierre de mes elige los 3 insumos que más pesan en tu explosión de insumos (normalmente concreto premezclado, varilla y block) y corre la calculadora uno por uno.",
+        "La cantidad teórica sale del generador de lo ya ejecutado (lo mismo que estimaste), no del presupuesto total; la real, de remisiones de olla, tickets de báscula o vales de almacén del mismo periodo. Para concreto y acero puedes sacar ambos números con los skills de consumo de concreto y cuantificación de acero.",
+        "El precio real es el promedio de facturas sin IVA e incluye fletes, bombeo, horas extra de planta y cargos por espera: es lo que de verdad pagaste.",
+        "Lee las dos causas: si pesa más el PRECIO, la acción es de compras (cotizar, contratos por volumen) o de cobro (ajuste de costos o escalatoria con índices INPP); si pesa más el CONSUMO, la acción es de campo (revisar cimbra, sobre-excavación, pedidos de olla al cierre del colado, cortes de varilla).",
+        "Anota el sobrecosto por consumo en el reporte A3 o el Pareto si se repite dos meses; mide el desperdicio real mes contra mes y la meta es quedar dentro del % de tu precio unitario.",
+        "Referencia de precios: el INPP del sector Construcción subió 5.79 % anual a julio de 2026 (INEGI) y el CEICO-CMIC reporta concreto premezclado +6.26 % y bloques +7.45 % en 2025; si tu alza de precio supera esas cifras, revisa tu compra antes de culpar al mercado."
+      ],
+      "fuentes": [
+        {
+          "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de insumos ene 2025–ene 2026 (12 feb 2026): construcción 3.95 %, edificación residencial 4.59 %, bloques de concreto 7.45 %, concreto premezclado 6.26 %, perfiles de acero 5.96 %, cemento 5.40 %; advierte que el INPP es precio de productor, no lo que paga la constructora",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "Expansión (29 abr 2026) – Obras con recursos públicos deberán usar acero producido en México; SICT estima 150,000 t de acero de refuerzo en 2026; siderurgia al 55 % de capacidad",
+          "url": "https://expansion.mx/empresas/2026/04/29/acero-hecho-en-mexico-proyectos-publicos-frena-avance-china"
+        }
+      ]
+    },
+    {
+      "id": "calc-indirectos-campo",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Indirectos de campo: cuánto te cuesta cada semana extra de obra y cuánto reclamar en una suspensión",
+      "resumen": "Compara el indirecto de campo que has gastado (residentes, administración, vigilancia, oficina y bodega, vehículos, servicios) contra el que has cobrado con el avance estimado, proyecta el resultado al término con el atraso esperado y calcula el monto de indirectos generados durante una suspensión (gastos no recuperables, Reglamento LOPSRM art. 146). Ejemplo: indirecto de campo de $1.08 M en 8 meses, $760 mil gastados a 5 meses con 55 % estimado → vas $166 mil abajo; con 1.5 meses de atraso terminas $355 mil abajo; cada semana extra cuesta $34,539 y 20 días de suspensión con 70 % del indirecto corriendo son $69,079.",
+      "agregada": "2026-11-12",
+      "entradas": [
+        {
+          "id": "IP",
+          "label": "Indirecto de campo presupuestado del contrato (total)",
+          "unidad": "$",
+          "valor": 1080000
+        },
+        {
+          "id": "n",
+          "label": "Plazo original del contrato",
+          "unidad": "meses",
+          "valor": 8
+        },
+        {
+          "id": "t",
+          "label": "Meses transcurridos",
+          "unidad": "meses",
+          "valor": 5
+        },
+        {
+          "id": "E",
+          "label": "Indirecto de campo realmente gastado a la fecha",
+          "unidad": "$",
+          "valor": 760000
+        },
+        {
+          "id": "a",
+          "label": "Avance financiero estimado (cobrado o en trámite) acumulado",
+          "unidad": "%",
+          "valor": 55
+        },
+        {
+          "id": "Im",
+          "label": "Gasto mensual actual de indirecto de campo",
+          "unidad": "$/mes",
+          "valor": 150000
+        },
+        {
+          "id": "x",
+          "label": "Atraso o prórroga esperada sobre el plazo original",
+          "unidad": "meses",
+          "valor": 1.5
+        },
+        {
+          "id": "S",
+          "label": "Días de suspensión ordenada por el cliente (0 si no hay)",
+          "unidad": "días",
+          "valor": 20
+        },
+        {
+          "id": "k",
+          "label": "Parte del indirecto que sigue corriendo durante la suspensión",
+          "unidad": "%",
+          "valor": 70
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Indirecto cobrado con el avance (presupuesto × avance)",
+          "formula": "IP*a/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Resultado a la fecha (cobrado − gastado; negativo = pierdes)",
+          "formula": "IP*a/100-E",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Índice de recuperación del indirecto (cobrado ÷ gastado)",
+          "formula": "(IP*a/100)/E",
+          "unidad": "",
+          "decimales": 2,
+          "semaforo": [
+            1,
+            0.9
+          ]
+        },
+        {
+          "label": "Indirecto proyectado al término (gastado + mensual × meses restantes con atraso)",
+          "formula": "E+Im*Math.max(n-t+x,0)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Resultado al término (presupuesto − proyectado)",
+          "formula": "IP-(E+Im*Math.max(n-t+x,0))",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Costo de cada semana extra de obra",
+          "formula": "Im*7/30.4",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Indirecto generado por la suspensión (para soporte de gastos no recuperables)",
+          "formula": "Im/30.4*S*k/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Avance que necesitas para cubrir lo ya gastado",
+          "formula": "E/IP*100",
+          "unidad": "%",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Separa en tu contabilidad el indirecto de CAMPO (nómina técnica y administrativa de la obra con cargas IMSS/INFONAVIT, oficina y bodega, vehículos y combustible, vigilancia, servicios, sanitarios, seguridad e higiene) del de oficina central; captura solo el de campo.",
+        "El avance financiero es lo estimado acumulado ÷ importe del contrato: el indirecto se cobra dentro de cada precio unitario, así que solo lo recuperas conforme estimas.",
+        "Si el índice de recuperación sale en rojo (menor a 0.90), el atraso o el bajo volumen estimado te está comiendo el indirecto: lleva el costo por semana a la junta para justificar acelerar o reducir plantilla de campo.",
+        "Ante una suspensión ordenada por el cliente, registra en bitácora desde el primer día qué personal, equipo y gastos siguen corriendo; el resultado de la calculadora es el soporte numérico, y la solicitud se presenta en las fechas de corte de estimación (art. 145). Si la suspensión es por caso fortuito o fuerza mayor solo proceden vigilancia, personal técnico-administrativo estrictamente necesario y mano de obra en sitio (art. 149).",
+        "Para una prórroga por causa no imputable, combina el costo por semana con el Análisis de impacto (TIA) para pedir tiempo y dinero en la misma solicitud; en obra privada solo procede si el contrato lo prevé."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento LOPSRM art. 146 – Gastos no recuperables por suspensión: rentas de equipo (o fletes de retiro y regreso), mano de obra programada que permanece en sitio registrada en bitácora, e indirectos generados durante la suspensión (art. 213), con programas y costos originales ajustados",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/146/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 145 – Los gastos no recuperables se solicitan desde que se determina la suspensión, en las fechas de corte de estimaciones",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/145/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 149 – Suspensión por caso fortuito o fuerza mayor: solo veladores y vigilancia, personal técnico y administrativo estrictamente necesario y mano de obra que permanece en sitio (sin rentas de equipo)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/149/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 213 – Conceptos que integran el costo indirecto de oficina central y de campo (personal técnico y administrativo, rentas, vehículos, fletes, oficina, seguridad e higiene, seguros y fianzas, trabajos previos)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/213/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-cierre-costos",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Cierre mensual de costos por partida: presupuesto, comprometido, ejercido, por ejercer y costo al término",
+      "resumen": "Formato de una hoja para que cada mes el superintendente sepa cuánto va a costar la obra al terminar, partida por partida, antes de que el sobrecosto aparezca en el finiquito. Cruza presupuesto contra lo comprometido (pedidos y subcontratos firmados), lo ejercido (facturas y destajos pagados) y lo que falta, y obliga a explicar cada desviación mayor a 3 % con su causa (precio o consumo) y su acción.",
+      "agregada": "2026-11-12",
+      "campos": [
+        "Obra / contrato / mes de cierre / fecha de corte",
+        "Partida (preliminares, cimentación, estructura, albañilería, instalaciones, acabados, indirectos de campo)",
+        "Presupuesto vigente de costo (original + extraordinarios y convenios autorizados)",
+        "Comprometido: pedidos, órdenes de compra y subcontratos firmados",
+        "Ejercido: facturas, destajos y nómina pagados a la fecha (sin IVA)",
+        "Avance físico de la partida (%) según corte de avance",
+        "Por ejercer estimado (cantidades faltantes × precio real vigente)",
+        "Costo proyectado al término = ejercido + por ejercer",
+        "Desviación al término ($ y %) = presupuesto − proyectado",
+        "Causa de la desviación: precio / consumo / alcance (extraordinario no autorizado) / atraso",
+        "Acción, responsable y fecha compromiso",
+        "Ventas: estimado acumulado al cliente, extraordinarios por cobrar y ajuste de costos solicitado",
+        "Elaboró (control de costos) / Revisó (superintendente) / Enterado (gerente de proyecto)"
+      ],
+      "items": [
+        "Todas las facturas y destajos del mes están cargados a una partida (sin 'varios' mayor al 2 %)",
+        "El ejercido de cada partida no rebasa el comprometido sin una orden de compra que lo respalde",
+        "El avance físico usado es el del corte semanal medido, no el reportado por contratistas",
+        "El 'por ejercer' se calculó con cantidades faltantes y precio real actual, no con el saldo del presupuesto",
+        "Cada partida con desviación mayor a 3 % tiene causa separada en precio y consumo (calculadora Sobrecosto de un insumo)",
+        "El indirecto de campo se revisó contra el avance estimado (calculadora Indirectos de campo)",
+        "Los extraordinarios ejecutados tienen solicitud autorizada o están en trámite con fecha",
+        "Se revisó si procede ajuste de costos con los índices INPP del mes",
+        "El costo proyectado total cuadra con el CPI / EAC de la calculadora de valor ganado (diferencia menor a 2 %)",
+        "Se fijó la utilidad proyectada (ventas proyectadas − costo proyectado) y se compara con la de propuesta"
+      ],
+      "como_usar": [
+        "El día 3 de cada mes administración entrega facturas, destajos y nómina del mes anterior cargados por partida; control de costos arma la hoja con el presupuesto vigente.",
+        "El superintendente llena avance físico y 'por ejercer' con los residentes de cada frente (30 minutos por partida grande) y corre las calculadoras de sobrecosto de insumo e indirectos de campo para las partidas en rojo.",
+        "En la junta mensual se revisan solo las partidas con desviación mayor a 3 %: causa, acción, responsable y fecha; exporta a CSV o PDF y archívalo con la estimación del mes.",
+        "Indicador: diferencia entre el costo proyectado en el mes 1 y el costo real al finiquito; mídelo en esta obra y la meta es que la proyección del cierre de cada mes se mueva menos de 2 % contra la del mes anterior."
+      ],
+      "fuentes": [
+        {
+          "titulo": "CMIC CEICO – Variación de precios de insumos ene 2025–ene 2026 (12 feb 2026): construcción 3.95 %, edificación residencial 4.59 %, bloques de concreto 7.45 %, concreto premezclado 6.26 %, perfiles de acero 5.96 %, cemento 5.40 %; advierte que el INPP es precio de productor, no lo que paga la constructora",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 213 – Conceptos que integran el costo indirecto de oficina central y de campo (personal técnico y administrativo, rentas, vehículos, fletes, oficina, seguridad e higiene, seguros y fianzas, trabajos previos)",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/213/"
         }
       ]
     },
