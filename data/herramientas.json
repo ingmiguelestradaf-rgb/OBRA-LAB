@@ -8725,6 +8725,211 @@
           "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
         }
       ]
+    },
+    {
+      "id": "calc-error-escaneo-celular",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "¿Sirve el escaneo LiDAR del celular para cuantificar? Error esperado en área, volumen y dinero contra tu tolerancia",
+      "resumen": "Antes de usar un escaneo 3D del celular (Scaniverse, Polycam u otra app LiDAR) como soporte de un generador, calcula cuánto puede moverse el resultado. Con el error de medición de la app (el que tú mismo mides contra cinta) obtienes el error posible en área, en volumen y en pesos, y el lado mínimo que debe tener un área para que el escaneo quede dentro de tu tolerancia. Muestra de inmediato la regla de oro: el escaneo sirve para dimensiones en planta grandes, nunca para espesores de firmes, losas o aplanados.",
+      "agregada": "2026-11-13",
+      "entradas": [
+        {
+          "id": "L",
+          "label": "Largo del área escaneada (losa, firme, muro, excavación)",
+          "unidad": "m",
+          "valor": 12
+        },
+        {
+          "id": "A",
+          "label": "Ancho del área escaneada",
+          "unidad": "m",
+          "valor": 8
+        },
+        {
+          "id": "h",
+          "label": "Espesor o altura de proyecto (losa, firme, profundidad)",
+          "unidad": "m",
+          "valor": 0.12
+        },
+        {
+          "id": "e",
+          "label": "Error de la app en cada medida (sácalo con la prueba contra cinta; el estudio ISPRS 2026 halló 5 cm en la MEJOR app)",
+          "unidad": "cm",
+          "valor": 5
+        },
+        {
+          "id": "tol",
+          "label": "Tolerancia que aceptas en la cuantificación (ej. 1 % para generadores)",
+          "unidad": "%",
+          "valor": 1
+        },
+        {
+          "id": "PU",
+          "label": "Precio unitario del concepto por m³",
+          "unidad": "$/m³",
+          "valor": 4200
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Área según el escaneo",
+          "formula": "L*A",
+          "unidad": "m²",
+          "decimales": 2
+        },
+        {
+          "label": "Error posible en área (y en volumen si el espesor lo mides con cinta o nivel)",
+          "formula": "(e/100/L+e/100/A)*100",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra tu tolerancia (verde ≥ 0: úsalo; amarillo hasta −0.5 %: confirma con cinta; rojo: no lo uses)",
+          "formula": "tol-(e/100/L+e/100/A)*100",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -0.5
+          ]
+        },
+        {
+          "label": "Volumen del elemento",
+          "formula": "L*A*h",
+          "unidad": "m³",
+          "decimales": 2
+        },
+        {
+          "label": "Dinero en juego por el error del escaneo (solo planta)",
+          "formula": "L*A*h*PU*(e/100/L+e/100/A)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Error posible en volumen si TAMBIÉN el espesor lo sacas del escaneo (por eso nunca se hace)",
+          "formula": "(e/100/L+e/100/A+e/100/h)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Lado mínimo para quedar dentro de la tolerancia (áreas más chicas: mide con cinta)",
+          "formula": "2*(e/100)/(tol/100)",
+          "unidad": "m",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Calibra tu app y tu teléfono una sola vez: escanea un cuarto o una losa ya medida y compara 5 distancias de 3 a 10 m contra cinta; la mayor diferencia en cm es tu 'error de la app'. Repite si cambias de app o de teléfono.",
+        "Captura largo y ancho del área a cuantificar, el espesor de proyecto, tu tolerancia y el precio unitario del concepto.",
+        "Si el margen sale verde, puedes usar las medidas en planta del escaneo como soporte del generador (guarda captura con fecha y el archivo del escaneo); el espesor siempre con cinta, nivel o sondeo.",
+        "Si sale amarillo o rojo, divide en áreas más grandes o mide con cinta: el 'lado mínimo' te dice a partir de qué tamaño el escaneo ya es confiable.",
+        "Indicador PDCA (4 semanas): diferencia entre generador del escaneo y generador con cinta en 3 conceptos; si es menor a tu tolerancia en los 3, adopta el escaneo para esos conceptos y mide el tiempo ahorrado por generador."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ISPRS Archives XLIX-M-1-2026 (2-jul-2026) – Cinco apps LiDAR de iPhone contra escáner Trimble X9: la mejor tuvo error posicional RMSE de 49.8 mm y el resultado varía mucho entre apps",
+          "url": "https://isprs-archives.copernicus.org/articles/XLIX-M-1-2026/1/2026/"
+        },
+        {
+          "titulo": "Twindo (fabricante, 24-jun-2026) – Precisión de LiDAR en iPhone/iPad: 1–2 % en la mayoría de medidas; mayor error % en dimensiones menores a 30 cm",
+          "url": "https://www.twindo.com/blog/how-accurate-is-lidar-scanning/"
+        },
+        {
+          "titulo": "Niantic Spatial – Scaniverse Classic: gratis e ilimitado con procesamiento en el teléfono, iOS y Android, exporta OBJ, FBX, USDZ y LAS (consultado 13-nov-2026)",
+          "url": "https://www.nianticspatial.com/faq/scaniverse-classic"
+        }
+      ]
+    },
+    {
+      "id": "dig-scaniverse",
+      "tipo": "recurso",
+      "categoria": "Herramientas digitales",
+      "titulo": "Scaniverse: escaneo 3D gratis con el celular para as-built, medidas y respaldo de avance (LiDAR o fotos)",
+      "resumen": "App de Niantic Spatial que convierte un recorrido con el celular en un modelo 3D medible: con iPhone/iPad Pro usa el LiDAR, y en Android y iPhone sin LiDAR usa fotogrametría. Mides distancias sobre el modelo, exportas nube de puntos (PLY, LAS) o malla (OBJ, FBX, USDZ) para AutoCAD/Revit o CloudCompare, y guardas un 'gemelo' de cada instalación antes de taparla con tablaroca, firme o relleno.",
+      "agregada": "2026-11-13",
+      "beneficio": "Evidencia medible de lo que queda oculto (tuberías en muro, ductos en plafón, acero antes del colado, excavaciones) para planos as-built y reclamaciones; reduce visitas para remedir y regresos a romper muros. Indicador: número de demoliciones o calas para localizar instalaciones y horas de levantamiento as-built por nivel, antes y después.",
+      "plataforma": "iOS (mejor resultado con LiDAR: iPhone Pro / iPad Pro) y Android con ARCore Depth API y 4 GB de RAM o más",
+      "costo": "Scaniverse Classic: gratis y sin límite, el procesamiento se hace en el teléfono (sitio oficial, consultado 13-nov-2026). La nueva versión con cuentas empresariales (feb-2026) tiene plan gratis de 20,000 créditos/mes (≈10 min de escaneo móvil), Plus USD 20/mes y Pro USD 50/mes; para obra basta Classic. Alternativa: Polycam (precio actual no verificado hoy en su sitio oficial). Precios en pesos: no verificados.",
+      "url": "https://nianticspatial.com/products/scaniverse",
+      "como_usar": [
+        "Instala Scaniverse y usa la experiencia Classic (gratis); en el teléfono del residente activa el respaldo de los escaneos a la nube de la obra.",
+        "Antes de cerrar cada muro, plafón o colado, escanea el tramo caminando despacio a 1–2 m, con buena luz y cubriendo cada lado; el LiDAR del teléfono pierde detalle más allá de unos 4–5 m.",
+        "Nombra el escaneo con eje, nivel, concepto y fecha (ej. N2_Eje-C-D_IHS_2026-11-13) y mide sobre el modelo 2 o 3 cotas que también midas con cinta para dejar constancia de la precisión.",
+        "Exporta LAS o PLY para dibujar el as-built en AutoCAD/Revit o CloudCompare, y liga el escaneo en la nota de bitácora o en el reporte diario.",
+        "Antes de usar sus medidas en un generador, revisa la calculadora '¿Sirve el escaneo LiDAR del celular para cuantificar?': en planta sí, espesores nunca."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Niantic Spatial – Scaniverse Classic: gratis e ilimitado con procesamiento en el teléfono, iOS y Android, exporta OBJ, FBX, USDZ y LAS (consultado 13-nov-2026)",
+          "url": "https://www.nianticspatial.com/faq/scaniverse-classic"
+        },
+        {
+          "titulo": "Niantic Spatial – Preguntas frecuentes de Scaniverse: plan gratis 20,000 créditos/mes, Plus USD 20/mes, Pro USD 50/mes (consultado 13-nov-2026)",
+          "url": "https://www.nianticspatial.com/faq/scaniverse"
+        },
+        {
+          "titulo": "Niantic Spatial – Notas de versión de Scaniverse (iOS 5.2.0, 20-feb-2026: cuentas empresariales; las cuentas personales no cambian)",
+          "url": "https://www.nianticspatial.com/capture/scaniverse-release-notes"
+        },
+        {
+          "titulo": "ISPRS Archives XLIX-M-1-2026 (2-jul-2026) – Cinco apps LiDAR de iPhone contra escáner Trimble X9: la mejor tuvo error posicional RMSE de 49.8 mm y el resultado varía mucho entre apps",
+          "url": "https://isprs-archives.copernicus.org/articles/XLIX-M-1-2026/1/2026/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-evidencia-fotografica",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Evidencia fotográfica con fecha, hora y GPS para estimaciones y bitácora: antes, durante y después por concepto",
+      "resumen": "Regla de captura para que cada foto de obra sirva como soporte de estimación, nota de bitácora o reclamación: sello visible de fecha, hora y coordenadas (Open Camera, gratis en Android; en iPhone una app de cámara con sello), referencia de eje y nivel en la toma, escala con flexómetro y nombre de archivo ligado al concepto del catálogo. El Reglamento de la LOPSRM (art. 132) pide fotografías entre los documentos de la estimación; con este formato el supervisor ya no puede rechazarlas por no saber dónde ni cuándo se tomaron.",
+      "agregada": "2026-11-13",
+      "campos": [
+        "Obra",
+        "Estimación núm. / periodo",
+        "Concepto del catálogo (clave y descripción)",
+        "Eje, tramo y nivel",
+        "Generador relacionado (número de hoja)",
+        "Fecha y hora de la toma (según sello)",
+        "Coordenadas (según sello)",
+        "Nota de bitácora relacionada",
+        "Tomó la foto (nombre)",
+        "Revisó (residente / supervisión)"
+      ],
+      "items": [
+        "La cámara tiene activados la fecha y hora automáticas de red y la ubicación (GPS) antes de salir al frente",
+        "La foto lleva sello visible de fecha, hora y coordenadas (en Open Camera se activa en sus ajustes de foto)",
+        "Se ve una referencia fija para ubicar la toma: eje rotulado, columna, número de departamento o cartel con eje y nivel",
+        "Hay escala en la foto: flexómetro extendido, estadal o pieza de medida conocida",
+        "Se tomaron las tres etapas del concepto: ANTES (estado previo), DURANTE (proceso o elemento oculto) y DESPUÉS (terminado)",
+        "Los elementos que quedarán ocultos (acero, tuberías, impermeabilización bajo relleno) se fotografiaron antes de taparse",
+        "La toma general (contexto) va acompañada de al menos una toma de detalle",
+        "El archivo se nombró con la regla fija: clave de concepto_eje-nivel_etapa_AAAA-MM-DD (ej. 0402_EjeB-N3_DURANTE_2026-11-13.jpg)",
+        "Las fotos se subieron el mismo día a la carpeta de la estimación correspondiente, sin editar ni recortar el sello",
+        "La foto se cita en el generador o en la nota de bitácora con su nombre de archivo",
+        "Las fotos de condiciones no imputables (lluvia, falta de frente, cambios del cliente) se guardan aparte para el análisis de impacto en el programa",
+        "Se conserva el archivo original con sus metadatos (no se mandan solo por mensajería que los borra)"
+      ],
+      "como_usar": [
+        "Instala Open Camera en los teléfonos Android de residentes y cabos (gratis, código abierto) y activa en sus ajustes el sello de fecha, hora y coordenadas en la foto (y el geoetiquetado); en iPhone usa una app de cámara con sello y verifica que no recorte la imagen.",
+        "Crea en la nube una carpeta por estimación con subcarpetas por concepto, y comparte la regla de nombre de archivo en la junta diaria.",
+        "Cada tarde el residente llena este formato por concepto estimable: revisa sello, referencia de eje, escala y las tres etapas; lo que falte se toma al día siguiente antes de que se tape.",
+        "Al integrar la estimación liga cada foto al generador y a la nota de bitácora; exporta el CSV del formato como índice fotográfico.",
+        "Indicador: conceptos rechazados u observados por falta de evidencia por estimación y días de retraso en su autorización; meta 0 observaciones por evidencia en 2 estimaciones."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento de la LOPSRM, art. 132 – Documentos que acompañan la estimación: generadores, notas de bitácora, croquis, controles de calidad, pruebas de laboratorio y fotografías",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/132/"
+        },
+        {
+          "titulo": "Open Camera – App de cámara de código abierto (GPL v3) para Android 6.0 o superior: sello de fecha, hora, coordenadas y texto en la foto",
+          "url": "https://opencamera.org.uk/"
+        }
+      ]
     }
   ]
 }

@@ -1,6 +1,43 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-13",
+      "titulo": "Herramientas digitales: escaneo 3D gratis con el celular (Scaniverse), cuándo sirve para cuantificar y evidencia fotográfica con GPS para estimaciones",
+      "resumen": "Tres herramientas para que lo que capturas con el celular sí cuente como soporte: Scaniverse (gratis en su versión Classic, verificado hoy en el sitio oficial) para escanear en 3D instalaciones y elementos antes de taparlos; una calculadora que dice si el error del escaneo cabe en tu tolerancia de cuantificación (el estudio ISPRS de julio 2026 encontró 5 cm de error en la mejor app de iPhone, así que sirve en planta pero nunca para espesores); y un formato de evidencia fotográfica con fecha, hora y coordenadas por concepto, como piden los soportes de estimación del Reglamento de la LOPSRM (art. 132).",
+      "herramientas": [
+        "dig-scaniverse",
+        "calc-error-escaneo-celular",
+        "fmt-evidencia-fotografica"
+      ],
+      "como_aplicarlo": "1) Hoy instala Open Camera con sello de fecha y GPS en los teléfonos de residentes y aplica el formato de evidencia a los conceptos de la próxima estimación. 2) Instala Scaniverse y escanea el siguiente muro o plafón con instalaciones antes de cerrarlo. 3) Haz la prueba de calibración contra cinta (5 distancias) y captura tu error en la calculadora antes de usar un escaneo en un generador.",
+      "fuentes": [
+        {
+          "titulo": "Niantic Spatial – Scaniverse Classic: gratis e ilimitado con procesamiento en el teléfono, iOS y Android, exporta OBJ, FBX, USDZ y LAS (consultado 13-nov-2026)",
+          "url": "https://www.nianticspatial.com/faq/scaniverse-classic"
+        },
+        {
+          "titulo": "Niantic Spatial – Preguntas frecuentes de Scaniverse: plan gratis 20,000 créditos/mes, Plus USD 20/mes, Pro USD 50/mes (consultado 13-nov-2026)",
+          "url": "https://www.nianticspatial.com/faq/scaniverse"
+        },
+        {
+          "titulo": "ISPRS Archives XLIX-M-1-2026 (2-jul-2026) – Cinco apps LiDAR de iPhone contra escáner Trimble X9: la mejor tuvo error posicional RMSE de 49.8 mm y el resultado varía mucho entre apps",
+          "url": "https://isprs-archives.copernicus.org/articles/XLIX-M-1-2026/1/2026/"
+        },
+        {
+          "titulo": "Twindo (fabricante, 24-jun-2026) – Precisión de LiDAR en iPhone/iPad: 1–2 % en la mayoría de medidas; mayor error % en dimensiones menores a 30 cm",
+          "url": "https://www.twindo.com/blog/how-accurate-is-lidar-scanning/"
+        },
+        {
+          "titulo": "Open Camera – App de cámara de código abierto (GPL v3) para Android 6.0 o superior: sello de fecha, hora, coordenadas y texto en la foto",
+          "url": "https://opencamera.org.uk/"
+        },
+        {
+          "titulo": "Reglamento de la LOPSRM, art. 132 – Documentos que acompañan la estimación: generadores, notas de bitácora, croquis, controles de calidad, pruebas de laboratorio y fotografías",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/132/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-12",
       "titulo": "Costos: sobrecosto de materiales separado en precio y consumo, indirectos de campo ante atrasos y suspensiones, y cierre mensual de costos por partida",
       "resumen": "Tres herramientas para saber cuánto va a costar la obra antes del finiquito. 'Sobrecosto de un insumo' separa la desviación de concreto, acero o block en lo que es de compras (precio) y lo que es de campo (consumo) y compara el desperdicio real contra el de tu precio unitario: 180 m³ teóricos con 3 % contra 192 m³ remisionados y $110/m³ más caro = $37,290 de sobrecosto, $21,120 por precio y $16,170 por consumo (desperdicio real 6.7 %). 'Indirectos de campo' compara lo gastado contra lo cobrado con el avance, proyecta el resultado con el atraso y calcula el costo de cada semana extra y el indirecto de una suspensión como soporte de gastos no recuperables (Reglamento LOPSRM arts. 145, 146 y 149). 'Cierre mensual de costos por partida' cruza presupuesto, comprometido, ejercido y por ejercer para dar el costo al término y obliga a explicar cada desviación mayor a 3 %. Contexto: el INPP del sector Construcción subió 5.79 % anual a julio de 2026 (INEGI) y desde abril de 2026 las obras con recursos públicos deben usar acero hecho en México. Mejoras: 'Valor ganado' ahora indica cómo buscar la causa de un CPI en rojo y 'Ajuste de costos' aclara que solo recupera la parte por precio.",
