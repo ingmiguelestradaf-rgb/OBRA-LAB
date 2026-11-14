@@ -4500,7 +4500,7 @@
         "Empieza comparando la actividad planeada para hoy contra lo que se está haciendo; haz al menos una pregunta abierta (qué, por qué, cómo) y anota la respuesta tal cual.",
         "Revisa los 8 desperdicios en orden; cada 'No cumple' lleva observación con foto, responsable y fecha de cierre.",
         "Elige solo UN desperdicio principal por recorrido y acuerda una acción concreta con la cuadrilla; si se repite 3 semanas, ábrele un ciclo PDCA.",
-        "Exporta el CSV y lleva el conteo de 'No cumple' por desperdicio; en un mes el más frecuente es tu prioridad. Mide el efecto con la calculadora de Muestreo del trabajo."
+        "Exporta el CSV y lleva el conteo de 'No cumple' por desperdicio; en un mes el más frecuente es tu prioridad. Mide el efecto con la calculadora de Muestreo del trabajo. Si el desperdicio que más se repite es transporte o movimientos, traza la ruta con el formato de Plano de acopios y diagrama espagueti y cuantifícala con la calculadora de Acarreos."
       ],
       "fuentes": [
         {
@@ -8483,6 +8483,398 @@
         {
           "titulo": "Lean Construction Institute – Tracks del 28.º LCI Congress (Atlanta, 12–16 oct 2026): 'Field-First Lean: Tools, Flow, and Daily Improvement' (sep 2026)",
           "url": "https://leanconstruction.org/blog/dive-into-the-2026-lci-congress-conference-tracks/"
+        }
+      ]
+    },
+    {
+      "id": "calc-acarreos",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Acarreos dentro de la obra: horas y dinero que se van caminando del acopio al frente, y cuánto ahorras si lo acercas",
+      "resumen": "El acarreo es trabajo que se paga y no avanza la obra. Con la distancia del acopio al punto de uso, los viajes por día y el costo real de la hora, calcula cuántas horas-hombre se van en ir y venir, qué % de la jornada de la cuadrilla representan, cuánto cuesta a la semana y cuánto ahorras al reubicar el acopio, subir el material con malacate o dejarlo descargar en el frente. Sirve para block, varilla habilitada, sacos de cemento, mortero en carretilla o tablaroca. El estudio de Aarhus (2025) midió que donde se juntan muchos oficios el tiempo productivo baja de 56 % a 36 %, y la caminata sube.",
+      "agregada": "2026-11-14",
+      "entradas": [
+        {
+          "id": "d",
+          "label": "Distancia actual de ida del acopio al punto de uso (mídela con cinta o pasos; incluye escaleras y rodeos)",
+          "unidad": "m",
+          "valor": 80
+        },
+        {
+          "id": "n",
+          "label": "Viajes por persona por día (cuéntalos 1 hora y multiplica)",
+          "unidad": "viajes",
+          "valor": 30
+        },
+        {
+          "id": "p",
+          "label": "Personas acarreando",
+          "unidad": "personas",
+          "valor": 4
+        },
+        {
+          "id": "v",
+          "label": "Velocidad promedio ida y vuelta (cronométrala: metros ÷ minutos; ejemplo 50 m/min con carretilla en terreno plano)",
+          "unidad": "m/min",
+          "valor": 50
+        },
+        {
+          "id": "tc",
+          "label": "Tiempo de carga y descarga por viaje",
+          "unidad": "min",
+          "valor": 1.5
+        },
+        {
+          "id": "J",
+          "label": "Horas de jornada por persona por día",
+          "unidad": "h",
+          "valor": 8
+        },
+        {
+          "id": "ch",
+          "label": "Costo real de la hora de peón o ayudante (calculadora de Factor de salario real)",
+          "unidad": "$/h",
+          "valor": 95
+        },
+        {
+          "id": "D",
+          "label": "Días de trabajo por semana",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "d2",
+          "label": "Distancia propuesta de ida después de reubicar el acopio",
+          "unidad": "m",
+          "valor": 20
+        },
+        {
+          "id": "inv",
+          "label": "Costo único de la mejora (mover acopio, rampa, malacate, tarimas, maniobra de grúa)",
+          "unidad": "$",
+          "valor": 3000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Minutos por viaje hoy (ida, vuelta, carga y descarga)",
+          "formula": "2*d/v+tc",
+          "unidad": "min",
+          "decimales": 1
+        },
+        {
+          "label": "Horas-hombre al día en acarreo hoy",
+          "formula": "n*p*(2*d/v+tc)/60",
+          "unidad": "h/día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "% de la jornada de esas personas que se va en acarreo",
+          "formula": "n*p*(2*d/v+tc)/60/(p*J)*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Kilómetros caminados por persona al día",
+          "formula": "n*2*d/1000",
+          "unidad": "km",
+          "decimales": 1
+        },
+        {
+          "label": "Costo semanal del acarreo hoy",
+          "formula": "n*p*(2*d/v+tc)/60*ch*D",
+          "unidad": "$/semana",
+          "decimales": 0
+        },
+        {
+          "label": "Horas-hombre al día con el acopio reubicado",
+          "formula": "n*p*(2*d2/v+tc)/60",
+          "unidad": "h/día",
+          "decimales": 1
+        },
+        {
+          "label": "Horas-hombre liberadas al día (para trabajo que sí avanza)",
+          "formula": "n*p*2*(d-d2)/v/60",
+          "unidad": "h/día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Ahorro semanal",
+          "formula": "n*p*2*(d-d2)/v/60*ch*D",
+          "unidad": "$/semana",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Días de trabajo para pagar la mejora",
+          "formula": "(d>d2)?inv/(n*p*2*(d-d2)/v/60*ch):0",
+          "unidad": "días",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Elige el material que más se mueve esta semana (block, varilla, sacos, mortero). Mide con cinta o con pasos la ruta real del acopio al punto de uso, incluyendo escaleras y rodeos.",
+        "Durante una hora cuenta los viajes de una persona y cronometra 3 viajes completos; con eso sacas la velocidad (metros de ida y vuelta ÷ minutos caminando) y el tiempo de carga y descarga.",
+        "Captura el costo real de la hora (de la calculadora de Factor de salario real) y lee el resultado: en el ejemplo, 4 ayudantes a 80 m hacen 9.4 horas-hombre de acarreo al día (29 % de su jornada) y cuesta $5,358 por semana.",
+        "Propón la nueva ubicación (más cerca, en el nivel donde se usa, junto al malacate) y su costo: a 20 m se liberan 4.8 horas-hombre al día, $2,736 por semana, y una mejora de $3,000 se paga en 6.6 días de trabajo (poco más de una semana).",
+        "Dibuja la ruta antes y después con el formato de Plano de acopios y diagrama espagueti, acuerda con el proveedor que descargue en el nuevo punto y repite la medición la semana siguiente para confirmar el ahorro."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Fiirgaard, Madushanka y Pérez – Location-Based Work Sampling (CIB World Building Congress, may 2025): 36 % de tiempo productivo en zonas con muchos oficios contra 56 % en zonas con pocos; la zona congestionada tuvo +6 % de caminata",
+          "url": "https://pure.au.dk/ws/files/428539511/Fiirgaard_et_al._2025_CIB_WBC2025_Location-based_work_Sampling_Reviewed.pdf"
+        },
+        {
+          "titulo": "IGLC 33 (2025) – Madushanka et al.: muestreo de trabajo por ubicación y mapas de calor para reducir caminatas y esperas excesivas",
+          "url": "https://iglc.net/Papers/Details/2322"
+        },
+        {
+          "titulo": "AEM / CONEXPO-CON/AGG (2026) – Stop Moving Materials Twice: zonas de acopio definidas y entregas alineadas al lookahead",
+          "url": "https://www.conexpoconagg.com/news/stop-moving-materials-twice-smarter-staging-for-be"
+        },
+        {
+          "titulo": "Fieldwire – Los 8 desperdicios Lean en construcción: transporte y movimientos innecesarios",
+          "url": "https://www.fieldwire.com/blog/eight-wastes-of-lean-construction/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-espagueti-acopios",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Plano de acopios y diagrama espagueti: ruta del material y de la gente antes y después de reacomodar la obra",
+      "resumen": "Sobre un croquis de la planta (o una foto del plano) se traza a mano cada viaje de una persona o de un material durante 30 a 60 minutos: las líneas enredadas muestran dónde se camina de más, dónde se cruzan oficios y qué material se mueve dos veces. El formato deja registrada la ruta actual, las zonas de acopio, la propuesta de reacomodo y la medición antes y después, para usarse en la planeación semanal (lookahead) cada vez que cambia el frente.",
+      "agregada": "2026-11-14",
+      "campos": [
+        "Obra",
+        "Fecha y hora de la observación (inicio y fin)",
+        "Frente / nivel / zona",
+        "Persona, cuadrilla o material observado",
+        "Material o herramienta que se mueve (block, varilla, sacos, cimbra, agua, herramienta)",
+        "Ubicación actual del acopio y del punto de uso (marcar en croquis: A = acopio, U = uso)",
+        "Número de viajes en el periodo observado",
+        "Distancia de ida medida (m) y minutos por viaje",
+        "Cruces con otros oficios o con maquinaria (dónde y cuántos)",
+        "Material movido dos o más veces antes de usarse (cuál y por qué)",
+        "Propuesta de reacomodo (nueva ubicación, rampa, malacate, descarga directa en frente)",
+        "Distancia propuesta (m) y horas-hombre por día liberadas (calculadora de Acarreos)",
+        "Responsable y fecha de implementación",
+        "Resultado medido una semana después"
+      ],
+      "items": [
+        "El croquis tiene escala aproximada o cotas, norte y accesos de proveedores marcados",
+        "Cada viaje observado quedó trazado como una línea continua del origen al destino",
+        "El material de mayor consumo está a menos de 1 a 2 días de uso del frente y en el mismo nivel donde se coloca",
+        "Ningún material se descarga en un punto y luego se vuelve a mover a otro acopio (doble maniobra)",
+        "Las rutas de acarreo no cruzan zonas de izaje, excavaciones abiertas ni el paso de ollas o maquinaria",
+        "Los pasillos de acarreo están libres, con piso firme para carretilla y sin escombro",
+        "La herramienta y el agua de la cuadrilla están en el frente, no en la bodega o en otro nivel",
+        "El proveedor sabe exactamente dónde descargar (punto marcado en obra y en la orden de compra)",
+        "El plano de acopios se revisó contra el lookahead de las próximas 2 a 6 semanas",
+        "La propuesta se acordó con el cabo y con el almacenista antes de ejecutarla",
+        "La medición posterior confirma menos distancia o menos viajes que la observación inicial"
+      ],
+      "como_usar": [
+        "Imprime o dibuja un croquis sencillo de la planta o del nivel; marca accesos, acopios actuales (A), puntos de uso (U), malacate o grúa y zonas peligrosas.",
+        "Sigue a una persona o un material durante 30 a 60 minutos y traza con pluma cada viaje como una línea continua; cuenta viajes y mide la distancia de ida con cinta o pasos.",
+        "Toma foto del croquis trazado y súbela como evidencia; contesta los puntos de verificación y anota cruces con otros oficios y dobles maniobras.",
+        "Captura distancia, viajes y personas en la calculadora de Acarreos para saber las horas y el dinero que cuesta la ruta actual y la propuesta.",
+        "Ejecuta el reacomodo con responsable y fecha, avisa al proveedor el nuevo punto de descarga y repite el trazo una semana después para comparar el antes y el después."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Fiirgaard, Madushanka y Pérez – Location-Based Work Sampling (CIB World Building Congress, may 2025): 36 % de tiempo productivo en zonas con muchos oficios contra 56 % en zonas con pocos; la zona congestionada tuvo +6 % de caminata",
+          "url": "https://pure.au.dk/ws/files/428539511/Fiirgaard_et_al._2025_CIB_WBC2025_Location-based_work_Sampling_Reviewed.pdf"
+        },
+        {
+          "titulo": "IGLC 33 (2025) – Madushanka et al.: muestreo de trabajo por ubicación y mapas de calor para reducir caminatas y esperas excesivas",
+          "url": "https://iglc.net/Papers/Details/2322"
+        },
+        {
+          "titulo": "AEM / CONEXPO-CON/AGG (2026) – Stop Moving Materials Twice: zonas de acopio definidas y entregas alineadas al lookahead",
+          "url": "https://www.conexpoconagg.com/news/stop-moving-materials-twice-smarter-staging-for-be"
+        },
+        {
+          "titulo": "Fieldwire – Los 8 desperdicios Lean en construcción: transporte y movimientos innecesarios",
+          "url": "https://www.fieldwire.com/blog/eight-wastes-of-lean-construction/"
+        }
+      ]
+    },
+    {
+      "id": "calc-cba-decision",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Elegir por ventajas (CBA): decidir entre 3 proveedores, subcontratistas o sistemas con la importancia de las ventajas, y el costo por separado",
+      "resumen": "Choosing by Advantages (CBA) es el método de decisión que promueve el Lean Construction Institute: en lugar de promediar calificaciones con pesos fijos (donde un criterio 'importante' pesa igual aunque las opciones casi no se diferencien), por cada factor se marca la opción menos preferida, se describen las ventajas de las otras y se asignan puntos de importancia a cada ventaja (100 a la ventaja más importante de toda la decisión). El costo no se mezcla con los puntos: al final se compara cuántos puntos de ventaja ofrece cada opción contra lo que cuesta. Sirve para elegir premezcladora, subcontratista de cimbra o de impermeabilización, sistema de losa o renta de equipo, y deja por escrito por qué se eligió.",
+      "agregada": "2026-11-14",
+      "entradas": [
+        {
+          "id": "a1",
+          "label": "Factor 1 (ej. tiempo de llegada de la olla) – puntos de ventaja de A (0 a la menos preferida en este factor)",
+          "unidad": "pts",
+          "valor": 40
+        },
+        {
+          "id": "b1",
+          "label": "Factor 1 – puntos de ventaja de B",
+          "unidad": "pts",
+          "valor": 100
+        },
+        {
+          "id": "c1",
+          "label": "Factor 1 – puntos de ventaja de C",
+          "unidad": "pts",
+          "valor": 0
+        },
+        {
+          "id": "a2",
+          "label": "Factor 2 (ej. cumplimiento histórico de f'c) – puntos de A",
+          "unidad": "pts",
+          "valor": 80
+        },
+        {
+          "id": "b2",
+          "label": "Factor 2 – puntos de B",
+          "unidad": "pts",
+          "valor": 0
+        },
+        {
+          "id": "c2",
+          "label": "Factor 2 – puntos de C",
+          "unidad": "pts",
+          "valor": 40
+        },
+        {
+          "id": "a3",
+          "label": "Factor 3 (ej. bomba disponible en sábado) – puntos de A",
+          "unidad": "pts",
+          "valor": 50
+        },
+        {
+          "id": "b3",
+          "label": "Factor 3 – puntos de B",
+          "unidad": "pts",
+          "valor": 50
+        },
+        {
+          "id": "c3",
+          "label": "Factor 3 – puntos de C",
+          "unidad": "pts",
+          "valor": 0
+        },
+        {
+          "id": "a4",
+          "label": "Factor 4 (ej. días de crédito) – puntos de A",
+          "unidad": "pts",
+          "valor": 30
+        },
+        {
+          "id": "b4",
+          "label": "Factor 4 – puntos de B",
+          "unidad": "pts",
+          "valor": 0
+        },
+        {
+          "id": "c4",
+          "label": "Factor 4 – puntos de C",
+          "unidad": "pts",
+          "valor": 45
+        },
+        {
+          "id": "ka",
+          "label": "Costo total de la alternativa A (precio × cantidad, con IVA o sin IVA, igual en las 3)",
+          "unidad": "$",
+          "valor": 1180000
+        },
+        {
+          "id": "kb",
+          "label": "Costo total de B",
+          "unidad": "$",
+          "valor": 1120000
+        },
+        {
+          "id": "kc",
+          "label": "Costo total de C",
+          "unidad": "$",
+          "valor": 1100000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Importancia total de ventajas de A",
+          "formula": "a1+a2+a3+a4",
+          "unidad": "pts",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Importancia total de ventajas de B",
+          "formula": "b1+b2+b3+b4",
+          "unidad": "pts",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Importancia total de ventajas de C",
+          "formula": "c1+c2+c3+c4",
+          "unidad": "pts",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Alternativa con más ventajas (1 = A, 2 = B, 3 = C)",
+          "formula": "(a1+a2+a3+a4>=b1+b2+b3+b4&&a1+a2+a3+a4>=c1+c2+c3+c4)?1:(b1+b2+b3+b4>=c1+c2+c3+c4?2:3)",
+          "unidad": "",
+          "decimales": 0
+        },
+        {
+          "label": "Alternativa más barata (1 = A, 2 = B, 3 = C)",
+          "formula": "(ka<=kb&&ka<=kc)?1:(kb<=kc?2:3)",
+          "unidad": "",
+          "decimales": 0
+        },
+        {
+          "label": "Costo extra de la alternativa con más ventajas contra la más barata",
+          "formula": "[ka,kb,kc][((a1+a2+a3+a4>=b1+b2+b3+b4&&a1+a2+a3+a4>=c1+c2+c3+c4)?1:(b1+b2+b3+b4>=c1+c2+c3+c4?2:3))-1]-Math.min(ka,kb,kc)",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Puntos de ventaja extra que compras con ese costo",
+          "formula": "[a1+a2+a3+a4,b1+b2+b3+b4,c1+c2+c3+c4][((a1+a2+a3+a4>=b1+b2+b3+b4&&a1+a2+a3+a4>=c1+c2+c3+c4)?1:(b1+b2+b3+b4>=c1+c2+c3+c4?2:3))-1]-[a1+a2+a3+a4,b1+b2+b3+b4,c1+c2+c3+c4][((ka<=kb&&ka<=kc)?1:(kb<=kc?2:3))-1]",
+          "unidad": "pts",
+          "decimales": 0
+        },
+        {
+          "label": "Costo por cada punto de ventaja extra (¿lo vale? decídelo en equipo)",
+          "formula": "([ka,kb,kc][((a1+a2+a3+a4>=b1+b2+b3+b4&&a1+a2+a3+a4>=c1+c2+c3+c4)?1:(b1+b2+b3+b4>=c1+c2+c3+c4?2:3))-1]-Math.min(ka,kb,kc))/Math.max(1,[a1+a2+a3+a4,b1+b2+b3+b4,c1+c2+c3+c4][((a1+a2+a3+a4>=b1+b2+b3+b4&&a1+a2+a3+a4>=c1+c2+c3+c4)?1:(b1+b2+b3+b4>=c1+c2+c3+c4?2:3))-1]-[a1+a2+a3+a4,b1+b2+b3+b4,c1+c2+c3+c4][((ka<=kb&&ka<=kc)?1:(kb<=kc?2:3))-1])",
+          "unidad": "$/pt",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Reúne a quien va a vivir la decisión (residente, compras, cabo o contratista) y define las 3 alternativas y hasta 4 factores que de verdad las diferencian (llegada, calidad histórica, servicio, crédito, garantía). El precio NO es factor: va aparte.",
+        "Por cada factor escribe el dato real de cada alternativa (ej. llegada A 45 min, B 25 min, C 60 min) y marca la menos preferida con 0 puntos; las otras tienen una ventaja sobre ella.",
+        "Compara todas las ventajas de todos los factores y elige la más importante de toda la decisión: vale 100 puntos (en el ejemplo, que B llegue 35 min antes que C). Califica las demás ventajas contra esa (0 a 100); no uses pesos por factor.",
+        "Captura los puntos y el costo total de cada alternativa. En el ejemplo A suma 200 puntos, B 150 y C 85; C es la más barata y A cuesta $80,000 más por 115 puntos extra: $696 por punto.",
+        "Decidan en equipo si esos puntos extra valen el dinero (CBA no lo decide por fórmula), y guarda captura de la calculadora con los datos de cada factor como soporte de la compra o del fallo del concurso."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Choosing By Advantages (CBA): alternativas, factores, atributos, ventajas e 'importancia de las ventajas' (página actualizada ene 2026)",
+          "url": "https://leanconstruction.org/lean-topics/choosing-by-advantages"
+        },
+        {
+          "titulo": "IGLC 34 (2026) – Schöttle: CBA en la selección de contratistas (interiores e instalaciones): más transparencia, trazabilidad y equidad que la suma ponderada, requiere facilitación inicial",
+          "url": "https://iglc.net/Papers/Details/2529"
+        },
+        {
+          "titulo": "IGLC 34 (2026) – Paucar et al.: CBA para elegir entre 4 drones con 9 factores; gana la de mayor importancia total de ventajas",
+          "url": "https://iglc.net/Papers/Details/2539"
         }
       ]
     },

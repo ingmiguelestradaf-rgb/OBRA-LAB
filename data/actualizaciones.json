@@ -1,6 +1,40 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-14",
+      "titulo": "Lean: acarreos dentro de la obra, plano de acopios con diagrama espagueti y decisiones con Elegir por ventajas (CBA)",
+      "resumen": "Dos herramientas para atacar el desperdicio de transporte y movimientos, que el muestreo de trabajo por ubicación de Aarhus (2025) encontró concentrado donde se juntan oficios (36 % de tiempo productivo contra 56 %): una calculadora que convierte la distancia del acopio al frente en horas-hombre y pesos por semana, y un formato para trazar la ruta real y reacomodar acopios. Además, una calculadora de Choosing by Advantages, el método de decisión del Lean Construction Institute que dos artículos del IGLC 2026 aplicaron para elegir contratistas y equipo: ventajas con puntos de importancia y el costo por separado. Mejora: el Recorrido Gemba ahora remite a estas dos herramientas cuando el desperdicio principal es transporte o movimientos.",
+      "herramientas": [
+        "calc-acarreos",
+        "fmt-espagueti-acopios",
+        "calc-cba-decision",
+        "fmt-gemba"
+      ],
+      "como_aplicarlo": "1) El lunes sigue 30 minutos al material que más se mueve (block o varilla), traza su ruta en el formato de Plano de acopios y mide la distancia. 2) Captura la ruta actual y la propuesta en la calculadora de Acarreos y reubica el acopio si la mejora se paga en menos de dos semanas. 3) En la próxima compra o asignación de subcontrato con 3 opciones, llena la calculadora CBA con el residente y compras y guarda la captura como soporte.",
+      "fuentes": [
+        {
+          "titulo": "Fiirgaard, Madushanka y Pérez – Location-Based Work Sampling (CIB World Building Congress, may 2025): 36 % de tiempo productivo en zonas con muchos oficios contra 56 % en zonas con pocos; la zona congestionada tuvo +6 % de caminata",
+          "url": "https://pure.au.dk/ws/files/428539511/Fiirgaard_et_al._2025_CIB_WBC2025_Location-based_work_Sampling_Reviewed.pdf"
+        },
+        {
+          "titulo": "IGLC 33 (2025) – Madushanka et al.: muestreo de trabajo por ubicación y mapas de calor para reducir caminatas y esperas excesivas",
+          "url": "https://iglc.net/Papers/Details/2322"
+        },
+        {
+          "titulo": "Lean Construction Institute – Choosing By Advantages (CBA): alternativas, factores, atributos, ventajas e 'importancia de las ventajas' (página actualizada ene 2026)",
+          "url": "https://leanconstruction.org/lean-topics/choosing-by-advantages"
+        },
+        {
+          "titulo": "IGLC 34 (2026) – Schöttle: CBA en la selección de contratistas (interiores e instalaciones): más transparencia, trazabilidad y equidad que la suma ponderada, requiere facilitación inicial",
+          "url": "https://iglc.net/Papers/Details/2529"
+        },
+        {
+          "titulo": "IGLC 34 (2026) – Paucar et al.: CBA para elegir entre 4 drones con 9 factores; gana la de mayor importancia total de ventajas",
+          "url": "https://iglc.net/Papers/Details/2539"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-13",
       "titulo": "Herramientas digitales: escaneo 3D gratis con el celular (Scaniverse), cuándo sirve para cuantificar y evidencia fotográfica con GPS para estimaciones",
       "resumen": "Tres herramientas para que lo que capturas con el celular sí cuente como soporte: Scaniverse (gratis en su versión Classic, verificado hoy en el sitio oficial) para escanear en 3D instalaciones y elementos antes de taparlos; una calculadora que dice si el error del escaneo cabe en tu tolerancia de cuantificación (el estudio ISPRS de julio 2026 encontró 5 cm de error en la mejor app de iPhone, así que sirve en planta pero nunca para espesores); y un formato de evidencia fotográfica con fecha, hora y coordenadas por concepto, como piden los soportes de estimación del Reglamento de la LOPSRM (art. 132).",
