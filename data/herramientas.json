@@ -1859,7 +1859,7 @@
         "Pendientes de la nota anterior cerrados o con nueva fecha",
         "Fotografías de la visita ligadas al folio de la nota",
         "Si hay suspensión temporal: notificada a la autoridad",
-        "Al terminar la obra: aviso de terminación presentado para obtener la constancia",
+        "Al terminar la obra: aviso de terminación presentado para obtener la constancia (sigue el formato Expediente de cierre y entrega de obra)",
         "Si además es obra pública, la bitácora electrónica del contrato está al día (formato Bitácora electrónica obligatoria)"
       ],
       "como_usar": [
@@ -2413,6 +2413,351 @@
         {
           "titulo": "CASS Abogados, Circular 03/2026 – Costos y factores de mano de obra en construcción desde feb 2026: costos por m² de obra privada actualizados 3.69 %; factores de obra pública sin cambio desde abril 2015; base para determinar cuotas cuando no se acreditan trabajadores y salarios (RSSOTC art. 18)",
           "url": "https://www.cass-abogados.com/post/circular-03-2026-costos-y-factores-de-mano-de-obra-en-construcci%C3%B3n-aplicables-a-partir-de-febrero"
+        }
+      ]
+    },
+    {
+      "id": "calc-cierre-contrato-publico",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Cierre del contrato de obra pública: recepción física (15 días), finiquito (60 días) y garantía de vicios ocultos (fianza 10 % o 5 % en carta de crédito / fideicomiso)",
+      "resumen": "Con el monto total ejercido y los días transcurridos te dice cuántos días le quedan a la dependencia para recibir físicamente la obra, cuántos quedan para el finiquito, cuánto debe garantizar tu fianza de vicios ocultos (LOPSRM art. 66), cuánto te cuesta cada alternativa (prima de fianza contra dinero detenido en fideicomiso) y cuánto falta para que se libere a los 12 meses.",
+      "agregada": "2026-11-15",
+      "entradas": [
+        {
+          "id": "ME",
+          "label": "Monto total ejercido de los trabajos (sin IVA)",
+          "unidad": "$",
+          "valor": 24600000
+        },
+        {
+          "id": "DV",
+          "label": "Días naturales desde que la dependencia verificó la terminación (0 si ya hay acta de recepción)",
+          "unidad": "días",
+          "valor": 0
+        },
+        {
+          "id": "PF",
+          "label": "Plazo de finiquito pactado en el contrato (máximo legal 60)",
+          "unidad": "días",
+          "valor": 45
+        },
+        {
+          "id": "DR",
+          "label": "Días naturales desde el acta de recepción física (0 si no se ha recibido)",
+          "unidad": "días",
+          "valor": 20
+        },
+        {
+          "id": "PR",
+          "label": "Prima anual de la fianza que te cotizó tu afianzadora",
+          "unidad": "%",
+          "valor": 1.2
+        },
+        {
+          "id": "TC",
+          "label": "Costo anual de tu dinero (crédito o lo que rinde en la empresa)",
+          "unidad": "%",
+          "valor": 18
+        },
+        {
+          "id": "RF",
+          "label": "Rendimiento anual del fideicomiso en renta fija",
+          "unidad": "%",
+          "valor": 7
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Días que le quedan a la dependencia para la recepción física (15 naturales tras verificar; 0 si ya hay acta)",
+          "formula": "DR>0?0:15-DV",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Plazo de finiquito aplicable (el menor entre contrato y 60 días)",
+          "formula": "Math.min(PF,60)",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Días que quedan para elaborar el finiquito",
+          "formula": "DR>0?Math.min(PF,60)-DR:Math.min(PF,60)",
+          "unidad": "días",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            11,
+            1
+          ]
+        },
+        {
+          "label": "Fianza de vicios ocultos (10 % del monto ejercido)",
+          "formula": "ME*0.10",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Costo de la fianza por los 12 meses (prima cotizada)",
+          "formula": "ME*0.10*PR/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Carta de crédito irrevocable (5 % del monto ejercido)",
+          "formula": "ME*0.05",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Dinero detenido si aportas el 5 % al fideicomiso",
+          "formula": "ME*0.05",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo neto del fideicomiso en 12 meses (tu costo de dinero menos lo que rinde)",
+          "formula": "ME*0.05*Math.max(0,TC-RF)/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Ahorro de la fianza contra el fideicomiso (positivo = conviene la fianza)",
+          "formula": "ME*0.05*Math.max(0,TC-RF)/100-ME*0.10*PR/100",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Días que faltan para que se libere la garantía (12 meses ≈ 365 días desde el acta)",
+          "formula": "DR>0?Math.max(0,365-DR):365",
+          "unidad": "días",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Toma de tu bitácora electrónica la fecha en que la dependencia verificó la terminación y, si ya existe, la fecha del acta de recepción física; captura el monto total ejercido (suma de estimaciones y extraordinarios pagados, sin IVA).",
+        "Si la recepción física está en amarillo o rojo, asienta en bitácora la solicitud de levantar el acta: la ley le da 15 días naturales a la dependencia después de verificar.",
+        "Pide a tu afianzadora la cotización de la fianza de vicios ocultos por el 10 % calculado y captura la prima real; compárala con el costo neto de dejar el 5 % en fideicomiso. La fianza debe estar constituida ANTES de la recepción.",
+        "Vigila los días de finiquito: si la dependencia lo elabora sin ti, tiene 10 días para notificarte y tú solo 15 días naturales para alegar; si no contestas se da por aceptado.",
+        "Agenda la fecha de liberación (12 meses desde el acta) y pide por escrito la cancelación de la fianza o el retiro del fideicomiso con rendimientos; solo procede si no surgió responsabilidad tuya en ese periodo. La prima de 1.2 % del ejemplo NO está verificada: usa la que te coticen. En obra privada aplica lo que diga tu contrato."
+      ],
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 64 – Conclusión de los trabajos: recepción física en 15 días naturales tras la verificación, finiquito en máximo 60 días naturales; si el contratista no acude, la dependencia lo notifica en 10 días y él tiene 15 para alegar (última reforma de la ley DOF 14-11-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-64/"
+        },
+        {
+          "titulo": "LOPSRM art. 66 – Vicios ocultos: 12 meses; fianza del 10 % del monto total ejercido, o carta de crédito irrevocable del 5 %, o 5 % en fideicomiso invertido en renta fija (texto cotejado sep 2026)",
+          "url": "https://mley.mx/LOPSRM/articulo/66/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 95 – La garantía se cancela a los 12 meses del acta de recepción física, siempre que no haya surgido responsabilidad del contratista",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/95/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 97 – Cancelación de fianza, carta de crédito o retiro del fideicomiso con sus rendimientos por instrucción escrita de la dependencia",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/97/"
+        }
+      ]
+    },
+    {
+      "id": "calc-garantias-vivienda",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Garantías de vivienda nueva (NOM-247-SE-2021): meses que le quedan a cada garantía, días de reparación que se suman y bonificación por defecto",
+      "resumen": "Para desarrolladores y constructores de vivienda: con los meses desde la entrega real y los días que llevas reparando te dice cuánto le queda a la garantía de estructura (5 años mínimo), impermeabilización (3) y demás elementos (1), y cuánto tendrías que bonificar si el defecto persiste (20 % del precio si es grave, 5 % del valor de la reparación si es leve). Incluye la referencia del Seguro de Calidad Infonavit (10 / 5 / 2 años).",
+      "agregada": "2026-11-15",
+      "entradas": [
+        {
+          "id": "MT",
+          "label": "Meses desde la entrega real de la vivienda (acta de entrega)",
+          "unidad": "meses",
+          "valor": 14
+        },
+        {
+          "id": "DRP",
+          "label": "Días acumulados que ha estado en reparación por garantía",
+          "unidad": "días",
+          "valor": 21
+        },
+        {
+          "id": "P",
+          "label": "Precio de la vivienda señalado en el contrato",
+          "unidad": "$",
+          "valor": 1850000
+        },
+        {
+          "id": "CR",
+          "label": "Costo de la reparación del defecto reclamado",
+          "unidad": "$",
+          "valor": 12500
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Meses de garantía de estructura que quedan (mínimo 60 meses)",
+          "formula": "Math.max(0,60-MT+DRP/30.4)",
+          "unidad": "meses",
+          "decimales": 1,
+          "semaforo": [
+            6,
+            0.1
+          ]
+        },
+        {
+          "label": "Meses de garantía de impermeabilización que quedan (mínimo 36 meses)",
+          "formula": "Math.max(0,36-MT+DRP/30.4)",
+          "unidad": "meses",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            6,
+            0.1
+          ]
+        },
+        {
+          "label": "Meses de garantía de los demás elementos que quedan (mínimo 12 meses)",
+          "formula": "Math.max(0,12-MT+DRP/30.4)",
+          "unidad": "meses",
+          "decimales": 1,
+          "semaforo": [
+            3,
+            0.1
+          ]
+        },
+        {
+          "label": "Bonificación si un defecto GRAVE persiste (20 % del precio del contrato)",
+          "formula": "P*0.20",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Bonificación si un defecto LEVE persiste (5 % del valor de la reparación)",
+          "formula": "CR*0.05",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Veces que cuesta más la bonificación grave que la reparación",
+          "formula": "P*0.20/CR",
+          "unidad": "veces",
+          "decimales": 0
+        },
+        {
+          "label": "Referencia Seguro de Calidad Infonavit – meses que quedan de estructura (120)",
+          "formula": "Math.max(0,120-MT)",
+          "unidad": "meses",
+          "decimales": 0
+        },
+        {
+          "label": "Referencia Seguro de Calidad Infonavit – meses que quedan de instalaciones hidrosanitarias y eléctricas (24)",
+          "formula": "Math.max(0,24-MT)",
+          "unidad": "meses",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Cuando llegue una reclamación, toma la fecha del acta de entrega real de esa vivienda y los días que ya estuvo en reparación por garantías anteriores (el tiempo de reparación no corre contra el plazo).",
+        "Captura el precio del contrato y el costo estimado de la reparación: si la garantía aplicable sigue en verde, atiende sin costo para el comprador y registra fecha de inicio y término de la reparación.",
+        "Clasifica el defecto: estructural, impermeabilización o 'demás elementos' (instalaciones, acabados, cancelería). Si es grave y la reparación no lo resuelve, la bonificación del 20 % del precio vuelve barata cualquier reparación de fondo: haz la reparación bien a la primera.",
+        "Si la vivienda se vendió con crédito tradicional Infonavit, el comprador además tiene el Seguro de Calidad (10 años estructura, 5 impermeabilización, 2 instalaciones) pagado por el desarrollador: oriéntalo al centro de atención Infonavit y conserva tu expediente de calidad para la aseguradora.",
+        "Los plazos de 5 / 3 / 1 años y las bonificaciones se tomaron de la ficha oficial de la Secretaría de Economía y de dos notas que citan el numeral 7; no se pudo leer el texto literal en el DOF. Confírmalos con tu jurídico antes de redactar la póliza de garantía."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Secretaría de Economía – NOM-247-SE-2021 (vigente; DOF 22-03-2022, en vigor 18-09-2022): información comercial y contratos de vivienda; garantías en el numeral 7",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-247-se-2021/"
+        },
+        {
+          "titulo": "Expansión – NOM-247: garantía mínima de 5 años en estructura, 3 en impermeabilización y 1 en lo demás; bonificación del 20 % del precio por defectos graves y 5 % del valor de la reparación por leves",
+          "url": "https://expansion.mx/inmobiliario/2022/04/06/recibir-bonificacion-por-defectos-ocultos-en-tu-vivienda"
+        },
+        {
+          "titulo": "Tanda Casa (oct 2026) – NOM-247 numeral 7.1.2 y 7.1.3: plazos irrenunciables desde la entrega real; el tiempo de reparación no cuenta dentro del plazo",
+          "url": "https://tandacasa.com/blog/comprar-casa-nueva-a-desarrolladora-nom-247-2026"
+        },
+        {
+          "titulo": "adn40 (ago 2026) – Seguro de Calidad Infonavit pagado por el desarrollador: estructura 10 años, impermeabilización 5, instalaciones hidrosanitarias y eléctricas 2 (vivienda nueva con crédito tradicional)",
+          "url": "https://www.adn40.mx/mexico/2026-08-01/es-oficial-por-infonavit-y-muchos-acreditados-no-saben-que-tienen-un-seguro-de-hasta-10-anos-para-reparar-su-vivienda-2/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-cierre-entrega-obra",
+      "tipo": "formato",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Expediente de cierre y entrega de obra: aviso de terminación municipal, acta de recepción, finiquito, garantías, IMSS (SIROC) y manual de uso",
+      "resumen": "Lista de cierre para no dejar cabos sueltos al terminar una obra en Tijuana: lo que pide el municipio (aviso de terminación del DRO), lo que pide la LOPSRM si es obra pública (verificación, acta de recepción física, finiquito, fianza de vicios ocultos), el aviso de terminación ante el IMSS en SIROC y lo que el comprador o cliente debe recibir (planos as-built, manual de uso y mantenimiento, póliza de garantía NOM-247).",
+      "agregada": "2026-11-15",
+      "campos": [
+        "Obra, ubicación y número de licencia de construcción",
+        "Cliente o dependencia / número de contrato",
+        "Director Responsable de Obra (nombre y registro) y corresponsables",
+        "Superintendente responsable del cierre",
+        "Fecha de terminación real de los trabajos",
+        "Fecha de aviso de terminación al cliente o dependencia",
+        "Fecha de verificación / acta de recepción física",
+        "Fecha límite de finiquito (contrato, máximo 60 días en obra pública)",
+        "Registro de obra en SIROC y fecha del aviso de terminación ante el IMSS",
+        "Monto total ejercido y número de fianza de vicios ocultos",
+        "Fecha de liberación de la garantía (12 meses desde el acta)",
+        "Responsable y fecha compromiso de cada pendiente"
+      ],
+      "items": [
+        "Bitácora con nota de término de la última etapa y nota de cierre firmada por el DRO",
+        "Aviso de terminación presentado al municipio por el DRO para obtener la constancia (Reglamento de Edificaciones de Tijuana, art. 17)",
+        "Planos as-built (estructurales, arquitectónicos e instalaciones) firmados y entregados",
+        "Informes de laboratorio (concreto, acero, compactación) y pruebas de instalaciones (hermeticidad, presión, aislamiento) integrados al expediente",
+        "Punch list del checklist 'Entrega final y punch list' cerrado o con fechas compromiso firmadas",
+        "Obra pública: aviso de conclusión en bitácora electrónica y verificación dentro del plazo pactado",
+        "Obra pública: acta de recepción física levantada dentro de 15 días naturales tras la verificación",
+        "Obra pública: fianza de vicios ocultos (10 %) o carta de crédito / fideicomiso (5 %) entregada ANTES de la recepción",
+        "Obra pública: finiquito elaborado en el plazo del contrato (máximo 60 días) y acta de extinción de derechos y obligaciones",
+        "Si la dependencia elaboró el finiquito sin ti: alegatos presentados dentro de 15 días naturales",
+        "Aviso de terminación de la obra en SIROC y último listado del SUA conciliado contra la mano de obra mínima IMSS",
+        "Subcontratistas con finiquito firmado, retenciones liberadas y sin adeudos de IMSS / REPSE pendientes",
+        "Vivienda: póliza de garantía con vigencia, alcances, exclusiones y mecanismo de reclamo (NOM-247: 5 años estructura, 3 impermeabilización, 1 lo demás)",
+        "Manual de uso y mantenimiento entregado (impermeabilización, instalaciones, equipos) con garantías de proveedores",
+        "Plan específico de protección civil de la obra cerrado y retiro de instalaciones provisionales (tapiales, tomas, letrero)",
+        "Fecha de liberación de la fianza y fecha fin de cada garantía agendadas en el calendario"
+      ],
+      "como_usar": [
+        "Abre el formato el día que terminas la última partida (no el día de la entrega) y llena las fechas que ya tengas; las vacías son tus pendientes.",
+        "Recorre la lista con el residente y el administrativo: marca N/A lo que no aplica (obra privada no lleva fianza LOPSRM; obra comercial no lleva NOM-247) y pon responsable y fecha a cada 'No'.",
+        "Usa la calculadora 'Cierre del contrato de obra pública' para las fechas límite de recepción, finiquito y garantía, y la de 'Garantías de vivienda nueva' para la póliza al comprador.",
+        "Exporta el CSV con el nombre de la obra y revísalo cada lunes en la junta hasta que todo quede en Cumple; después guárdalo con la constancia de terminación y el acta de recepción.",
+        "Confirma con el IMSS en SIROC el trámite de aviso de terminación de tu obra: según el RSSOTC art. 12-A el instituto tiene hasta 90 días hábiles para revisar; conserva el acuse."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Reglamento de la Ley de Edificaciones para el Municipio de Tijuana, art. 17 – el DRO presenta el aviso de terminación para obtener la constancia",
+          "url": "https://www.tijuana.gob.mx/normatividad/documentos/Reglamentos/40_20211126144942_wp.pdf"
+        },
+        {
+          "titulo": "LOPSRM art. 64 – Conclusión de los trabajos: recepción física en 15 días naturales tras la verificación, finiquito en máximo 60 días naturales; si el contratista no acude, la dependencia lo notifica en 10 días y él tiene 15 para alegar (última reforma de la ley DOF 14-11-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-64/"
+        },
+        {
+          "titulo": "LOPSRM art. 66 – Vicios ocultos: 12 meses; fianza del 10 % del monto total ejercido, o carta de crédito irrevocable del 5 %, o 5 % en fideicomiso invertido en renta fija (texto cotejado sep 2026)",
+          "url": "https://mley.mx/LOPSRM/articulo/66/"
+        },
+        {
+          "titulo": "IMSS – Trámite IMSS-02-097 Registro de obra, fases e incidencias en SIROC (RSSOTC arts. 5, 9 y 12)",
+          "url": "https://www.imss.gob.mx/tramites/imss02097"
+        },
+        {
+          "titulo": "ElConta.mx (2024) – Liberación de obra ante el IMSS tras el aviso de terminación: el IMSS tiene hasta 90 días hábiles para revisar (RSSOTC art. 12-A); si no lo hace se presume cumplimiento (opinión, verificar vigencia)",
+          "url": "https://elconta.mx/liberacion-obra-construccion-inactividad-fiscalizadora-autoridad-imss/"
+        },
+        {
+          "titulo": "Secretaría de Economía – NOM-247-SE-2021 (vigente; DOF 22-03-2022, en vigor 18-09-2022): información comercial y contratos de vivienda; garantías en el numeral 7",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-247-se-2021/"
+        },
+        {
+          "titulo": "El Imparcial (abr 2026) – Protección Civil de Tijuana, operativo 'Obra Verificada': 6 de 8 obras infraccionadas (sin unidad interna, sin capacitación, salidas obstruidas, sin extintores); multas de 1,000 UMA y 30 días para el plan específico",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/04/09/infraccionan-seis-de-ocho-obras-revisadas-en-tijuana-por-incumplimientos/"
         }
       ]
     },
@@ -3064,7 +3409,9 @@
         "Planos as built y manuales de equipos entregados",
         "Garantías de proveedores y contratistas entregadas",
         "Llaves y controles identificados y entregados",
-        "Acta de entrega firmada con lista de pendientes y fechas compromiso"
+        "Acta de entrega firmada con lista de pendientes y fechas compromiso",
+        "Vivienda: póliza de garantía al comprador con plazos NOM-247 (5 años estructura, 3 impermeabilización, 1 lo demás) y manual de uso y mantenimiento",
+        "Expediente de cierre completo (aviso de terminación municipal, acta de recepción, finiquito, SIROC): formato Expediente de cierre y entrega de obra"
       ],
       "como_usar": [
         "Revisa con el contratista antes de que cubra o continúe el trabajo: lo que se tapa ya no se inspecciona.",

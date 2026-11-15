@@ -1,6 +1,53 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-15",
+      "titulo": "Normatividad: cierre de obra sin cabos sueltos — recepción, finiquito y fianza de vicios ocultos, garantías de vivienda NOM-247 y expediente de entrega",
+      "resumen": "Tres herramientas para la etapa donde más dinero se queda atorado: el cierre. Una calculadora de cierre de obra pública con los plazos de la LOPSRM (recepción física en 15 días tras verificar, finiquito en máximo 60, 15 días para alegar si la dependencia lo hace sin ti) y la garantía de vicios ocultos del art. 66 (fianza del 10 % del monto ejercido o 5 % en carta de crédito o fideicomiso, liberación a los 12 meses), comparando cuánto cuesta cada opción. Una calculadora de garantías de vivienda nueva con los mínimos de la NOM-247-SE-2021 (5 años estructura, 3 impermeabilización, 1 lo demás), los días de reparación que se suman y la bonificación del 20 % del precio por defecto grave; incluye la referencia del Seguro de Calidad Infonavit (10 / 5 / 2 años). Y un expediente de cierre que junta municipio (aviso de terminación del DRO), LOPSRM, IMSS (SIROC), protección civil y entrega al cliente. Mejoras: el formato Visita del DRO y el checklist Entrega final ahora remiten al expediente de cierre e incluyen la póliza de garantía NOM-247.",
+      "herramientas": [
+        "calc-cierre-contrato-publico",
+        "calc-garantias-vivienda",
+        "fmt-cierre-entrega-obra",
+        "fmt-bitacora-dro",
+        "qc-entrega"
+      ],
+      "como_aplicarlo": "1) Abre el Expediente de cierre para la obra más próxima a terminar y marca lo que ya tienes; cada 'No' lleva responsable y fecha. 2) Si es obra pública, captura monto ejercido y fechas en la calculadora de Cierre y pide hoy la cotización de la fianza de vicios ocultos para tenerla antes de la recepción. 3) Si entregas vivienda, revisa que la póliza de garantía tenga al menos 5 / 3 / 1 años y usa la calculadora de Garantías con la próxima reclamación.",
+      "fuentes": [
+        {
+          "titulo": "LOPSRM art. 64 – Conclusión de los trabajos: recepción física en 15 días naturales tras la verificación, finiquito en máximo 60 días naturales; si el contratista no acude, la dependencia lo notifica en 10 días y él tiene 15 para alegar (última reforma de la ley DOF 14-11-2025)",
+          "url": "https://sdv.com.mx/compendio/ley-de-obras-publicas-y-servicios-relacionados-con-las-mismas/articulo-64/"
+        },
+        {
+          "titulo": "LOPSRM art. 66 – Vicios ocultos: 12 meses; fianza del 10 % del monto total ejercido, o carta de crédito irrevocable del 5 %, o 5 % en fideicomiso invertido en renta fija (texto cotejado sep 2026)",
+          "url": "https://mley.mx/LOPSRM/articulo/66/"
+        },
+        {
+          "titulo": "Reglamento LOPSRM art. 95 – La garantía se cancela a los 12 meses del acta de recepción física, siempre que no haya surgido responsabilidad del contratista",
+          "url": "https://mley.mx/Reg_LOPSRM/articulo/95/"
+        },
+        {
+          "titulo": "Secretaría de Economía – NOM-247-SE-2021 (vigente; DOF 22-03-2022, en vigor 18-09-2022): información comercial y contratos de vivienda; garantías en el numeral 7",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-247-se-2021/"
+        },
+        {
+          "titulo": "Expansión – NOM-247: garantía mínima de 5 años en estructura, 3 en impermeabilización y 1 en lo demás; bonificación del 20 % del precio por defectos graves y 5 % del valor de la reparación por leves",
+          "url": "https://expansion.mx/inmobiliario/2022/04/06/recibir-bonificacion-por-defectos-ocultos-en-tu-vivienda"
+        },
+        {
+          "titulo": "adn40 (ago 2026) – Seguro de Calidad Infonavit pagado por el desarrollador: estructura 10 años, impermeabilización 5, instalaciones hidrosanitarias y eléctricas 2 (vivienda nueva con crédito tradicional)",
+          "url": "https://www.adn40.mx/mexico/2026-08-01/es-oficial-por-infonavit-y-muchos-acreditados-no-saben-que-tienen-un-seguro-de-hasta-10-anos-para-reparar-su-vivienda-2/"
+        },
+        {
+          "titulo": "El Imparcial (abr 2026) – Protección Civil de Tijuana, operativo 'Obra Verificada': 6 de 8 obras infraccionadas (sin unidad interna, sin capacitación, salidas obstruidas, sin extintores); multas de 1,000 UMA y 30 días para el plan específico",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/04/09/infraccionan-seis-de-ocho-obras-revisadas-en-tijuana-por-incumplimientos/"
+        },
+        {
+          "titulo": "ElConta.mx (2024) – Liberación de obra ante el IMSS tras el aviso de terminación: el IMSS tiene hasta 90 días hábiles para revisar (RSSOTC art. 12-A); si no lo hace se presume cumplimiento (opinión, verificar vigencia)",
+          "url": "https://elconta.mx/liberacion-obra-construccion-inactividad-fiscalizadora-autoridad-imss/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-14",
       "titulo": "Lean: acarreos dentro de la obra, plano de acopios con diagrama espagueti y decisiones con Elegir por ventajas (CBA)",
       "resumen": "Dos herramientas para atacar el desperdicio de transporte y movimientos, que el muestreo de trabajo por ubicación de Aarhus (2025) encontró concentrado donde se juntan oficios (36 % de tiempo productivo contra 56 %): una calculadora que convierte la distancia del acopio al frente en horas-hombre y pesos por semana, y un formato para trazar la ruta real y reacomodar acopios. Además, una calculadora de Choosing by Advantages, el método de decisión del Lean Construction Institute que dos artículos del IGLC 2026 aplicaron para elegir contratistas y equipo: ventajas con puntos de importancia y el costo por separado. Mejora: el Recorrido Gemba ahora remite a estas dos herramientas cuando el desperdicio principal es transporte o movimientos.",
