@@ -1,6 +1,35 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-16",
+      "titulo": "Control de avance: prueba de calidad del programa (DCMA 14 puntos) y línea de balance para vivienda en serie",
+      "resumen": "Dos calculadoras para que el programa de obra sirva de algo antes de medirlo. La primera aplica los umbrales de la evaluación DCMA de 14 puntos (la revisión de calidad de programas más usada en la industria) a 10 conteos que sacas de ProjectLibre o MS Project: lógica completa ≥ 95 %, sin leads, lags ≤ 5 %, ligas fin-comienzo ≥ 90 %, restricciones duras ≤ 5 %, holguras y duraciones mayores a 44 días hábiles ≤ 5 %, sin holgura negativa, BEI y CPLI; te dice cuántos puntos pasa y cuántos cabos sueltos o lags hay que corregir. La segunda es una línea de balance para unidades repetitivas: cuando dos oficios avanzan a ritmos distintos calcula el arranque más temprano del segundo sin que choque, la fecha de término y cuántas cuadrillas bastan para ir al ritmo del primero (en el ejemplo, 3 cuadrillas de losa terminan el mismo día que 4). Mejora: la ficha de ProjectLibre ahora tiene confirmado con el aviso oficial de Microsoft (MC1478955) el retiro de Project Online el 30-sep-2026, que no afecta a Project de escritorio, y un paso para pasar la prueba DCMA antes de guardar la línea base.",
+      "herramientas": [
+        "calc-calidad-programa",
+        "calc-linea-balance",
+        "dig-projectlibre"
+      ],
+      "como_aplicarlo": "1) Hoy abre el programa vigente, cuenta cabos sueltos, lags, restricciones y holguras y captúralos en la Prueba de calidad del programa; corrige lo rojo esta semana. 2) Antes de aceptar el programa de un subcontratista o entregar un TIA, exige 9 de 10 puntos. 3) En el frente de vivienda o niveles repetidos captura el par de oficios que más se estorba en la Línea de balance y ajusta arranque y cuadrillas para la semana que entra.",
+      "fuentes": [
+        {
+          "titulo": "Deltek Acumen – Descripción de las métricas DCMA 14 puntos: lógica ≤5 %, lags ≤5 %, relaciones FC ≥90 %, restricciones duras ≤5 %, holgura y duración altas = más de 44 días laborables",
+          "url": "https://help.deltek.com/Product/Acumen/8.11/GA/DCMA%2014%20Point%20Assessment%20Metric%20Descriptions.html"
+        },
+        {
+          "titulo": "ScheduleReader (jul 2026) – Checklist DCMA 14 puntos con umbrales: leads 0 %, holgura negativa 0 %, holgura > 44 d ≤5 %, CPLI y BEI de referencia 1.00; BEI < 0.8 es señal de alerta (documento comercial, no oficial de DCMA)",
+          "url": "https://www.schedulereader.com/wp-content/uploads/2026/07/DCMA-14-Point-Assessment-Checklist-ScheduleReader.pdf"
+        },
+        {
+          "titulo": "Microsoft 365 Message Center MC1478955 (24-sep-2026) – Project Online se retira el 30-sep-2026; reemplazos: Planner (funciones premium con licencia Planner and Project Plan 3), Project Server Subscription Edition o Project Operations; no afecta a Project de escritorio",
+          "url": "https://mc.merill.net/message/MC1478955"
+        },
+        {
+          "titulo": "Altuwaim et al. – Adaptive LOB scheduling for optimizing resource leveling and consumption, Journal of Civil Engineering and Management 30(3), 2024 (CC BY 4.0): inicio de cada actividad en la primera unidad más el colchón con la actividad anterior; cuadrillas variables entre unidades",
+          "url": "https://btp.vgtu.lt/index.php/JCEM/article/download/20952/12176"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-15",
       "titulo": "Normatividad: cierre de obra sin cabos sueltos — recepción, finiquito y fianza de vicios ocultos, garantías de vivienda NOM-247 y expediente de entrega",
       "resumen": "Tres herramientas para la etapa donde más dinero se queda atorado: el cierre. Una calculadora de cierre de obra pública con los plazos de la LOPSRM (recepción física en 15 días tras verificar, finiquito en máximo 60, 15 días para alegar si la dependencia lo hace sin ti) y la garantía de vicios ocultos del art. 66 (fianza del 10 % del monto ejercido o 5 % en carta de crédito o fideicomiso, liberación a los 12 meses), comparando cuánto cuesta cada opción. Una calculadora de garantías de vivienda nueva con los mínimos de la NOM-247-SE-2021 (5 años estructura, 3 impermeabilización, 1 lo demás), los días de reparación que se suman y la bonificación del 20 % del precio por defecto grave; incluye la referencia del Seguro de Calidad Infonavit (10 / 5 / 2 años). Y un expediente de cierre que junta municipio (aviso de terminación del DRO), LOPSRM, IMSS (SIROC), protección civil y entrega al cliente. Mejoras: el formato Visita del DRO y el checklist Entrega final ahora remiten al expediente de cierre e incluyen la póliza de garantía NOM-247.",

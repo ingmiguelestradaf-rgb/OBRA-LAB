@@ -3507,11 +3507,12 @@
       "agregada": "2026-11-02",
       "beneficio": "Tener el programa de obra vivo (línea base contra real) en la PC de obra sin costo de licencia, para correr el TIA de una prórroga, revisar la ruta crítica antes de la junta de los lunes y alimentar las calculadoras de valor ganado y PERT. Indicador: semanas con programa actualizado a tiempo y días entre corte de avance y programa actualizado.",
       "plataforma": "Windows, macOS y Linux (escritorio, requiere Java incluido en el instalador); interfaz en español. ProjectLibre Cloud en navegador.",
-      "costo": "Escritorio: gratis, licencia de código abierto CPAL 1.0; versión 1.9.8 publicada en SourceForge (ficha actualizada 13-jul-2026, consultada 2-nov-2026). ProjectLibre Cloud (suscripción para equipos): precio NO verificado, el sitio oficial no se pudo consultar en esta revisión. Contexto: Microsoft Project Online se retiró el 30-sep-2026 según publicaciones de socios de Microsoft; no se pudo leer la página oficial de Microsoft en esta revisión.",
+      "costo": "Escritorio: gratis, licencia de código abierto CPAL 1.0; versión 1.9.8 publicada en SourceForge (ficha actualizada 13-jul-2026, consultada 2-nov-2026). ProjectLibre Cloud (suscripción para equipos): precio NO verificado, el sitio oficial no se pudo consultar en esta revisión. Contexto (verificado 16-nov-2026): Microsoft confirmó en el Message Center (MC1478955, 24-sep-2026) que Project Online se retiró el 30-sep-2026 y que el cambio no afecta a Project de escritorio; su reemplazo en la nube es Planner con licencia premium (precio no verificado en esta revisión).",
       "url": "https://sourceforge.net/projects/projectlibre/",
       "como_usar": [
         "Descarga ProjectLibre desde SourceForge o projectlibre.com (no de sitios de terceros) e instálalo en la PC de la oficina de obra.",
         "Abre el programa del cliente (.mpp o .xml de MS Project) o captura el tuyo: partidas por frente y nivel, duraciones en días y ligas fin-inicio; revisa que ninguna actividad quede sin sucesora.",
+        "Antes de guardar la línea base pásale la prueba 'Calidad del programa DCMA de 14 puntos': cuenta cabos sueltos, lags, restricciones duras y holguras altas, y corrige hasta pasar 9 de 10.",
         "Guarda la línea base antes de arrancar y desde ahí actualiza cada semana el % y las fechas reales con los datos del 'Corte semanal de avance físico'.",
         "Usa la vista Gantt con ruta crítica para la junta del lunes; pasa el tramo crítico restante a la calculadora 'Probabilidad de terminar a tiempo (PERT)'.",
         "Cuando haya un evento ajeno, guarda una copia del archivo, inserta el fragnet y llena el formato 'Análisis de impacto en el programa (TIA)'.",
@@ -3525,6 +3526,10 @@
         {
           "titulo": "Velosio: Microsoft Project Online retirement, what to do before September 30, 2026",
           "url": "https://www.velosio.com/blog/microsoft-project-online-retirement-what-to-do-before-september-30-2026/"
+        },
+        {
+          "titulo": "Microsoft 365 Message Center MC1478955 (24-sep-2026) – Project Online se retira el 30-sep-2026; reemplazos: Planner (funciones premium con licencia Planner and Project Plan 3), Project Server Subscription Edition o Project Operations; no afecta a Project de escritorio",
+          "url": "https://mc.merill.net/message/MC1478955"
         }
       ]
     },
@@ -5654,6 +5659,381 @@
         {
           "titulo": "LFT art. 74 – Días de descanso obligatorio (1 ene, primer lunes de febrero, tercer lunes de marzo, 1 may, 16 sep, tercer lunes de noviembre, 1 oct cada seis años, 25 dic y jornada electoral) y art. 75 (salario doble adicional si se labora)",
           "url": "https://mley.mx/LFT/articulo/74/"
+        }
+      ]
+    },
+    {
+      "id": "calc-calidad-programa",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "¿Tu programa de obra aguanta una revisión? Prueba de calidad DCMA de 14 puntos (lógica, holguras, restricciones, BEI y CPLI)",
+      "resumen": "Antes de entregar el programa al cliente, de pedir una prórroga o de firmar el de un subcontratista, revisa si está bien armado. Capturas conteos que sacas en 10 minutos de ProjectLibre o MS Project (actividades sin liga, con lags, con restricciones, holguras y duraciones mayores a 44 días hábiles, actividades que ya debían estar terminadas) y te dice qué porcentaje cumple cada punto de la evaluación DCMA, el BEI (actividades terminadas contra las que debían terminar), el CPLI (si la ruta crítica todavía alcanza) y cuántos puntos pasa de 10. Un programa que no pasa la prueba no sirve para defender un TIA ni para calcular valor ganado.",
+      "agregada": "2026-11-16",
+      "entradas": [
+        {
+          "id": "N",
+          "label": "Actividades normales del programa (sin hitos ni resúmenes)",
+          "unidad": "act.",
+          "valor": 180
+        },
+        {
+          "id": "L",
+          "label": "Actividades sin predecesora o sin sucesora (cabos sueltos; no cuentes inicio y fin del proyecto)",
+          "unidad": "act.",
+          "valor": 14
+        },
+        {
+          "id": "R",
+          "label": "Relaciones (ligas) totales del programa",
+          "unidad": "ligas",
+          "valor": 260
+        },
+        {
+          "id": "LD",
+          "label": "Ligas con adelanto negativo (lead, ej. FC −3 d)",
+          "unidad": "ligas",
+          "valor": 3
+        },
+        {
+          "id": "LG",
+          "label": "Ligas con retraso positivo (lag, ej. FC +7 d de fraguado)",
+          "unidad": "ligas",
+          "valor": 22
+        },
+        {
+          "id": "FS",
+          "label": "Ligas tipo fin-comienzo (FC / FS)",
+          "unidad": "ligas",
+          "valor": 210
+        },
+        {
+          "id": "HC",
+          "label": "Actividades con restricción dura (Debe iniciar el / Debe terminar el / No terminar después de)",
+          "unidad": "act.",
+          "valor": 6
+        },
+        {
+          "id": "HF",
+          "label": "Actividades con holgura total mayor a 44 días hábiles",
+          "unidad": "act.",
+          "valor": 20
+        },
+        {
+          "id": "NF",
+          "label": "Actividades con holgura total negativa",
+          "unidad": "act.",
+          "valor": 0
+        },
+        {
+          "id": "HD",
+          "label": "Actividades con duración mayor a 44 días hábiles",
+          "unidad": "act.",
+          "valor": 9
+        },
+        {
+          "id": "BL",
+          "label": "Actividades que según la línea base ya debían estar terminadas a la fecha de corte",
+          "unidad": "act.",
+          "valor": 40
+        },
+        {
+          "id": "BT",
+          "label": "De todas las actividades, cuántas ya están terminadas a la fecha de corte",
+          "unidad": "act.",
+          "valor": 33
+        },
+        {
+          "id": "CPL",
+          "label": "Días que le faltan a la ruta crítica (de la fecha de corte al término contractual)",
+          "unidad": "días",
+          "valor": 120
+        },
+        {
+          "id": "TF",
+          "label": "Holgura total de la actividad 'Fin de obra' (negativa = ya vas tarde)",
+          "unidad": "días",
+          "valor": -6
+        }
+      ],
+      "salidas": [
+        {
+          "label": "1. Actividades con lógica completa (meta ≥ 95 %)",
+          "formula": "100*(1-L/N)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "2. Ligas sin adelantos negativos (meta 100 %)",
+          "formula": "100*(1-LD/R)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            100,
+            98
+          ]
+        },
+        {
+          "label": "3. Ligas sin lags (meta ≥ 95 %)",
+          "formula": "100*(1-LG/R)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "4. Ligas fin-comienzo (meta ≥ 90 %)",
+          "formula": "100*FS/R",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            90,
+            80
+          ]
+        },
+        {
+          "label": "5. Actividades sin restricción dura (meta ≥ 95 %)",
+          "formula": "100*(1-HC/N)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "6. Actividades con holgura ≤ 44 días hábiles (meta ≥ 95 %)",
+          "formula": "100*(1-HF/N)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "7. Actividades sin holgura negativa (meta 100 %)",
+          "formula": "100*(1-NF/N)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            100,
+            95
+          ]
+        },
+        {
+          "label": "8. Actividades con duración ≤ 44 días hábiles (meta ≥ 95 %)",
+          "formula": "100*(1-HD/N)",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            95,
+            90
+          ]
+        },
+        {
+          "label": "9. BEI: terminadas / las que debían terminar (referencia 1.00; < 0.80 alarma)",
+          "formula": "BT/BL",
+          "unidad": "",
+          "decimales": 2,
+          "semaforo": [
+            0.95,
+            0.8
+          ]
+        },
+        {
+          "label": "10. CPLI: (ruta crítica + holgura del fin) / ruta crítica (referencia 1.00)",
+          "formula": "(CPL+TF)/CPL",
+          "unidad": "",
+          "decimales": 2,
+          "semaforo": [
+            1,
+            0.95
+          ]
+        },
+        {
+          "label": "Puntos que pasa de 10",
+          "formula": "(L/N<=0.05)+(LD==0)+(LG/R<=0.05)+(FS/R>=0.9)+(HC/N<=0.05)+(HF/N<=0.05)+(NF==0)+(HD/N<=0.05)+(BT/BL>=0.95)+((CPL+TF)/CPL>=1)",
+          "unidad": "de 10",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            9,
+            7
+          ]
+        },
+        {
+          "label": "Cabos sueltos que hay que ligar para llegar al 5 %",
+          "formula": "Math.max(0,L-Math.floor(0.05*N))",
+          "unidad": "act.",
+          "decimales": 0
+        },
+        {
+          "label": "Lags que hay que convertir en actividad (ej. 'Fraguado') para llegar al 5 %",
+          "formula": "Math.max(0,LG-Math.floor(0.05*R))",
+          "unidad": "ligas",
+          "decimales": 0
+        },
+        {
+          "label": "Ritmo que exige el resto del programa para no atrasarte (1/CPLI)",
+          "formula": "CPL/(CPL+TF)",
+          "unidad": "× planeado",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Saca los conteos del programa: en ProjectLibre o MS Project agrega las columnas Predecesoras, Sucesoras, Holgura total, Duración y Tipo de restricción, ordena o filtra cada una y cuenta (excluye hitos, resúmenes y las actividades de Inicio y Fin de obra). Si trabajas semana de 6 días, 44 días hábiles son unas 7 semanas.",
+        "Captura los conteos: cada punto en verde cumple el umbral de la evaluación DCMA de 14 puntos; esta calculadora usa los 10 que se pueden contar sin software especial (no incluye recursos, fechas inválidas, tareas perdidas ni la prueba de ruta crítica, que se hace aparte: mete 600 días a una actividad crítica y verifica que el fin de obra se mueva lo mismo).",
+        "Corrige en este orden: liga los cabos sueltos, cambia los lags largos por actividades reales ('Fraguado 7 d', 'Curado', 'Entrega de cancelería'), quita restricciones duras que no vengan del contrato y parte las actividades de más de 44 días por nivel o frente para que se puedan medir.",
+        "Con la línea base guardada, cada corte mensual revisa BEI y CPLI: un BEI menor a 0.95 dice que estás dejando actividades atrás aunque el % global se vea bien; un CPLI menor a 1 te dice cuánto más rápido tienes que ir (última salida) — llévalo a 'Programa ganado' y a 'Recuperar atraso'.",
+        "Antes de entregar un 'Análisis de impacto (TIA)' o el programa de un subcontratista, exige 9 de 10 puntos: un programa sin lógica no demuestra que el evento movió la fecha de término.",
+        "PDCA: aplica la prueba al programa vigente hoy, corrígelo en una semana y vuelve a medir; adopta la regla 'ningún programa entra a obra con menos de 9 de 10' si en el mes siguiente el % de avance pronosticado se acerca más al real."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Deltek Acumen – Descripción de las métricas DCMA 14 puntos: lógica ≤5 %, lags ≤5 %, relaciones FC ≥90 %, restricciones duras ≤5 %, holgura y duración altas = más de 44 días laborables",
+          "url": "https://help.deltek.com/Product/Acumen/8.11/GA/DCMA%2014%20Point%20Assessment%20Metric%20Descriptions.html"
+        },
+        {
+          "titulo": "ScheduleReader (jul 2026) – Checklist DCMA 14 puntos con umbrales: leads 0 %, holgura negativa 0 %, holgura > 44 d ≤5 %, CPLI y BEI de referencia 1.00; BEI < 0.8 es señal de alerta (documento comercial, no oficial de DCMA)",
+          "url": "https://www.schedulereader.com/wp-content/uploads/2026/07/DCMA-14-Point-Assessment-Checklist-ScheduleReader.pdf"
+        },
+        {
+          "titulo": "Microsoft 365 Message Center MC1478955 (24-sep-2026) – Project Online se retira el 30-sep-2026; reemplazos: Planner (funciones premium con licencia Planner and Project Plan 3), Project Server Subscription Edition o Project Operations; no afecta a Project de escritorio",
+          "url": "https://mc.merill.net/message/MC1478955"
+        }
+      ]
+    },
+    {
+      "id": "calc-linea-balance",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Línea de balance para vivienda en serie o niveles repetidos: cuándo arranca el siguiente oficio sin chocar, fecha de término y cuadrillas que sobran",
+      "resumen": "Cuando dos actividades seguidas avanzan a ritmos distintos (ej. muros de block y losa, o yeso y pintura) en 20, 40 o 100 viviendas o niveles iguales, el oficio rápido alcanza al lento y se para, o arranca tan pronto que se queda sin frente. Con la duración por unidad y las cuadrillas de cada oficio te da el ritmo de cada uno (unidades por día), el día más temprano en que puede arrancar el segundo oficio dejando un colchón en TODAS las unidades, la fecha de término de ambos y cuántas cuadrillas del segundo oficio bastan para ir al mismo ritmo que el primero sin alargar la obra. Complementa al Plan takt cuando los oficios no pueden ir al mismo ritmo.",
+      "agregada": "2026-11-16",
+      "entradas": [
+        {
+          "id": "N",
+          "label": "Unidades repetitivas (viviendas, departamentos, niveles, tramos)",
+          "unidad": "unid.",
+          "valor": 40
+        },
+        {
+          "id": "dA",
+          "label": "Actividad A (la que va primero): días que tarda UNA cuadrilla en UNA unidad",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "cA",
+          "label": "Cuadrillas de la actividad A trabajando en paralelo",
+          "unidad": "cuadr.",
+          "valor": 4
+        },
+        {
+          "id": "dB",
+          "label": "Actividad B (la que sigue): días que tarda UNA cuadrilla en UNA unidad",
+          "unidad": "días",
+          "valor": 4
+        },
+        {
+          "id": "cB",
+          "label": "Cuadrillas de la actividad B",
+          "unidad": "cuadr.",
+          "valor": 4
+        },
+        {
+          "id": "BUF",
+          "label": "Colchón mínimo entre que A entrega una unidad y B entra a ella",
+          "unidad": "días",
+          "valor": 2
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Ritmo de A",
+          "formula": "cA/dA",
+          "unidad": "unid./día",
+          "decimales": 2
+        },
+        {
+          "label": "Ritmo de B",
+          "formula": "cB/dB",
+          "unidad": "unid./día",
+          "decimales": 2
+        },
+        {
+          "label": "A termina la última unidad (día)",
+          "formula": "dA+(N-1)*dA/cA",
+          "unidad": "día",
+          "decimales": 1
+        },
+        {
+          "label": "Arranque más temprano de B en la primera unidad (día)",
+          "formula": "dA+BUF+Math.max(0,(N-1)*(dA/cA-dB/cB))",
+          "unidad": "día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "B termina la última unidad (día)",
+          "formula": "dA+BUF+Math.max(0,(N-1)*(dA/cA-dB/cB))+(N-1)*dB/cB+dB",
+          "unidad": "día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Cuadrillas de B que bastan para ir al ritmo de A",
+          "formula": "Math.ceil(dB*cA/dA)",
+          "unidad": "cuadr.",
+          "decimales": 0
+        },
+        {
+          "label": "B termina con esas cuadrillas (día)",
+          "formula": "dA+BUF+Math.max(0,(N-1)*(dA/cA-dB/Math.ceil(dB*cA/dA)))+(N-1)*dB/Math.ceil(dB*cA/dA)+dB",
+          "unidad": "día",
+          "decimales": 1
+        },
+        {
+          "label": "Cuadrillas de B que te sobran (negativo = te faltan para no frenar la obra)",
+          "formula": "cB-Math.ceil(dB*cA/dA)",
+          "unidad": "cuadr.",
+          "decimales": 0
+        },
+        {
+          "label": "Unidades que A ya terminó y esperan a B el día que A acaba (si crece, B va muy lento)",
+          "formula": "Math.max(0,N-Math.min(N,1+Math.floor((dA+(N-1)*dA/cA-(dA+BUF+Math.max(0,(N-1)*(dA/cA-dB/cB))))*cB/dB)))",
+          "unidad": "unid.",
+          "decimales": 0
+        },
+        {
+          "label": "Velocidad de B contra A (positivo = B más rápido, debe arrancar tarde)",
+          "formula": "100*((cB/dB)/(cA/dA)-1)",
+          "unidad": "%",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Toma dos actividades seguidas del frente repetitivo (ej. A = muros de block, B = cimbra-armado-colado de losa) y mide en obra cuántos días tarda UNA cuadrilla en UNA unidad; usa la 'Primera ejecución' o la calculadora 'Rendimiento de cuadrilla', no el tabulador.",
+        "Captura unidades, duraciones, cuadrillas y el colchón (días de fraguado, liberación de calidad o margen por variación; 1 a 3 días es lo común). La calculadora asume que cada cuadrilla termina una unidad y pasa a la siguiente.",
+        "Si B es más rápido que A, no lo arranques antes del día que marca 'Arranque más temprano': lo que ganas al inicio lo pierdes esperando al final y pagando cuadrillas paradas. Mejor quita las cuadrillas que sobran y úsalas en otro frente.",
+        "Si B es más lento que A (velocidad negativa), el problema es al revés: se te acumulan unidades terminadas por A esperando a B. Súbele cuadrillas a B o bájale a A para no abrir frentes que no vas a cerrar ('Frentes abiertos y tiempo de ciclo').",
+        "Repite con cada par de actividades seguidas (A→B, B→C…) y dibuja la línea de balance en una hoja: unidades en el eje vertical, días en el horizontal, una línea inclinada por oficio. Las líneas no se deben cruzar; pégala en la oficina y márcale el avance real cada viernes.",
+        "Indicador: días entre la entrega de A y la entrada de B en cada unidad (debe quedar cerca del colchón) y cuadrillas paradas por falta de frente. Prueba 4 semanas en una etapa de vivienda y adopta si bajan las cuadrillas paradas sin mover la fecha de término."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Altuwaim et al. – Adaptive LOB scheduling for optimizing resource leveling and consumption, Journal of Civil Engineering and Management 30(3), 2024 (CC BY 4.0): inicio de cada actividad en la primera unidad más el colchón con la actividad anterior; cuadrillas variables entre unidades",
+          "url": "https://btp.vgtu.lt/index.php/JCEM/article/download/20952/12176"
+        },
+        {
+          "titulo": "Lean Construction Institute – Takt time: trabajo en tren por zonas al mismo ritmo (referencia para comparar con la línea de balance)",
+          "url": "https://leanconstruction.org/lean-topics/takt-time/"
         }
       ]
     },
