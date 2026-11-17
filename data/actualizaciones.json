@@ -1,6 +1,39 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-17",
+      "titulo": "Calidad: control estadístico del concreto (desviación estándar y f'cr) y recepción de cemento con la nueva NOM-EM-023-SE-2026",
+      "resumen": "Dos herramientas para atrapar problemas de calidad antes de que fallen los cilindros. La calculadora de Control estadístico toma las últimas 10 pruebas de una mezcla y da promedio, desviación estándar, coeficiente de variación, nivel de control ACI 214 (excelente a pobre), la resistencia promedio requerida f'cr de ACI 301/318 (con el factor k por número de pruebas o el sobrediseño fijo si hay menos de 15) y la probabilidad aproximada de que salga una prueba o un promedio de 3 bajo f'c; en el ejemplo (f'c 250, promedio 293.6, s de las pruebas 10.2 y s de la planta 28 con 30 pruebas) el control es excelente, f'cr = 287.5 y la mezcla va 6.1 kg/cm² arriba; si la planta solo tuviera 20 pruebas con s = 40, f'cr subiría a 315.7 y la misma mezcla quedaría 22 kg/cm² corta. El formato de Recepción de cemento aplica la Norma de Emergencia NOM-EM-023-SE-2026 publicada en el DOF el 2-nov-2026: datos obligatorios del saco o la remisión (productor o importador, país de origen, planta, cantidad y designación normalizada CPO/CPP/CPEG/CPC con clase 20 a 40R y RS, BRA, BCH, B) y el Certificado de Conformidad de Producto. Ojo: la norma ya está publicada, pero no es exigible hasta que la Secretaría de Economía anuncie que hay suficientes organismos de evaluación; mientras, pide el certificado NMX-C-414. Mejora: la calculadora de Aceptación de f'c ahora remite al control estadístico mensual.",
+      "herramientas": [
+        "calc-control-estadistico-concreto",
+        "fmt-recepcion-cemento",
+        "calc-aceptacion-fc"
+      ],
+      "como_aplicarlo": "1) Hoy pide al laboratorio las últimas 10 pruebas de tu mezcla principal y a la planta su desviación estándar por escrito; captúralas en Control estadístico. 2) Si el margen sobre f'cr es negativo o el control es 3 o menos, manda oficio a la planta antes del siguiente colado. 3) En la próxima entrega de cemento llena Recepción de cemento con foto de la etiqueta y pide el certificado al proveedor.",
+      "fuentes": [
+        {
+          "titulo": "DOF 02-nov-2026 – NOM-EM-023-SE-2026, Industria del cemento-Cementos hidráulicos-Especificaciones de calidad, métodos de prueba e información comercial (texto en la Plataforma de la Infraestructura de la Calidad, SE). Vigencia 6 meses prorrogable; no exigible hasta el pronunciamiento de la SE sobre organismos de evaluación",
+          "url": "https://platiica.economia.gob.mx/wp-content/uploads/sites/2/PDF_Normas_Publicas/NOM-EM-023-SE-2026.pdf"
+        },
+        {
+          "titulo": "Diario Oficial de la Federación – nota de publicación de la NOM-EM-023-SE-2026 (02/11/2026)",
+          "url": "https://dof.gob.mx/nota_detalle.php?codigo=5802721&fecha=02/11/2026"
+        },
+        {
+          "titulo": "Snell, Obla y Carino – Excessive Overdesign of Concrete Mixtures for Strength, Concrete International, nov 2024 (reimpresión NRMCA): f'cr = f'c + 1.34ks y f'c + 2.33ks − 500 psi (ACI SPEC-301-20); niveles de control ACI 214 (excelente a pobre)",
+          "url": "https://nrmca.org/wp-content/uploads/CI4611Snell.pdf"
+        },
+        {
+          "titulo": "UFGS 03 30 00 – Tabla de factores de modificación de la desviación estándar con menos de 30 pruebas (15: 1.16, 20: 1.08, 25: 1.03, 30: 1.00) y f'cr sin datos",
+          "url": "https://ufgscriteriadocreport.tpub.com/03300A/03300A0022.htm"
+        },
+        {
+          "titulo": "BD+C (31-ene-2025) – ACI publica la edición 2025 del código ACI CODE-318-25",
+          "url": "https://www.bdcnetwork.com/home/news/55264945/new-standard-for-structural-concrete-released"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-16",
       "titulo": "Control de avance: prueba de calidad del programa (DCMA 14 puntos) y línea de balance para vivienda en serie",
       "resumen": "Dos calculadoras para que el programa de obra sirva de algo antes de medirlo. La primera aplica los umbrales de la evaluación DCMA de 14 puntos (la revisión de calidad de programas más usada en la industria) a 10 conteos que sacas de ProjectLibre o MS Project: lógica completa ≥ 95 %, sin leads, lags ≤ 5 %, ligas fin-comienzo ≥ 90 %, restricciones duras ≤ 5 %, holguras y duraciones mayores a 44 días hábiles ≤ 5 %, sin holgura negativa, BEI y CPLI; te dice cuántos puntos pasa y cuántos cabos sueltos o lags hay que corregir. La segunda es una línea de balance para unidades repetitivas: cuando dos oficios avanzan a ritmos distintos calcula el arranque más temprano del segundo sin que choque, la fecha de término y cuántas cuadrillas bastan para ir al ritmo del primero (en el ejemplo, 3 cuadrillas de losa terminan el mismo día que 4). Mejora: la ficha de ProjectLibre ahora tiene confirmado con el aviso oficial de Microsoft (MC1478955) el retiro de Project Online el 30-sep-2026, que no afecta a Project de escritorio, y un paso para pasar la prueba DCMA antes de guardar la línea base.",

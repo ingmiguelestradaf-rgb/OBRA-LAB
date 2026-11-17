@@ -472,7 +472,8 @@
         "Dictamen 0: no aceptes ni rechaces el elemento de inmediato; pide al laboratorio el cilindro testigo de 56 días, revisa remisiones, revenimiento y curado de esa olla y, si persiste, extrae 3 corazones (NMX-C-169) en el elemento afectado y evalúalos con la calculadora 'Corazones de concreto' (promedio ≥ 0.85 f'c y ninguno < 0.75 f'c).",
         "Si la dispersión entre gemelos pasa de 8 %, el problema suele ser de muestreo, cabeceo o curado de los cilindros, no del concreto: revisa el procedimiento del laboratorio antes de reclamar a la planta.",
         "Lleva el registro prueba por prueba en el formato Liberación de colado y anota en bitácora cada dictamen; indicador: % de pruebas que cumplen por proveedor y por mes.",
-        "Si una prueba sale baja, busca en los formatos 'Recepción de olla y muestreo' la olla de esos cilindros: minutos desde la carga, revenimiento y agua agregada suelen explicar el resultado antes de culpar a la planta."
+        "Si una prueba sale baja, busca en los formatos 'Recepción de olla y muestreo' la olla de esos cilindros: minutos desde la carga, revenimiento y agua agregada suelen explicar el resultado antes de culpar a la planta.",
+        "Cada mes junta las últimas 10 pruebas de la misma mezcla en 'Control estadístico del concreto': si la desviación estándar sube o el promedio se acerca a f'cr, reclama a la planta antes de que una terna de 3 pruebas falle aquí."
       ],
       "fuentes": [
         {
@@ -6648,6 +6649,209 @@
       ]
     },
     {
+      "id": "calc-control-estadistico-concreto",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Control estadístico del concreto: desviación estándar, nivel de control (ACI 214) y f'cr que la planta debe garantizar",
+      "resumen": "Con las últimas pruebas de laboratorio de una misma mezcla calcula promedio, desviación estándar y coeficiente de variación, califica el control del concreto (excelente a pobre, ACI 214), obtiene la resistencia promedio requerida f'cr (ACI 301 / 318) y la probabilidad aproximada de que salga una prueba o un promedio de 3 por debajo de f'c. Sirve para reclamar a la planta antes de que fallen los cilindros, o para detectar sobrediseño que te está costando cemento.",
+      "agregada": "2026-11-17",
+      "entradas": [
+        {
+          "id": "fc",
+          "label": "f'c especificado",
+          "unidad": "kg/cm²",
+          "valor": 250
+        },
+        {
+          "id": "p1",
+          "label": "Prueba 1 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 296
+        },
+        {
+          "id": "p2",
+          "label": "Prueba 2 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 284
+        },
+        {
+          "id": "p3",
+          "label": "Prueba 3 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 305
+        },
+        {
+          "id": "p4",
+          "label": "Prueba 4 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 279
+        },
+        {
+          "id": "p5",
+          "label": "Prueba 5 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 301
+        },
+        {
+          "id": "p6",
+          "label": "Prueba 6 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 288
+        },
+        {
+          "id": "p7",
+          "label": "Prueba 7 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 310
+        },
+        {
+          "id": "p8",
+          "label": "Prueba 8 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 292
+        },
+        {
+          "id": "p9",
+          "label": "Prueba 9 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 283
+        },
+        {
+          "id": "p10",
+          "label": "Prueba 10 a 28 días (promedio de 2 cilindros; 0 = sin dato)",
+          "unidad": "kg/cm²",
+          "valor": 298
+        },
+        {
+          "id": "sp",
+          "label": "Desviación estándar que reporta la planta para esta mezcla (0 = usar las pruebas de arriba)",
+          "unidad": "kg/cm²",
+          "valor": 28
+        },
+        {
+          "id": "np",
+          "label": "Número de pruebas con que la planta calculó esa desviación",
+          "unidad": "pruebas",
+          "valor": 30
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Pruebas usadas",
+          "formula": "[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length",
+          "unidad": "pruebas",
+          "decimales": 0
+        },
+        {
+          "label": "Promedio de las pruebas",
+          "formula": "([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Desviación estándar de las pruebas (s)",
+          "formula": "Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Coeficiente de variación (s / promedio)",
+          "formula": "Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Nivel de control ACI 214 con s (5 = excelente < 28 · 4 = muy bueno < 35 · 3 = bueno < 42 · 2 = regular < 49 · 1 = pobre)",
+          "formula": "Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))<28?5:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))<35?4:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))<42?3:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))<49?2:1",
+          "unidad": "",
+          "decimales": 0,
+          "semaforo": [
+            4,
+            3
+          ]
+        },
+        {
+          "label": "Factor k por número de pruebas (0 = menos de 15: se usa sobrediseño fijo)",
+          "formula": "((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)",
+          "unidad": "",
+          "decimales": 2
+        },
+        {
+          "label": "f'cr: resistencia promedio que la mezcla debe dar",
+          "formula": "((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)<15?(fc<210?fc+70:fc<=350?fc+85:1.1*fc+50):(fc<=350?Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1)))-35):Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),0.9*fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))))))",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Sobrediseño requerido (f'cr − f'c)",
+          "formula": "((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)<15?(fc<210?fc+70:fc<=350?fc+85:1.1*fc+50):(fc<=350?Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1)))-35):Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),0.9*fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))))))-fc",
+          "unidad": "kg/cm²",
+          "decimales": 1
+        },
+        {
+          "label": "Margen del promedio real sobre f'cr (negativo = la mezcla va corta)",
+          "formula": "([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)<15?(fc<210?fc+70:fc<=350?fc+85:1.1*fc+50):(fc<=350?Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1)))-35):Math.max(fc+1.34*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))),0.9*fc+2.33*((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=30?1:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=25?1.03-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-25)*0.006:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=20?1.08-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-20)*0.01:(sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)>=15?1.16-((sp>0?np:[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-15)*0.016:0)*(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))))))",
+          "unidad": "kg/cm²",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -10
+          ]
+        },
+        {
+          "label": "Pruebas individuales más de 35 kg/cm² bajo f'c (10 % si f'c > 350), con signo menos: 0 = ninguna",
+          "formula": "-[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).filter(v=>v<fc-(fc>350?0.1*fc:35)).length",
+          "unidad": "pruebas",
+          "decimales": 0,
+          "semaforo": [
+            0,
+            -1
+          ]
+        },
+        {
+          "label": "Probabilidad aprox. de una prueba individual bajo f'c",
+          "formula": "((z)=>{const t=1/(1+0.2316419*Math.abs(z));const q=0.3989423*Math.exp(-z*z/2)*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>=0?q:1-q})((([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-fc)/(sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1))))*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Probabilidad aprox. de un promedio de 3 consecutivas bajo f'c (ACI permite ~1 %)",
+          "formula": "((z)=>{const t=1/(1+0.2316419*Math.abs(z));const q=0.3989423*Math.exp(-z*z/2)*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>=0?q:1-q})((([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length)-fc)/((sp>0?sp:Math.sqrt([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+(b-([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).reduce((a,b)=>a+b,0)/[p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length))**2,0)/([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10].filter(v=>v>0).length-1)))/Math.sqrt(3)))*100",
+          "unidad": "%",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Junta los informes del laboratorio de una sola mezcla (mismo f'c, misma planta, mismo revenimiento y TMA) y captura las últimas 10 pruebas a 28 días; cada prueba es el promedio de los 2 cilindros de la misma olla. Deja en 0 las casillas sin dato.",
+        "Si la planta te entrega su desviación estándar histórica de esa mezcla (pídela por escrito, con número de pruebas), escríbela en 'Desviación estándar de la planta'; con 30 o más pruebas k = 1.00, con 15 a 29 se aumenta (1.16 a 1.03) y con menos de 15 se usa el sobrediseño fijo (+70, +85 o 1.10 f'c + 50 kg/cm²).",
+        "Lee el nivel de control: con 3 o menos (s ≥ 35 kg/cm²) revisa primero muestreo, cabeceo y curado de cilindros (fmt-recepcion-olla) y después agua agregada en obra; si el control es bueno, el problema es la mezcla de la planta.",
+        "Margen sobre f'cr negativo o probabilidad de promedio de 3 bajo f'c mayor a 1 %: pide a la planta por escrito el ajuste de la mezcla antes del siguiente colado, aunque los cilindros todavía 'pasen' en la calculadora de Aceptación de f'c.",
+        "Margen muy grande (más de 1.5 s sobre f'cr) con control bueno o excelente: la mezcla está sobrediseñada; en obra privada puedes negociar precio o pedir otra dosificación con el mismo f'c.",
+        "Indicador: s y CV por proveedor cada mes. Meta: control 'muy bueno' (s < 35 kg/cm², CV < 12 %) y 0 pruebas individuales bajo el límite."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Snell, Obla y Carino – Excessive Overdesign of Concrete Mixtures for Strength, Concrete International, nov 2024 (reimpresión NRMCA): f'cr = f'c + 1.34ks y f'c + 2.33ks − 500 psi (ACI SPEC-301-20); niveles de control ACI 214 (excelente a pobre)",
+          "url": "https://nrmca.org/wp-content/uploads/CI4611Snell.pdf"
+        },
+        {
+          "titulo": "UFGS 03 30 00 – Tabla de factores de modificación de la desviación estándar con menos de 30 pruebas (15: 1.16, 20: 1.08, 25: 1.03, 30: 1.00) y f'cr sin datos",
+          "url": "https://ufgscriteriadocreport.tpub.com/03300A/03300A0022.htm"
+        },
+        {
+          "titulo": "ACI 214RS-11 – Guía para la evaluación de resultados de ensayos de resistencia del concreto (versión en español, vista previa)",
+          "url": "https://www.concrete.org/Portals/0/Files/PDF/Previews/214RS-11_preview.pdf"
+        },
+        {
+          "titulo": "BD+C (31-ene-2025) – ACI publica la edición 2025 del código ACI CODE-318-25",
+          "url": "https://www.bdcnetwork.com/home/news/55264945/new-standard-for-structural-concrete-released"
+        }
+      ]
+    },
+    {
       "id": "fmt-recepcion-olla",
       "tipo": "formato",
       "categoria": "Concreto",
@@ -6782,6 +6986,68 @@
         {
           "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
           "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-recepcion-cemento",
+      "tipo": "formato",
+      "categoria": "Concreto",
+      "titulo": "Recepción de cemento en saco o a granel: etiqueta, designación y certificado (NOM-EM-023-SE-2026)",
+      "resumen": "Formato por entrega de cemento para concreto hecho en obra, morteros y block: revisa que el saco o la remisión traigan los datos que exige la nueva Norma de Emergencia de cemento (DOF 2-nov-2026), que la designación (tipo CPO/CPP/CPEG/CPC, clase 20/30/30R/40/40R y RS, BRA, BCH, B) sea la que pide el proyecto y que el proveedor tenga Certificado de Conformidad de Producto. Así frenas cemento informal o importado sin control antes de que llegue a un elemento estructural.",
+      "agregada": "2026-11-17",
+      "campos": [
+        "Obra",
+        "Fecha y hora de llegada",
+        "Proveedor / distribuidor",
+        "No. de remisión o factura",
+        "Marca y planta productora (como aparece en el saco o la remisión)",
+        "País de origen",
+        "Designación normalizada (ej. CPC 30R RS)",
+        "Designación que pide el proyecto o la especificación",
+        "Presentación: saco de ___ kg / granel (t)",
+        "Cantidad recibida (sacos o t) y peso de 3 sacos al azar (kg)",
+        "No. de Certificado de Conformidad de Producto (CCP), organismo certificador y vigencia",
+        "Uso previsto (concreto estructural, mortero, block, plantilla)",
+        "Decisión: aceptado / apartado / rechazado y motivo",
+        "Recibió (almacenista) y revisó (residente)"
+      ],
+      "items": [
+        "Etiqueta del saco en español, clara e indeleble (no a mano ni con calcomanía encima)",
+        "El saco trae nombre del producto, razón social del productor o importador y domicilio fiscal",
+        "El saco trae país de origen, marca registrada y nombre y ubicación de la planta productora",
+        "El saco trae la cantidad en kg y la designación normalizada (tipo + clase resistente + características especiales)",
+        "Cemento a granel: la remisión o factura trae los mismos datos que se exigen en el saco",
+        "El tipo es uno de los cuatro de la norma (CPO, CPP, CPEG o CPC) y la clase (20, 30, 30R, 40, 40R) es igual o mayor a la especificada",
+        "Si el proyecto pide RS (resistente a sulfatos), BRA, BCH o blanco, la designación lo indica",
+        "El proveedor entregó copia del Certificado de Conformidad de Producto con número, referencia a NOM-EM-023-SE-2026 (o NMX-C-414-ONNCCE-2017 mientras la NOM no sea exigible), planta, país de origen y vigencia",
+        "La planta y la designación del certificado coinciden con las del saco o la remisión",
+        "Peso de 3 sacos al azar dentro de lo declarado (un saco de 50 kg que pesa 47 kg es 6 % menos cemento en tu mezcla)",
+        "Sacos sin humedad, sin grumos duros que no se deshacen con la mano, sin roturas; granel sin terrones",
+        "Estiba sobre tarimas, separada de muros y piso, máximo 10 sacos de alto, bajo techo o cubierta con plástico; se usa primero lo que llegó primero",
+        "Cemento sin etiqueta, sin designación o de marca desconocida apartado con cinta roja y fuera de elementos estructurales",
+        "Remisión, foto de la etiqueta y copia del certificado archivados con este formato y anotados en bitácora si hubo rechazo"
+      ],
+      "como_usar": [
+        "Al pedir el cemento, exige por escrito al proveedor la copia del Certificado de Conformidad de Producto (o, mientras la NOM no sea exigible, el certificado NMX-C-414) de la marca y planta que te va a surtir.",
+        "Cuando llegue el camión, el almacenista llena el formato en el celular: toma foto de la etiqueta de un saco por lote (o de la remisión si es granel) y pesa 3 sacos al azar.",
+        "El residente compara la designación del saco contra la del plano o especificación (ej. CPC 30R RS si hay suelos con sulfatos) y contra el certificado; si algo no coincide, el lote queda apartado.",
+        "Lo apartado no se usa en columnas, trabes, losas ni muros de carga; se aclara con el proveedor o se devuelve, y se anota en bitácora.",
+        "Antes de cada colado hecho en obra, revisa que los sacos de la mezcladora vengan de un lote aceptado; usa la calculadora de dosificación con la clase real del cemento.",
+        "Indicador: % de entregas con etiqueta completa y certificado; meta: 100 % en 2 semanas y 0 sacos sin designación en obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "DOF 02-nov-2026 – NOM-EM-023-SE-2026, Industria del cemento-Cementos hidráulicos-Especificaciones de calidad, métodos de prueba e información comercial (texto en la Plataforma de la Infraestructura de la Calidad, SE). Vigencia 6 meses prorrogable; no exigible hasta el pronunciamiento de la SE sobre organismos de evaluación",
+          "url": "https://platiica.economia.gob.mx/wp-content/uploads/sites/2/PDF_Normas_Publicas/NOM-EM-023-SE-2026.pdf"
+        },
+        {
+          "titulo": "Diario Oficial de la Federación – nota de publicación de la NOM-EM-023-SE-2026 (02/11/2026)",
+          "url": "https://dof.gob.mx/nota_detalle.php?codigo=5802721&fecha=02/11/2026"
+        },
+        {
+          "titulo": "Xataka México (3-nov-2026) – Secretaría de Economía pone norma de emergencia para detener cemento de mala calidad",
+          "url": "https://www.xataka.com.mx/legislacion-y-derechos/secretaria-economia-pone-rigurosa-norma-para-detener-cemento-mala-calidad-mexico-que-nom-em-023-se-2026/amp"
         }
       ]
     },
