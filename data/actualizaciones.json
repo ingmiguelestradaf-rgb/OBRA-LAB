@@ -1,6 +1,44 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-18",
+      "titulo": "Seguridad: ruido que daña el oído sin que nadie lo note (dosis por cuadrilla y protector que sí alcanza) y extintores suficientes en cada nivel de la obra",
+      "resumen": "Tres herramientas para dos riesgos que casi nunca se calculan en obra. 'Ruido en la jornada' calcula la dosis diaria con la NOM-011-STPS-2001 (8 h a 90 dB(A), la mitad del tiempo por cada 3 dB más), el NER de 8 h, las horas máximas con el equipo más ruidoso y el nivel real con el protector descontando (NRR − 7)/2; en el ejemplo (1.5 h de rotomartillo a 100 dB(A), 1 h de cortadora a 95, 3 h a 88 y 2.5 h a 80) la dosis es 255 %, el rotomartillo solo se puede usar 16 min ese día y un tapón NRR 25 apenas deja el nivel en 85.1 dB(A). El formato 'Control de ruido y protección auditiva' deja la evidencia del análisis de riesgo, entrega y capacitación de EPP que exige la NOM-017-STPS-2024 (en vigor desde el 28-sep-2025, reemplazó a la de 2008). 'Extintores para la obra' aplica la NOM-002-STPS-2010: riesgo ordinario o alto por superficie e inventario de combustibles (Tabla A.1), 1 extintor por cada 300 m² (200 en riesgo alto) o por cada 23 m de recorrido, y clase B a 15 m (10 m en alto) del almacén de combustibles; el ejemplo de 4 niveles de 650 m² da 12 extintores y queda a un nivel de pasar a riesgo alto. Un estudio NIOSH publicado en dic-2024 encontró pérdida auditiva en hasta 28 % de los trabajadores de construcción expuestos a ruido. Mejora: el 'Recorrido de seguridad semanal' ahora revisa extintores por nivel y protección auditiva como hallazgos críticos.",
+      "herramientas": [
+        "calc-dosis-ruido",
+        "fmt-ruido-epp-auditivo",
+        "calc-extintores-obra",
+        "fmt-seguridad"
+      ],
+      "como_aplicarlo": "1) Esta semana mide con sonómetro (o la app gratuita NIOSH SLM en iPhone) el rotomartillo, la cortadora de disco y la planta de luz trabajando, y captura niveles y horas por cuadrilla en 'Ruido en la jornada'. 2) Donde salga rojo, ajusta horas o pasa a doble protección y registra la entrega firmada en 'Control de ruido y protección auditiva'. 3) Captura áreas, recorridos e inventario del almacén en 'Extintores para la obra', coloca los que falten por nivel y arranca la revisión mensual firmada.",
+      "fuentes": [
+        {
+          "titulo": "NOM-011-STPS-2001 Ruido (texto DOF 17-abr-2002, Plataforma de la Infraestructura de la Calidad, SE): 5.3 y Tabla A.1 (90 dB(A) 8 h · 93 4 h · 96 2 h · 99 1 h · 102 30 min · 105 15 min); 7.2 TMPE con tasa de intercambio de 3 dB(A); 5.4, 5.5, 8.6 y 8.7.4 obligaciones desde 85 dB(A); 8.2.2 d) reevaluación cada 2 años. Revisión quinquenal confirmada el 23-ene-2023",
+          "url": "https://platiica.economia.gob.mx/normalizacion/wp-content/uploads/sites/2/PDF_Normas_Publicas/011stps.pdf"
+        },
+        {
+          "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025; sustituye a la NOM-017-STPS-2008): selección del EPP por análisis de riesgos del puesto, capacitación, supervisión y señalización",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
+        },
+        {
+          "titulo": "NOM-002-STPS-2010 Prevención y protección contra incendios (PDF STPS): 7.17 b) y c) un extintor por cada 300 m² (riesgo ordinario) o 200 m² (alto) o fracción; Tabla 1 distancias máximas 23 m (A, C, D), 15 m clase B ordinario / 10 m alto, 10 m clase K; 7.17 f) altura no mayor de 1.50 m; 7.2–7.3 revisión mensual con registro; 7.18 mantenimiento al menos una vez al año; Apéndice A, Tabla A.1 riesgo de incendio",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680192/NOM-002-STPS-2010.pdf"
+        },
+        {
+          "titulo": "Argent (oct-2025) – Calculating Hearing Protection Effectiveness: atenuación de campo = (NRR − 7)/2; doble protección = (NRR mayor − 7)/2 + 5 dB (criterio de OSHA)",
+          "url": "https://www.thesilverlining.com/hubfs/LC1821%20Calculating%20Hearing%20Protection%20Effectiveness%20-%2010-25%5E.pdf"
+        },
+        {
+          "titulo": "CDC/NIOSH – NIOSH Sound Level Meter App (gratuita, solo iOS; LAeq, TWA, dosis y dosis proyectada; ±2 dBA en laboratorio). Página actualizada el 28-oct-2026",
+          "url": "https://www.cdc.gov/niosh/noise/about/app.html"
+        },
+        {
+          "titulo": "ISHN (12-dic-2024) – Estudio NIOSH (Masterson et al., Journal of Safety Research): hasta 28 % de los trabajadores de construcción expuestos a ruido tienen pérdida auditiva (carreteras y puentes 28 %, preparación de terreno 26 %, vivienda unifamiliar 25 %)",
+          "url": "https://www.ishn.com/articles/114525-preventing-hearing-loss-in-construction-niosh-study-identifies-high-risk-noise-exposed-workers"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-17",
       "titulo": "Calidad: control estadístico del concreto (desviación estándar y f'cr) y recepción de cemento con la nueva NOM-EM-023-SE-2026",
       "resumen": "Dos herramientas para atrapar problemas de calidad antes de que fallen los cilindros. La calculadora de Control estadístico toma las últimas 10 pruebas de una mezcla y da promedio, desviación estándar, coeficiente de variación, nivel de control ACI 214 (excelente a pobre), la resistencia promedio requerida f'cr de ACI 301/318 (con el factor k por número de pruebas o el sobrediseño fijo si hay menos de 15) y la probabilidad aproximada de que salga una prueba o un promedio de 3 bajo f'c; en el ejemplo (f'c 250, promedio 293.6, s de las pruebas 10.2 y s de la planta 28 con 30 pruebas) el control es excelente, f'cr = 287.5 y la mezcla va 6.1 kg/cm² arriba; si la planta solo tuviera 20 pruebas con s = 40, f'cr subiría a 315.7 y la misma mezcla quedaría 22 kg/cm² corta. El formato de Recepción de cemento aplica la Norma de Emergencia NOM-EM-023-SE-2026 publicada en el DOF el 2-nov-2026: datos obligatorios del saco o la remisión (productor o importador, país de origen, planta, cantidad y designación normalizada CPO/CPP/CPEG/CPC con clase 20 a 40R y RS, BRA, BCH, B) y el Certificado de Conformidad de Producto. Ojo: la norma ya está publicada, pero no es exigible hasta que la Secretaría de Economía anuncie que hay suficientes organismos de evaluación; mientras, pide el certificado NMX-C-414. Mejora: la calculadora de Aceptación de f'c ahora remite al control estadístico mensual.",

@@ -1736,7 +1736,8 @@
         "Bordes de losa y huecos protegidos",
         "Excavaciones con talud o ademe según la Tabla 6, acopio a 2 m o más del borde, escalera desde 1.20 m y 'Inspección diaria de excavación' del día firmada",
         "Orden y limpieza en áreas de trabajo y circulaciones",
-        "Extintores vigentes y accesibles",
+        "Extintores ABC por nivel según 'Extintores para la obra' (NOM-002): cargados, con revisión mensual firmada, colgados a no más de 1.50 m, señalizados, sin material enfrente; extintor clase B junto al almacén de combustibles y la planta de luz",
+        "Cuadrillas con rotomartillo, demoledor, cortadora de disco o compactadora con protector auditivo puesto, dosis calculada en 'Ruido en la jornada' y zona de 85 dB(A) o más señalizada",
         "Instalación eléctrica provisional protegida y con tierra",
         "Botiquín y rutas de evacuación señalizadas",
         "Constancias DC-3 y exámenes médicos vigentes del personal que trabaja en altura",
@@ -1752,7 +1753,8 @@
         "Cada trabajo en altura sin permiso cuenta como hallazgo crítico: detén la tarea, llena el 'Permiso de trabajo en altura' y registra el caso; meta: 0 por semana.",
         "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar.",
         "Una entrada a cisterna, fosa o cárcamo sin permiso o sin medición de gases es hallazgo crítico: saca al personal, mide y ventila con 'Ventilación de espacio confinado'. Al cierre de mes captura los casos en 'Indicadores de accidentabilidad'.",
-        "Un andamio que pasa de 4:1 sin amarres o sobrecargado, o una soldadura sin permiso de trabajo en caliente, es hallazgo crítico: baja al personal o apaga el equipo y corrige con 'Andamio tubular' o 'Permiso de trabajo en caliente' antes de reanudar."
+        "Un andamio que pasa de 4:1 sin amarres o sobrecargado, o una soldadura sin permiso de trabajo en caliente, es hallazgo crítico: baja al personal o apaga el equipo y corrige con 'Andamio tubular' o 'Permiso de trabajo en caliente' antes de reanudar.",
+        "Un nivel sin extintor, un extintor descargado o un operador de demoledor o cortadora sin protector auditivo es hallazgo crítico: corrígelo antes de seguir y revisa con 'Extintores para la obra' o 'Control de ruido y protección auditiva'."
       ],
       "fuentes": [
         {
@@ -1770,6 +1772,14 @@
         {
           "titulo": "NOM-027-STPS-2008 Soldadura y corte (PDF STPS): 4.8 y 5.8 autorización por escrito; 8 a) extintor ABC a no más de 7 m; 8 d) bitácora de revisión de equipos; 8 e) sin reguladores reconstruidos; 8 h) ventilación antes y durante; 10.3 b) sin combustibles en un radio no menor a 10 m; 10.5 espacios confinados (O₂ 19.5–23.5 %, cilindros afuera); 10.6 contenido de la autorización y copia conservada al menos un año",
           "url": "https://www.gob.mx/cms/uploads/attachment/file/680160/NOM-027-STPS-2008.pdf"
+        },
+        {
+          "titulo": "NOM-002-STPS-2010 Prevención y protección contra incendios (PDF STPS): 7.17 b) y c) un extintor por cada 300 m² (riesgo ordinario) o 200 m² (alto) o fracción; Tabla 1 distancias máximas 23 m (A, C, D), 15 m clase B ordinario / 10 m alto, 10 m clase K; 7.17 f) altura no mayor de 1.50 m; 7.2–7.3 revisión mensual con registro; 7.18 mantenimiento al menos una vez al año; Apéndice A, Tabla A.1 riesgo de incendio",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680192/NOM-002-STPS-2010.pdf"
+        },
+        {
+          "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025; sustituye a la NOM-017-STPS-2008): selección del EPP por análisis de riesgos del puesto, capacitación, supervisión y señalización",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
         }
       ]
     },
@@ -10108,6 +10118,366 @@
         {
           "titulo": "El Imparcial (3 sep 2026) – Vientos de Santa Ana en Tijuana: temporada de ráfagas secas y cálidas de otoño e invierno",
           "url": "https://www.elimparcial.com/tij/tijuana/2026/09/03/como-proteger-una-vivienda-de-fuertes-rafagas-de-viento-tips-ante-los-vientos-de-santa-ana-en-tijuana/"
+        }
+      ]
+    },
+    {
+      "id": "calc-dosis-ruido",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Ruido en la jornada: dosis de cada trabajador (NOM-011-STPS), horas máximas con el equipo más ruidoso y si su tapón u orejera alcanza",
+      "resumen": "Con el nivel en dB(A) y las horas de hasta 4 actividades del día (rotomartillo o demoledor, cortadora de disco, vibrador o revolvedora, resto del tiempo) calcula la dosis diaria con la tasa de intercambio de 3 dB(A) de la NOM-011-STPS-2001 (TMPE = 8 h / 2^((NER−90)/3)), el nivel equivalente de 8 h (NER), cuántas horas puede usar el equipo más ruidoso sin pasar el 100 % y el nivel que le queda con el protector auditivo, descontando el NRR del empaque con el criterio de campo de OSHA ((NRR − 7)/2, +5 dB si usa tapón y orejera). Con NER de 85 dB(A) o más la NOM-011 obliga a EPP auditivo, programa de conservación de la audición, examen médico anual y señalización; arriba de 90 dB(A) hay que reducir tiempo o ruido. Los niveles se MIDEN (sonómetro o app NIOSH SLM), no se suponen.",
+      "agregada": "2026-11-18",
+      "entradas": [
+        {
+          "id": "l1",
+          "label": "Actividad 1 (la más ruidosa, p. ej. rotomartillo, demoledor o cortadora de disco): nivel medido a la altura del oído",
+          "unidad": "dB(A)",
+          "valor": 100
+        },
+        {
+          "id": "t1",
+          "label": "Horas al día en la actividad 1",
+          "unidad": "h",
+          "valor": 1.5
+        },
+        {
+          "id": "l2",
+          "label": "Actividad 2: nivel medido",
+          "unidad": "dB(A)",
+          "valor": 95
+        },
+        {
+          "id": "t2",
+          "label": "Horas al día en la actividad 2",
+          "unidad": "h",
+          "valor": 1
+        },
+        {
+          "id": "l3",
+          "label": "Actividad 3: nivel medido (p. ej. junto a revolvedora o vibrador)",
+          "unidad": "dB(A)",
+          "valor": 88
+        },
+        {
+          "id": "t3",
+          "label": "Horas al día en la actividad 3",
+          "unidad": "h",
+          "valor": 3
+        },
+        {
+          "id": "l4",
+          "label": "Resto de la jornada: nivel medido en el frente",
+          "unidad": "dB(A)",
+          "valor": 80
+        },
+        {
+          "id": "t4",
+          "label": "Horas del resto de la jornada",
+          "unidad": "h",
+          "valor": 2.5
+        },
+        {
+          "id": "nrr",
+          "label": "NRR del protector auditivo (viene impreso en el empaque; 0 si no usa)",
+          "unidad": "dB",
+          "valor": 25
+        },
+        {
+          "id": "dual",
+          "label": "¿Usa tapón y orejera juntos? (1 = sí, 0 = no)",
+          "unidad": "",
+          "valor": 0
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Horas capturadas (deben sumar la jornada)",
+          "formula": "t1+t2+t3+t4",
+          "unidad": "h",
+          "decimales": 1
+        },
+        {
+          "label": "Dosis diaria de ruido sin protector (100 % = límite)",
+          "formula": "100/8*(t1*Math.pow(2,(l1-90)/3)+t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3))",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Nivel equivalente de la jornada de 8 h (NER) sin protector",
+          "formula": "90+9.97*Math.log10(Math.max(1e-6,(t1*Math.pow(2,(l1-90)/3)+t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3))/8))",
+          "unidad": "dB(A)",
+          "decimales": 1
+        },
+        {
+          "label": "Margen sin protector bajo 90 dB(A) (verde ≥ 5 = bajo 85; rojo = rebasa el límite)",
+          "formula": "90-(90+9.97*Math.log10(Math.max(1e-6,(t1*Math.pow(2,(l1-90)/3)+t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3))/8)))",
+          "unidad": "dB",
+          "decimales": 1,
+          "semaforo": [
+            5,
+            0
+          ]
+        },
+        {
+          "label": "Tiempo máximo permisible con la actividad 1 sola (TMPE)",
+          "formula": "480/Math.pow(2,(l1-90)/3)",
+          "unidad": "min",
+          "decimales": 0
+        },
+        {
+          "label": "Horas máximas de la actividad 1 sin pasar 100 % (con las otras actividades del día)",
+          "formula": "Math.max(0,(8-(t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3)))/Math.pow(2,(l1-90)/3))",
+          "unidad": "h",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Atenuación real estimada del protector ((NRR − 7)/2, +5 dB si es doble)",
+          "formula": "nrr>7?(nrr-7)/2+5*(dual>0?1:0):0",
+          "unidad": "dB",
+          "decimales": 1
+        },
+        {
+          "label": "Nivel que le llega con el protector",
+          "formula": "90+9.97*Math.log10(Math.max(1e-6,(t1*Math.pow(2,(l1-90)/3)+t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3))/8))-(nrr>7?(nrr-7)/2+5*(dual>0?1:0):0)",
+          "unidad": "dB(A)",
+          "decimales": 1
+        },
+        {
+          "label": "Margen con protector bajo 90 dB(A) (verde ≥ 5; amarillo 0 a 5; rojo = el protector no alcanza)",
+          "formula": "90-(90+9.97*Math.log10(Math.max(1e-6,(t1*Math.pow(2,(l1-90)/3)+t2*Math.pow(2,(l2-90)/3)+t3*Math.pow(2,(l3-90)/3)+t4*Math.pow(2,(l4-90)/3))/8))-(nrr>7?(nrr-7)/2+5*(dual>0?1:0):0))",
+          "unidad": "dB",
+          "decimales": 1,
+          "semaforo": [
+            5,
+            0
+          ]
+        },
+        {
+          "label": "¿Alguna actividad arriba de 105 dB(A)? (1 = sí: nadie sin protector, ni un minuto)",
+          "formula": "Math.max(l1,l2,l3,l4)>105?1:0",
+          "unidad": "",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Mide el nivel de cada actividad a la altura del oído del operador, con la herramienta trabajando en material real (no en vacío): sonómetro tipo 2 o, como tamizaje, la app gratuita NIOSH SLM en iPhone (±2 dBA en laboratorio). Anota fecha, equipo y punto de medición.",
+        "Pregunta al cabo cuántas horas reales opera cada equipo cada trabajador (no el turno completo) y captura las 4 actividades; las horas deben sumar la jornada.",
+        "Lee el NRR en el empaque del tapón u orejera que realmente usan. El programa descuenta (NRR − 7)/2: un tapón de NRR 25 da unos 9 dB en campo, no 25.",
+        "Decide con el semáforo: rojo sin protector → reduce horas en la actividad 1 hasta el valor de 'Horas máximas', rota la cuadrilla o cambia a equipo más silencioso; rojo con protector → usa doble protección o reduce tiempo. Desde 85 dB(A) entrega EPP auditivo (selección por análisis de riesgo del puesto, NOM-017-STPS-2024), señaliza la zona y manda al personal a audiometría anual.",
+        "Ejemplo verificado: 1.5 h a 100, 1 h a 95, 3 h a 88 y 2.5 h a 80 dB(A) dan 255 % de dosis y NER de 94.1 dB(A); el rotomartillo solo se puede usar 0.27 h (16 min) ese día (solo, sin lo demás, serían 48 min), y con tapón NRR 25 el nivel baja a 85.1 dB(A) (margen 4.9 dB, amarillo).",
+        "Indicador: % de cuadrillas ruidosas con dosis calculada y protector suficiente (meta 100 %) y trabajadores expuestos a 85 dB(A) o más con audiometría vigente. Reevalúa cada 2 años o a los 90 días de cambiar de equipo o proceso (NOM-011, 8.2.2)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-011-STPS-2001 Ruido (texto DOF 17-abr-2002, Plataforma de la Infraestructura de la Calidad, SE): 5.3 y Tabla A.1 (90 dB(A) 8 h · 93 4 h · 96 2 h · 99 1 h · 102 30 min · 105 15 min); 7.2 TMPE con tasa de intercambio de 3 dB(A); 5.4, 5.5, 8.6 y 8.7.4 obligaciones desde 85 dB(A); 8.2.2 d) reevaluación cada 2 años. Revisión quinquenal confirmada el 23-ene-2023",
+          "url": "https://platiica.economia.gob.mx/normalizacion/wp-content/uploads/sites/2/PDF_Normas_Publicas/011stps.pdf"
+        },
+        {
+          "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025; sustituye a la NOM-017-STPS-2008): selección del EPP por análisis de riesgos del puesto, capacitación, supervisión y señalización",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
+        },
+        {
+          "titulo": "Argent (oct-2025) – Calculating Hearing Protection Effectiveness: atenuación de campo = (NRR − 7)/2; doble protección = (NRR mayor − 7)/2 + 5 dB (criterio de OSHA)",
+          "url": "https://www.thesilverlining.com/hubfs/LC1821%20Calculating%20Hearing%20Protection%20Effectiveness%20-%2010-25%5E.pdf"
+        },
+        {
+          "titulo": "CDC/NIOSH – NIOSH Sound Level Meter App (gratuita, solo iOS; LAeq, TWA, dosis y dosis proyectada; ±2 dBA en laboratorio). Página actualizada el 28-oct-2026",
+          "url": "https://www.cdc.gov/niosh/noise/about/app.html"
+        },
+        {
+          "titulo": "ISHN (12-dic-2024) – Estudio NIOSH (Masterson et al., Journal of Safety Research): hasta 28 % de los trabajadores de construcción expuestos a ruido tienen pérdida auditiva (carreteras y puentes 28 %, preparación de terreno 26 %, vivienda unifamiliar 25 %)",
+          "url": "https://www.ishn.com/articles/114525-preventing-hearing-loss-in-construction-niosh-study-identifies-high-risk-noise-exposed-workers"
+        }
+      ]
+    },
+    {
+      "id": "calc-extintores-obra",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Extintores para la obra (NOM-002-STPS-2010): riesgo ordinario o alto, cuántos por nivel y distancia máxima, incluido el almacén de combustibles",
+      "resumen": "Con el área construida por nivel, los niveles en proceso, el recorrido más largo del nivel y lo que tienes almacenado (gasolina, thinner y solventes; diésel y aceites; gas LP; madera de cimbra, cartón y poliestireno) clasifica la obra en riesgo de incendio ordinario o alto con los umbrales de la Tabla A.1 de la NOM-002-STPS-2010 y calcula los extintores por nivel: el mayor entre 1 por cada 300 m² (200 m² en riesgo alto) o fracción y los que pide la distancia máxima de recorrido de 23 m (clases A y C). Indica también la distancia máxima a un extintor clase B junto al almacén de combustibles o la planta de luz (15 m ordinario, 10 m alto). Útil ahora que en Tijuana sube el uso de calentones y lámparas con generador en las noches frías y con Santa Ana.",
+      "agregada": "2026-11-18",
+      "entradas": [
+        {
+          "id": "an",
+          "label": "Área construida por nivel (losa en proceso o terminada)",
+          "unidad": "m²",
+          "valor": 650
+        },
+        {
+          "id": "nv",
+          "label": "Niveles con trabajo o materiales (incluye sótano y azotea)",
+          "unidad": "niveles",
+          "valor": 4
+        },
+        {
+          "id": "lr",
+          "label": "Recorrido más largo dentro del nivel, medido por donde se camina (rodeando muros, huecos y acopios)",
+          "unidad": "m",
+          "valor": 60
+        },
+        {
+          "id": "li",
+          "label": "Líquidos inflamables almacenados: gasolina, thinner, solventes, primers base solvente",
+          "unidad": "L",
+          "valor": 200
+        },
+        {
+          "id": "lc",
+          "label": "Líquidos combustibles almacenados: diésel, aceites, impermeabilizante asfáltico líquido",
+          "unidad": "L",
+          "valor": 400
+        },
+        {
+          "id": "gs",
+          "label": "Gases inflamables: capacidad de tanques y cilindros de gas LP / acetileno",
+          "unidad": "L",
+          "valor": 300
+        },
+        {
+          "id": "sc",
+          "label": "Sólidos combustibles: madera de cimbra, triplay, cartón, poliestireno, mobiliario de oficina (60 kg por empleado de oficina)",
+          "unidad": "kg",
+          "valor": 6000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Superficie construida total",
+          "formula": "an*nv",
+          "unidad": "m²",
+          "decimales": 0
+        },
+        {
+          "label": "Riesgo de incendio (0 = ordinario, 1 = alto)",
+          "formula": "(an*nv>=3000||li>=1400||lc>=2000||gs>=3000||sc>=15000)?1:0",
+          "unidad": "",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Margen al umbral de riesgo alto más cercano (verde ≥ 20 %; rojo = ya es riesgo alto)",
+          "formula": "100-100*Math.max(an*nv/3000,li/1400,lc/2000,gs/3000,sc/15000)",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            20,
+            0
+          ]
+        },
+        {
+          "label": "Extintores por superficie en cada nivel",
+          "formula": "Math.ceil(an/((an*nv>=3000||li>=1400||lc>=2000||gs>=3000||sc>=15000)?200:300))",
+          "unidad": "pza",
+          "decimales": 0
+        },
+        {
+          "label": "Extintores por distancia de 23 m en cada nivel",
+          "formula": "Math.ceil(lr/46)",
+          "unidad": "pza",
+          "decimales": 0
+        },
+        {
+          "label": "Extintores ABC por nivel (el mayor de los dos)",
+          "formula": "Math.max(Math.ceil(an/((an*nv>=3000||li>=1400||lc>=2000||gs>=3000||sc>=15000)?200:300)),Math.ceil(lr/46))",
+          "unidad": "pza",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Extintores ABC en toda la obra",
+          "formula": "nv*Math.max(Math.ceil(an/((an*nv>=3000||li>=1400||lc>=2000||gs>=3000||sc>=15000)?200:300)),Math.ceil(lr/46))",
+          "unidad": "pza",
+          "decimales": 0
+        },
+        {
+          "label": "Distancia máxima a un extintor clase B (almacén de combustibles, planta de luz, área de soplete)",
+          "formula": "(li+lc+gs)>0?(((an*nv>=3000||li>=1400||lc>=2000||gs>=3000||sc>=15000))?10:15):0",
+          "unidad": "m",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Captura el área de cada nivel con trabajo y mide el recorrido más largo caminando (rodeando muros, huecos y acopios), no en línea recta en el plano.",
+        "Haz inventario del almacén y los frentes: litros de gasolina, thinner y solventes (inflamables), diésel y aceites (combustibles), capacidad de tanques de gas LP y acetileno, y kg aproximados de madera de cimbra, triplay, cartón y poliestireno. Si un concepto llega al umbral, la obra pasa a riesgo alto (más extintores, brigada y 2 simulacros al año).",
+        "Coloca los extintores ABC que da la calculadora en cada nivel, cerca de escaleras y accesos, colgados a no más de 1.50 m del piso hasta la parte más alta, señalizados (NOM-026-STPS) y marcados en el plano de la obra. Junto al almacén de combustibles y la planta de luz pon uno apto para clase B (PQS ABC o BC, o CO₂) a no más de la distancia indicada.",
+        "Revisa cada extintor una vez al mes con un registro (fecha, responsable, presión, sello, manguera, acceso libre, anomalías y seguimiento) y dales mantenimiento al menos una vez al año con un proveedor bajo la NOM-154-SCFI; recárgalos después de cada uso.",
+        "Ejemplo verificado: 650 m² × 4 niveles = 2,600 m² y 60 m de recorrido → riesgo ordinario (13 % de margen, amarillo: un nivel más y pasa a alto), 3 extintores por nivel y 12 en la obra; clase B a no más de 15 m del almacén. Nota: la Tabla A.1 también suma inventarios con una fórmula combinada (A.1.3 e) que esta calculadora no aplica; si estás cerca de varios umbrales, trátalo como riesgo alto.",
+        "Indicador: extintores colocados contra requeridos por nivel y % de revisiones mensuales hechas (meta 100 %); un extintor faltante, descargado o tapado por material es hallazgo crítico en el 'Recorrido de seguridad semanal'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-002-STPS-2010 Prevención y protección contra incendios (PDF STPS): 7.17 b) y c) un extintor por cada 300 m² (riesgo ordinario) o 200 m² (alto) o fracción; Tabla 1 distancias máximas 23 m (A, C, D), 15 m clase B ordinario / 10 m alto, 10 m clase K; 7.17 f) altura no mayor de 1.50 m; 7.2–7.3 revisión mensual con registro; 7.18 mantenimiento al menos una vez al año; Apéndice A, Tabla A.1 riesgo de incendio",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/680192/NOM-002-STPS-2010.pdf"
+        },
+        {
+          "titulo": "STPS – Guía informativa NOM-002-STPS-2010",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/807653/GUIA_INFORMATIVA_NOM-002_2.pdf"
+        }
+      ]
+    },
+    {
+      "id": "fmt-ruido-epp-auditivo",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Control de ruido y protección auditiva por cuadrilla (NOM-011-STPS-2001 y NOM-017-STPS-2024)",
+      "resumen": "Registro de campo para las cuadrillas ruidosas (demolición, cortes con disco, rotomartillo, compactadora, vibrador, planta de luz): niveles medidos, horas, dosis calculada con 'Ruido en la jornada', protector entregado y su NRR, señalización y audiometrías. Sirve como evidencia del análisis de riesgo por puesto y de la entrega y capacitación del EPP que pide la NOM-017-STPS-2024 (en vigor desde el 28-sep-2025) y de las obligaciones desde 85 dB(A) de la NOM-011.",
+      "agregada": "2026-11-18",
+      "campos": [
+        "Obra",
+        "Fecha y hora de la medición",
+        "Cuadrilla, contratista y cabo",
+        "Equipo o actividad ruidosa (marca y modelo)",
+        "Instrumento de medición (sonómetro tipo 2 con calibración vigente o app NIOSH SLM como tamizaje)",
+        "Nivel medido a la altura del oído del operador, dB(A), y distancia a la fuente",
+        "Horas reales de exposición por día",
+        "Dosis diaria (%) y NER calculados en 'Ruido en la jornada'",
+        "Protector entregado: tipo (tapón / orejera / doble), marca, NRR del empaque y atenuación de campo (NRR − 7)/2",
+        "Nivel estimado con protector, dB(A)",
+        "Trabajadores expuestos: nombre, firma de recibido del EPP y fecha de la última audiometría",
+        "Medidas de control acordadas (rotación, horario, equipo más silencioso, barrera, distancia)",
+        "Responsable de seguimiento y fecha de verificación (máximo 30 días)"
+      ],
+      "items": [
+        "El nivel se midió en la obra con el equipo trabajando en material real, no se tomó de un catálogo",
+        "Se calculó la dosis de cada puesto con las horas reales (no con el turno completo)",
+        "Ningún trabajador queda arriba de 90 dB(A) de NER sin medida de control o con un protector que no alcanza",
+        "Nadie trabaja sin protector cerca de una fuente de más de 105 dB(A)",
+        "El protector se eligió por el análisis de riesgo del puesto, con NRR suficiente, talla correcta y compatible con casco y lentes",
+        "Entrega del protector firmada y capacitación dada sobre colocación, limpieza y reemplazo (tapones desechables nuevos cada día)",
+        "Los tapones se colocan bien (verificado por el cabo) y las orejeras sellan; sin orejeras sobre gorra o capucha",
+        "Zona con 85 dB(A) o más señalizada en su acceso con 'Uso obligatorio de protección auditiva'",
+        "Planta de luz, compresor y cortadora de banco ubicados lejos de frentes y oficinas, o con barrera o mampara",
+        "Personal expuesto a 85 dB(A) o más con audiometría anual vigente; altas nuevas con audiometría de ingreso",
+        "Rotación u horarios para que ningún trabajador opere el equipo más ruidoso más horas que las calculadas",
+        "Registro conservado (la NOM-011 pide 5 años de documentación) y reevaluación programada a 2 años o al cambiar equipo o proceso"
+      ],
+      "como_usar": [
+        "Lista las cuadrillas con equipo ruidoso y mide cada una una vez con el equipo trabajando; captura los niveles y horas en 'Ruido en la jornada' y copia aquí la dosis y el NER.",
+        "Con el NRR del protector que entregaste revisa el nivel con protector: si queda en rojo, cambia a doble protección o reduce horas y anota la medida con responsable y fecha.",
+        "Cada trabajador firma la entrega del protector y la plática de colocación; el cabo verifica en el arranque del día que lo traiga puesto. Señaliza los accesos de las zonas de 85 dB(A) o más.",
+        "Manda a audiometría al personal expuesto y archiva el formato con la evidencia de EPP de la NOM-017; en una inspección de la STPS es lo primero que piden.",
+        "Indicador: cuadrillas ruidosas evaluadas contra cuadrillas ruidosas activas (meta 100 %) y hallazgos de 'sin protector' en el recorrido semanal (meta 0)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-011-STPS-2001 Ruido (texto DOF 17-abr-2002, Plataforma de la Infraestructura de la Calidad, SE): 5.3 y Tabla A.1 (90 dB(A) 8 h · 93 4 h · 96 2 h · 99 1 h · 102 30 min · 105 15 min); 7.2 TMPE con tasa de intercambio de 3 dB(A); 5.4, 5.5, 8.6 y 8.7.4 obligaciones desde 85 dB(A); 8.2.2 d) reevaluación cada 2 años. Revisión quinquenal confirmada el 23-ene-2023",
+          "url": "https://platiica.economia.gob.mx/normalizacion/wp-content/uploads/sites/2/PDF_Normas_Publicas/011stps.pdf"
+        },
+        {
+          "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025; sustituye a la NOM-017-STPS-2008): selección del EPP por análisis de riesgos del puesto, capacitación, supervisión y señalización",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
+        },
+        {
+          "titulo": "Holland & Knight (22-abr-2025) – Nuevas obligaciones sobre equipo de protección personal: EPP certificado y acorde al riesgo, capacitación, supervisión; multas de 250 a 5,000 UMA (LFT art. 994 fr. V)",
+          "url": "https://www.hklaw.com/es/insights/publications/2025/04/nuevas-obligaciones-sobre-equipo-de-proteccion-personal"
+        },
+        {
+          "titulo": "CDC/NIOSH – NIOSH Sound Level Meter App (gratuita, solo iOS; LAeq, TWA, dosis y dosis proyectada; ±2 dBA en laboratorio). Página actualizada el 28-oct-2026",
+          "url": "https://www.cdc.gov/niosh/noise/about/app.html"
         }
       ]
     },
