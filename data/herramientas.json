@@ -1203,7 +1203,8 @@
         "Captura el importe a ajustar: lo pendiente de ejecutar según el programa vigente, o la estimación del periodo. Si el atraso es tuyo, usa los índices del mes en que debió ejecutarse (salvo que el del mes real sea menor).",
         "El factor se aplica al costo directo y los indirectos, financiamiento y utilidad conservan sus porcentajes, por eso se multiplica el importe a precio unitario; la parte cubierta por el anticipo no se ajusta.",
         "Entrega la solicitud con la tabla de índices y sus fuentes. En obra pública el procedimiento (art. 57 fracc. I, II o III) lo fija el contrato y la dependencia revisa con sus matrices; en obra privada solo procede si hay cláusula de escalatoria.",
-        "Antes de solicitar, revisa con 'Sobrecosto de un insumo' cuánto del sobrecosto es por precio: solo esa parte la cubre el ajuste de costos; el sobreconsumo no se recupera por esta vía."
+        "Antes de solicitar, revisa con 'Sobrecosto de un insumo' cuánto del sobrecosto es por precio: solo esa parte la cubre el ajuste de costos; el sobreconsumo no se recupera por esta vía.",
+        "Antes de pedir escalatoria revisa con 'Reserva de contingencia con registro de riesgos' qué parte del alza ya cubre tu reserva y con 'Comprar ahora o conforme se ocupa' si te conviene cerrar precio en lugar de esperar el ajuste."
       ],
       "fuentes": [
         {
@@ -1225,6 +1226,10 @@
         {
           "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
           "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
+        },
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9-nov-2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct-2025: +4.01 %); industrias metálicas básicas +9.83 % anual; minerales no metálicos (cemento, concreto, block) +5.71 % anual. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
         }
       ]
     },
@@ -10683,6 +10688,362 @@
         {
           "titulo": "Open Camera – App de cámara de código abierto (GPL v3) para Android 6.0 o superior: sello de fecha, hora, coordenadas y texto en la foto",
           "url": "https://opencamera.org.uk/"
+        }
+      ]
+    },
+    {
+      "id": "calc-compra-anticipada",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "¿Comprar el material de golpe ahora o conforme se ocupa? Alza de precio esperada contra costo financiero, almacenaje y merma (varilla, block, cemento)",
+      "resumen": "Compara dos formas de comprar el mismo material: todo hoy a precio actual, o en partes iguales cada mes con el alza mensual que esperas. Al comprar de golpe se protege del alza, pero pagas el dinero detenido (tasa mensual de tu crédito o de tu caja), el almacenaje y vigilancia y la merma extra por tenerlo más tiempo en obra. Da el ahorro neto y el alza mensual mínima a partir de la cual sí conviene comprar adelantado. Contexto nov-2026: INPP construcción +6.23 % anual (≈0.5 % al mes) a octubre de 2026 e industrias metálicas básicas +9.83 % anual.",
+      "agregada": "2026-11-19",
+      "entradas": [
+        {
+          "id": "Q",
+          "label": "Cantidad total a comprar",
+          "unidad": "t, m³, millar o pza",
+          "valor": 40
+        },
+        {
+          "id": "P",
+          "label": "Precio unitario actual cotizado (sin IVA, puesto en obra)",
+          "unidad": "$/unidad",
+          "valor": 16500
+        },
+        {
+          "id": "N",
+          "label": "Meses en que se va a consumir (según programa)",
+          "unidad": "meses",
+          "valor": 6
+        },
+        {
+          "id": "a",
+          "label": "Alza de precio esperada por mes",
+          "unidad": "%/mes",
+          "valor": 0.8
+        },
+        {
+          "id": "i",
+          "label": "Costo del dinero por mes (tasa de tu línea de crédito o rendimiento que dejas de ganar)",
+          "unidad": "%/mes",
+          "valor": 1.5
+        },
+        {
+          "id": "C",
+          "label": "Costo extra de almacenaje, vigilancia y maniobras por tener el acopio grande",
+          "unidad": "$/mes",
+          "valor": 3000
+        },
+        {
+          "id": "m",
+          "label": "Merma, robo u oxidación extra por almacenar más tiempo",
+          "unidad": "%",
+          "valor": 1.5
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Meses promedio que el material espera en obra si compras todo hoy",
+          "formula": "(N-1)/2",
+          "unidad": "meses",
+          "decimales": 1
+        },
+        {
+          "label": "Costo comprando conforme se ocupa (con el alza esperada)",
+          "formula": "a>0 ? Q*P/N*(Math.pow(1+a/100,N)-1)/(a/100) : Q*P",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo comprando todo hoy (material + merma + dinero detenido + almacenaje)",
+          "formula": "Q*P*(1+m/100) + Q*P*(i/100)*(N-1)/2 + C*N",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "AHORRO por comprar hoy (negativo = mejor comprar conforme se ocupa)",
+          "formula": "(a>0 ? Q*P/N*(Math.pow(1+a/100,N)-1)/(a/100) : Q*P) - (Q*P*(1+m/100) + Q*P*(i/100)*(N-1)/2 + C*N)",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Ahorro como % del monto de la compra",
+          "formula": "((a>0 ? Q*P/N*(Math.pow(1+a/100,N)-1)/(a/100) : Q*P) - (Q*P*(1+m/100) + Q*P*(i/100)*(N-1)/2 + C*N))/(Q*P)*100",
+          "unidad": "%",
+          "decimales": 2,
+          "semaforo": [
+            0,
+            -2
+          ]
+        },
+        {
+          "label": "Alza mensual mínima para que convenga comprar hoy (aproximada)",
+          "formula": "N>1 ? i + (m + 100*C*N/(Q*P))/((N-1)/2) : 0",
+          "unidad": "%/mes",
+          "decimales": 2,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Pide al proveedor la cotización de hoy puesta en obra y pregunta por escrito si te congela precio con anticipo y por cuánto tiempo; eso cambia la decisión más que cualquier pronóstico.",
+        "Captura la cantidad que falta por consumir y los meses del programa en que se usa (en el ejemplo: 40 t de varilla en 6 meses a 16,500 $/t; el precio de ejemplo NO es de mercado, usa tu cotización).",
+        "Para el alza mensual usa el dato que tengas: aviso del proveedor, la variación del INPP de INEGI (construcción +0.65 % en octubre de 2026) o el histórico de tus facturas; para el costo del dinero usa la tasa de tu línea de crédito (aunque Banxico bajó su tasa a 6.25 % el 5-nov-2026, el crédito a constructoras cuesta varias veces más).",
+        "Lee el semáforo: verde si comprar hoy ahorra; amarillo si pierdes menos del 2 % del monto (decide por logística o riesgo de desabasto); rojo si conviene comprar conforme se ocupa. En el ejemplo con 0.8 %/mes sale −39,308 $ (−5.96 %): no conviene, y solo convendría con alzas mayores a 3.19 % al mes.",
+        "Si decides comprar de golpe, asegura espacio techado y sobre polines, regístralo en 'Inventario en obra y entregas justo a tiempo' y concilia consumo contra remisiones cada mes.",
+        "Revisa la decisión cada mes con el nuevo INPP (lo publica INEGI alrededor del día 9) y anota el resultado real en el 'Cierre mensual de costos por partida'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9-nov-2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct-2025: +4.01 %); industrias metálicas básicas +9.83 % anual; minerales no metálicos (cemento, concreto, block) +5.71 % anual. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de insumos ene-2025 a ene-2026 (12-feb-2026): construcción 3.95 %, block y tabique de concreto 7.45 %, concreto premezclado 6.26 %, perfiles de acero 5.96 %, cemento 5.40 %",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "Yieh / CMIC (9-ene-2026): la CMIC advierte alzas de alrededor de 15 % en algunos materiales y presión adicional en el acero para 2026",
+          "url": "https://yieh.com/en/News/cmic-mexicos-construction-sector-faces-challenges-in-2026-due-to-rising-raw-material-and-labor-costs/158703"
+        },
+        {
+          "titulo": "Expansión (29-abr-2026): acuerdo para usar solo acero hecho en México en obra pública; demanda 2026 de ~150,000 t de acero de refuerzo; varilla de 15,244 a 16,132 $/t en jul-2025 según volumen (dato del artículo, sin fuente citada)",
+          "url": "https://expansion.mx/empresas/2026/04/29/acero-hecho-en-mexico-proyectos-publicos-frena-avance-china"
+        },
+        {
+          "titulo": "El CEO (5-nov-2026): Banxico recorta 25 pb y deja la tasa objetivo en 6.25 %",
+          "url": "https://elceo.com/economia/banxico-recorta-tasa-interes-a-6-25-noviembre-2026/"
+        }
+      ]
+    },
+    {
+      "id": "calc-reserva-riesgos",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Reserva de contingencia con registro de riesgos: valor esperado, P80 y P90 de los 5 riesgos de costo más fuertes de la obra",
+      "resumen": "En lugar de poner un % fijo de imprevistos, calcula la reserva con los riesgos propios de la obra: para cada uno capturas la probabilidad de que pase y lo que costaría. Da el valor esperado (probabilidad × impacto) de cada riesgo y del total, su % del costo directo y una reserva con 80 % y 90 % de confianza (aproximación normal con la desviación estándar de riesgos independientes). Ejemplo de obra en Tijuana: alza de acero, días perdidos por lluvia de invierno, suelo malo en excavación, retrabajos y el ajuste de mano de obra de enero de 2027.",
+      "agregada": "2026-11-19",
+      "entradas": [
+        {
+          "id": "CD",
+          "label": "Costo directo de la obra (o de lo que falta por ejecutar)",
+          "unidad": "$",
+          "valor": 12000000
+        },
+        {
+          "id": "p1",
+          "label": "Riesgo 1 – probabilidad (ej. alza de acero de refuerzo antes de comprar)",
+          "unidad": "%",
+          "valor": 40
+        },
+        {
+          "id": "i1",
+          "label": "Riesgo 1 – costo si ocurre",
+          "unidad": "$",
+          "valor": 180000
+        },
+        {
+          "id": "p2",
+          "label": "Riesgo 2 – probabilidad (ej. 6 días perdidos por lluvia de invierno)",
+          "unidad": "%",
+          "valor": 50
+        },
+        {
+          "id": "i2",
+          "label": "Riesgo 2 – costo si ocurre (días × indirectos de campo por día)",
+          "unidad": "$",
+          "valor": 120000
+        },
+        {
+          "id": "p3",
+          "label": "Riesgo 3 – probabilidad (ej. suelo blando: sobreexcavación y sustitución)",
+          "unidad": "%",
+          "valor": 25
+        },
+        {
+          "id": "i3",
+          "label": "Riesgo 3 – costo si ocurre",
+          "unidad": "$",
+          "valor": 250000
+        },
+        {
+          "id": "p4",
+          "label": "Riesgo 4 – probabilidad (ej. retrabajo por rechazo de calidad)",
+          "unidad": "%",
+          "valor": 30
+        },
+        {
+          "id": "i4",
+          "label": "Riesgo 4 – costo si ocurre",
+          "unidad": "$",
+          "valor": 90000
+        },
+        {
+          "id": "p5",
+          "label": "Riesgo 5 – probabilidad (ej. aumento de mano de obra por salario 2027 y jornada de 46 h no cubierto)",
+          "unidad": "%",
+          "valor": 60
+        },
+        {
+          "id": "i5",
+          "label": "Riesgo 5 – costo si ocurre",
+          "unidad": "$",
+          "valor": 150000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Valor esperado riesgo 1",
+          "formula": "p1/100*i1",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Valor esperado riesgo 2",
+          "formula": "p2/100*i2",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Valor esperado riesgo 3",
+          "formula": "p3/100*i3",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Valor esperado riesgo 4",
+          "formula": "p4/100*i4",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Valor esperado riesgo 5",
+          "formula": "p5/100*i5",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "VALOR ESPERADO TOTAL (reserva mínima, ≈ P50)",
+          "formula": "(p1*i1+p2*i2+p3*i3+p4*i4+p5*i5)/100",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Valor esperado como % del costo directo",
+          "formula": "(p1*i1+p2*i2+p3*i3+p4*i4+p5*i5)/CD",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Desviación estándar de la exposición",
+          "formula": "Math.sqrt([[p1,i1],[p2,i2],[p3,i3],[p4,i4],[p5,i5]].reduce((s,[p,x])=>s+(p/100)*(1-p/100)*x*x,0))",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "RESERVA P80 (80 % de confianza)",
+          "formula": "(p1*i1+p2*i2+p3*i3+p4*i4+p5*i5)/100 + 0.8416*Math.sqrt([[p1,i1],[p2,i2],[p3,i3],[p4,i4],[p5,i5]].reduce((s,[p,x])=>s+(p/100)*(1-p/100)*x*x,0))",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Reserva P80 como % del costo directo",
+          "formula": "((p1*i1+p2*i2+p3*i3+p4*i4+p5*i5)/100 + 0.8416*Math.sqrt([[p1,i1],[p2,i2],[p3,i3],[p4,i4],[p5,i5]].reduce((s,[p,x])=>s+(p/100)*(1-p/100)*x*x,0)))/CD*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Reserva P90 (90 % de confianza, dueño o cliente averso al riesgo)",
+          "formula": "(p1*i1+p2*i2+p3*i3+p4*i4+p5*i5)/100 + 1.2816*Math.sqrt([[p1,i1],[p2,i2],[p3,i3],[p4,i4],[p5,i5]].reduce((s,[p,x])=>s+(p/100)*(1-p/100)*x*x,0))",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Peor caso: ocurren los 5 riesgos",
+          "formula": "i1+i2+i3+i4+i5",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "En la junta de costos lista con residente, compras y administración los riesgos que pueden costar dinero en lo que falta de obra y quédate con los 5 de mayor costo (si tienes menos, deja en 0 la probabilidad de los que sobran).",
+        "Para cada riesgo estima la probabilidad (10, 25, 50, 75 o 90 % basta) y el costo si pasa con datos de la obra: indirectos por día de 'Indirectos de campo', alza con 'Comprar ahora o conforme se ocupa', volumen extra por precio unitario.",
+        "Lee el resultado: el valor esperado es lo mínimo que debe haber en la reserva; la P80 es la que se recomienda llevar en obra privada; la P90 si el cliente no acepta extras. En el ejemplo: valor esperado 311,500 $ (2.60 % del CD), P80 457,744 $ (3.81 %), P90 534,203 $ y peor caso 790,000 $.",
+        "Compara la P80 contra lo que realmente tienes de imprevistos en el presupuesto o en la utilidad; si no alcanza, ataca primero el riesgo con mayor valor esperado (comprar adelantado, sondeo de suelo, cláusula de escalatoria).",
+        "Actualiza cada quincena: baja a 0 los riesgos que ya pasaron o se cerraron, agrega los nuevos y libera reserva a utilidad solo cuando el riesgo ya no puede ocurrir.",
+        "Límite: con 5 riesgos el cálculo es una aproximación normal; para obras grandes o licitaciones haz Monte Carlo ligado al programa (AACE RP 57R-09)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Guild of Project Controls (GPCCAR M04-4) – Valor monetario esperado = probabilidad × impacto; contingencia por percentil según tolerancia al riesgo (P50 neutral, P85–P90 averso); Monte Carlo integrado costo-programa (AACE RP 57R-09) como mejor práctica",
+          "url": "https://planningplanet.com/guild/gpccar/assess-prioritize-and-quantify-risks-opportunities"
+        },
+        {
+          "titulo": "MBP (2025) – The Value of Risk-Informed Contingencies in Construction: de la contingencia como % fijo (5 a 15 %) a la contingencia basada en los riesgos propios del proyecto",
+          "url": "https://www.mbpce.com/wp-content/uploads/2025/10/MBP_Blog_The-Value-of-Risk-Informed-Contingencies-in-Construction-How-to-Navigate-the-Unpredictable.pdf"
+        },
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9-nov-2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct-2025: +4.01 %); industrias metálicas básicas +9.83 % anual; minerales no metálicos (cemento, concreto, block) +5.71 % anual. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        },
+        {
+          "titulo": "El CEO (5-nov-2026): Banxico recorta 25 pb y deja la tasa objetivo en 6.25 %",
+          "url": "https://elceo.com/economia/banxico-recorta-tasa-interes-a-6-25-noviembre-2026/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-registro-riesgos-costo",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Registro de riesgos de costo de la obra: revisión quincenal con dueño, respuesta y reserva",
+      "resumen": "Hoja de una sola página para llevar los riesgos que pueden costar dinero (precio de insumos, clima, suelo, calidad, mano de obra, pagos del cliente) con probabilidad, costo si ocurre, valor esperado, responsable, respuesta y fecha límite. Alimenta la calculadora 'Reserva de contingencia con registro de riesgos' y deja evidencia para reclamar extras o escalatoria cuando el riesgo es del cliente.",
+      "agregada": "2026-11-19",
+      "campos": [
+        "Obra",
+        "Fecha de revisión",
+        "Quincena / corte",
+        "Costo directo por ejecutar ($)",
+        "Reserva disponible en presupuesto ($)",
+        "Riesgo 1: descripción · probabilidad % · costo si ocurre $ · responsable · respuesta · fecha límite",
+        "Riesgo 2: descripción · probabilidad % · costo si ocurre $ · responsable · respuesta · fecha límite",
+        "Riesgo 3: descripción · probabilidad % · costo si ocurre $ · responsable · respuesta · fecha límite",
+        "Riesgo 4: descripción · probabilidad % · costo si ocurre $ · responsable · respuesta · fecha límite",
+        "Riesgo 5: descripción · probabilidad % · costo si ocurre $ · responsable · respuesta · fecha límite",
+        "Valor esperado total y reserva P80 (de la calculadora)",
+        "Riesgos cerrados esta quincena y reserva liberada ($)",
+        "Elaboró (superintendente) / Revisó (administración)"
+      ],
+      "items": [
+        "Se revisaron los insumos de mayor peso (acero, concreto, block, cemento) contra la última cotización y el último INPP de INEGI",
+        "Cada riesgo tiene un responsable con nombre y una respuesta concreta (evitar, reducir, transferir con cláusula o seguro, aceptar)",
+        "Se identificó de quién es cada riesgo según el contrato (contratista o cliente) y los del cliente tienen nota de bitácora o aviso por escrito",
+        "Los riesgos de clima y suelo están ligados a actividades del programa (con fecha y holgura)",
+        "Se capturaron probabilidades y costos en la calculadora y la reserva P80 cabe en lo presupuestado",
+        "Las compras anticipadas se evaluaron con 'Comprar ahora o conforme se ocupa' y quedó la cotización firmada",
+        "Los riesgos que ya no pueden ocurrir se cerraron y su reserva se liberó con visto bueno de administración",
+        "Los riesgos que ocurrieron se registraron con su costo real en el 'Cierre mensual de costos por partida'",
+        "Se agregaron riesgos nuevos detectados en el corte de avance, el Gemba o la junta semanal",
+        "El registro firmado se archivó con el cierre de costos y se compartió con el cliente cuando aplica (obra privada con contrato de costo más honorarios o escalatoria)"
+      ],
+      "como_usar": [
+        "Imprime o abre el formato cada 1 y 16 del mes y llénalo en 30 minutos con residente, compras y administración.",
+        "Anota máximo 5 riesgos activos con probabilidad y costo; pásalos a 'Reserva de contingencia con registro de riesgos' y copia el valor esperado y la P80.",
+        "Marca Cumple / No / N/A en la lista; todo 'No' se vuelve una acción con responsable y fecha en observaciones.",
+        "Para los riesgos del cliente deja la nota de bitácora el mismo día; sin aviso por escrito no hay reclamo.",
+        "Prueba PDCA de 2 meses: compara cuánto se gastó en imprevistos contra la reserva P80 del registro; si quedó dentro, se adopta en todas las obras."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Guild of Project Controls (GPCCAR M04-4) – Valor monetario esperado = probabilidad × impacto; contingencia por percentil según tolerancia al riesgo (P50 neutral, P85–P90 averso); Monte Carlo integrado costo-programa (AACE RP 57R-09) como mejor práctica",
+          "url": "https://planningplanet.com/guild/gpccar/assess-prioritize-and-quantify-risks-opportunities"
+        },
+        {
+          "titulo": "MBP (2025) – The Value of Risk-Informed Contingencies in Construction: de la contingencia como % fijo (5 a 15 %) a la contingencia basada en los riesgos propios del proyecto",
+          "url": "https://www.mbpce.com/wp-content/uploads/2025/10/MBP_Blog_The-Value-of-Risk-Informed-Contingencies-in-Construction-How-to-Navigate-the-Unpredictable.pdf"
         }
       ]
     }

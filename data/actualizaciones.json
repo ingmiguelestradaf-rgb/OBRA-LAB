@@ -1,6 +1,48 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-19",
+      "titulo": "Costos: comprar el material ahora o conforme se ocupa, y la reserva de imprevistos calculada con los riesgos reales de la obra",
+      "resumen": "Con el INPP de construcción a +6.23 % anual en octubre de 2026 (INEGI, boletín del 9-nov) y metales básicos a +9.83 %, la pregunta de compras es si conviene cerrar la varilla o el block de golpe. 'Comprar ahora o conforme se ocupa' compara la compra total hoy (con dinero detenido, almacenaje y merma) contra compras mensuales con el alza esperada, y da el alza mínima a la que conviene adelantar: en el ejemplo (40 t, 6 meses, 0.8 %/mes, crédito a 1.5 %/mes) comprar hoy cuesta 39,308 $ más, y solo convendría con alzas arriba de 3.19 % al mes, salvo que el proveedor congele precio. 'Reserva de contingencia con registro de riesgos' reemplaza el % fijo de imprevistos por el valor esperado de los 5 riesgos más fuertes y una reserva P80 / P90; el ejemplo de 12 M$ de costo directo da 311,500 $ de valor esperado (2.60 %) y P80 de 457,744 $ (3.81 %). El formato 'Registro de riesgos de costo' lleva la revisión quincenal con responsable, respuesta y aviso por escrito al cliente. Mejora: 'Ajuste de costos por índices' suma la fuente del INPP de octubre de 2026 y un paso para decidir entre escalatoria, reserva o compra anticipada.",
+      "herramientas": [
+        "calc-compra-anticipada",
+        "calc-reserva-riesgos",
+        "fmt-registro-riesgos-costo",
+        "calc-ajuste-costos"
+      ],
+      "como_aplicarlo": "1) Pide hoy cotización de varilla y block con opción de precio congelado y córrela en 'Comprar ahora o conforme se ocupa' con lo que falta por consumir. 2) En la junta de costos del viernes lista los 5 riesgos de costo de la obra y saca el valor esperado y la P80 en 'Reserva de contingencia'. 3) Abre el 'Registro de riesgos de costo', asigna responsable y fecha a cada respuesta y revísalo el 1 y el 16 de cada mes.",
+      "fuentes": [
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9-nov-2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct-2025: +4.01 %); industrias metálicas básicas +9.83 % anual; minerales no metálicos (cemento, concreto, block) +5.71 % anual. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        },
+        {
+          "titulo": "CMIC CEICO – Variación de precios de insumos ene-2025 a ene-2026 (12-feb-2026): construcción 3.95 %, block y tabique de concreto 7.45 %, concreto premezclado 6.26 %, perfiles de acero 5.96 %, cemento 5.40 %",
+          "url": "https://www.cmic.org.mx/ceico/registros/carrusel/portadas/CEICO_Informe_Febrero_2026_Variacion_precio_materiales2.pdf"
+        },
+        {
+          "titulo": "Yieh / CMIC (9-ene-2026): la CMIC advierte alzas de alrededor de 15 % en algunos materiales y presión adicional en el acero para 2026",
+          "url": "https://yieh.com/en/News/cmic-mexicos-construction-sector-faces-challenges-in-2026-due-to-rising-raw-material-and-labor-costs/158703"
+        },
+        {
+          "titulo": "Expansión (29-abr-2026): acuerdo para usar solo acero hecho en México en obra pública; demanda 2026 de ~150,000 t de acero de refuerzo; varilla de 15,244 a 16,132 $/t en jul-2025 según volumen (dato del artículo, sin fuente citada)",
+          "url": "https://expansion.mx/empresas/2026/04/29/acero-hecho-en-mexico-proyectos-publicos-frena-avance-china"
+        },
+        {
+          "titulo": "El CEO (5-nov-2026): Banxico recorta 25 pb y deja la tasa objetivo en 6.25 %",
+          "url": "https://elceo.com/economia/banxico-recorta-tasa-interes-a-6-25-noviembre-2026/"
+        },
+        {
+          "titulo": "Guild of Project Controls (GPCCAR M04-4) – Valor monetario esperado = probabilidad × impacto; contingencia por percentil según tolerancia al riesgo (P50 neutral, P85–P90 averso); Monte Carlo integrado costo-programa (AACE RP 57R-09) como mejor práctica",
+          "url": "https://planningplanet.com/guild/gpccar/assess-prioritize-and-quantify-risks-opportunities"
+        },
+        {
+          "titulo": "MBP (2025) – The Value of Risk-Informed Contingencies in Construction: de la contingencia como % fijo (5 a 15 %) a la contingencia basada en los riesgos propios del proyecto",
+          "url": "https://www.mbpce.com/wp-content/uploads/2025/10/MBP_Blog_The-Value-of-Risk-Informed-Contingencies-in-Construction-How-to-Navigate-the-Unpredictable.pdf"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-18",
       "titulo": "Seguridad: ruido que daña el oído sin que nadie lo note (dosis por cuadrilla y protector que sí alcanza) y extintores suficientes en cada nivel de la obra",
       "resumen": "Tres herramientas para dos riesgos que casi nunca se calculan en obra. 'Ruido en la jornada' calcula la dosis diaria con la NOM-011-STPS-2001 (8 h a 90 dB(A), la mitad del tiempo por cada 3 dB más), el NER de 8 h, las horas máximas con el equipo más ruidoso y el nivel real con el protector descontando (NRR − 7)/2; en el ejemplo (1.5 h de rotomartillo a 100 dB(A), 1 h de cortadora a 95, 3 h a 88 y 2.5 h a 80) la dosis es 255 %, el rotomartillo solo se puede usar 16 min ese día y un tapón NRR 25 apenas deja el nivel en 85.1 dB(A). El formato 'Control de ruido y protección auditiva' deja la evidencia del análisis de riesgo, entrega y capacitación de EPP que exige la NOM-017-STPS-2024 (en vigor desde el 28-sep-2025, reemplazó a la de 2008). 'Extintores para la obra' aplica la NOM-002-STPS-2010: riesgo ordinario o alto por superficie e inventario de combustibles (Tabla A.1), 1 extintor por cada 300 m² (200 en riesgo alto) o por cada 23 m de recorrido, y clase B a 15 m (10 m en alto) del almacén de combustibles; el ejemplo de 4 niveles de 650 m² da 12 extintores y queda a un nivel de pasar a riesgo alto. Un estudio NIOSH publicado en dic-2024 encontró pérdida auditiva en hasta 28 % de los trabajadores de construcción expuestos a ruido. Mejora: el 'Recorrido de seguridad semanal' ahora revisa extintores por nivel y protección auditiva como hallazgos críticos.",
