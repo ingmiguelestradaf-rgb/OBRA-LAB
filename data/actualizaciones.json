@@ -1,6 +1,44 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-20",
+      "titulo": "Herramientas digitales: cámara time-lapse que sí sirve como evidencia (batería, memoria y visitas calculadas) y punch list en el plano con Fieldwire gratis",
+      "resumen": "'Cámara time-lapse en obra' calcula con tu horario las fotos por día, la duración del video de toda la obra, y los días que aguantan batería y memoria contra tu frecuencia de visita. En el ejemplo (10 h, 5 min, 6 días/semana, 180 días, batería declarada de 100 días a 5 min, 0.5 MB por foto, microSD de 64 GB, visita cada 30 días): 120 fotos/día, video de 10.3 min, batería estimada de 82 días con 30 % de castigo, memoria de 1,274 días, margen de 52 días (verde) y 3 visitas mínimas. La memoria por foto no la publica el fabricante: se mide con una prueba de 1 día. El formato 'Instalación y revisión de cámara time-lapse' cuida que el video valga como evidencia: encuadre fijo, hora de la cámara correcta, respaldo con fecha antes de borrar y eventos ligados a la bitácora. 'Fieldwire' lleva los pendientes y el punch list sobre el plano con foto, responsable y fecha; su plan Basic es gratis hasta 5 usuarios, 3 proyectos y 100 planos (precios verificados en el sitio oficial el 20-nov-2026; precios en pesos no verificados). Mejora: el 'Recorrido 360° semanal' suma un punto para fechar avances con el video time-lapse.",
+      "herramientas": [
+        "calc-timelapse-obra",
+        "fmt-camara-timelapse",
+        "dig-fieldwire",
+        "fmt-recorrido-360"
+      ],
+      "como_aplicarlo": "1) Si ya tienes cámara time-lapse o vas a comprar una, haz la prueba de 1 día, corre 'Cámara time-lapse en obra' y programa las visitas en el programa. 2) Instálala con el formato 'Instalación y revisión de cámara time-lapse' y guarda la foto de referencia del encuadre. 3) Abre una cuenta gratuita de Fieldwire en la obra con más pendientes de acabados, invita a 2 o 3 contratistas y mide en 4 semanas los días promedio para cerrar un pendiente.",
+      "fuentes": [
+        {
+          "titulo": "Brinno – Comparativo de cámaras time-lapse para construcción 2026 (17-jul-2026): BCC5000 4K IP65 casi 200 días con batería de expansión; BCC2000 Plus 1080p IPX5 ~1 año con 16 pilas AA; BCC300 1080p IPX4 100 días; todas a intervalo de 5 min. Precio internacional USD 2,199 / 769.99 / 414.99",
+          "url": "https://brinno.com/blogs/brinno-tips/best-construction-time-lapse-camera-comparison-2026"
+        },
+        {
+          "titulo": "Brinno – BCC5000: intervalo de 3 s a 24 h, microSD hasta 256 GB, ~200 días a 5 min 'según pruebas internas; depende del intervalo, Wi-Fi y temperatura', operación 0 a 45 °C, abrazadera para 50 kg (consultado 20-nov-2026)",
+          "url": "https://brinno.com/pages/bcc5000-wifi-4k-construction-time-lapse-camera-bundle"
+        },
+        {
+          "titulo": "Fieldwire by Hilti – Precios (consultado 20-nov-2026): Basic USD 0 (5 usuarios, 3 proyectos, 100 planos); Pro USD 39, Business USD 64, Business Plus USD 89 por usuario/mes con pago anual",
+          "url": "https://www.fieldwire.com/pricing/"
+        },
+        {
+          "titulo": "Fieldwire Help Center – Planes: gratis mientras no pases de 3 proyectos, 100 planos y 5 usuarios; pago mensual Pro USD 54, Business USD 79, Business Plus USD 104 por usuario; sin contratos a largo plazo",
+          "url": "https://help.fieldwire.com/hc/en-us/articles/202634054"
+        },
+        {
+          "titulo": "Fieldwire (blog, 26-jun-2026) – Software gratis de gestión de obra: el plan Basic incluye tareas, planos, checklists para punch list y uso sin conexión en iOS y Android (afirmación del fabricante)",
+          "url": "https://www.fieldwire.com/blog/free-construction-management-software/"
+        },
+        {
+          "titulo": "Fieldwire (14-oct-2025) – Etiquetado automático de fotos con IA por especialidad, solo en planes Business y Business Plus",
+          "url": "https://www.fieldwire.com/blog/product-updates-2025-ai-photo-tagging/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-19",
       "titulo": "Costos: comprar el material ahora o conforme se ocupa, y la reserva de imprevistos calculada con los riesgos reales de la obra",
       "resumen": "Con el INPP de construcción a +6.23 % anual en octubre de 2026 (INEGI, boletín del 9-nov) y metales básicos a +9.83 %, la pregunta de compras es si conviene cerrar la varilla o el block de golpe. 'Comprar ahora o conforme se ocupa' compara la compra total hoy (con dinero detenido, almacenaje y merma) contra compras mensuales con el alza esperada, y da el alza mínima a la que conviene adelantar: en el ejemplo (40 t, 6 meses, 0.8 %/mes, crédito a 1.5 %/mes) comprar hoy cuesta 39,308 $ más, y solo convendría con alzas arriba de 3.19 % al mes, salvo que el proveedor congele precio. 'Reserva de contingencia con registro de riesgos' reemplaza el % fijo de imprevistos por el valor esperado de los 5 riesgos más fuertes y una reserva P80 / P90; el ejemplo de 12 M$ de costo directo da 311,500 $ de valor esperado (2.60 %) y P80 de 457,744 $ (3.81 %). El formato 'Registro de riesgos de costo' lleva la revisión quincenal con responsable, respuesta y aviso por escrito al cliente. Mejora: 'Ajuste de costos por índices' suma la fuente del INPP de octubre de 2026 y un paso para decidir entre escalatoria, reserva o compra anticipada.",

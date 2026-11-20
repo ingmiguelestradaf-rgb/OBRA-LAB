@@ -4271,7 +4271,8 @@
         "Personas ajenas avisadas; no se capturan rostros de vecinos ni datos sensibles a propósito",
         "Video subido y procesado el mismo día; enlace anotado en el Reporte diario",
         "Revisión rápida del residente contra la semana anterior y contra planos: hallazgos con responsable y fecha",
-        "Respaldo en carpeta de la obra con acceso restringido (no en el celular personal únicamente)"
+        "Respaldo en carpeta de la obra con acceso restringido (no en el celular personal únicamente)",
+        "Si hay cámara time-lapse fija, revisar su video del mismo periodo para fechar los avances que el recorrido 360° no alcanza a ver (colados, montajes, entradas de equipo)"
       ],
       "como_usar": [
         "Marca en el plano de cada nivel una ruta fija con su punto de arranque y nombra los archivos Nivel-Zona-AAAAMMDD; si usas DroneDeploy Ground u OpenSpace, la app ubica el video en el plano por ti.",
@@ -11044,6 +11045,250 @@
         {
           "titulo": "MBP (2025) – The Value of Risk-Informed Contingencies in Construction: de la contingencia como % fijo (5 a 15 %) a la contingencia basada en los riesgos propios del proyecto",
           "url": "https://www.mbpce.com/wp-content/uploads/2025/10/MBP_Blog_The-Value-of-Risk-Informed-Contingencies-in-Construction-How-to-Navigate-the-Unpredictable.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-timelapse-obra",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "Cámara time-lapse en obra: intervalo, fotos, duración del video, batería y memoria antes de subir a cambiarla",
+      "resumen": "Antes de colgar una cámara time-lapse (Brinno u otra) en un poste, andamio o edificio vecino, calcula con tu horario de obra cuántas fotos toma al día, cuánto dura el video de toda la obra y de cada semana, cuántos días le aguantan la batería y la memoria, y si eso alcanza para tu frecuencia de visita. La batería se escala desde lo que declara el fabricante (Brinno la declara a 5 min) con un castigo de 30 % por calor, frío y Wi-Fi; la memoria por foto la capturas tú de tu propia cámara porque los fabricantes no la publican.",
+      "agregada": "2026-11-20",
+      "entradas": [
+        {
+          "id": "H",
+          "label": "Horas de captura por día (programa la cámara solo en horario de obra)",
+          "unidad": "h",
+          "valor": 10
+        },
+        {
+          "id": "intv",
+          "label": "Intervalo entre fotos (5 min sirve para toda la obra; 1 min para colados o montajes)",
+          "unidad": "min",
+          "valor": 5
+        },
+        {
+          "id": "dl",
+          "label": "Días que trabaja la obra por semana (programa la cámara para no tomar en descanso)",
+          "unidad": "días",
+          "valor": 6
+        },
+        {
+          "id": "D",
+          "label": "Duración de la obra que quieres grabar (días naturales)",
+          "unidad": "días",
+          "valor": 180
+        },
+        {
+          "id": "fps",
+          "label": "Cuadros por segundo del video final",
+          "unidad": "fps",
+          "valor": 30
+        },
+        {
+          "id": "Bd",
+          "label": "Batería que declara el fabricante (Brinno BCC300: 100; BCC5000 con batería extra: ~200)",
+          "unidad": "días",
+          "valor": 100
+        },
+        {
+          "id": "Bint",
+          "label": "Intervalo con que el fabricante declara esa batería (Brinno: 5 min)",
+          "unidad": "min",
+          "valor": 5
+        },
+        {
+          "id": "Hf",
+          "label": "Horas al día que supone esa declaración (si el fabricante no lo dice, pon tus horas de obra: así el cálculo queda del lado seguro)",
+          "unidad": "h",
+          "valor": 10
+        },
+        {
+          "id": "MB",
+          "label": "Memoria por foto o cuadro (sácala de tu cámara: MB usados ÷ fotos tomadas en una prueba de 1 día)",
+          "unidad": "MB",
+          "valor": 0.5
+        },
+        {
+          "id": "SD",
+          "label": "Capacidad de la memoria microSD",
+          "unidad": "GB",
+          "valor": 64
+        },
+        {
+          "id": "R",
+          "label": "Cada cuántos días naturales puedes subir a revisar la cámara",
+          "unidad": "días",
+          "valor": 30
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Fotos por día de trabajo",
+          "formula": "H*60/intv",
+          "unidad": "fotos",
+          "decimales": 0
+        },
+        {
+          "label": "Fotos en toda la obra",
+          "formula": "H*60/intv*D*dl/7",
+          "unidad": "fotos",
+          "decimales": 0
+        },
+        {
+          "label": "Duración del video de toda la obra",
+          "formula": "H*60/intv*D*dl/7/fps/60",
+          "unidad": "min",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Segundos de video que aporta cada semana",
+          "formula": "H*60/intv*dl/fps",
+          "unidad": "s",
+          "decimales": 0
+        },
+        {
+          "label": "Batería estimada en tu obra (días naturales, con 30 % de castigo)",
+          "formula": "Bd*(Hf*60/Bint)/(H*60/intv)*0.7*7/dl",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Memoria estimada (días naturales)",
+          "formula": "SD*1024/(H*60/intv*MB)*7/dl",
+          "unidad": "días",
+          "decimales": 0
+        },
+        {
+          "label": "Memoria que ocupa toda la obra",
+          "formula": "H*60/intv*D*dl/7*MB/1024",
+          "unidad": "GB",
+          "decimales": 1
+        },
+        {
+          "label": "Margen contra tu visita (verde ≥ 7 días; amarillo 0 a 7: cambia batería y baja la memoria en cada visita; rojo: la cámara se queda sin batería o memoria antes de que subas)",
+          "formula": "Math.min(Bd*(Hf*60/Bint)/(H*60/intv)*0.7*7/dl, SD*1024/(H*60/intv*MB)*7/dl)-R",
+          "unidad": "días",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            7,
+            0
+          ]
+        },
+        {
+          "label": "Visitas mínimas de mantenimiento durante la obra",
+          "formula": "Math.ceil(D/Math.min(Bd*(Hf*60/Bint)/(H*60/intv)*0.7*7/dl, SD*1024/(H*60/intv*MB)*7/dl))",
+          "unidad": "visitas",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Haz una prueba de 1 día con la cámara en la oficina de obra al intervalo que vas a usar: anota fotos tomadas y MB ocupados en la memoria; divide MB entre fotos y captúralo como 'memoria por foto'.",
+        "Captura tu horario real (ej. 7:00 a 17:00 = 10 h), días por semana, duración de la obra y la batería que declara el fabricante con su intervalo; si no dice cuántas horas al día supone, deja tus horas de obra.",
+        "Si el margen sale rojo, sube el intervalo (5 → 10 min), quita domingos del horario, pon una microSD más grande o una batería de expansión; vuelve a correr hasta que salga verde o amarillo.",
+        "Fija la fecha de cada visita con el 'número de visitas mínimas' en el programa de obra y asígnala a un responsable; usa el formato 'Instalación y revisión de cámara time-lapse' en cada visita.",
+        "Indicador PDCA (8 semanas): días con foto contra días programados (meta ≥ 95 %) y cuántas veces el video sirvió para resolver una discusión de fechas, avance o daños; si no llegas al 95 %, ajusta intervalo y frecuencia de visita."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Brinno – Comparativo de cámaras time-lapse para construcción 2026 (17-jul-2026): BCC5000 4K IP65 casi 200 días con batería de expansión; BCC2000 Plus 1080p IPX5 ~1 año con 16 pilas AA; BCC300 1080p IPX4 100 días; todas a intervalo de 5 min. Precio internacional USD 2,199 / 769.99 / 414.99",
+          "url": "https://brinno.com/blogs/brinno-tips/best-construction-time-lapse-camera-comparison-2026"
+        },
+        {
+          "titulo": "Brinno – BCC5000: intervalo de 3 s a 24 h, microSD hasta 256 GB, ~200 días a 5 min 'según pruebas internas; depende del intervalo, Wi-Fi y temperatura', operación 0 a 45 °C, abrazadera para 50 kg (consultado 20-nov-2026)",
+          "url": "https://brinno.com/pages/bcc5000-wifi-4k-construction-time-lapse-camera-bundle"
+        }
+      ]
+    },
+    {
+      "id": "fmt-camara-timelapse",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Instalación y revisión de cámara time-lapse: encuadre fijo, horario, batería, memoria y respaldo con fecha",
+      "resumen": "Checklist para que el video time-lapse sirva como evidencia de avance y de fechas (inicio de colados, retiro de cimbra, entrada de grúa, daños a colindancias) y no solo como video bonito: encuadre que no se mueve en toda la obra, hora de la cámara correcta, horario de captura programado, batería y memoria revisadas en cada visita y respaldo nombrado con fecha. Se llena al instalar y en cada visita de mantenimiento que dé la calculadora 'Cámara time-lapse en obra'.",
+      "agregada": "2026-11-20",
+      "campos": [
+        "Obra",
+        "Fecha y hora de la visita",
+        "Tipo de visita (instalación / mantenimiento / retiro)",
+        "Cámara (marca, modelo y número de serie)",
+        "Ubicación de montaje (poste, andamio, edificio vecino con permiso por escrito)",
+        "Frentes y ejes que cubre el encuadre",
+        "Intervalo y horario de captura programados",
+        "Batería al llegar (% o rayas) y acción (cambio / recarga)",
+        "Memoria usada al llegar (GB) y archivo respaldado (nombre)",
+        "Días con foto desde la visita anterior / días programados",
+        "Eventos de la obra visibles en este periodo (colados, montajes, incidentes)",
+        "Responsable de la cámara",
+        "Revisó (residente)"
+      ],
+      "items": [
+        "Montaje firme (abrazadera o tornillería, no cinchos) y fuera del paso de grúa, ollas y bomba; cámara asegurada contra robo (candado o caja)",
+        "Encuadre igual que la foto de referencia de la instalación (compara con la foto guardada) y nivel de burbuja revisado",
+        "Lente y ventana de la carcasa limpios, sin empañamiento; desecante dentro de la carcasa en temporada de lluvia o con Santa Ana (polvo)",
+        "Fecha y hora de la cámara correctas (contra el celular): de ellas depende que el video sirva como evidencia",
+        "Horario de captura programado solo en jornada de obra y días laborables; intervalo según la calculadora",
+        "Batería cambiada o cargada si ya no alcanza hasta la próxima visita",
+        "Memoria descargada, archivo respaldado como Obra_Camara_AAAAMMDD-AAAAMMDD y memoria liberada solo DESPUÉS de comprobar el respaldo",
+        "Revisión rápida del video del periodo: huecos sin foto, encuadre movido o tomas a contraluz anotados",
+        "Eventos importantes del periodo ligados a su hora en el video y anotados en el Reporte diario o la bitácora",
+        "Aviso a vecinos y trabajadores de que hay cámara; el encuadre no apunta a ventanas ni patios de vecinos"
+      ],
+      "como_usar": [
+        "Al instalar, toma una foto de referencia del encuadre desde la propia cámara y guárdala con el número de serie; esa foto se compara en cada visita.",
+        "Programa la fecha de cada visita con la calculadora 'Cámara time-lapse en obra' y llena este checklist en el celular cada vez que subas.",
+        "Respalda el archivo en la carpeta de la obra (no solo en la memoria) antes de borrar la tarjeta y anota el nombre del archivo en el formato.",
+        "Cuando haya una discusión de fechas o daños, busca el evento por hora en el video y anéxalo a la nota de bitácora con el nombre del archivo.",
+        "Cada mes revisa 'días con foto / días programados'; si baja de 95 %, sube la frecuencia de visita o mejora batería y memoria."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Brinno – Comparativo de cámaras time-lapse para construcción 2026 (17-jul-2026): BCC5000 4K IP65 casi 200 días con batería de expansión; BCC2000 Plus 1080p IPX5 ~1 año con 16 pilas AA; BCC300 1080p IPX4 100 días; todas a intervalo de 5 min. Precio internacional USD 2,199 / 769.99 / 414.99",
+          "url": "https://brinno.com/blogs/brinno-tips/best-construction-time-lapse-camera-comparison-2026"
+        },
+        {
+          "titulo": "Brinno – BCC5000: intervalo de 3 s a 24 h, microSD hasta 256 GB, ~200 días a 5 min 'según pruebas internas; depende del intervalo, Wi-Fi y temperatura', operación 0 a 45 °C, abrazadera para 50 kg (consultado 20-nov-2026)",
+          "url": "https://brinno.com/pages/bcc5000-wifi-4k-construction-time-lapse-camera-bundle"
+        }
+      ]
+    },
+    {
+      "id": "dig-fieldwire",
+      "tipo": "recurso",
+      "categoria": "Herramientas digitales",
+      "titulo": "Fieldwire (Hilti): planos, tareas y punch list en el celular, gratis para 5 usuarios y 3 obras",
+      "resumen": "App de gestión de campo: subes los planos en PDF, marcas sobre ellos tareas y pendientes (punch list) con foto, responsable, fecha y estado, y cada contratista ve y cierra lo suyo desde su celular. El plan Basic es gratuito mientras no pases de 5 usuarios, 3 proyectos y 100 planos; incluye visor de planos, tareas, archivos, fotos y especificaciones. Reportes, exportación, sello de fecha en fotos, formatos personalizados, RFIs y el etiquetado de fotos con IA son de planes de pago.",
+      "agregada": "2026-11-20",
+      "beneficio": "Pendientes y observaciones de calidad que hoy viven en libretas y WhatsApp quedan ubicados en el plano, con foto antes y después, responsable y fecha; se ve quién debe qué y cuántos días lleva abierto. Indicador: días promedio para cerrar un pendiente y pendientes abiertos al entregar cada nivel o vivienda, antes y después (meta: −30 % en 4 semanas).",
+      "plataforma": "iOS, Android y navegador web; uso sin conexión en la app móvil según el fabricante",
+      "costo": "Basic USD 0 (hasta 5 usuarios, 3 proyectos y 100 planos en total). Pro USD 39, Business USD 64 y Business Plus USD 89 por usuario al mes con pago anual; con pago mensual USD 54, 79 y 104 (sitio oficial y centro de ayuda, consultados 20-nov-2026). El etiquetado de fotos con IA solo está en Business y Business Plus. Precios en pesos y soporte de la app en español: no verificados hoy (el sitio sí tiene versión en español). Alternativa gratis sin app: el formato 'Entrega final y punch list' de ObraLab exportado a CSV.",
+      "url": "https://www.fieldwire.com/pricing/",
+      "como_usar": [
+        "Crea la cuenta gratuita y un proyecto por obra; sube solo los planos vigentes del frente que vas a controlar (no pases de 100 planos en las 3 obras) y respeta la lista maestra del formato 'Planos vigentes con QR'.",
+        "Invita a máximo 5 usuarios: residente, sobrestante y los 2 o 3 contratistas con más pendientes (acabados, instalaciones); el resto recibe sus pendientes por captura de pantalla.",
+        "Usa categorías fijas por especialidad (Albañilería, IHS, Eléctrica, Acabados, Cancelería) y una regla: todo pendiente lleva foto, ubicación en plano, responsable y fecha compromiso.",
+        "En la junta semanal filtra por responsable y por vencidos; el contratista sube foto al cerrar y el residente lo verifica en sitio antes de marcarlo como cerrado.",
+        "A las 4 semanas compara días promedio de cierre y pendientes abiertos contra tu libreta anterior, y mete el ahorro de horas en '¿Vale la pena esta herramienta digital?' antes de pagar un plan Pro."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Fieldwire by Hilti – Precios (consultado 20-nov-2026): Basic USD 0 (5 usuarios, 3 proyectos, 100 planos); Pro USD 39, Business USD 64, Business Plus USD 89 por usuario/mes con pago anual",
+          "url": "https://www.fieldwire.com/pricing/"
+        },
+        {
+          "titulo": "Fieldwire Help Center – Planes: gratis mientras no pases de 3 proyectos, 100 planos y 5 usuarios; pago mensual Pro USD 54, Business USD 79, Business Plus USD 104 por usuario; sin contratos a largo plazo",
+          "url": "https://help.fieldwire.com/hc/en-us/articles/202634054"
+        },
+        {
+          "titulo": "Fieldwire (blog, 26-jun-2026) – Software gratis de gestión de obra: el plan Basic incluye tareas, planos, checklists para punch list y uso sin conexión en iOS y Android (afirmación del fabricante)",
+          "url": "https://www.fieldwire.com/blog/free-construction-management-software/"
+        },
+        {
+          "titulo": "Fieldwire (14-oct-2025) – Etiquetado automático de fotos con IA por especialidad, solo en planes Business y Business Plus",
+          "url": "https://www.fieldwire.com/blog/product-updates-2025-ai-photo-tagging/"
         }
       ]
     }
