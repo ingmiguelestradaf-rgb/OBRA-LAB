@@ -9010,7 +9010,8 @@
         "Se comparó el dato antes y después con el mismo método de medición",
         "Si funcionó, se cambió el estándar (checklist de ObraLab, formato, junta) y se avisó a todas las cuadrillas",
         "Si no funcionó, se regresó a la causa raíz (no se abandonó el A3)",
-        "Todo cabe en una hoja y lo entiende un cabo sin explicación"
+        "Todo cabe en una hoja y lo entiende un cabo sin explicación",
+        "Si el problema es un retrabajo, su costo se calculó con 'Costo real de un retrabajo' y la contramedida incluye un candado a prueba de errores (plantilla, kit, punto de liberación o foto antes de tapar)"
       ],
       "como_usar": [
         "Elige UN problema: la causa principal del Pareto de no cumplimiento, un defecto que aparece en 3 o más recorridos Gemba o un retrabajo con costo. No abras más de 2 A3 al mismo tiempo.",
@@ -11289,6 +11290,339 @@
         {
           "titulo": "Fieldwire (14-oct-2025) – Etiquetado automático de fotos con IA por especialidad, solo en planes Business y Business Plus",
           "url": "https://www.fieldwire.com/blog/product-updates-2025-ai-photo-tagging/"
+        }
+      ]
+    },
+    {
+      "id": "calc-costo-retrabajo",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Costo real de un retrabajo: mano de obra, material, equipo y días de atraso, % del valor ejecutado y obra que hay que hacer para recuperarlo",
+      "resumen": "Un muro desplomado, una losa con instalaciones olvidadas o un aplanado rechazado se pagan dos veces, y casi nunca se anotan completos. Con las horas-hombre de demoler y rehacer, el material, el equipo y los días que se movió la ruta crítica, calcula el costo total del retrabajo, el acumulado del mes como % de la obra ejecutada contra tu meta y cuánta obra nueva tienes que ejecutar con tu margen de utilidad para recuperarlo. Referencias: el estudio de Love (ASCE, ene-2026) midió en promedio 0.38 % del contrato antes de entregar y 0.76 % con las correcciones posteriores, y encontró costos subreportados en 300 %; BCG (2026) cita 4 a 6 % del contrato. La meta de 1 % del ejemplo es un criterio de esta app, no una norma.",
+      "agregada": "2026-11-21",
+      "entradas": [
+        {
+          "id": "hh",
+          "label": "Horas-hombre de demoler, limpiar y rehacer (suma de toda la cuadrilla)",
+          "unidad": "h",
+          "valor": 48
+        },
+        {
+          "id": "ch",
+          "label": "Costo real de la hora de la cuadrilla (calculadora de Factor de salario real)",
+          "unidad": "$/h",
+          "valor": 110
+        },
+        {
+          "id": "mat",
+          "label": "Material desperdiciado + material nuevo para rehacer",
+          "unidad": "$",
+          "valor": 8500
+        },
+        {
+          "id": "eq",
+          "label": "Equipo, renta, acarreo y tiro de escombro",
+          "unidad": "$",
+          "valor": 2500
+        },
+        {
+          "id": "da",
+          "label": "Días que se movió la ruta crítica por este retrabajo (0 si no la tocó)",
+          "unidad": "días",
+          "valor": 2
+        },
+        {
+          "id": "ind",
+          "label": "Indirectos de campo por día (calculadora de Indirectos de campo)",
+          "unidad": "$/día",
+          "valor": 9000
+        },
+        {
+          "id": "otros",
+          "label": "Otros retrabajos ya registrados este mes",
+          "unidad": "$",
+          "valor": 15000
+        },
+        {
+          "id": "ev",
+          "label": "Obra ejecutada en el mes (importe del corte o estimación, sin IVA)",
+          "unidad": "$",
+          "valor": 3500000
+        },
+        {
+          "id": "ut",
+          "label": "Margen de utilidad de la obra",
+          "unidad": "%",
+          "valor": 8
+        },
+        {
+          "id": "meta",
+          "label": "Meta de retrabajo de la obra (% de lo ejecutado)",
+          "unidad": "%",
+          "valor": 1
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Costo directo del retrabajo (mano de obra + material + equipo)",
+          "formula": "hh*ch+mat+eq",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo por días de atraso (indirectos)",
+          "formula": "da*ind",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo total de este retrabajo",
+          "formula": "hh*ch+mat+eq+da*ind",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Jornadas de 8 h pagadas dos veces",
+          "formula": "hh/8",
+          "unidad": "jornadas",
+          "decimales": 1
+        },
+        {
+          "label": "Retrabajo acumulado del mes",
+          "formula": "hh*ch+mat+eq+da*ind+otros",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Retrabajo del mes como % de la obra ejecutada",
+          "formula": "ev>0?(hh*ch+mat+eq+da*ind+otros)/ev*100:0",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Margen bajo la meta (puntos %; verde ≥ 0.25, rojo si es negativo)",
+          "formula": "meta-(ev>0?(hh*ch+mat+eq+da*ind+otros)/ev*100:0)",
+          "unidad": "pts %",
+          "decimales": 2,
+          "semaforo": [
+            0.25,
+            0
+          ]
+        },
+        {
+          "label": "Obra nueva que hay que ejecutar con tu margen para recuperar este retrabajo",
+          "formula": "ut>0?(hh*ch+mat+eq+da*ind)/(ut/100):0",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Cada vez que se demuela o rehaga algo, anótalo el mismo día en el formato 'Registro de retrabajos con 5 porqués' y pide al cabo las horas-hombre reales (cuántos y cuántas horas).",
+        "Captura material, equipo y escombro con las remisiones o vales de almacén; los días de atraso cuentan solo si el retrabajo movió la ruta crítica (revísalo en el programa).",
+        "Lee el resultado: en el ejemplo, 48 h-h, $8,500 de material, $2,500 de equipo y 2 días de atraso suman $34,280; con lo ya registrado el mes llega a $49,280 = 1.41 % de lo ejecutado, 0.41 puntos arriba de la meta (rojo).",
+        "Usa el último renglón en la junta con contratistas: con 8 % de utilidad, ese solo retrabajo se come la ganancia de $428,500 de obra.",
+        "Al cierre de mes captura el total en el 'Cierre mensual de costos' y lleva el retrabajo más caro a un Reporte A3; mide el % del mes siguiente con la misma calculadora."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ASCE Civil Engineering Source (22-ene-2026) – How much does field rework in construction actually cost? Resume a Love, J. Constr. Eng. Manage.: retrabajo antes de terminar promedio 0.38 % del contrato (0.01 a 3.67 %), 0.76 % con correcciones después de entregar (hasta 7.34 %), y costos reales subreportados en 300 %",
+          "url": "https://www.asce.org/publications-and-news/civil-engineering-source/article/2026/01/22/how-much-does-field-rework-in-construction-actually-cost"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        }
+      ]
+    },
+    {
+      "id": "fmt-registro-retrabajo",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Registro de retrabajos con 5 porqués y candado a prueba de errores (poka-yoke): que el mismo defecto no se repita en el siguiente nivel",
+      "resumen": "Bitácora corta para anotar cada retrabajo el mismo día: qué se rehízo, dónde, cuánto costó (horas-hombre, material, días), la causa por tipo (diseño o plano, cambio del cliente, material defectuoso, ejecución, falta de liberación, daño por otro oficio) y los 5 porqués hechos en el frente con el cabo. Cierra con un candado a prueba de errores: plantilla, escantillón, kit de material, punto de liberación o foto obligatoria antes de tapar. El estudio de Love (ASCE, 2026) encontró que el retrabajo se subreporta en 300 %: este registro es la base para medirlo de verdad.",
+      "agregada": "2026-11-21",
+      "campos": [
+        "Obra / frente / nivel o unidad / fecha en que se detectó / quién lo detectó",
+        "Qué se rehízo (concepto del catálogo) y cantidad (m², m³, piezas, ml) · foto antes y después",
+        "Contratista o cuadrilla que ejecutó el trabajo original y cuadrilla que lo rehace",
+        "Tipo de causa: diseño o plano / cambio del cliente / material defectuoso / ejecución / se tapó sin liberar / daño por otro oficio / otro",
+        "Costo: horas-hombre, material, equipo y escombro, días de ruta crítica (de la calculadora 'Costo real de un retrabajo')",
+        "¿Quién paga? Empresa / contratista (descuento en destajo) / cliente (extraordinario) · documento que lo respalda",
+        "5 porqués hechos en el frente con el cabo (por qué 1 a 5) y causa raíz",
+        "Candado a prueba de errores: plantilla o escantillón / kit de material / punto de liberación / foto obligatoria antes de tapar / cambio en el plano o checklist",
+        "Responsable del candado y fecha · dónde aplica (siguiente nivel, unidades restantes)",
+        "Verificación: ¿se repitió en las siguientes 3 unidades o niveles? (sí / no, fecha)",
+        "Revisó (residente o calidad) / aprobó (superintendente)"
+      ],
+      "items": [
+        "Se registró el mismo día que se detectó, con foto",
+        "Las horas-hombre las dio el cabo, no son un estimado de oficina",
+        "Se clasificó la causa en un solo tipo",
+        "Los 5 porqués se hicieron en el frente y terminan en algo que se puede cambiar (proceso, información, secuencia), no en una persona",
+        "Quedó definido quién paga y con qué documento (vale de destajo, nota de bitácora, extraordinario)",
+        "Hay un candado a prueba de errores, no solo 'tener más cuidado'",
+        "El candado se puso antes de que la cuadrilla llegue al siguiente nivel o unidad",
+        "Se revisó en las 3 unidades siguientes que el defecto no se repitió",
+        "El costo se sumó al retrabajo del mes en el cierre de costos",
+        "Los 3 retrabajos más caros del mes se presentaron en la junta con contratistas"
+      ],
+      "como_usar": [
+        "Ten el formato abierto en el celular de residentes y de calidad; cada demolición o corrección se anota el mismo día con foto antes y después.",
+        "En el frente, en 10 minutos con el cabo, haz los 5 porqués y elige la causa en un solo tipo; si es de plano o del cliente, abre la nota de bitácora o el extraordinario ese mismo día.",
+        "Define el candado a prueba de errores (ej. escantillón para alturas de chalupas, foto de instalaciones obligatoria antes de cerrar tablaroca, kit de material por baño) y ponlo antes del siguiente nivel o unidad.",
+        "Revisa las siguientes 3 unidades: si el defecto no reaparece, agrega el candado al checklist de calidad de la etapa; si reaparece, lleva el caso a un Reporte A3.",
+        "Cada viernes suma los costos del registro en la calculadora 'Costo real de un retrabajo' y compara el % contra la meta de la obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ASCE Civil Engineering Source (22-ene-2026) – How much does field rework in construction actually cost? Resume a Love, J. Constr. Eng. Manage.: retrabajo antes de terminar promedio 0.38 % del contrato (0.01 a 3.67 %), 0.76 % con correcciones después de entregar (hasta 7.34 %), y costos reales subreportados en 300 %",
+          "url": "https://www.asce.org/publications-and-news/civil-engineering-source/article/2026/01/22/how-much-does-field-rework-in-construction-actually-cost"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        }
+      ]
+    },
+    {
+      "id": "calc-flujo-valor-ciclo",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Mapa de flujo de valor del ciclo de losa (o de cualquier ciclo repetitivo): tiempo que agrega valor, esperas, eficiencia del ciclo y días que ganas en toda la obra",
+      "resumen": "Recorre un ciclo completo de un nivel (trazo, cimbra, armado, instalaciones, liberación, colado y curado hasta poder cimbrar arriba) y separa las horas de jornada en tres: lo que agrega valor (alguien está transformando el elemento), lo necesario que no agrega valor (curado mínimo, inspección obligatoria) y el desperdicio puro (esperar liberación, olla, bomba o material, retrabajos, traslados). Calcula el tiempo del ciclo, la eficiencia del ciclo (valor agregado ÷ tiempo total), y cuántos días y pesos de indirectos ganas en toda la obra si reduces las esperas. Es la versión de bolsillo del mapa de flujo de valor (VSM) del Lean Construction Institute; un caso publicado en 2026 combinó VSM con BIM y bajó 15 % las horas de excavación.",
+      "agregada": "2026-11-21",
+      "entradas": [
+        {
+          "id": "va",
+          "label": "Horas que agregan valor en el ciclo (trazo, cimbrar, armar, instalar, colar)",
+          "unidad": "h",
+          "valor": 40
+        },
+        {
+          "id": "nn",
+          "label": "Horas necesarias que no agregan valor (curado mínimo antes de cargar, inspección obligatoria)",
+          "unidad": "h",
+          "valor": 16
+        },
+        {
+          "id": "el",
+          "label": "Espera de liberación (supervisión, laboratorio, DRO, residente)",
+          "unidad": "h",
+          "valor": 6
+        },
+        {
+          "id": "em",
+          "label": "Espera de material, olla, bomba o equipo",
+          "unidad": "h",
+          "valor": 8
+        },
+        {
+          "id": "rt",
+          "label": "Retrabajos dentro del ciclo",
+          "unidad": "h",
+          "valor": 4
+        },
+        {
+          "id": "ot",
+          "label": "Otras esperas (frente ocupado por otro oficio, cuadrilla incompleta)",
+          "unidad": "h",
+          "valor": 4
+        },
+        {
+          "id": "J",
+          "label": "Horas de jornada por día",
+          "unidad": "h",
+          "valor": 8
+        },
+        {
+          "id": "r",
+          "label": "Reducción que te propones en el desperdicio puro",
+          "unidad": "%",
+          "valor": 50
+        },
+        {
+          "id": "N",
+          "label": "Ciclos que faltan (niveles, losas, viviendas) en ruta crítica",
+          "unidad": "ciclos",
+          "valor": 8
+        },
+        {
+          "id": "ind",
+          "label": "Indirectos de campo por día",
+          "unidad": "$/día",
+          "valor": 9000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Tiempo total del ciclo",
+          "formula": "va+nn+el+em+rt+ot",
+          "unidad": "h",
+          "decimales": 0
+        },
+        {
+          "label": "Días de jornada por ciclo hoy",
+          "formula": "(va+nn+el+em+rt+ot)/J",
+          "unidad": "días",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Eficiencia del ciclo (valor agregado ÷ tiempo total)",
+          "formula": "va/(va+nn+el+em+rt+ot)*100",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Desperdicio puro (esperas + retrabajos) como % del ciclo",
+          "formula": "(el+em+rt+ot)/(va+nn+el+em+rt+ot)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Días por ciclo con la mejora",
+          "formula": "(va+nn+(el+em+rt+ot)*(1-r/100))/J",
+          "unidad": "días",
+          "decimales": 2
+        },
+        {
+          "label": "Días que ganas en los ciclos que faltan",
+          "formula": "(el+em+rt+ot)*r/100/J*N",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Indirectos que te ahorras",
+          "formula": "(el+em+rt+ot)*r/100/J*N*ind",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Elige el ciclo que manda en el programa (normalmente el de losa por nivel) y sigue un ciclo completo con el reporte diario: anota por hora qué pasó con el elemento, no con cada trabajador.",
+        "Clasifica cada hora en valor agregado, necesario sin valor o desperdicio puro (liberación, material, retrabajo, otras esperas) y captúralas; no cuentes doble las horas en que hubo trabajo y espera a la vez.",
+        "Lee el resultado: en el ejemplo el ciclo dura 78 h = 9.75 días, la eficiencia es 51.3 % y el desperdicio puro es 28.2 %; bajar a la mitad las esperas da 1.38 días por nivel, 11 días en 8 niveles y $99,000 de indirectos.",
+        "Ataca la espera más grande con una sola contramedida (ej. liberación programada a hora fija, olla confirmada el día anterior, kit de material listo) y anótala en el Reporte A3 o en el Registro de retrabajos.",
+        "Mide el siguiente ciclo igual y compara días por ciclo y eficiencia; los días ganados solo cuentan si ese ciclo está en ruta crítica (revísalo en el programa o en la línea de balance)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery: Value Stream Mapping, First-run Study, Work in Process",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        },
+        {
+          "titulo": "Mohan et al., Frontiers in Built Environment (26-feb-2026) – VSM con BIM 4D/5D en un edificio G+7: excavación de 536 a 455.6 h (−15 %), total de 11,400 a 11,165 h (−2 %) en 4 meses",
+          "url": "https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2026.1761692/full"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
         }
       ]
     }

@@ -1,6 +1,36 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-21",
+      "titulo": "Lean: cuánto cuesta de verdad cada retrabajo, registro con 5 porqués y candado a prueba de errores, y mapa de flujo de valor del ciclo de losa",
+      "resumen": "'Costo real de un retrabajo' suma mano de obra, material, equipo y días de ruta crítica, da el % del mes contra tu meta y la obra que hay que ejecutar para recuperarlo: en el ejemplo un retrabajo de 48 h-h con 2 días de atraso cuesta $34,280, el mes llega a 1.41 % de lo ejecutado (rojo contra meta de 1 %) y con 8 % de utilidad equivale a la ganancia de $428,500 de obra. 'Registro de retrabajos con 5 porqués' lo anota el mismo día, define quién paga y obliga a poner un candado a prueba de errores antes del siguiente nivel. 'Mapa de flujo de valor del ciclo de losa' separa horas de valor, necesarias y desperdicio: en el ejemplo 78 h por ciclo (9.75 días), 51.3 % de eficiencia, y bajar a la mitad las esperas da 11 días y $99,000 de indirectos en 8 niveles. Contexto: Love (ASCE, ene-2026) midió retrabajo promedio de 0.38 % del contrato antes de entregar y 0.76 % con correcciones posteriores, con costos subreportados en 300 %; BCG (2026) cita 4 a 6 %. Mejora: el 'Reporte A3' pide costear los retrabajos y cerrar con candado a prueba de errores.",
+      "herramientas": [
+        "calc-costo-retrabajo",
+        "fmt-registro-retrabajo",
+        "calc-flujo-valor-ciclo",
+        "fmt-a3"
+      ],
+      "como_aplicarlo": "1) Desde el lunes pide a residentes llenar el 'Registro de retrabajos' cada vez que se demuela o rehaga algo, con horas-hombre del cabo y foto. 2) El viernes suma los costos en 'Costo real de un retrabajo' y presenta los 3 más caros en la junta con contratistas. 3) Sigue un ciclo de losa completo, captúralo en el 'Mapa de flujo de valor' y ataca la espera más grande con una sola contramedida; mide el siguiente ciclo para comparar.",
+      "fuentes": [
+        {
+          "titulo": "ASCE Civil Engineering Source (22-ene-2026) – How much does field rework in construction actually cost? Resume a Love, J. Constr. Eng. Manage.: retrabajo antes de terminar promedio 0.38 % del contrato (0.01 a 3.67 %), 0.76 % con correcciones después de entregar (hasta 7.34 %), y costos reales subreportados en 300 %",
+          "url": "https://www.asce.org/publications-and-news/civil-engineering-source/article/2026/01/22/how-much-does-field-rework-in-construction-actually-cost"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        },
+        {
+          "titulo": "Mohan et al., Frontiers in Built Environment (26-feb-2026) – VSM con BIM 4D/5D en un edificio G+7: excavación de 536 a 455.6 h (−15 %), total de 11,400 a 11,165 h (−2 %) en 4 meses",
+          "url": "https://www.frontiersin.org/journals/built-environment/articles/10.3389/fbuil.2026.1761692/full"
+        },
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery: Value Stream Mapping, First-run Study, Work in Process",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-20",
       "titulo": "Herramientas digitales: cámara time-lapse que sí sirve como evidencia (batería, memoria y visitas calculadas) y punch list en el plano con Fieldwire gratis",
       "resumen": "'Cámara time-lapse en obra' calcula con tu horario las fotos por día, la duración del video de toda la obra, y los días que aguantan batería y memoria contra tu frecuencia de visita. En el ejemplo (10 h, 5 min, 6 días/semana, 180 días, batería declarada de 100 días a 5 min, 0.5 MB por foto, microSD de 64 GB, visita cada 30 días): 120 fotos/día, video de 10.3 min, batería estimada de 82 días con 30 % de castigo, memoria de 1,274 días, margen de 52 días (verde) y 3 visitas mínimas. La memoria por foto no la publica el fabricante: se mide con una prueba de 1 día. El formato 'Instalación y revisión de cámara time-lapse' cuida que el video valga como evidencia: encuadre fijo, hora de la cámara correcta, respaldo con fecha antes de borrar y eventos ligados a la bitácora. 'Fieldwire' lleva los pendientes y el punch list sobre el plano con foto, responsable y fecha; su plan Basic es gratis hasta 5 usuarios, 3 proyectos y 100 planos (precios verificados en el sitio oficial el 20-nov-2026; precios en pesos no verificados). Mejora: el 'Recorrido 360° semanal' suma un punto para fechar avances con el video time-lapse.",
