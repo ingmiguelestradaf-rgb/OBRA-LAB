@@ -1,6 +1,47 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-22",
+      "titulo": "Normatividad: residuos de construcción en regla — ¿tu obra pasa los 80 m³ de la NOM-161 o las 10 t de gran generador en B.C.?, meta de 50 % valorizado y control de cada viaje de escombro",
+      "resumen": "'Residuos de construcción de tu obra' estima m³ sueltos y toneladas con los m², la excavación y la demolición: en el ejemplo (1,500 m², 140 m³ de excavación sobrante) salen 191 m³ y 270 t, así que la obra requiere plan de manejo (NOM-161-SEMARNAT-2011, más de 80 m³) y es gran generador ante la Secretaría de Medio Ambiente de B.C. (10 t o más al año: plan, bitácora física y electrónica, manifiestos e informe anual, art. 14); mandar 60 m³ a reúso da 31 % contra la meta de 50 % del art. 17, y faltan 35.5 m³. 'Control de residuos de construcción en obra' asegura separación, transportista y sitio autorizados y un vale por viaje. Contexto: Tijuana no tiene bancos de tiro municipales autorizados (ago-2026) y el centro de separación que impulsaba CMIC no se concretó; la reforma estatal de oct-2025 creó el padrón municipal de acopiadores. Mejora: el 'Expediente de cierre y entrega de obra' ahora pide los comprobantes de destino de todos los viajes.",
+      "herramientas": [
+        "calc-residuos-construccion",
+        "fmt-plan-manejo-rcd",
+        "fmt-cierre-entrega-obra"
+      ],
+      "como_aplicarlo": "1) Corre la calculadora con los m² de la licencia y la excavación del plano de cimentación; si pasas 80 m³ o 10 t, pide esta semana a tu gestor ambiental el plan de manejo y el registro ante la Secretaría. 2) Antes del próximo viaje exige al transportista su autorización y el acuse del sitio de destino, y abre el formato 'Control de residuos'. 3) El viernes cuenta los vales, captura m³ por tipo y ofrece la tierra limpia y el concreto triturado a otras obras para subir el % valorizado.",
+      "fuentes": [
+        {
+          "titulo": "NOM-161-SEMARNAT-2011 (DOF 01-02-2013, vigente según la ficha de la Secretaría de Economía): Anexo normativo, fracción VII – residuos de la construcción, mantenimiento y demolición en general que se generen en una obra en una cantidad mayor a 80 m³ están sujetos a plan de manejo",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/134113/20.-_NORMA_OFICIAL_MEXICANA_NOM-161-SEMARNAT-2011.pdf"
+        },
+        {
+          "titulo": "Secretaría de Economía – ficha de la NOM-161-SEMARNAT-2011: estado vigente; revisión sistemática de 2023 con resultado 'modificación' (sin norma nueva publicada a la fecha)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-161-semarnat-2011/"
+        },
+        {
+          "titulo": "Ley para la Prevención, Gestión Integral y Economía Circular de los Residuos del Estado de Baja California (POE 26-03-2021, última reforma 17-10-2025): art. 11 d) gran generador ≥ 10 t/año; art. 14 plan de manejo ante la Secretaría de Medio Ambiente y Desarrollo Sustentable, bitácora física y electrónica, informe anual y manifiestos; art. 17 residuos de construcción a sitios autorizados y valorizar al menos 50 % cuando la infraestructura local lo permita; art. 51 prohibiciones",
+          "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_VII/20251017_LEYRESIDUOS.PDF"
+        },
+        {
+          "titulo": "El Imparcial (10-oct-2025) – Reforma al art. 8 de la ley de residuos de BC: padrón municipal de acopiadores y recicladores y convenios de recolección con separación desde el origen",
+          "url": "https://www.elimparcial.com/mxl/mexicali/2025/10/10/aprueban-reforma-para-fortalecer-la-economia-circular-y-formalizar-redes-de-reciclaje-en-baja-california/"
+        },
+        {
+          "titulo": "El Imparcial (3-ago-2026) – Tijuana no tiene bancos de tiro autorizados para escombro; el Colegio de Arquitectos pide al menos cuatro",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/08/03/tijuana-no-tiene-donde-tirar-escombros-arquitectos-piden-crear-bancos-autorizados/"
+        },
+        {
+          "titulo": "El Imparcial, columna del presidente de CMIC Tijuana, Tecate y Rosarito (25-abr-2026) – el centro de separación y disposición de residuos de construcción no se concretó; propone separar concreto, acero y madera para reutilizarlos",
+          "url": "https://www.elimparcial.com/tij/columnas/2026/04/25/sin-seguimiento-no-hay-solucion-al-manejo-de-residuos-de-construccion/"
+        },
+        {
+          "titulo": "Miranda Pasos et al., Epistemus 20 (2016), UNISON – 12 viviendas de 46.1 m² en Hermosillo: 747.6 kg de residuos por vivienda (≈16 kg/m²; mortero 36 %, concreto 36 %, block 26 %)",
+          "url": "https://biblat.unam.mx/hevila/EpistemusCienciatecnologiaysalud/2016/no20/11.pdf"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-21",
       "titulo": "Lean: cuánto cuesta de verdad cada retrabajo, registro con 5 porqués y candado a prueba de errores, y mapa de flujo de valor del ciclo de losa",
       "resumen": "'Costo real de un retrabajo' suma mano de obra, material, equipo y días de ruta crítica, da el % del mes contra tu meta y la obra que hay que ejecutar para recuperarlo: en el ejemplo un retrabajo de 48 h-h con 2 días de atraso cuesta $34,280, el mes llega a 1.41 % de lo ejecutado (rojo contra meta de 1 %) y con 8 % de utilidad equivale a la ganancia de $428,500 de obra. 'Registro de retrabajos con 5 porqués' lo anota el mismo día, define quién paga y obliga a poner un candado a prueba de errores antes del siguiente nivel. 'Mapa de flujo de valor del ciclo de losa' separa horas de valor, necesarias y desperdicio: en el ejemplo 78 h por ciclo (9.75 días), 51.3 % de eficiencia, y bajar a la mitad las esperas da 11 días y $99,000 de indirectos en 8 niveles. Contexto: Love (ASCE, ene-2026) midió retrabajo promedio de 0.38 % del contrato antes de entregar y 0.76 % con correcciones posteriores, con costos subreportados en 300 %; BCG (2026) cita 4 a 6 %. Mejora: el 'Reporte A3' pide costear los retrabajos y cerrar con candado a prueba de errores.",

@@ -2736,6 +2736,7 @@
         "Subcontratistas con finiquito firmado, retenciones liberadas y sin adeudos de IMSS / REPSE pendientes",
         "Vivienda: póliza de garantía con vigencia, alcances, exclusiones y mecanismo de reclamo (NOM-247: 5 años estructura, 3 impermeabilización, 1 lo demás)",
         "Manual de uso y mantenimiento entregado (impermeabilización, instalaciones, equipos) con garantías de proveedores",
+        "Comprobantes de destino de todos los viajes de escombro y tierra (transportista y sitio autorizados) y plan de manejo de residuos cerrado, si la obra pasó de 80 m³ (NOM-161) — ver 'Control de residuos de construcción'",
         "Plan específico de protección civil de la obra cerrado y retiro de instalaciones provisionales (tapiales, tomas, letrero)",
         "Fecha de liberación de la fianza y fecha fin de cada garantía agendadas en el calendario"
       ],
@@ -2774,6 +2775,264 @@
         {
           "titulo": "El Imparcial (abr 2026) – Protección Civil de Tijuana, operativo 'Obra Verificada': 6 de 8 obras infraccionadas (sin unidad interna, sin capacitación, salidas obstruidas, sin extintores); multas de 1,000 UMA y 30 días para el plan específico",
           "url": "https://www.elimparcial.com/tij/tijuana/2026/04/09/infraccionan-seis-de-ocho-obras-revisadas-en-tijuana-por-incumplimientos/"
+        },
+        {
+          "titulo": "Ley para la Prevención, Gestión Integral y Economía Circular de los Residuos del Estado de Baja California (POE 26-03-2021, última reforma 17-10-2025): art. 11 d) gran generador ≥ 10 t/año; art. 14 plan de manejo ante la Secretaría de Medio Ambiente y Desarrollo Sustentable, bitácora física y electrónica, informe anual y manifiestos; art. 17 residuos de construcción a sitios autorizados y valorizar al menos 50 % cuando la infraestructura local lo permita; art. 51 prohibiciones",
+          "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_VII/20251017_LEYRESIDUOS.PDF"
+        }
+      ]
+    },
+    {
+      "id": "calc-residuos-construccion",
+      "tipo": "calculadora",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Residuos de construcción de tu obra: m³ y toneladas, ¿pasas los 80 m³ de la NOM-161 o las 10 t/año de gran generador en B.C.?, % valorizado contra la meta de 50 % y viajes de camión",
+      "resumen": "Con los m² de construcción, la excavación que sale de la obra y lo que demueles, estima el volumen suelto y las toneladas de residuos. Te dice si necesitas plan de manejo (NOM-161-SEMARNAT-2011: más de 80 m³ en una obra), si eres gran generador ante la Secretaría de Medio Ambiente de B.C. (10 t o más al año), qué % valorizas contra la meta del art. 17 de la ley estatal (al menos 50 % cuando haya infraestructura) y cuántos viajes y cuánto dinero te cuesta sacar el resto. En el ejemplo (1,500 m² y 140 m³ de excavación sobrante) salen 191 m³ y 270 t: sí lleva plan de manejo y sí eres gran generador; mandar 60 m³ a reúso da 31 % (rojo).",
+      "agregada": "2026-11-22",
+      "entradas": [
+        {
+          "id": "A",
+          "label": "Superficie de construcción de la obra",
+          "unidad": "m²",
+          "valor": 1500
+        },
+        {
+          "id": "TG",
+          "label": "Residuos de obra negra y acabados por m² (16 kg/m² medido en vivienda; ajústalo con tus viajes reales)",
+          "unidad": "kg/m²",
+          "valor": 16
+        },
+        {
+          "id": "PV",
+          "label": "Peso volumétrico del escombro suelto (concreto, block, mortero)",
+          "unidad": "t/m³",
+          "valor": 1.5
+        },
+        {
+          "id": "EX",
+          "label": "Excavación total medida en banco (volumen geométrico)",
+          "unidad": "m³",
+          "valor": 180
+        },
+        {
+          "id": "RE",
+          "label": "Excavación que reusas como relleno dentro de la misma obra (en banco)",
+          "unidad": "m³",
+          "valor": 40
+        },
+        {
+          "id": "FA",
+          "label": "Factor de abundamiento de la tierra (1.25 típico en arcilla o arena-grava; usa el de tu estudio de mecánica de suelos)",
+          "unidad": "",
+          "valor": 1.25
+        },
+        {
+          "id": "PT",
+          "label": "Peso volumétrico de la tierra en banco (1.76 t/m³ arcilla húmeda)",
+          "unidad": "t/m³",
+          "valor": 1.76
+        },
+        {
+          "id": "DM",
+          "label": "Escombro de demolición, suelto (0 si es obra nueva)",
+          "unidad": "m³",
+          "valor": 0
+        },
+        {
+          "id": "VR",
+          "label": "Residuos que mandas a valorizar: reciclaje, reúso en otra obra, acopiador del padrón municipal (suelto)",
+          "unidad": "m³",
+          "valor": 60
+        },
+        {
+          "id": "CAM",
+          "label": "Capacidad del camión de volteo",
+          "unidad": "m³",
+          "valor": 7
+        },
+        {
+          "id": "TV",
+          "label": "Tu costo por viaje a sitio autorizado (flete + derecho de tiro)",
+          "unidad": "$",
+          "valor": 2500
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Residuos que salen de la obra (volumen suelto)",
+          "formula": "A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM",
+          "unidad": "m³",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Margen contra el límite de 80 m³ de la NOM-161 (negativo = la obra requiere plan de manejo)",
+          "formula": "80-(A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)",
+          "unidad": "m³",
+          "decimales": 1,
+          "semaforo": [
+            20,
+            0
+          ]
+        },
+        {
+          "label": "Toneladas de residuos de la obra",
+          "formula": "A*TG/1000+Math.max(0,EX-RE)*PT+DM*PV",
+          "unidad": "t",
+          "decimales": 1
+        },
+        {
+          "label": "Margen contra 10 t/año de gran generador en B.C. (negativo = plan de manejo, registro, bitácora e informe anual ante la Secretaría; si la obra dura más de un año, divide entre los años)",
+          "formula": "10-(A*TG/1000+Math.max(0,EX-RE)*PT+DM*PV)",
+          "unidad": "t",
+          "decimales": 1,
+          "semaforo": [
+            2,
+            0
+          ]
+        },
+        {
+          "label": "% valorizado (meta art. 17: al menos 50 %)",
+          "formula": "100*Math.min(VR,A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)/(A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            50,
+            30
+          ]
+        },
+        {
+          "label": "m³ adicionales que tendrías que valorizar para llegar al 50 %",
+          "formula": "Math.max(0,0.5*(A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)-VR)",
+          "unidad": "m³",
+          "decimales": 1
+        },
+        {
+          "label": "Viajes de camión totales (cada uno con su manifiesto o vale)",
+          "formula": "Math.ceil((A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)/CAM)",
+          "unidad": "viajes",
+          "decimales": 0
+        },
+        {
+          "label": "Costo de llevar a sitio autorizado lo que no se valoriza",
+          "formula": "Math.ceil(Math.max(0,A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM-VR)/CAM)*TV",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Ahorro en viajes si llegas al 50 % valorizado",
+          "formula": "(Math.ceil(Math.max(0,A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM-VR)/CAM)-Math.ceil(0.5*(A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM)/CAM))*TV*((VR<0.5*(A*TG/1000/PV+Math.max(0,EX-RE)*FA+DM))?1:0)",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Antes de excavar, captura los m² de la licencia, la excavación del plano de cimentación (en banco) y lo que vas a reusar como relleno; si hay demolición, mídela suelta (largo × ancho × alto del montón o viajes).",
+        "Si el margen de 80 m³ sale negativo, la obra requiere plan de manejo de residuos de construcción (NOM-161); si el de 10 t sale negativo, eres gran generador en B.C.: plan de manejo ante la Secretaría de Medio Ambiente y Desarrollo Sustentable, bitácora física y electrónica, manifiestos e informe anual (art. 14). Casi cualquier edificio con sótano o plataforma lo pasa.",
+        "Busca a dónde valorizar: tierra limpia para rellenos de otras obras, concreto y block triturado como base, acero y cartón con acopiadores del padrón municipal. Sube 'VR' hasta que el % valorizado quede en verde y compara el ahorro en viajes.",
+        "Cada semana corrige 'TG' con los viajes reales del reporte diario (m³ por viaje × viajes ÷ m² construidos a la fecha) para que el pronóstico se ajuste a tu obra.",
+        "Las tasas de ejemplo vienen de un estudio en vivienda de Hermosillo (16 kg/m², sin excavación) y de una tesina de la UNAM (1.5 t/m³); son orientativas. Los derechos de tiro y fletes no se verificaron: usa tu cotización. Confirma con la Secretaría estatal si tu obra se registra como gran generador por obra o por empresa."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-161-SEMARNAT-2011 (DOF 01-02-2013, vigente según la ficha de la Secretaría de Economía): Anexo normativo, fracción VII – residuos de la construcción, mantenimiento y demolición en general que se generen en una obra en una cantidad mayor a 80 m³ están sujetos a plan de manejo",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/134113/20.-_NORMA_OFICIAL_MEXICANA_NOM-161-SEMARNAT-2011.pdf"
+        },
+        {
+          "titulo": "Secretaría de Economía – ficha de la NOM-161-SEMARNAT-2011: estado vigente; revisión sistemática de 2023 con resultado 'modificación' (sin norma nueva publicada a la fecha)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-161-semarnat-2011/"
+        },
+        {
+          "titulo": "Ley para la Prevención, Gestión Integral y Economía Circular de los Residuos del Estado de Baja California (POE 26-03-2021, última reforma 17-10-2025): art. 11 d) gran generador ≥ 10 t/año; art. 14 plan de manejo ante la Secretaría de Medio Ambiente y Desarrollo Sustentable, bitácora física y electrónica, informe anual y manifiestos; art. 17 residuos de construcción a sitios autorizados y valorizar al menos 50 % cuando la infraestructura local lo permita; art. 51 prohibiciones",
+          "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_VII/20251017_LEYRESIDUOS.PDF"
+        },
+        {
+          "titulo": "El Imparcial (10-oct-2025) – Reforma al art. 8 de la ley de residuos de BC: padrón municipal de acopiadores y recicladores y convenios de recolección con separación desde el origen",
+          "url": "https://www.elimparcial.com/mxl/mexicali/2025/10/10/aprueban-reforma-para-fortalecer-la-economia-circular-y-formalizar-redes-de-reciclaje-en-baja-california/"
+        },
+        {
+          "titulo": "Miranda Pasos et al., Epistemus 20 (2016), UNISON – 12 viviendas de 46.1 m² en Hermosillo: 747.6 kg de residuos por vivienda (≈16 kg/m²; mortero 36 %, concreto 36 %, block 26 %)",
+          "url": "https://biblat.unam.mx/hevila/EpistemusCienciatecnologiaysalud/2016/no20/11.pdf"
+        },
+        {
+          "titulo": "Laiseca, tesina de especialidad UNAM (2016) – peso volumétrico de RCD de 1.5 t/m³, arcilla húmeda 1.76 t/m³; solo 4 % de los RCD se aprovecha y 20 % llega a sitios autorizados",
+          "url": "https://ru.dgb.unam.mx/bitstream/20.500.14330/TES01000745557/3/0745557.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3-ago-2026) – Tijuana no tiene bancos de tiro autorizados para escombro; el Colegio de Arquitectos pide al menos cuatro",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/08/03/tijuana-no-tiene-donde-tirar-escombros-arquitectos-piden-crear-bancos-autorizados/"
+        }
+      ]
+    },
+    {
+      "id": "fmt-plan-manejo-rcd",
+      "tipo": "formato",
+      "categoria": "Normatividad y documentación",
+      "titulo": "Control de residuos de construcción en obra: plan de manejo (NOM-161), separación, transportista y sitio autorizados, manifiestos y bitácora (ley de residuos de B.C.)",
+      "resumen": "Formato semanal para que cada viaje de escombro tenga respaldo: plan de manejo presentado, registro como gran generador, separación en obra (tierra, concreto y block, acero, madera, cartón y residuos peligrosos aparte), transportista y sitio autorizados, manifiesto o vale de cada viaje, bitácora física y electrónica y cuadre de m³ contra lo calculado. En Tijuana no hay bancos de tiro municipales autorizados (El Imparcial, ago-2026): el comprobante del sitio de destino es lo que te defiende ante una inspección.",
+      "agregada": "2026-11-22",
+      "campos": [
+        "Obra, ubicación y número de licencia de construcción",
+        "Semana (del – al) y responsable ambiental de la obra",
+        "Número o acuse del plan de manejo / registro de gran generador ante la Secretaría de Medio Ambiente y Desarrollo Sustentable de B.C.",
+        "Transportista: razón social, número de autorización y placas de los camiones",
+        "Sitio de destino autorizado (nombre, ubicación y autorización) para tierra y escombro",
+        "Acopiador o reciclador del padrón municipal para acero, cartón y madera",
+        "Viajes de la semana por tipo (tierra / concreto y block / mixto) y m³",
+        "m³ valorizados en la semana (reúso, reciclaje, relleno en otra obra) y % acumulado",
+        "m³ acumulados contra el pronóstico de la calculadora de residuos",
+        "Observaciones, responsable y fecha compromiso"
+      ],
+      "items": [
+        "Calculadora 'Residuos de construcción de tu obra' corrida con datos reales: se sabe si la obra pasa de 80 m³ o de 10 t/año",
+        "Plan de manejo presentado (o registro de pequeño generador en el municipio) y acuse archivado en la obra",
+        "Zona de acopio delimitada y señalizada dentro del predio, separada por tipo: tierra, concreto y block, acero, madera, cartón y plástico",
+        "Residuos peligrosos aparte y bajo techo: botes de pintura, solventes, aceites, aditivos y estopas (no van con el escombro)",
+        "Ningún residuo de la obra en contenedores de la vía pública, banqueta, lote baldío, cañada o arroyo (art. 51 de la ley estatal)",
+        "Nada almacenado en la obra por más de seis meses",
+        "Transportista con autorización vigente de la Secretaría; copia en la obra",
+        "Cada viaje con manifiesto o vale de salida: fecha, placas, tipo, m³ y firma; acuse de recepción del sitio de destino",
+        "Viajes registrados en la bitácora física y electrónica y en el reporte diario de obra",
+        "Fotos de cada viaje con fecha, hora y GPS (formato 'Evidencia fotográfica')",
+        "Acero de desperdicio pesado y vendido o entregado con comprobante (cuadra con el control de acero)",
+        "Tierra limpia de excavación ofrecida a otras obras como relleno antes de tirarla",
+        "Concreto sobrante de la olla aprovechado (banquetas, dados, plantillas) en vez de tirarlo",
+        "% valorizado acumulado igual o mayor a 50 % o justificación escrita de por qué no hay infraestructura local",
+        "Subcontratistas con cláusula de limpieza y retiro de sus residuos al mismo destino autorizado",
+        "Expediente listo para el informe anual y para el cierre de obra (comprobantes de destino de todos los viajes)"
+      ],
+      "como_usar": [
+        "Llénalo el primer día de excavación con los datos del transportista y del sitio de destino; si no tienes sitio autorizado, ese es el primer 'No' a resolver antes de sacar el primer viaje.",
+        "Cada viernes el residente cuenta los vales de la semana, captura viajes y m³ por tipo, y compara contra el pronóstico de la calculadora de residuos.",
+        "Recorre la zona de acopio con el cabo: marca Cumple / No / N/A y toma foto de cada 'No' (escombro revuelto con botes de pintura, material en banqueta).",
+        "Exporta el CSV y guárdalo junto con los vales y acuses en la carpeta 'Residuos' del expediente de obra: es la evidencia para el informe anual a la Secretaría y para el cierre de la obra.",
+        "Las sanciones de la ley estatal (multas en UMA y clausura, arts. 66 a 68) no se pudieron leer en el texto literal: confirma montos con tu jurídico; la autoridad estatal vigila la existencia y presentación del plan (NOM-161, sección 13)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Ley para la Prevención, Gestión Integral y Economía Circular de los Residuos del Estado de Baja California (POE 26-03-2021, última reforma 17-10-2025): art. 11 d) gran generador ≥ 10 t/año; art. 14 plan de manejo ante la Secretaría de Medio Ambiente y Desarrollo Sustentable, bitácora física y electrónica, informe anual y manifiestos; art. 17 residuos de construcción a sitios autorizados y valorizar al menos 50 % cuando la infraestructura local lo permita; art. 51 prohibiciones",
+          "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_VII/20251017_LEYRESIDUOS.PDF"
+        },
+        {
+          "titulo": "NOM-161-SEMARNAT-2011 (DOF 01-02-2013, vigente según la ficha de la Secretaría de Economía): Anexo normativo, fracción VII – residuos de la construcción, mantenimiento y demolición en general que se generen en una obra en una cantidad mayor a 80 m³ están sujetos a plan de manejo",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/134113/20.-_NORMA_OFICIAL_MEXICANA_NOM-161-SEMARNAT-2011.pdf"
+        },
+        {
+          "titulo": "El Imparcial (3-ago-2026) – Tijuana no tiene bancos de tiro autorizados para escombro; el Colegio de Arquitectos pide al menos cuatro",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/08/03/tijuana-no-tiene-donde-tirar-escombros-arquitectos-piden-crear-bancos-autorizados/"
+        },
+        {
+          "titulo": "El Imparcial, columna del presidente de CMIC Tijuana, Tecate y Rosarito (25-abr-2026) – el centro de separación y disposición de residuos de construcción no se concretó; propone separar concreto, acero y madera para reutilizarlos",
+          "url": "https://www.elimparcial.com/tij/columnas/2026/04/25/sin-seguimiento-no-hay-solucion-al-manejo-de-residuos-de-construccion/"
+        },
+        {
+          "titulo": "El Imparcial (10-oct-2025) – Reforma al art. 8 de la ley de residuos de BC: padrón municipal de acopiadores y recicladores y convenios de recolección con separación desde el origen",
+          "url": "https://www.elimparcial.com/mxl/mexicali/2025/10/10/aprueban-reforma-para-fortalecer-la-economia-circular-y-formalizar-redes-de-reciclaje-en-baja-california/"
+        },
+        {
+          "titulo": "Laiseca, tesina de especialidad UNAM (2016) – peso volumétrico de RCD de 1.5 t/m³, arcilla húmeda 1.76 t/m³; solo 4 % de los RCD se aprovecha y 20 % llega a sitios autorizados",
+          "url": "https://ru.dgb.unam.mx/bitstream/20.500.14330/TES01000745557/3/0745557.pdf"
         }
       ]
     },
