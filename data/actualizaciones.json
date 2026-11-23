@@ -1,6 +1,36 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-23",
+      "titulo": "Avance y programa: ritmo requerido contra real por actividad, semáforo de consumo del colchón (fever chart) y junta semanal de producción",
+      "resumen": "Tres herramientas para controlar el programa con tasas de producción, como recomienda McKinsey (oct-2026: ~80 % de los planes suponen ritmos irrealmente optimistas) y en un año en que el benchmark de Buildots (nov-2026) muestra que las obras solo entregan 63 % del trabajo semanal planeado. 'Ritmo requerido contra ritmo real' te dice por actividad cuántas unidades por día necesitas, cuántos días de atraso llevas y cuántas cuadrillas faltan (ejemplo: aplanado 1,500 m² por hacer en 30 días con 10 % de colchón pide 55.6 m²/día; sacas 45, 81 %, rojo: 4 cuadrillas en lugar de 3). 'Consumo del colchón del programa' compara % de colchón gastado contra % de ruta crítica terminada (ejemplo: 40 % de avance y 9 de 18 días gastados = zona amarilla, recupera 2.9 días). 'Junta semanal de producción' amarra ambos con la estructura de plan semanal del LCI. Mejora: 'Probabilidad de terminar a tiempo (PERT)' ahora te remite a vigilar ese colchón cada viernes.",
+      "herramientas": [
+        "calc-ritmo-requerido",
+        "calc-consumo-colchon",
+        "fmt-junta-produccion-semanal",
+        "calc-pert-probabilidad"
+      ],
+      "como_aplicarlo": "1) Este viernes, después del corte de avance, corre 'Ritmo requerido' para las 3 a 5 actividades críticas con un colchón de 15 % por la temporada de lluvias. 2) Calcula el consumo del colchón con la fecha pronosticada de tu programa y anota la zona. 3) Abre la 'Junta semanal de producción' con los cabos y comprométanse en unidades por día, no en porcentaje.",
+      "fuentes": [
+        {
+          "titulo": "McKinsey (6-oct-2026) – Using production rates to excel at executing construction projects: planear por tasas (m³/día, t/día), calcular la tasa requerida para la fecha meta y compararla con la lograda en campo; ~80 % de los planes revisados suponen tasas irrealmente optimistas",
+          "url": "https://www.mckinsey.com/capabilities/operations/our-insights/using-production-rates-to-excel-at-executing-construction-projects"
+        },
+        {
+          "titulo": "ForConstructionPros (6-nov-2026) – Buildots Global Construction Benchmarks Report: las obras entregan en promedio 63 % del trabajo semanal planeado, solo 29.3 % de las actividades arrancan a tiempo y terminan 5.3 semanas tarde en promedio",
+          "url": "https://www.forconstructionpros.com/business/business-services/business-management/article/22977358/buildots-why-construction-projects-miss-37-of-weekly-goals"
+        },
+        {
+          "titulo": "Lean Construction Institute – Field Crew Huddle: Weekly Work Planning (revisar lo hecho, comprometer la semana siguiente con capacidad real, causas y contramedidas, no sobreprogramar y no olvidar colchones; act. ago-2025)",
+          "url": "https://fieldcrewhuddle.leanconstruction.org/weekly-work-planning/"
+        },
+        {
+          "titulo": "Critical Chain Project Management – administración de colchones y fever chart (avance de la cadena contra % de colchón consumido, zonas verde, amarilla y roja)",
+          "url": "https://en.wikipedia.org/wiki/Critical_chain_project_management"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-22",
       "titulo": "Normatividad: residuos de construcción en regla — ¿tu obra pasa los 80 m³ de la NOM-161 o las 10 t de gran generador en B.C.?, meta de 50 % valorizado y control de cada viaje de escombro",
       "resumen": "'Residuos de construcción de tu obra' estima m³ sueltos y toneladas con los m², la excavación y la demolición: en el ejemplo (1,500 m², 140 m³ de excavación sobrante) salen 191 m³ y 270 t, así que la obra requiere plan de manejo (NOM-161-SEMARNAT-2011, más de 80 m³) y es gran generador ante la Secretaría de Medio Ambiente de B.C. (10 t o más al año: plan, bitácora física y electrónica, manifiestos e informe anual, art. 14); mandar 60 m³ a reúso da 31 % contra la meta de 50 % del art. 17, y faltan 35.5 m³. 'Control de residuos de construcción en obra' asegura separación, transportista y sitio autorizados y un vale por viaje. Contexto: Tijuana no tiene bancos de tiro municipales autorizados (ago-2026) y el centro de separación que impulsaba CMIC no se concretó; la reforma estatal de oct-2025 creó el padrón municipal de acopiadores. Mejora: el 'Expediente de cierre y entrega de obra' ahora pide los comprobantes de destino de todos los viajes.",

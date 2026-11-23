@@ -5692,7 +5692,8 @@
         "Captura los días que faltan a la fecha contractual de término (o la fecha comprometida al cliente).",
         "Si la probabilidad sale en rojo (menos de 50 %) o el colchón para 90 % es positivo, ataca primero la actividad con mayor % de incertidumbre: liberar restricciones, segundo turno o cuadrilla extra (evalúa costo con 'Recuperar atraso').",
         "Vuelve a correrla cada lunes con las duraciones actualizadas y anota la probabilidad en el reporte semanal; indicador PDCA: probabilidad de cumplir semana contra semana durante 4 semanas.",
-        "Limitación: supone actividades independientes y una sola ruta crítica (fórmula PERT clásica, probabilidad con aproximación normal, error menor a 0.5 puntos). Si hay una ruta casi crítica en paralelo, el riesgo real es mayor: córrela también para esa ruta."
+        "Limitación: supone actividades independientes y una sola ruta crítica (fórmula PERT clásica, probabilidad con aproximación normal, error menor a 0.5 puntos). Si hay una ruta casi crítica en paralelo, el riesgo real es mayor: córrela también para esa ruta.",
+        "Ya con el colchón definido, vigílalo cada viernes con 'Consumo del colchón del programa (fever chart)': te dice si el atraso que llevas es normal para tu avance o ya es alarma."
       ],
       "fuentes": [
         {
@@ -11882,6 +11883,318 @@
         {
           "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
           "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        }
+      ]
+    },
+    {
+      "id": "calc-ritmo-requerido",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Ritmo requerido contra ritmo real por actividad: ¿llegas a la fecha meta con las cuadrillas que tienes? (m², m³, kg o piezas por día)",
+      "resumen": "Planeación por tasas de producción: con la cantidad que falta, los días hábiles que quedan y un colchón para lluvia y festivos calcula cuántas unidades por día tienes que sacar, lo compara con lo que la cuadrilla saca de verdad y te dice cuántos días de atraso vas a tener y cuántas cuadrillas necesitas. Detecta el atraso de una actividad semanas antes de que se vea en el % global de la curva S.",
+      "agregada": "2026-11-23",
+      "entradas": [
+        {
+          "id": "total",
+          "label": "Cantidad total de la actividad (catálogo o generador)",
+          "unidad": "unid.",
+          "valor": 2400
+        },
+        {
+          "id": "hecho",
+          "label": "Cantidad ejecutada acumulada (medida en el corte)",
+          "unidad": "unid.",
+          "valor": 900
+        },
+        {
+          "id": "real",
+          "label": "Ritmo real: promedio por día hábil de las últimas 2 semanas",
+          "unidad": "unid./día",
+          "valor": 45
+        },
+        {
+          "id": "dias",
+          "label": "Días hábiles que quedan hasta la fecha meta de la actividad",
+          "unidad": "días",
+          "valor": 30
+        },
+        {
+          "id": "colchon",
+          "label": "Colchón para lluvia, festivos y faltas (% de los días que quedan)",
+          "unidad": "%",
+          "valor": 10
+        },
+        {
+          "id": "cuad",
+          "label": "Cuadrillas trabajando hoy en la actividad",
+          "unidad": "cuadrillas",
+          "valor": 3
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Cantidad que falta",
+          "formula": "total-hecho",
+          "unidad": "unid.",
+          "decimales": 0
+        },
+        {
+          "label": "Días efectivos de trabajo (descontando el colchón)",
+          "formula": "dias*(1-colchon/100)",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Ritmo requerido para llegar a la fecha meta",
+          "formula": "(total-hecho)/(dias*(1-colchon/100))",
+          "unidad": "unid./día",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Ritmo real / ritmo requerido",
+          "formula": "real/((total-hecho)/(dias*(1-colchon/100)))*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            100,
+            90
+          ]
+        },
+        {
+          "label": "Días hábiles para terminar al ritmo actual",
+          "formula": "(total-hecho)/real",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días de atraso (+) o de sobra (−) contra la fecha meta, sin usar el colchón",
+          "formula": "(total-hecho)/real-dias",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Ritmo por cuadrilla (real)",
+          "formula": "real/cuad",
+          "unidad": "unid./día",
+          "decimales": 1
+        },
+        {
+          "label": "Cuadrillas necesarias al ritmo real por cuadrilla",
+          "formula": "Math.ceil(((total-hecho)/(dias*(1-colchon/100)))/(real/cuad)-1e-9)",
+          "unidad": "cuadrillas",
+          "decimales": 0
+        },
+        {
+          "label": "Cuadrillas que hay que agregar (0 = vas bien)",
+          "formula": "Math.max(0,Math.ceil(((total-hecho)/(dias*(1-colchon/100)))/(real/cuad)-1e-9)-cuad)",
+          "unidad": "cuadrillas",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Elige las 3 a 5 actividades de la ruta crítica o de mayor importe (por ejemplo: aplanado de muros en m², colado de losas en m³, acero en kg, block en m²) y anota la cantidad total del generador y la fecha meta del programa de cada una.",
+        "Cada viernes toma la cantidad acumulada del 'Corte semanal de avance físico' y saca el ritmo real dividiendo lo que se hizo en las últimas 2 semanas entre los días hábiles trabajados (no entre días naturales). Ejemplo: 450 m² en 10 días = 45 m²/día.",
+        "Captura los días hábiles que quedan y un colchón de 10 % (súbelo a 15–20 % en temporada de lluvias en Tijuana, de noviembre a marzo, o si la actividad depende de un solo proveedor).",
+        "Lee el semáforo: verde (≥ 100 %) vas bien; amarillo (90–99 %) ajusta esta semana quitando restricciones (material, frente libre, planos); rojo (< 90 %) no llegas sin más cuadrillas o más horas. Con el ejemplo: requieres 55.6 m²/día, sacas 45 (81 %, rojo), terminarías 3.3 días hábiles tarde y necesitas 4 cuadrillas en lugar de 3.",
+        "Antes de contratar, pasa la decisión por 'Recuperar atraso: horas extra contra cuadrilla adicional' y verifica con 'Rendimiento de cuadrilla' que el ritmo por cuadrilla sea el real; lleva el ritmo requerido como meta diaria a la junta de arranque y a la 'Junta semanal de producción'.",
+        "PDCA de 4 semanas: registra cada viernes la relación real/requerido de cada actividad; si el número de actividades en rojo baja y la fecha pronosticada de la curva S deja de moverse, adopta la calculadora para todas las partidas críticas."
+      ],
+      "fuentes": [
+        {
+          "titulo": "McKinsey (6-oct-2026) – Using production rates to excel at executing construction projects: planear por tasas (m³/día, t/día), calcular la tasa requerida para la fecha meta y compararla con la lograda en campo; ~80 % de los planes revisados suponen tasas irrealmente optimistas",
+          "url": "https://www.mckinsey.com/capabilities/operations/our-insights/using-production-rates-to-excel-at-executing-construction-projects"
+        },
+        {
+          "titulo": "ForConstructionPros (6-nov-2026) – Buildots Global Construction Benchmarks Report: las obras entregan en promedio 63 % del trabajo semanal planeado, solo 29.3 % de las actividades arrancan a tiempo y terminan 5.3 semanas tarde en promedio",
+          "url": "https://www.forconstructionpros.com/business/business-services/business-management/article/22977358/buildots-why-construction-projects-miss-37-of-weekly-goals"
+        },
+        {
+          "titulo": "Lean Construction Institute – Field Crew Huddle: Weekly Work Planning (revisar lo hecho, comprometer la semana siguiente con capacidad real, causas y contramedidas, no sobreprogramar y no olvidar colchones; act. ago-2025)",
+          "url": "https://fieldcrewhuddle.leanconstruction.org/weekly-work-planning/"
+        }
+      ]
+    },
+    {
+      "id": "calc-consumo-colchon",
+      "tipo": "calculadora",
+      "categoria": "Control de avance",
+      "titulo": "Consumo del colchón del programa (fever chart de cadena crítica): ¿el atraso que llevas es normal para tu avance o ya es alarma?",
+      "resumen": "Compara el % del colchón de tiempo que ya te comiste contra el % de la ruta crítica terminada y te da la zona: verde (no hagas nada), amarilla (prepara un plan de recuperación) o roja (ejecútalo ya). Evita las dos fallas típicas: alarmarse por 3 días de atraso al inicio cuando sobra colchón, o confiarse a mitad de obra cuando ya se fue más de la mitad.",
+      "agregada": "2026-11-23",
+      "entradas": [
+        {
+          "id": "cadena",
+          "label": "Duración de la ruta crítica sin colchón (días hábiles)",
+          "unidad": "días",
+          "valor": 120
+        },
+        {
+          "id": "colchon",
+          "label": "Colchón de tiempo al final del programa (días hábiles entre el término de la ruta crítica y la fecha contractual)",
+          "unidad": "días",
+          "valor": 18
+        },
+        {
+          "id": "avance",
+          "label": "% de la ruta crítica terminada (días de ruta crítica completados / duración total × 100)",
+          "unidad": "%",
+          "valor": 40
+        },
+        {
+          "id": "atraso",
+          "label": "Atraso acumulado de la ruta crítica (días hábiles; fecha pronosticada de término menos la planeada sin colchón)",
+          "unidad": "días",
+          "valor": 9
+        }
+      ],
+      "salidas": [
+        {
+          "label": "% del colchón consumido",
+          "formula": "atraso/colchon*100",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Límite verde/amarillo para tu avance (10 + 0.6 × avance)",
+          "formula": "10+0.6*avance",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Límite amarillo/rojo para tu avance (25 + 0.7 × avance)",
+          "formula": "25+0.7*avance",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Índice de zona (≥ 1 verde · 0 a 1 amarilla · < 0 roja)",
+          "formula": "((25+0.7*avance)-atraso/colchon*100)/((25+0.7*avance)-(10+0.6*avance))",
+          "unidad": "",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0
+          ]
+        },
+        {
+          "label": "Días de colchón que quedan (negativo = ya rebasaste la fecha contractual)",
+          "formula": "colchon-atraso",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días que hay que recuperar para volver a zona verde (0 = ya estás en verde)",
+          "formula": "Math.max(0,atraso-(10+0.6*avance)/100*colchon)",
+          "unidad": "días",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Tasa de consumo: % de colchón por cada 10 % de avance",
+          "formula": "avance>0?atraso/colchon*100/avance*10:0",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Atraso pronosticado al término si sigue la misma tasa",
+          "formula": "avance>0?atraso/avance*100:0",
+          "unidad": "días",
+          "decimales": 1
+        },
+        {
+          "label": "Días que sobran (+) o faltan (−) contra la fecha contractual a la misma tasa",
+          "formula": "avance>0?colchon-atraso/avance*100:colchon",
+          "unidad": "días",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Si tu programa no tiene colchón explícito, sácalo: la diferencia en días hábiles entre el término de la última actividad de la ruta crítica y la fecha contractual (o el que te dio 'Probabilidad de terminar a tiempo (PERT)'). Anota también la duración de la ruta crítica sin ese colchón.",
+        "Cada viernes, después del corte de avance, calcula el % de ruta crítica terminada (días de actividades críticas completadas entre la duración total) y el atraso acumulado: la fecha pronosticada de término de ProjectLibre o de 'Programa ganado' menos la fecha planeada sin colchón.",
+        "Lee el índice de zona: verde (≥ 1) no cambies nada; amarilla (0 a 1) identifica qué actividad crítica se está comiendo el colchón y prepara el plan de recuperación con 'Ritmo requerido contra ritmo real'; roja (< 0) ejecuta el plan esa semana y déjalo en bitácora. Con el ejemplo: llevas 40 % y te comiste 50 % del colchón (límites 34 % y 53 %): zona amarilla, recupera 2.9 días para volver a verde.",
+        "Grafica cada semana el punto (avance, % consumido) en una hoja: la tendencia importa más que un punto aislado; dos semanas seguidas subiendo hacia rojo es la señal para escalar con el cliente o el contratista.",
+        "Los límites 10 + 0.6 × avance y 25 + 0.7 × avance son una convención usual de fever chart (a 100 % de avance: 70 % y 95 % de colchón); ajústalos a tu obra, por ejemplo más estrictos si tu contrato tiene penas por atraso altas.",
+        "PDCA de 6 semanas: compara cuántas veces la zona amarilla te avisó antes de que el atraso apareciera en el SPI(t) de 'Programa ganado'; si te dio al menos una semana de ventaja, adóptalo en la junta semanal."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Critical Chain Project Management – administración de colchones y fever chart (avance de la cadena contra % de colchón consumido, zonas verde, amarilla y roja)",
+          "url": "https://en.wikipedia.org/wiki/Critical_chain_project_management"
+        },
+        {
+          "titulo": "Smartsheet – What Is the Critical Chain Method? (colchón del proyecto al final de la cadena, monitoreo del consumo del colchón)",
+          "url": "https://www.smartsheet.com/content/critical-chain-method"
+        },
+        {
+          "titulo": "McKinsey (6-oct-2026) – Using production rates to excel at executing construction projects: planear por tasas (m³/día, t/día), calcular la tasa requerida para la fecha meta y compararla con la lograda en campo; ~80 % de los planes revisados suponen tasas irrealmente optimistas",
+          "url": "https://www.mckinsey.com/capabilities/operations/our-insights/using-production-rates-to-excel-at-executing-construction-projects"
+        }
+      ]
+    },
+    {
+      "id": "fmt-junta-produccion-semanal",
+      "tipo": "formato",
+      "categoria": "Control de avance",
+      "titulo": "Junta semanal de producción (viernes): ritmo requerido contra real por frente, compromisos de la semana y estado del colchón",
+      "resumen": "Minuta de 45 minutos con los cabos y contratistas para cerrar la semana y comprometer la siguiente con números de producción (unidades por día), no con porcentajes vagos. Sigue la estructura de plan semanal del Lean Construction Institute: lo que se hizo, lo que se compromete con la capacidad real, causas de incumplimiento y contramedidas, más el semáforo de colchón del programa.",
+      "agregada": "2026-11-23",
+      "campos": [
+        "Obra",
+        "Semana No. y periodo (del … al …)",
+        "Fecha, hora y lugar de la junta",
+        "Asistentes (contratista, cabo o responsable de cada frente)",
+        "Frente / nivel / zona",
+        "Actividad y unidad (m², m³, kg, piezas)",
+        "Cantidad comprometida la semana pasada",
+        "Cantidad realmente ejecutada (del corte de avance)",
+        "% de cumplimiento del compromiso (PPC de la actividad)",
+        "Ritmo real (unid./día) y ritmo requerido (unid./día) – de la calculadora Ritmo requerido",
+        "Semáforo real/requerido (verde ≥ 100 %, amarillo 90–99 %, rojo < 90 %)",
+        "Causa de no cumplimiento (material, frente no liberado, planos/RFI, mano de obra, equipo, clima, actividad previa, cambio del cliente)",
+        "Contramedida, responsable y fecha",
+        "Compromiso para la semana siguiente (cantidad y cuadrillas) y quién lo asume",
+        "Restricciones que hay que liberar antes del lunes (del análisis de restricciones)",
+        "% de colchón consumido, % de ruta crítica terminada e índice de zona (calculadora Consumo del colchón)",
+        "Acuerdos que van a bitácora (folio)",
+        "Firma del superintendente y de cada contratista"
+      ],
+      "items": [
+        "La junta se hizo el día y hora fijos de siempre, con un responsable de cada frente presente",
+        "Las cantidades ejecutadas vienen del corte de avance medido en obra, no de lo que dijo el contratista en la junta",
+        "Cada compromiso de la semana siguiente está en unidades (m², m³, kg, piezas), no en '% de avance'",
+        "Ningún compromiso supera el ritmo real demostrado por la cuadrilla, salvo que se agreguen cuadrillas o horas y quede anotado",
+        "Cada compromiso tiene sus restricciones liberadas o una fecha y responsable para liberarlas antes de empezar",
+        "Se registró la causa de cada compromiso no cumplido y se capturó en el Pareto de causas de no cumplimiento",
+        "Las actividades en rojo (ritmo real < 90 % del requerido) tienen contramedida concreta con responsable y fecha",
+        "Se revisó el estado del colchón del programa y la zona (verde, amarilla o roja) quedó anotada",
+        "Si la zona es roja, el plan de recuperación se presentó y se asentó en bitácora",
+        "Los acuerdos se enviaron por escrito a los asistentes el mismo día"
+      ],
+      "como_usar": [
+        "Fija un día y hora (el LCI sugiere viernes por la tarde) y antes de la junta corre el 'Corte semanal de avance físico', la calculadora 'Ritmo requerido contra ritmo real' para las actividades críticas y 'Consumo del colchón del programa'.",
+        "Primera parte (15 min): revisa frente por frente lo comprometido contra lo ejecutado; anota la causa de cada incumplimiento sin buscar culpables.",
+        "Segunda parte (20 min): cada responsable compromete la semana siguiente en unidades por día que su cuadrilla ya demostró; si el ritmo requerido es mayor, se decide ahí mismo si se agregan cuadrillas, horas o se liberan restricciones.",
+        "Tercera parte (10 min): revisa el semáforo del colchón; si está en amarilla o roja, acuerda la contramedida, el responsable y la fecha, y asienta el acuerdo en bitácora.",
+        "Exporta a CSV y pasa el % de cumplimiento a 'PPC semanal' y las causas al 'Pareto de causas de no cumplimiento'.",
+        "PDCA de 4 semanas: si el % de compromisos cumplidos sube (el benchmark internacional de 2026 es 63 % de lo planeado; apunta a 80 %), mantén el formato como junta estándar de la obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Institute – Field Crew Huddle: Weekly Work Planning (revisar lo hecho, comprometer la semana siguiente con capacidad real, causas y contramedidas, no sobreprogramar y no olvidar colchones; act. ago-2025)",
+          "url": "https://fieldcrewhuddle.leanconstruction.org/weekly-work-planning/"
+        },
+        {
+          "titulo": "ForConstructionPros (6-nov-2026) – Buildots Global Construction Benchmarks Report: las obras entregan en promedio 63 % del trabajo semanal planeado, solo 29.3 % de las actividades arrancan a tiempo y terminan 5.3 semanas tarde en promedio",
+          "url": "https://www.forconstructionpros.com/business/business-services/business-management/article/22977358/buildots-why-construction-projects-miss-37-of-weekly-goals"
+        },
+        {
+          "titulo": "McKinsey (6-oct-2026) – Using production rates to excel at executing construction projects: planear por tasas (m³/día, t/día), calcular la tasa requerida para la fecha meta y compararla con la lograda en campo; ~80 % de los planes revisados suponen tasas irrealmente optimistas",
+          "url": "https://www.mckinsey.com/capabilities/operations/our-insights/using-production-rates-to-excel-at-executing-construction-projects"
         }
       ]
     }
