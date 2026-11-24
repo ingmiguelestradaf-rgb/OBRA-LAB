@@ -9299,7 +9299,7 @@
       "id": "fmt-recepcion-varilla",
       "tipo": "formato",
       "categoria": "Acero",
-      "titulo": "Recepción de varilla en obra: certificado, marcas de laminación, masa y almacenamiento (NMX-B-506)",
+      "titulo": "Recepción de varilla en obra: certificado, marcas de laminación, masa y almacenamiento (NMX-B-506 y NOM-251-SE-2025)",
       "resumen": "Formato por entrega de acero de refuerzo para aceptar o apartar un lote antes de habilitarlo: certificado de calidad del lote, marcas de laminación (fabricante, número, grado 42), masa por metro, estado superficial y almacenamiento, con trazabilidad hasta el elemento donde se colocó.",
       "agregada": "2026-11-03",
       "campos": [
@@ -9307,6 +9307,7 @@
         "Fecha y hora de llegada",
         "Proveedor / acería (fabricante)",
         "No. de remisión o factura",
+        "No. del certificado de conformidad NOM-251 (CCP) o certificado por lote, y país de origen si es importada",
         "No. de colada o lote del certificado",
         "Números de varilla y kg por número (remisión)",
         "Grado (42 u otro) y norma del certificado (NMX-B-506 / ASTM A615)",
@@ -9319,6 +9320,7 @@
       ],
       "items": [
         "La remisión coincide con el pedido: números de varilla, cantidades, longitud (12 m o corte especial) y grado",
+        "Cada atado trae etiqueta en español con nombre genérico, fabricante o importador y contraseña oficial NOM; el proveedor entregó copia del certificado de conformidad NOM-251-SE-2025 (obligatorio para varilla corrugada desde el 12-ago-2026) o certificado por lote con los números de colada",
         "Llegó el certificado de calidad del lote (fluencia, tensión, alargamiento y doblado) y su número de colada corresponde a las etiquetas de los paquetes",
         "Fluencia del certificado ≥ 4,200 kg/cm² (42 kg/mm²) y tensión ≥ 6,300 kg/cm² para grado 42; alargamiento ≥ 9 % en #3 a #6",
         "Cada varilla trae las marcas de laminación legibles: símbolo del fabricante, número de designación y grado (42); se tomó foto de las marcas",
@@ -9332,7 +9334,7 @@
         "Remisión, ticket de báscula, certificado y fotos archivados con este formato y anotados en el control de acero de la obra"
       ],
       "como_usar": [
-        "Pide al proveedor, al hacer el pedido, que el certificado de calidad del lote venga con la remisión; sin certificado el lote se recibe como 'apartado' y no se habilita.",
+        "Pide al proveedor, al hacer el pedido, que el certificado de calidad del lote y la copia del certificado de conformidad NOM-251-SE-2025 vengan con la remisión; sin certificado el lote se recibe como 'apartado' y no se habilita.",
         "Al llegar el camión, el almacenista llena el formato en el celular mientras se descarga: revisa remisión, etiquetas y toma foto de las marcas de laminación de cada número.",
         "Pesa una pieza por número con la calculadora 'Varilla delgada: masa real contra nominal' y anota el dictamen; si sale 0 aparta el lote.",
         "El residente revisa el certificado (fluencia, tensión, alargamiento) contra los valores de grado 42 y firma la decisión.",
@@ -9351,6 +9353,10 @@
         {
           "titulo": "Secretaría de Economía – Catálogo Mexicano de Normas: NMX-B-506-CANACERO-2019 (varilla corrugada para refuerzo de concreto)",
           "url": "https://platiica.economia.gob.mx/normalizacion/nmx-b-506-canacero-2019/"
+        },
+        {
+          "titulo": "Secretaría de Economía – NOM-251-SE-2025, Industria de la construcción-Productos de acero (DOF 13-feb-2026): varilla corrugada (NMX-B-506), malla electrosoldada (NMX-B-290), armaduras triangulares (NMX-B-455) y armaduras para castillos y dalas (NMX-B-456) obligatorias a los 180 días (12-ago-2026); el resto de los productos de acero a los 18 meses; etiqueta en español con contraseña oficial y certificado de conformidad (CCP) o certificado por lote con número de colada",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-251-se-2025/"
         }
       ]
     },
@@ -12195,6 +12201,206 @@
         {
           "titulo": "McKinsey (6-oct-2026) – Using production rates to excel at executing construction projects: planear por tasas (m³/día, t/día), calcular la tasa requerida para la fecha meta y compararla con la lograda en campo; ~80 % de los planes revisados suponen tasas irrealmente optimistas",
           "url": "https://www.mckinsey.com/capabilities/operations/our-insights/using-production-rates-to-excel-at-executing-construction-projects"
+        }
+      ]
+    },
+    {
+      "id": "calc-esclerometro",
+      "tipo": "calculadora",
+      "categoria": "Concreto",
+      "titulo": "Esclerómetro (martillo de rebote): ¿la lectura de la zona es válida y se parece al concreto bueno? (NMX-C-192 / ASTM C805)",
+      "resumen": "Con las 10 lecturas del esclerómetro en una zona, aplica la regla de la norma (descartar las que se alejan más de 6 unidades del promedio; si son más de 2, repetir la zona), da el número de rebote válido y lo compara contra una zona de referencia del mismo elemento o colado cuyo concreto sí cumplió en cilindros. Sirve para decidir dónde sacar corazones y cuántos ahorrarte, no para aceptar o rechazar el concreto.",
+      "agregada": "2026-11-24",
+      "entradas": [
+        {
+          "id": "l1",
+          "label": "Lectura 1",
+          "unidad": "rebote",
+          "valor": 34
+        },
+        {
+          "id": "l2",
+          "label": "Lectura 2",
+          "unidad": "rebote",
+          "valor": 36
+        },
+        {
+          "id": "l3",
+          "label": "Lectura 3",
+          "unidad": "rebote",
+          "valor": 33
+        },
+        {
+          "id": "l4",
+          "label": "Lectura 4",
+          "unidad": "rebote",
+          "valor": 35
+        },
+        {
+          "id": "l5",
+          "label": "Lectura 5",
+          "unidad": "rebote",
+          "valor": 38
+        },
+        {
+          "id": "l6",
+          "label": "Lectura 6",
+          "unidad": "rebote",
+          "valor": 30
+        },
+        {
+          "id": "l7",
+          "label": "Lectura 7",
+          "unidad": "rebote",
+          "valor": 35
+        },
+        {
+          "id": "l8",
+          "label": "Lectura 8",
+          "unidad": "rebote",
+          "valor": 42
+        },
+        {
+          "id": "l9",
+          "label": "Lectura 9",
+          "unidad": "rebote",
+          "valor": 34
+        },
+        {
+          "id": "l10",
+          "label": "Lectura 10",
+          "unidad": "rebote",
+          "valor": 36
+        },
+        {
+          "id": "ref",
+          "label": "Número de rebote de la zona de referencia (concreto con cilindros aceptados, misma dirección de golpe y superficie)",
+          "unidad": "rebote",
+          "valor": 37
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Promedio de las 10 lecturas",
+          "formula": "([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10)",
+          "unidad": "rebote",
+          "decimales": 1
+        },
+        {
+          "label": "Lecturas válidas (a 6 unidades o menos del promedio; verde ≥ 8: zona válida, rojo: repetir 10 lecturas)",
+          "formula": "[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length",
+          "unidad": "de 10",
+          "decimales": 0,
+          "semaforo": [
+            8,
+            8
+          ]
+        },
+        {
+          "label": "Número de rebote de la zona (promedio sin las descartadas)",
+          "formula": "([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).reduce((a,b)=>a+b,0)/[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length)",
+          "unidad": "rebote",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Zona / referencia (verde ≥ 90 %; amarillo ≥ 80 %: más lecturas; rojo: candidata a corazones)",
+          "formula": "([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).reduce((a,b)=>a+b,0)/[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length)/ref*100",
+          "unidad": "%",
+          "decimales": 1,
+          "semaforo": [
+            90,
+            80
+          ]
+        },
+        {
+          "label": "Dictamen (1 = zona válida y comparable al concreto bueno; 0.5 = válida pero baja: investigar; 0 = repetir lecturas o extraer corazones)",
+          "formula": "[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length<8?0:(([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).reduce((a,b)=>a+b,0)/[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length)/ref*100>=90?1:(([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).reduce((a,b)=>a+b,0)/[l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].filter(x=>Math.abs(x-([l1,l2,l3,l4,l5,l6,l7,l8,l9,l10].reduce((a,b)=>a+b,0)/10))<=6).length)/ref*100>=80?0.5:0))",
+          "unidad": "",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            1,
+            0.5
+          ]
+        }
+      ],
+      "como_usar": [
+        "Elige la zona dudosa (la que representa una prueba de cilindros baja, un colado con agua agregada o un elemento con mal curado) y una zona de referencia del mismo tipo de elemento cuyo concreto sí cumplió; las dos con el mismo acabado (cimbra o llana), edad parecida y secas en superficie.",
+        "Prepara un círculo de al menos 15 cm: lija con piedra de carburo si la superficie está rugosa o con lechada suelta; evita huecos, bordes, juntas y varillas con recubrimiento menor de 2 cm (localízalas antes). El elemento debe tener 10 cm de espesor o más.",
+        "Da 10 golpes perpendiculares a la superficie, separados al menos 2.5 cm, siempre en la misma dirección (horizontal en muros y columnas, hacia arriba en el lecho bajo de losas) y captura las 10 lecturas; si un golpe rompe una burbuja de aire, no lo cuentes y repítelo.",
+        "Haz lo mismo en la zona de referencia y captura su número de rebote en 'ref'. Si 'Lecturas válidas' sale en rojo, repite las 10 lecturas en la misma zona; no promedies lecturas malas.",
+        "Dictamen 1: no gastes en corazones por esa zona; anótalo con la prueba de cilindros. Dictamen 0.5 o 0: marca la zona en plano y pide corazones justo ahí (calculadora 'Corazones de concreto'); el rebote nunca sustituye a cilindros o corazones para aceptar o rechazar.",
+        "Indicador: corazones extraídos por investigación y costo de cada una; mide 1 mes antes y 1 mes después de usar el esclerómetro para ubicar las zonas. Verifica el esclerómetro en su yunque de calibración cada año (lectura típica 80 ± 2)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Secretaría de Economía – NMX-C-192-ONNCCE-2018, Determinación del número de rebote con esclerómetro – método de ensayo (vigente; equivalente a ISO 1920-7)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nmx-c-192-onncce-2018/"
+        },
+        {
+          "titulo": "WSDOT FOP para ASTM C805 (feb-2024): 10 lecturas por zona de al menos 150 mm, impactos separados 25 mm, descartar lecturas a más de 6 unidades del promedio y repetir la zona si se descartan más de 2; elementos de 10 cm o más; no sobre varilla con recubrimiento < 20 mm; no sirve para aceptar o rechazar concreto",
+          "url": "https://appstest.wsdot.wa.gov/publications/manuals/fulltext/M46-01/C805.pdf"
+        },
+        {
+          "titulo": "NRMCA – CIP 10 Resistencia del concreto en la estructura (corazones con criterio ACI 318: promedio ≥ 85 % f'c y ninguno < 75 %)",
+          "url": "https://www.nrmca.org/wp-content/uploads/2020/04/CIP10es.pdf"
+        },
+        {
+          "titulo": "Screening Eagle – app Schmidt Rebound Hammer (antes Schmidt Live), gratuita en App Store, para esclerómetros Original Schmidt OS8000 / Silver Schmidt: registro, curvas propias e informe PDF (versión 4.5.1)",
+          "url": "https://apps.apple.com/us/app/schmidt-rebound-hammer/id1239435876"
+        }
+      ]
+    },
+    {
+      "id": "fmt-recepcion-malla-armex-nom251",
+      "tipo": "formato",
+      "categoria": "Acero",
+      "titulo": "Recepción de malla electrosoldada y armaduras para castillos, dalas y losas (armex y triangulares) con la NOM-251-SE-2025",
+      "resumen": "Desde el 12 de agosto de 2026 la NOM-251-SE-2025 hace obligatoria la certificación de la malla electrosoldada (NMX-B-290), las armaduras electrosoldadas para castillos y dalas (NMX-B-456), las armaduras triangulares de losa (NMX-B-455) y la varilla corrugada. Este formato revisa cada entrega en obra: etiqueta en español con contraseña oficial NOM, certificado de conformidad o certificado por lote, medidas contra lo pedido, soldaduras y almacenamiento, para no colocar acero sin respaldo en elementos estructurales.",
+      "agregada": "2026-11-24",
+      "campos": [
+        "Obra",
+        "Fecha y hora de llegada",
+        "Proveedor y fabricante (o importador) que aparece en la etiqueta",
+        "No. de remisión o factura",
+        "Producto: malla electrosoldada / armadura para castillo o dala / armadura triangular de losa",
+        "Designación pedida (ej. malla 6x6-10/10; armadura 15x15 o 15x20 cm con 4 varillas y separación de escalerilla)",
+        "Cantidad pedida y recibida (rollos, hojas o piezas de 6 m)",
+        "No. del certificado de conformidad NOM-251 (CCP) u organismo certificador, o certificado por lote con número de colada",
+        "País de origen (si es importado)",
+        "Diámetros medidos con vernier (alambre longitudinal y transversal, mm) y separaciones medidas (cm)",
+        "Elementos donde se colocará (eje / nivel)",
+        "Decisión: aceptado / apartado / rechazado y motivo",
+        "Recibió (almacenista) y revisó (residente)"
+      ],
+      "items": [
+        "La remisión coincide con el pedido: designación (separación y calibre de la malla; sección, número de varillas y escalerilla de la armadura), longitud y cantidad",
+        "Cada rollo, hoja o atado trae etiqueta o identificación en español con el nombre genérico del producto, la marca o razón social del fabricante o importador y la contraseña oficial NOM (NOM-106-SCFI-2017)",
+        "El proveedor entregó copia del certificado de conformidad de producto (CCP) NOM-251 vigente para ese producto o familia, o un certificado por lote que cubre la cantidad recibida con sus números de colada o serie",
+        "El número de colada, serie o lote del certificado coincide con la etiqueta del material recibido",
+        "Diámetro del alambre o varilla medido con vernier en 3 piezas igual al de la ficha técnica del fabricante para la designación pedida (no se acepta 'calibre más delgado' sin autorización del estructurista)",
+        "Separaciones medidas en 3 puntos iguales a lo pedido (ej. 15 x 15 cm en malla 6x6; paso de escalerilla o estribo de la armadura)",
+        "Puntos de soldadura completos: sin cruces desprendidos al manipular la malla o la armadura; sin alambres rotos ni dobleces de fábrica",
+        "Sin óxido en escamas, picaduras, aceite, pintura ni lodo adheridos; el óxido superficial ligero se acepta",
+        "Almacenada sobre polines a 15 cm o más del suelo, protegida de lluvia y separada por designación; lo apartado o rechazado marcado con cinta roja",
+        "Remisión, etiqueta (foto), certificado y este formato archivados en el control de acero de la obra y anotados en bitácora cuando el elemento sea estructural"
+      ],
+      "como_usar": [
+        "Al hacer el pedido, pide por escrito que la malla y las armaduras vengan con etiqueta NOM-251 y copia del certificado de conformidad (CCP) o certificado por lote; sin eso el material se recibe como 'apartado' y no se coloca en elementos estructurales.",
+        "Al llegar el camión, el almacenista llena el formato en el celular: compara remisión contra pedido y toma foto de la etiqueta de cada designación.",
+        "Mide con vernier 3 alambres o varillas y 3 separaciones por designación y compáralos con la ficha técnica del fabricante; anota los mm reales en los datos generales.",
+        "El residente revisa que el certificado cubra el producto y la colada, y firma la decisión; los lotes apartados se separan con cinta roja.",
+        "Indicador: % de entregas de malla y armaduras con etiqueta NOM y certificado completo por proveedor; meta 100 % en 4 semanas. Si un proveedor no llega, cámbialo antes del siguiente colado."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Secretaría de Economía – NOM-251-SE-2025, Industria de la construcción-Productos de acero (DOF 13-feb-2026): varilla corrugada (NMX-B-506), malla electrosoldada (NMX-B-290), armaduras triangulares (NMX-B-455) y armaduras para castillos y dalas (NMX-B-456) obligatorias a los 180 días (12-ago-2026); el resto de los productos de acero a los 18 meses; etiqueta en español con contraseña oficial y certificado de conformidad (CCP) o certificado por lote con número de colada",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-251-se-2025/"
+        },
+        {
+          "titulo": "Diario Oficial de la Federación – Normas Oficiales Mexicanas de la Secretaría de Economía (publicación de la NOM-251-SE-2025)",
+          "url": "https://dof.gob.mx/website/normasOficiales/9586/seeco/seeco.html"
         }
       ]
     }

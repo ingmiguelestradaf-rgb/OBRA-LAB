@@ -1,6 +1,35 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-24",
+      "titulo": "Calidad: esclerómetro para ubicar concreto dudoso antes de sacar corazones, y recepción de malla y armex con la nueva NOM-251-SE-2025",
+      "resumen": "La NOM-251-SE-2025 (DOF 13-feb-2026) ya es obligatoria desde el 12 de agosto de 2026 para la varilla corrugada, la malla electrosoldada, las armaduras triangulares y las armaduras para castillos y dalas: deben llegar con etiqueta en español, contraseña oficial NOM y certificado de conformidad (o certificado por lote con número de colada); el resto de los productos de acero entra en 18 meses (agosto de 2027). Nuevo formato 'Recepción de malla electrosoldada y armaduras' para revisarlo en cada entrega, con medidas reales con vernier. Nueva calculadora 'Esclerómetro': con 10 lecturas aplica la regla de NMX-C-192 / ASTM C805 (descartar lecturas a más de 6 unidades del promedio; más de 2 descartadas = repetir) y compara la zona dudosa contra una zona buena (ejemplo: lecturas 30 a 42, se descarta el 42, rebote 34.6 contra 37 de referencia = 93 %, verde: no hace falta corazón ahí). Mejora: 'Recepción de varilla' ahora pide la etiqueta y el certificado NOM-251.",
+      "herramientas": [
+        "calc-esclerometro",
+        "fmt-recepcion-malla-armex-nom251",
+        "fmt-recepcion-varilla"
+      ],
+      "como_aplicarlo": "1) Hoy manda a tus proveedores de varilla, malla y armex un correo pidiendo etiqueta NOM-251 y copia del certificado de conformidad con cada remisión. 2) En la siguiente entrega, llena 'Recepción de malla y armaduras' y mide 3 alambres con vernier. 3) Si tienes una prueba de cilindros baja, antes de pedir corazones da 10 golpes de esclerómetro en la zona dudosa y 10 en una zona buena, y saca corazones solo donde la calculadora marque amarillo o rojo.",
+      "fuentes": [
+        {
+          "titulo": "Secretaría de Economía – NOM-251-SE-2025, Industria de la construcción-Productos de acero (DOF 13-feb-2026): varilla corrugada (NMX-B-506), malla electrosoldada (NMX-B-290), armaduras triangulares (NMX-B-455) y armaduras para castillos y dalas (NMX-B-456) obligatorias a los 180 días (12-ago-2026); el resto de los productos de acero a los 18 meses; etiqueta en español con contraseña oficial y certificado de conformidad (CCP) o certificado por lote con número de colada",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-251-se-2025/"
+        },
+        {
+          "titulo": "Secretaría de Economía – NMX-C-192-ONNCCE-2018, Determinación del número de rebote con esclerómetro – método de ensayo (vigente; equivalente a ISO 1920-7)",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nmx-c-192-onncce-2018/"
+        },
+        {
+          "titulo": "WSDOT FOP para ASTM C805 (feb-2024): 10 lecturas por zona de al menos 150 mm, impactos separados 25 mm, descartar lecturas a más de 6 unidades del promedio y repetir la zona si se descartan más de 2; elementos de 10 cm o más; no sobre varilla con recubrimiento < 20 mm; no sirve para aceptar o rechazar concreto",
+          "url": "https://appstest.wsdot.wa.gov/publications/manuals/fulltext/M46-01/C805.pdf"
+        },
+        {
+          "titulo": "Screening Eagle – app Schmidt Rebound Hammer (antes Schmidt Live), gratuita en App Store, para esclerómetros Original Schmidt OS8000 / Silver Schmidt: registro, curvas propias e informe PDF (versión 4.5.1)",
+          "url": "https://apps.apple.com/us/app/schmidt-rebound-hammer/id1239435876"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-23",
       "titulo": "Avance y programa: ritmo requerido contra real por actividad, semáforo de consumo del colchón (fever chart) y junta semanal de producción",
       "resumen": "Tres herramientas para controlar el programa con tasas de producción, como recomienda McKinsey (oct-2026: ~80 % de los planes suponen ritmos irrealmente optimistas) y en un año en que el benchmark de Buildots (nov-2026) muestra que las obras solo entregan 63 % del trabajo semanal planeado. 'Ritmo requerido contra ritmo real' te dice por actividad cuántas unidades por día necesitas, cuántos días de atraso llevas y cuántas cuadrillas faltan (ejemplo: aplanado 1,500 m² por hacer en 30 días con 10 % de colchón pide 55.6 m²/día; sacas 45, 81 %, rojo: 4 cuadrillas en lugar de 3). 'Consumo del colchón del programa' compara % de colchón gastado contra % de ruta crítica terminada (ejemplo: 40 % de avance y 9 de 18 días gastados = zona amarilla, recupera 2.9 días). 'Junta semanal de producción' amarra ambos con la estructura de plan semanal del LCI. Mejora: 'Probabilidad de terminar a tiempo (PERT)' ahora te remite a vigilar ese colchón cada viernes.",
