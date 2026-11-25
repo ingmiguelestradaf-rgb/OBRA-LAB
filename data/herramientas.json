@@ -1749,7 +1749,9 @@
         "Herramienta en altura amarrada y área inferior delimitada (caída de objetos)",
         "Izajes con grúa con cálculo de eslingas y % de tabla de carga hecho antes de levantar; radio de acción acordonado y un solo señalero",
         "Cisternas, fosas, cárcamos y pozos señalizados y tapados; nadie dentro sin 'Permiso de entrada a espacio confinado' vigente, vigía afuera y ventilador funcionando",
-        "Soldadura, corte o esmerilado fuera del taller con 'Permiso de trabajo en caliente' vigente, sin combustibles en 10 m, extintor ABC a menos de 7 m y vigilante de fuego"
+        "Soldadura, corte o esmerilado fuera del taller con 'Permiso de trabajo en caliente' vigente, sin combustibles en 10 m, extintor ABC a menos de 7 m y vigilante de fuego",
+        "Descarga y acarreo de bultos de cemento, cal o mortero sin que nadie cargue solo más de 25 kg: acopio en tarima elevada, diablito o carretilla, y LI calculado en 'Bultos de cemento, cal y mortero'",
+        "Cada actividad de riesgo del día tiene su 'Análisis de seguridad en el trabajo (AST)' firmado por la cuadrilla y pegado en el frente"
       ],
       "como_usar": [
         "Haz el recorrido con un representante de cada contratista.",
@@ -1759,7 +1761,8 @@
         "Una excavación sin inspección del día o un izaje sin cálculo previo cuenta como hallazgo crítico: detén la tarea y usa 'Inspección diaria de excavación' o 'Izaje con grúa' antes de reanudar.",
         "Una entrada a cisterna, fosa o cárcamo sin permiso o sin medición de gases es hallazgo crítico: saca al personal, mide y ventila con 'Ventilación de espacio confinado'. Al cierre de mes captura los casos en 'Indicadores de accidentabilidad'.",
         "Un andamio que pasa de 4:1 sin amarres o sobrecargado, o una soldadura sin permiso de trabajo en caliente, es hallazgo crítico: baja al personal o apaga el equipo y corrige con 'Andamio tubular' o 'Permiso de trabajo en caliente' antes de reanudar.",
-        "Un nivel sin extintor, un extintor descargado o un operador de demoledor o cortadora sin protector auditivo es hallazgo crítico: corrígelo antes de seguir y revisa con 'Extintores para la obra' o 'Control de ruido y protección auditiva'."
+        "Un nivel sin extintor, un extintor descargado o un operador de demoledor o cortadora sin protector auditivo es hallazgo crítico: corrígelo antes de seguir y revisa con 'Extintores para la obra' o 'Control de ruido y protección auditiva'.",
+        "Una actividad de riesgo sin AST firmado, o un peón cargando bultos de 50 kg al hombro, es hallazgo crítico: para la tarea, llena el AST con la cuadrilla o cambia a diablito, tarima elevada o bulto de 25 kg antes de reanudar."
       ],
       "fuentes": [
         {
@@ -1785,6 +1788,10 @@
         {
           "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025; sustituye a la NOM-017-STPS-2008): selección del EPP por análisis de riesgos del puesto, capacitación, supervisión y señalización",
           "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
+        },
+        {
+          "titulo": "NOM-036-1-STPS-2018, Factores de riesgo ergonómico – Manejo manual de cargas (DOF): 2.1 no aplica a cargas menores de 3 kg; Tabla 1 masa máxima 25 kg hombres de 18 a 45 años, 20 kg mujeres de 18 a 45, 15 kg mujeres mayores de 45; 4.9 métodos válidos (ecuación de NIOSH, ISO 11228); Cap. 7 análisis y evaluación; 8.3 b) 1) embarazadas no más de 10 kg; 8.3 b) 3) grupos de carga (2 personas = 2/3 de la suma, 3 = la mitad) o ayudas mecánicas; 8.3 b) 5) tope de 10,000 kg por jornada de 8 h a menos de 10 m y 6,000 kg hasta 20 m; Cap. 9 examen médico inicial y anual; Cap. 10 capacitación al ingreso y cada 2 años",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5544579"
         }
       ]
     },
@@ -12401,6 +12408,257 @@
         {
           "titulo": "Diario Oficial de la Federación – Normas Oficiales Mexicanas de la Secretaría de Economía (publicación de la NOM-251-SE-2025)",
           "url": "https://dof.gob.mx/website/normasOficiales/9586/seeco/seeco.html"
+        }
+      ]
+    },
+    {
+      "id": "calc-carga-manual-bultos",
+      "tipo": "calculadora",
+      "categoria": "Seguridad",
+      "titulo": "Bultos de cemento, cal y mortero: ¿cuánto puede cargar cada trabajador sin lastimarse? (NOM-036-1-STPS y ecuación de NIOSH)",
+      "resumen": "Con el peso del bulto, la distancia de las manos al cuerpo, la altura donde lo levanta y donde lo deja, el giro del tronco y la frecuencia calcula el peso máximo recomendado (RWL) de la ecuación revisada de NIOSH, que la NOM-036-1-STPS-2018 reconoce como método de evaluación, y el índice de levantamiento LI = peso / RWL (NIOSH recomienda LI ≤ 1). También revisa la Tabla 1 de la NOM-036-1 (25 kg máximo para hombres de 18 a 45 años), cuántas personas hacen falta para cargarlo entre varios (8.3: 2 personas levantan 2/3 de la suma de sus límites, 3 la mitad: un bulto de 50 kg no cabe ni entre 3) y los kilos que mueve cada quien en el día contra el tope de 10,000 kg (menos de 10 m) o 6,000 kg (hasta 20 m). Ejemplo: descargar 300 bultos de 50 kg desde tarima al piso hasta la caja de la camioneta, 3 peones, 15 m: RWL 7.6 kg, LI 6.6 (rojo); con bulto de 25 kg LI 3.3 y con tarima a 75 cm y sin giro baja a 1.3. Lo que más baja el riesgo es la ALTURA de origen y el peso del bulto, no la faja.",
+      "agregada": "2026-11-25",
+      "entradas": [
+        {
+          "id": "peso",
+          "label": "Peso del bulto o carga (cemento y cal 50 o 25 kg; mortero 50 kg; block, tabique, varilla: pésalo)",
+          "unidad": "kg",
+          "valor": 50
+        },
+        {
+          "id": "H",
+          "label": "Distancia horizontal de las manos al punto medio entre los tobillos al levantar (pegado al cuerpo ≈ 25; bulto sobre la orilla de la tarima ≈ 40–50)",
+          "unidad": "cm",
+          "valor": 40
+        },
+        {
+          "id": "vo",
+          "label": "Altura de las manos al INICIO, medida desde el piso (bulto en piso ≈ 5; en tarima ≈ 15; sobre 2 tarimas o banco ≈ 75)",
+          "unidad": "cm",
+          "valor": 15
+        },
+        {
+          "id": "vd",
+          "label": "Altura de las manos al FINAL (caja de camioneta ≈ 110; boca de revolvedora ≈ 100; hombro ≈ 140)",
+          "unidad": "cm",
+          "valor": 110
+        },
+        {
+          "id": "ang",
+          "label": "Giro del tronco al levantar o dejar (0 si gira con los pies; 45 media vuelta del tronco; 90 de lado)",
+          "unidad": "°",
+          "valor": 45
+        },
+        {
+          "id": "fm",
+          "label": "Factor de frecuencia FM de NIOSH (≤1 h / 1–2 h / 2–8 h): 1 por min .94/.88/.75 · 2 por min .91/.84/.65 · 4 por min .84/.72/.45 · 6 por min .75/.50/.27 · 10 por min .45/.26/0",
+          "unidad": "",
+          "valor": 0.91
+        },
+        {
+          "id": "cm",
+          "label": "Factor de agarre CM: 1.00 caja con asas · 0.95 bulto que se agarra bien · 0.90 bulto flojo, roto, mojado o resbaloso",
+          "unidad": "",
+          "valor": 0.95
+        },
+        {
+          "id": "bultos",
+          "label": "Bultos que mueve la cuadrilla en el día",
+          "unidad": "pza",
+          "valor": 300
+        },
+        {
+          "id": "personas",
+          "label": "Personas que cargan",
+          "unidad": "pza",
+          "valor": 3
+        },
+        {
+          "id": "dist",
+          "label": "Distancia que se acarrean a mano (más de 20 m: usa carretilla o diablito)",
+          "unidad": "m",
+          "valor": 15
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Factores NIOSH: HM × VM × DM × AM (1 = postura ideal)",
+          "formula": "(H<=25?1:(H>63?0:25/H))*(vo>175?0:1-0.003*Math.abs(vo-75))*(Math.max(25,Math.abs(vd-vo))>175?0:0.82+4.5/Math.max(25,Math.abs(vd-vo)))*(ang>135?0:1-0.0032*ang)",
+          "unidad": "",
+          "decimales": 2
+        },
+        {
+          "label": "Peso máximo recomendado para esta tarea (RWL de NIOSH)",
+          "formula": "(23*(H<=25?1:(H>63?0:25/H))*(vo>175?0:1-0.003*Math.abs(vo-75))*(Math.max(25,Math.abs(vd-vo))>175?0:0.82+4.5/Math.max(25,Math.abs(vd-vo)))*(ang>135?0:1-0.0032*ang)*fm*cm)",
+          "unidad": "kg",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Índice de levantamiento LI = peso / RWL (NIOSH recomienda ≤ 1)",
+          "formula": "peso/Math.max(0.01,(23*(H<=25?1:(H>63?0:25/H))*(vo>175?0:1-0.003*Math.abs(vo-75))*(Math.max(25,Math.abs(vd-vo))>175?0:0.82+4.5/Math.max(25,Math.abs(vd-vo)))*(ang>135?0:1-0.0032*ang)*fm*cm))",
+          "unidad": "",
+          "decimales": 1,
+          "destacar": true
+        },
+        {
+          "label": "Semáforo 1 − LI (verde: LI ≤ 1; amarillo: LI de 1 a 3, riesgo aumentado, rediseña; rojo: LI > 3, criterio práctico de ergonomía para cambiar la tarea ya)",
+          "formula": "1-peso/Math.max(0.01,(23*(H<=25?1:(H>63?0:25/H))*(vo>175?0:1-0.003*Math.abs(vo-75))*(Math.max(25,Math.abs(vd-vo))>175?0:0.82+4.5/Math.max(25,Math.abs(vd-vo)))*(ang>135?0:1-0.0032*ang)*fm*cm))",
+          "unidad": "",
+          "decimales": 1,
+          "semaforo": [
+            0,
+            -2
+          ]
+        },
+        {
+          "label": "LI si cambias a bulto de 25 kg (misma postura)",
+          "formula": "25/Math.max(0.01,(23*(H<=25?1:(H>63?0:25/H))*(vo>175?0:1-0.003*Math.abs(vo-75))*(Math.max(25,Math.abs(vd-vo))>175?0:0.82+4.5/Math.max(25,Math.abs(vd-vo)))*(ang>135?0:1-0.0032*ang)*fm*cm))",
+          "unidad": "",
+          "decimales": 1
+        },
+        {
+          "label": "LI con bulto de 25 kg en tarima elevada a 75 cm, pegado al cuerpo y sin giro",
+          "formula": "25/(23*1*1*(Math.max(25,Math.abs(vd-75))>175?0.01:0.82+4.5/Math.max(25,Math.abs(vd-75)))*fm*cm+1e-9)",
+          "unidad": "",
+          "decimales": 1
+        },
+        {
+          "label": "Margen contra la Tabla 1 de la NOM-036-1: 25 kg hombre de 18 a 45 años (rojo = el bulto se pasa; mujeres 18–45: 20 kg; mujeres mayores de 45: 15 kg)",
+          "formula": "25-peso",
+          "unidad": "kg",
+          "decimales": 1,
+          "semaforo": [
+            0,
+            0
+          ]
+        },
+        {
+          "label": "Personas necesarias para cargarlo entre varios (8.3: 1 hasta 25 kg; 2 hasta 33.3 kg; 3 hasta 37.5 kg; 0 = ni con 3: diablito, montacargas o bulto más chico)",
+          "formula": "peso<=25?1:(peso<=50/1.5?2:(peso<=37.5?3:0))",
+          "unidad": "personas",
+          "decimales": 0
+        },
+        {
+          "label": "Kilos que carga cada persona en el día",
+          "formula": "bultos*peso/Math.max(1,personas)",
+          "unidad": "kg",
+          "decimales": 0
+        },
+        {
+          "label": "% del tope diario NOM-036-1 8.3 b) 5) (10,000 kg a menos de 10 m; 6,000 kg hasta 20 m)",
+          "formula": "bultos*peso/Math.max(1,personas)/(dist<10?10000:6000)*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Margen contra el tope diario (verde ≥ 20 %; rojo = se pasa: agrega personas o carretilla)",
+          "formula": "100-bultos*peso/Math.max(1,personas)/(dist<10?10000:6000)*100",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            20,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Observa una vez la tarea real (descarga de la camioneta, acarreo al acopio, alimentar la revolvedora) y mide con flexómetro: distancia de las manos a los tobillos, altura de las manos al levantar y al dejar, y cuenta cuántos bultos por minuto mueve cada quien.",
+        "Captura los datos con el FM de la tabla del campo (frecuencia y horas seguidas) y el agarre del bulto; el ejemplo trae 300 bultos de 50 kg, 3 peones y 15 m de acarreo.",
+        "Si el LI sale mayor a 1 cambia primero lo que más pesa en el cálculo: sube el acopio a tarima doble o banco a 75 cm, pide la camioneta con plataforma a la altura de la cama, elimina el giro (que gire con los pies) y prueba con bulto de 25 kg; vuelve a calcular cada cambio.",
+        "Si la persona necesaria sale 0 o el tope diario pasa de 100 %: el bulto de 50 kg va con diablito, carretilla, montacargas o malacate, nunca 'entre dos' al hombro; anótalo en la orden de compra (pedir cemento y cal en 25 kg o descarga con montacargas del proveedor).",
+        "Deja el resultado impreso como el análisis de la NOM-036-1 (Cap. 7) de esa tarea, capacita a la cuadrilla y revisa que tengan examen médico; indicador: LI de la tarea antes y después (meta ≤ 1) y molestias de espalda reportadas por mes en 'Indicadores de accidentabilidad'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-036-1-STPS-2018, Factores de riesgo ergonómico – Manejo manual de cargas (DOF): 2.1 no aplica a cargas menores de 3 kg; Tabla 1 masa máxima 25 kg hombres de 18 a 45 años, 20 kg mujeres de 18 a 45, 15 kg mujeres mayores de 45; 4.9 métodos válidos (ecuación de NIOSH, ISO 11228); Cap. 7 análisis y evaluación; 8.3 b) 1) embarazadas no más de 10 kg; 8.3 b) 3) grupos de carga (2 personas = 2/3 de la suma, 3 = la mitad) o ayudas mecánicas; 8.3 b) 5) tope de 10,000 kg por jornada de 8 h a menos de 10 m y 6,000 kg hasta 20 m; Cap. 9 examen médico inicial y anual; Cap. 10 capacitación al ingreso y cada 2 años",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5544579"
+        },
+        {
+          "titulo": "NIOSH – Applications Manual for the Revised NIOSH Lifting Equation, pub. 94-110 (revisión sep-2021, fórmulas idénticas a 1994): RWL = 23 kg × HM × VM × DM × AM × FM × CM; HM = 25/H (H de 25 a 63 cm), VM = 1 − 0.003|V − 75| (V hasta 175 cm), DM = 0.82 + 4.5/D (D de 25 a 175 cm), AM = 1 − 0.0032A (A hasta 135°); LI = carga/RWL",
+          "url": "https://stacks.cdc.gov/view/cdc/110725/cdc_110725_DS1.pdf"
+        },
+        {
+          "titulo": "CDC/NIOSH – Revised NIOSH Lifting Equation (página actualizada el 28-oct-2026): NIOSH recomienda que el índice de levantamiento LI sea igual o menor a 1.0",
+          "url": "https://www.cdc.gov/niosh/ergonomics/about/RNLE.html"
+        },
+        {
+          "titulo": "Xataka México (6-ago-2026) – México dejó atrás los costales de 50 kilos: cemento, cal y otros insumos migran a bultos de 25 kg por la NOM-036-1; la norma no prohíbe vender bultos más pesados, regula el manejo manual",
+          "url": "https://www.xataka.com.mx/medicina-y-salud/mexico-dejo-atras-costales-50-kilos-razon-tiene-que-ver-salud-millones-trabajadores"
+        },
+        {
+          "titulo": "STPS – Comunicado conjunto 19/2024 en la planta de Cementos Moctezuma con CANACEM: con la entrada en vigor de la NOM-036-1 la masa máxima que levanta un trabajador es 25 kg; la industria adapta bultos de cemento y cal",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/906191/TRABAJO_CANACEM.pdf"
+        },
+        {
+          "titulo": "CemNet (5-abr-2024) – CANACEM implementa el bulto de cemento de 25 kg conforme a la NOM-036-1-STPS-2018 (Cementos Moctezuma: CPC 30 R y 30 RS en 25 kg)",
+          "url": "https://www.cemnet.com/News/story/176740/mexico-implements-new-25kg-bag.html"
+        }
+      ]
+    },
+    {
+      "id": "fmt-ast-actividad",
+      "tipo": "formato",
+      "categoria": "Seguridad",
+      "titulo": "Análisis de seguridad en el trabajo (AST) de la actividad del día: pasos, peligros, nivel de riesgo y controles firmados por la cuadrilla (NOM-031-STPS-2011)",
+      "resumen": "Hoja de una página que el cabo llena con su cuadrilla ANTES de empezar una actividad nueva o que cambió (colado, cimbrado en altura, descarga de material, demolición, zanja, izaje). Divide la actividad en pasos, pone el peligro de cada paso, lo clasifica con la jerarquía de la NOM-031 (grave, elevado, medio, bajo o mínimo; 8.3.1: los graves se atienden de inmediato, antes de arrancar) y escribe el control en el orden que sí funciona: eliminar, sustituir, protección física, procedimiento y al final EPP (NOM-017-STPS-2024). Liga los permisos que ya existen en ObraLab (altura, excavación, confinado, caliente) y la calculadora de bultos para el manejo manual de cargas. Firmado por la cuadrilla, es la evidencia del análisis de riesgos potenciales que pide la NOM-031 (5.2 y 8.1) para obras pequeñas y medianas.",
+      "agregada": "2026-11-25",
+      "campos": [
+        "Obra, fecha y número de AST",
+        "Actividad y lugar exacto (nivel, ejes, frente)",
+        "Contratista y cabo responsable",
+        "Herramienta, equipo y material que se usará (rotomartillo, cortadora, revolvedora, grúa, bultos de X kg)",
+        "Pasos de la actividad (3 a 8), uno por renglón",
+        "Peligro de cada paso (caída, golpe, atrapamiento, carga manual, eléctrico, polvo, ruido, incendio)",
+        "Nivel de riesgo de cada paso: grave / elevado / medio / bajo / mínimo",
+        "Control de cada paso en orden: eliminar → sustituir → protección física → procedimiento → EPP",
+        "Responsable de cada control (nombre)",
+        "Permisos anexos: altura, excavación, espacio confinado, trabajo en caliente, izaje (número)",
+        "Resultado de 'Bultos de cemento, cal y mortero' si hay carga manual de más de 25 kg o repetida",
+        "Nombres y firmas de toda la cuadrilla (enterados antes de iniciar)",
+        "Revisó y autorizó: residente o encargado de seguridad (nombre, firma y hora)",
+        "Cambios durante el día que obligaron a parar y actualizar el AST",
+        "Cierre: incidentes o casi accidentes del día (sí/no y descripción breve)"
+      ],
+      "items": [
+        "El AST se hizo en el frente, con la cuadrilla, antes de empezar (no en la oficina ni al final del día)",
+        "Todos los pasos de la actividad están escritos, incluidos preparación, acarreo de material y limpieza",
+        "Cada peligro tiene nivel de riesgo y control con responsable",
+        "Ningún paso queda en 'grave' sin control aplicado: si sigue grave, la actividad no arranca (NOM-031, 8.3.1)",
+        "Se buscó eliminar o sustituir antes de recurrir al EPP (p. ej. bulto de 25 kg o montacargas en lugar de faja; cortar en mesa con agua en lugar de cortar en seco)",
+        "Los permisos que aplican están anexos y vigentes (altura, excavación, confinado, caliente, izaje)",
+        "Carga manual revisada: nadie carga solo más de 25 kg (hombres 18–45), 20 kg (mujeres 18–45) ni 15 kg (mujeres mayores de 45); embarazadas no más de 10 kg (NOM-036-1)",
+        "EPP específico de la actividad disponible y en buen estado para todos antes de iniciar",
+        "Equipo y herramienta revisados (guardas, cables, discos, mangueras, eslingas)",
+        "Área delimitada y señalizada para que no entren otros oficios",
+        "Ruta de evacuación, botiquín, extintor y teléfono de emergencia conocidos por la cuadrilla",
+        "Toda la cuadrilla firmó y entiende su parte (preguntar a uno al azar qué hace si pasa X)",
+        "Si cambió el clima (viento Santa Ana, lluvia), el material, la cuadrilla o el método, se paró y se actualizó el AST",
+        "Al cierre se anotaron incidentes y casi accidentes y se pasaron al registro semanal"
+      ],
+      "como_usar": [
+        "Define con cada contratista qué actividades requieren AST: toda actividad nueva en la obra, toda la que cambie de método o de lugar, y siempre las de riesgo (altura, zanja, izaje, demolición, colado, descarga de material).",
+        "A primera hora, en el frente, el cabo lee los pasos con su cuadrilla, entre todos escriben el peligro de cada paso y le ponen nivel (grave, elevado, medio, bajo, mínimo); 10 a 15 minutos, mismo momento que la junta de arranque.",
+        "Para cada peligro escribe el control empezando por eliminar o sustituir y dejando el EPP al final; si hay bultos o piezas pesadas, mide la tarea en 'Bultos de cemento, cal y mortero' y anota el LI.",
+        "El residente o el encargado de seguridad revisa en el recorrido: si queda un paso grave sin control, no autoriza el arranque. Todos firman y el AST queda pegado a la vista en el frente.",
+        "Guarda los AST por semana junto con el 'Recorrido de seguridad semanal'; indicador: actividades de riesgo con AST firmado contra actividades de riesgo vistas en el recorrido (meta 100 %) y casi accidentes reportados por semana (que suban al principio es buena señal: se están reportando)."
+      ],
+      "fuentes": [
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud (DOF): 5.2 obras pequeñas describen actividades, riesgos y medidas antes y durante la ejecución; 8.1 y 8.2 análisis de riesgos potenciales por actividad o fase con firma del responsable; 8.3 jerarquización en graves, elevados, medios, bajos y mínimos y 8.3.1 los graves se atienden de inmediato; 5.7 instrucciones para trabajos peligrosos; 9.4 autorizaciones",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5188292"
+        },
+        {
+          "titulo": "NOM-036-1-STPS-2018, Factores de riesgo ergonómico – Manejo manual de cargas (DOF): 2.1 no aplica a cargas menores de 3 kg; Tabla 1 masa máxima 25 kg hombres de 18 a 45 años, 20 kg mujeres de 18 a 45, 15 kg mujeres mayores de 45; 4.9 métodos válidos (ecuación de NIOSH, ISO 11228); Cap. 7 análisis y evaluación; 8.3 b) 1) embarazadas no más de 10 kg; 8.3 b) 3) grupos de carga (2 personas = 2/3 de la suma, 3 = la mitad) o ayudas mecánicas; 8.3 b) 5) tope de 10,000 kg por jornada de 8 h a menos de 10 m y 6,000 kg hasta 20 m; Cap. 9 examen médico inicial y anual; Cap. 10 capacitación al ingreso y cada 2 años",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5544579"
+        },
+        {
+          "titulo": "NOM-017-STPS-2024 Equipo de protección personal (DOF 28-mar-2025, en vigor desde el 28-sep-2025): EPP seleccionado con el análisis de riesgos del puesto; es la última barrera, no la primera",
+          "url": "https://platiica.economia.gob.mx/normalizacion/nom-017-stps-2024/"
+        },
+        {
+          "titulo": "Walmart de México – Manual de seguridad para proveedores y contratistas 2026 (dic-2025): ejemplo de lo que un cliente grande exige al contratista en obra",
+          "url": "https://www.walmartmexico.com/content/dam/walmart-mexico/documents/bienes-raices/dic-2025/0.%20Manual%20de%20seguridad%20para%20proveedores%20y%20contratistas_2026.pdf"
         }
       ]
     }

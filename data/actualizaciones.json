@@ -1,6 +1,43 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-25",
+      "titulo": "Seguridad: bultos de 50 kg que lastiman la espalda (límite de 25 kg de la NOM-036-1 calculado con la ecuación de NIOSH) y análisis de seguridad en el trabajo (AST) firmado por la cuadrilla antes de arrancar",
+      "resumen": "La NOM-036-1-STPS-2018 fija 25 kg como masa máxima que levanta un hombre de 18 a 45 años (20 kg mujeres de 18 a 45, 15 kg mujeres mayores de 45) y por eso cemento y cal ya se venden en bultos de 25 kg, aunque el de 50 kg sigue en el mercado y en muchas obras se sigue cargando al hombro. Nueva calculadora 'Bultos de cemento, cal y mortero': con la ecuación revisada de NIOSH (método que reconoce la NOM-036-1) da el peso máximo recomendado para la postura real y el índice de levantamiento; ejemplo: 300 bultos de 50 kg de la tarima a la camioneta con 3 peones → RWL 7.6 kg, LI 6.6 (rojo); con bulto de 25 kg en tarima a 75 cm y sin giro, LI 1.3. Además dice cuántas personas harían falta (con 50 kg, ni 3 alcanzan según 8.3) y los kilos diarios por persona contra el tope de 6,000 a 10,000 kg. Nuevo formato 'Análisis de seguridad en el trabajo (AST)': pasos, peligros, nivel de riesgo con la jerarquía de la NOM-031 y controles en orden (eliminar antes que EPP), firmado por la cuadrilla. Mejora: el 'Recorrido de seguridad semanal' ahora revisa carga manual de bultos y AST firmados.",
+      "herramientas": [
+        "calc-carga-manual-bultos",
+        "fmt-ast-actividad",
+        "fmt-seguridad"
+      ],
+      "como_aplicarlo": "1) Hoy mide con flexómetro la descarga de cemento o cal (alturas y distancia al cuerpo), captúrala en 'Bultos de cemento, cal y mortero' y, si el LI pasa de 1, sube el acopio a tarima doble y pide la siguiente compra en bultos de 25 kg o con descarga mecánica. 2) Mañana a primera hora llena el AST con la cuadrilla de la actividad de más riesgo (colado, cimbra en altura o zanja) y no arranques si queda un paso 'grave' sin control. 3) En el recorrido de la semana cuenta actividades de riesgo con AST contra las vistas (meta 100 %) y compara el LI de la descarga antes y después.",
+      "fuentes": [
+        {
+          "titulo": "NOM-036-1-STPS-2018, Factores de riesgo ergonómico – Manejo manual de cargas (DOF): 2.1 no aplica a cargas menores de 3 kg; Tabla 1 masa máxima 25 kg hombres de 18 a 45 años, 20 kg mujeres de 18 a 45, 15 kg mujeres mayores de 45; 4.9 métodos válidos (ecuación de NIOSH, ISO 11228); Cap. 7 análisis y evaluación; 8.3 b) 1) embarazadas no más de 10 kg; 8.3 b) 3) grupos de carga (2 personas = 2/3 de la suma, 3 = la mitad) o ayudas mecánicas; 8.3 b) 5) tope de 10,000 kg por jornada de 8 h a menos de 10 m y 6,000 kg hasta 20 m; Cap. 9 examen médico inicial y anual; Cap. 10 capacitación al ingreso y cada 2 años",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5544579"
+        },
+        {
+          "titulo": "NIOSH – Applications Manual for the Revised NIOSH Lifting Equation, pub. 94-110 (revisión sep-2021, fórmulas idénticas a 1994): RWL = 23 kg × HM × VM × DM × AM × FM × CM; HM = 25/H (H de 25 a 63 cm), VM = 1 − 0.003|V − 75| (V hasta 175 cm), DM = 0.82 + 4.5/D (D de 25 a 175 cm), AM = 1 − 0.0032A (A hasta 135°); LI = carga/RWL",
+          "url": "https://stacks.cdc.gov/view/cdc/110725/cdc_110725_DS1.pdf"
+        },
+        {
+          "titulo": "CDC/NIOSH – Revised NIOSH Lifting Equation (página actualizada el 28-oct-2026): NIOSH recomienda que el índice de levantamiento LI sea igual o menor a 1.0",
+          "url": "https://www.cdc.gov/niosh/ergonomics/about/RNLE.html"
+        },
+        {
+          "titulo": "Xataka México (6-ago-2026) – México dejó atrás los costales de 50 kilos: cemento, cal y otros insumos migran a bultos de 25 kg por la NOM-036-1; la norma no prohíbe vender bultos más pesados, regula el manejo manual",
+          "url": "https://www.xataka.com.mx/medicina-y-salud/mexico-dejo-atras-costales-50-kilos-razon-tiene-que-ver-salud-millones-trabajadores"
+        },
+        {
+          "titulo": "STPS – Comunicado conjunto 19/2024 en la planta de Cementos Moctezuma con CANACEM: con la entrada en vigor de la NOM-036-1 la masa máxima que levanta un trabajador es 25 kg; la industria adapta bultos de cemento y cal",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/906191/TRABAJO_CANACEM.pdf"
+        },
+        {
+          "titulo": "NOM-031-STPS-2011 Construcción – Condiciones de seguridad y salud (DOF): 5.2 obras pequeñas describen actividades, riesgos y medidas antes y durante la ejecución; 8.1 y 8.2 análisis de riesgos potenciales por actividad o fase con firma del responsable; 8.3 jerarquización en graves, elevados, medios, bajos y mínimos y 8.3.1 los graves se atienden de inmediato; 5.7 instrucciones para trabajos peligrosos; 9.4 autorizaciones",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=5188292"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-24",
       "titulo": "Calidad: esclerómetro para ubicar concreto dudoso antes de sacar corazones, y recepción de malla y armex con la nueva NOM-251-SE-2025",
       "resumen": "La NOM-251-SE-2025 (DOF 13-feb-2026) ya es obligatoria desde el 12 de agosto de 2026 para la varilla corrugada, la malla electrosoldada, las armaduras triangulares y las armaduras para castillos y dalas: deben llegar con etiqueta en español, contraseña oficial NOM y certificado de conformidad (o certificado por lote con número de colada); el resto de los productos de acero entra en 18 meses (agosto de 2027). Nuevo formato 'Recepción de malla electrosoldada y armaduras' para revisarlo en cada entrega, con medidas reales con vernier. Nueva calculadora 'Esclerómetro': con 10 lecturas aplica la regla de NMX-C-192 / ASTM C805 (descartar lecturas a más de 6 unidades del promedio; más de 2 descartadas = repetir) y compara la zona dudosa contra una zona buena (ejemplo: lecturas 30 a 42, se descarta el 42, rebote 34.6 contra 37 de referencia = 93 %, verde: no hace falta corazón ahí). Mejora: 'Recepción de varilla' ahora pide la etiqueta y el certificado NOM-251.",
