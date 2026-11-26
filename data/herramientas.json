@@ -8873,9 +8873,13 @@
         "El precio real es el promedio de facturas sin IVA e incluye fletes, bombeo, horas extra de planta y cargos por espera: es lo que de verdad pagaste.",
         "Lee las dos causas: si pesa más el PRECIO, la acción es de compras (cotizar, contratos por volumen) o de cobro (ajuste de costos o escalatoria con índices INPP); si pesa más el CONSUMO, la acción es de campo (revisar cimbra, sobre-excavación, pedidos de olla al cierre del colado, cortes de varilla).",
         "Anota el sobrecosto por consumo en el reporte A3 o el Pareto si se repite dos meses; mide el desperdicio real mes contra mes y la meta es quedar dentro del % de tu precio unitario.",
-        "Referencia de precios: el INPP del sector Construcción subió 5.79 % anual a julio de 2026 (INEGI) y el CEICO-CMIC reporta concreto premezclado +6.26 % y bloques +7.45 % en 2025; si tu alza de precio supera esas cifras, revisa tu compra antes de culpar al mercado."
+        "Referencia de precios: el INPP del sector Construcción subió 6.23 % anual a octubre de 2026 (INEGI, preliminar; julio: 5.79 %), las industrias metálicas básicas (donde está el acero) 9.83 % y los minerales no metálicos (cemento, concreto, block) 5.71 %; el CEICO-CMIC reporta concreto premezclado +6.26 % y bloques +7.45 % en 2025. Si tu alza de precio supera esas cifras, revisa tu compra con el cuadro comparativo de cotizaciones antes de culpar al mercado."
       ],
       "fuentes": [
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9 nov 2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct 2025: +4.01 %); industrias metálicas básicas +9.83 % anual, minerales no metálicos +5.71 %, industria de la madera +3.24 %. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        },
         {
           "titulo": "INEGI – INPP julio 2026 (boletín 482/26, 7 ago 2026): sector Construcción +0.50 % mensual y +5.79 % anual (julio 2025: +3.90 %); lámina de acero +4.85 % en el mes. Cifras preliminares",
           "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_08.pdf"
@@ -12659,6 +12663,487 @@
         {
           "titulo": "Walmart de México – Manual de seguridad para proveedores y contratistas 2026 (dic-2025): ejemplo de lo que un cliente grande exige al contratista en obra",
           "url": "https://www.walmartmexico.com/content/dam/walmart-mexico/documents/bienes-raices/dic-2025/0.%20Manual%20de%20seguridad%20para%20proveedores%20y%20contratistas_2026.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-cimbra-costo-uso",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Cimbra de contacto: costo por m² por uso con triplay de pino, triplay fenólico o cimbra modular rentada, y cuántos usos necesita el fenólico para convenir",
+      "resumen": "La cimbra suele ser la partida de estructura que más se 'come' el precio unitario y casi nadie la amortiza con los usos reales. Esta calculadora reparte el costo del triplay entre los colados que de verdad tiene tu obra (si la obra tiene 8 losas, una hoja que aguanta 10 usos solo se aprovecha 8), le suma madera de soporte, mano de obra y desmoldante, y lo compara contra una cimbra modular rentada. Ejemplo con precios de ejemplo (no de mercado, cotiza los tuyos): losa de 250 m² por nivel, 8 colados; pino a $650/hoja con 4 usos → $291/m²·uso; fenólico a $1,150/hoja con 10 usos → $284/m²·uso; modular a $110/m²/mes con 3 colados al mes → $175/m²·uso. El fenólico necesita dar 7.1 usos para empatar al pino y en esta obra solo puede dar 8: casi empata.",
+      "agregada": "2026-11-26",
+      "entradas": [
+        {
+          "id": "Ac",
+          "label": "Área de contacto por colado (losa + trabes de un nivel o del frente que se cimbra a la vez)",
+          "unidad": "m²",
+          "valor": 250
+        },
+        {
+          "id": "N",
+          "label": "Número de colados con la misma cimbra en la obra (niveles o repeticiones)",
+          "unidad": "usos",
+          "valor": 8
+        },
+        {
+          "id": "Dc",
+          "label": "Desperdicio de triplay por cortes y ajustes",
+          "unidad": "%",
+          "valor": 10
+        },
+        {
+          "id": "Ph",
+          "label": "Precio de la hoja de triplay de pino 1.22 × 2.44 m (sin IVA)",
+          "unidad": "$/hoja",
+          "valor": 650
+        },
+        {
+          "id": "Uh",
+          "label": "Usos reales del triplay de pino en tu obra (cuenta los de la obra anterior)",
+          "unidad": "usos",
+          "valor": 4
+        },
+        {
+          "id": "Pf",
+          "label": "Precio de la hoja de triplay fenólico 1.22 × 2.44 m (sin IVA)",
+          "unidad": "$/hoja",
+          "valor": 1150
+        },
+        {
+          "id": "Uf",
+          "label": "Usos esperados del fenólico (ficha del fabricante: hasta 10 a 15 con buen manejo)",
+          "unidad": "usos",
+          "valor": 10
+        },
+        {
+          "id": "Cs",
+          "label": "Madera de soporte, clavo y alambre amortizados (polín, barrote, pies derechos) – solo triplay",
+          "unidad": "$/m²·uso",
+          "valor": 45
+        },
+        {
+          "id": "Mo",
+          "label": "Mano de obra de cimbrado y descimbrado con triplay (destajo o cuadrilla)",
+          "unidad": "$/m²",
+          "valor": 180
+        },
+        {
+          "id": "Dm",
+          "label": "Desmoldante y limpieza",
+          "unidad": "$/m²·uso",
+          "valor": 6
+        },
+        {
+          "id": "Rm",
+          "label": "Renta de cimbra modular con puntales (cotización sin IVA)",
+          "unidad": "$/m²/mes",
+          "valor": 110
+        },
+        {
+          "id": "Cm",
+          "label": "Colados por mes que logras con un juego de cimbra modular",
+          "unidad": "colados/mes",
+          "valor": 3
+        },
+        {
+          "id": "Mm",
+          "label": "Mano de obra de montaje y desmontaje de la cimbra modular",
+          "unidad": "$/m²",
+          "valor": 120
+        },
+        {
+          "id": "Fm",
+          "label": "Fletes de ida y vuelta, faltantes y reparaciones de la modular (total de la obra)",
+          "unidad": "$",
+          "valor": 25000
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Juegos de triplay de pino que vas a comprar",
+          "formula": "Math.ceil(N/Uh)",
+          "unidad": "juegos",
+          "decimales": 0
+        },
+        {
+          "label": "Hojas de pino a comprar (todos los juegos)",
+          "formula": "Math.ceil(Math.ceil(N/Uh)*Ac*(1+Dc/100)/2.9768)",
+          "unidad": "hojas",
+          "decimales": 0
+        },
+        {
+          "label": "Triplay de PINO: costo por m² por uso",
+          "formula": "Math.ceil(N/Uh)*Ac*(1+Dc/100)/2.9768*Ph/(Ac*N)+Cs+Mo+Dm",
+          "unidad": "$/m²",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Triplay FENÓLICO: costo por m² por uso",
+          "formula": "Math.ceil(N/Uf)*Ac*(1+Dc/100)/2.9768*Pf/(Ac*N)+Cs+Mo+Dm",
+          "unidad": "$/m²",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Cimbra MODULAR rentada: costo por m² por uso",
+          "formula": "Rm/Cm+Mm+Dm+Fm/(Ac*N)",
+          "unidad": "$/m²",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Costo total de cimbra en la obra – pino",
+          "formula": "(Math.ceil(N/Uh)*Ac*(1+Dc/100)/2.9768*Ph/(Ac*N)+Cs+Mo+Dm)*Ac*N",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo total de cimbra en la obra – fenólico",
+          "formula": "(Math.ceil(N/Uf)*Ac*(1+Dc/100)/2.9768*Pf/(Ac*N)+Cs+Mo+Dm)*Ac*N",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Costo total de cimbra en la obra – modular",
+          "formula": "(Rm/Cm+Mm+Dm+Fm/(Ac*N))*Ac*N",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Ahorro de la opción más barata contra el pino",
+          "formula": "(Math.ceil(N/Uh)*Ac*(1+Dc/100)/2.9768*Ph/(Ac*N)+Cs+Mo+Dm)*Ac*N-Math.min((Math.ceil(N/Uf)*Ac*(1+Dc/100)/2.9768*Pf/(Ac*N)+Cs+Mo+Dm),(Rm/Cm+Mm+Dm+Fm/(Ac*N)),(Math.ceil(N/Uh)*Ac*(1+Dc/100)/2.9768*Ph/(Ac*N)+Cs+Mo+Dm))*Ac*N",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Usos que debe dar el fenólico para empatar al pino (solo triplay)",
+          "formula": "Pf*Uh/Ph",
+          "unidad": "usos",
+          "decimales": 1
+        },
+        {
+          "label": "Margen de usos del fenólico (usos aprovechables en esta obra − usos para empatar)",
+          "formula": "Math.min(Uf,N)-Pf*Uh/Ph",
+          "unidad": "usos",
+          "decimales": 1,
+          "semaforo": [
+            2,
+            0
+          ]
+        }
+      ],
+      "como_usar": [
+        "Mide el área de contacto de un nivel tipo (fondo de losa + costados y fondos de trabes) en el generador de cimbra y cuenta cuántos colados iguales tiene la obra.",
+        "Pide 2 cotizaciones de triplay (pino de 16 mm y fenólico de 18 mm) y una de renta de cimbra modular con puntales, todas sin IVA y puestas en obra; captura el precio de la hoja y la renta por m² por mes.",
+        "Usos reales: no uses el de la ficha a ciegas. Cuenta cuántos colados aguantó el triplay en tu última obra antes de que el acabado de la losa saliera rechazado; las fichas dan hasta 10 (Sistegua) o de 10 a 15 (FINSA) usos para tableros con película y solo con buen manejo, limpieza y almacenaje bajo techo.",
+        "Captura la mano de obra real de cada sistema (el destajo de cimbra con triplay suele ser mayor que el montaje de modular, pero confírmalo con tu destajista) y los fletes y faltantes de la modular.",
+        "Lee el costo por m² por uso y el ahorro; si el margen de usos del fenólico sale amarillo o rojo, solo conviene si cuidas las hojas (desmoldante en cada uso, cantos sellados, nada de clavos en la cara) o si la obra tiene más colados.",
+        "Indicador: compara el costo de cimbra por m² por uso del precio unitario contra el real al cierre de cada mes (formato de cierre mensual de costos) y anota los usos reales que dio cada hoja para la siguiente obra."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Sistegua – Ficha técnica plywood fenólico para cimbra (2026): hoja 1220 × 2440 mm, película fenólica 120 g/m², 'hasta 10 reutilizaciones según condiciones de uso'",
+          "url": "https://sistegua.com/wp-content/uploads/2026/06/Ficha-tecnica-PLYWOOD-FENOLICO.pdf"
+        },
+        {
+          "titulo": "FINSA – SuperPan Tech Encoform EZ: tablero con film para encofrado, entre 10 y 15 reutilizaciones con buenas prácticas de manejo y almacenaje",
+          "url": "https://www.finsa.com/documents/d/guest/triptico-encoform_es"
+        },
+        {
+          "titulo": "Doka – Tableros de encofrado (catálogo 09/2024): tricapa 3-SO hasta 25 puestas, 3S basic hasta 10, 3S top hasta 40; tablero Xlife en marcos Framax hasta 350 puestas (referencia no vinculante)",
+          "url": "https://direct.doka.com/_ext/downloads/downloadcenter/999792004_2024_09_online.pdf"
+        },
+        {
+          "titulo": "SENCICO (Perú) – Uso de la madera en encofrados: planchas 4' × 8'; recopila usos de triplay en México de 7 a 50 según calidad y cuidado (datos de referencia antiguos, Arbaiza 2000)",
+          "url": "https://cdn.www.gob.pe/uploads/document/file/4768972/Uso%20de%20la%20madera%20en%20encofrados.pdf"
+        },
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9 nov 2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct 2025: +4.01 %); industrias metálicas básicas +9.83 % anual, minerales no metálicos +5.71 %, industria de la madera +3.24 %. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-costo-puesto-obra",
+      "tipo": "calculadora",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Costo real puesto en obra de dos cotizaciones: flete, merma, crédito, anticipo e IVA 8 % o 16 % (¿el más barato en papel es el más barato en obra?)",
+      "resumen": "Compara dos proveedores del mismo material con lo que de verdad te cuesta cada pieza, m³ o tonelada ya en el frente: precio, flete y maniobra por viaje, merma o rechazo (block quebrado, varilla fuera de masa, olla rechazada), días de crédito, anticipo y, en Tijuana, el costo financiero de pagar IVA al 16 % a un proveedor de fuera de la región fronteriza cuando tú facturas al 8 % y te quedan saldos a favor. Da el precio máximo que el proveedor B tendría que dar para empatar. Ejemplo con precios de ejemplo (no de mercado): 4,000 block; A local a $15.50 con flete incluido, 4 % de merma, contado, IVA 8 % → $16.21; B a $14.20 + $2,800 por viaje de 1,500 piezas, 7 % de merma, 30 días de crédito, IVA 16 % → $17.10. El 'barato' sale $3,564 más caro; B tendría que bajar a $13.36 para empatar.",
+      "agregada": "2026-11-26",
+      "entradas": [
+        {
+          "id": "Q",
+          "label": "Cantidad a comprar (piezas, m³, t)",
+          "unidad": "u",
+          "valor": 4000
+        },
+        {
+          "id": "i",
+          "label": "Costo del dinero de la empresa (tasa de tu línea de crédito o de financiamiento)",
+          "unidad": "% mensual",
+          "valor": 1.5
+        },
+        {
+          "id": "m",
+          "label": "Meses que tardas en recuperar el IVA pagado (acreditamiento o devolución de saldo a favor); 0 si lo acreditas en el mes",
+          "unidad": "meses",
+          "valor": 2
+        },
+        {
+          "id": "Pa",
+          "label": "A – Precio unitario cotizado (sin IVA)",
+          "unidad": "$/u",
+          "valor": 15.5
+        },
+        {
+          "id": "Fa",
+          "label": "A – Flete y maniobra de descarga por viaje (0 si viene incluido)",
+          "unidad": "$/viaje",
+          "valor": 0
+        },
+        {
+          "id": "Va",
+          "label": "A – Unidades por viaje",
+          "unidad": "u/viaje",
+          "valor": 1500
+        },
+        {
+          "id": "Ma",
+          "label": "A – Merma o rechazo esperado (de tu historial con ese proveedor)",
+          "unidad": "%",
+          "valor": 4
+        },
+        {
+          "id": "Ca",
+          "label": "A – Días de crédito (0 = contado contra entrega)",
+          "unidad": "días",
+          "valor": 0
+        },
+        {
+          "id": "Aa",
+          "label": "A – Anticipo que exige al pedir",
+          "unidad": "%",
+          "valor": 100
+        },
+        {
+          "id": "Ea",
+          "label": "A – Días entre el pago del anticipo y la entrega",
+          "unidad": "días",
+          "valor": 3
+        },
+        {
+          "id": "Ia",
+          "label": "A – Tasa de IVA que factura (8 en región fronteriza con aviso SAT, 16 fuera)",
+          "unidad": "%",
+          "valor": 8
+        },
+        {
+          "id": "Pb",
+          "label": "B – Precio unitario cotizado (sin IVA)",
+          "unidad": "$/u",
+          "valor": 14.2
+        },
+        {
+          "id": "Fb",
+          "label": "B – Flete y maniobra de descarga por viaje",
+          "unidad": "$/viaje",
+          "valor": 2800
+        },
+        {
+          "id": "Vb",
+          "label": "B – Unidades por viaje",
+          "unidad": "u/viaje",
+          "valor": 1500
+        },
+        {
+          "id": "Mb",
+          "label": "B – Merma o rechazo esperado",
+          "unidad": "%",
+          "valor": 7
+        },
+        {
+          "id": "Cb",
+          "label": "B – Días de crédito",
+          "unidad": "días",
+          "valor": 30
+        },
+        {
+          "id": "Ab",
+          "label": "B – Anticipo que exige al pedir",
+          "unidad": "%",
+          "valor": 0
+        },
+        {
+          "id": "Eb",
+          "label": "B – Días entre el pago del anticipo y la entrega",
+          "unidad": "días",
+          "valor": 0
+        },
+        {
+          "id": "Ib",
+          "label": "B – Tasa de IVA que factura",
+          "unidad": "%",
+          "valor": 16
+        }
+      ],
+      "salidas": [
+        {
+          "label": "A – Costo puesto en obra por unidad útil (sin IVA, sin financiamiento)",
+          "formula": "(Pa+Fa/Va)/(1-Ma/100)",
+          "unidad": "$/u",
+          "decimales": 2
+        },
+        {
+          "label": "B – Costo puesto en obra por unidad útil (sin IVA, sin financiamiento)",
+          "formula": "(Pb+Fb/Vb)/(1-Mb/100)",
+          "unidad": "$/u",
+          "decimales": 2
+        },
+        {
+          "label": "A – COSTO REAL por unidad (con anticipo, crédito e IVA)",
+          "formula": "(Pa+Fa/Va)/(1-Ma/100)*(1+(Aa/100)*(i/100)*(Ea/30)-(1-Aa/100)*(i/100)*(Ca/30)+(Ia/100)*(i/100)*m)",
+          "unidad": "$/u",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "B – COSTO REAL por unidad (con anticipo, crédito e IVA)",
+          "formula": "(Pb+Fb/Vb)/(1-Mb/100)*(1+(Ab/100)*(i/100)*(Eb/30)-(1-Ab/100)*(i/100)*(Cb/30)+(Ib/100)*(i/100)*m)",
+          "unidad": "$/u",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Diferencia en la compra total: B − A (positivo = A es más barato)",
+          "formula": "Q*((Pb+Fb/Vb)/(1-Mb/100)*(1+(Ab/100)*(i/100)*(Eb/30)-(1-Ab/100)*(i/100)*(Cb/30)+(Ib/100)*(i/100)*m)-(Pa+Fa/Va)/(1-Ma/100)*(1+(Aa/100)*(i/100)*(Ea/30)-(1-Aa/100)*(i/100)*(Ca/30)+(Ia/100)*(i/100)*m))",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Diferencia de precio en la cotización: B contra A",
+          "formula": "(Pb/Pa-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Diferencia de costo real: B contra A",
+          "formula": "((Pb+Fb/Vb)/(1-Mb/100)*(1+(Ab/100)*(i/100)*(Eb/30)-(1-Ab/100)*(i/100)*(Cb/30)+(Ib/100)*(i/100)*m)/((Pa+Fa/Va)/(1-Ma/100)*(1+(Aa/100)*(i/100)*(Ea/30)-(1-Aa/100)*(i/100)*(Ca/30)+(Ia/100)*(i/100)*m))-1)*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Precio máximo que B debe cotizar para empatar a A",
+          "formula": "(Pa+Fa/Va)/(1-Ma/100)*(1+(Aa/100)*(i/100)*(Ea/30)-(1-Aa/100)*(i/100)*(Ca/30)+(Ia/100)*(i/100)*m)*(1-Mb/100)/(1+(Ab/100)*(i/100)*(Eb/30)-(1-Ab/100)*(i/100)*(Cb/30)+(Ib/100)*(i/100)*m)-Fb/Vb",
+          "unidad": "$/u",
+          "decimales": 2
+        },
+        {
+          "label": "Costo del flete de B por unidad",
+          "formula": "Fb/Vb",
+          "unidad": "$/u",
+          "decimales": 2
+        }
+      ],
+      "como_usar": [
+        "Pide las dos cotizaciones por escrito y sin IVA, con lo que incluyen: flete, descarga, unidades por viaje, crédito, anticipo y tasa de IVA con la que facturan (en Tijuana, proveedor con domicilio en la región y aviso al SAT factura al 8 %).",
+        "La merma sale de tu historial: piezas rotas o rechazadas en recepción, toneladas de diferencia en báscula o volumen faltante en remisiones; si no tienes dato, usa la misma para ambos y ve solo el efecto del flete y del crédito.",
+        "Captura tu costo del dinero (la tasa de tu línea de crédito o la que usa la calculadora de costo de financiamiento) y cuántos meses tardas en acreditar o recuperar el IVA; si facturas al 8 % y compras al 16 %, los saldos a favor se acumulan y ese dinero detenido es costo.",
+        "Lee el costo real por unidad y la diferencia total; si B sale más caro, usa el 'precio máximo que B debe cotizar' para negociar en lugar de rechazarlo de entrada.",
+        "Anota el resultado en el cuadro comparativo de cotizaciones y archívalo con la orden de compra; al recibir el material compara merma y flete reales contra lo supuesto.",
+        "Ojo con la vigencia: el decreto de IVA 8 % de la región fronteriza norte está vigente hasta el 31 de diciembre de 2026; para compras que se facturen en enero de 2027 confirma en el DOF o el SAT si se prorrogó antes de capturar 8 %."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Decreto que modifica los diversos de estímulos fiscales región fronteriza norte y sur (firmado 30 dic 2025): el estímulo de la región fronteriza norte queda vigente hasta el 31 de diciembre de 2026",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5777697"
+        },
+        {
+          "titulo": "SAT – Estímulo IVA región fronteriza norte: qué necesito para facturar (aviso previo, 72 horas, 'IVA Crédito aplicado del 50%', clave de producto y CP de expedición marcados) y casos en que no aplica (inmuebles, intangibles, transporte que sale de la región)",
+          "url": "https://www.sat.gob.mx/minisitio/EstimulosFiscalesFronteraNorteSur/region_fronteriza_norte_iva/que_necesito_para_facturar.html"
+        },
+        {
+          "titulo": "SAT – Región fronteriza norte IVA: en qué casos no aplica el estímulo",
+          "url": "https://www.sat.gob.mx/minisitio/EstimulosFiscalesFronteraNorteSur/region_fronteriza_norte_iva/en_que_casos_no_aplica.html"
+        },
+        {
+          "titulo": "El Imparcial (11 ene 2026) – CCE Tijuana pide que el IVA 8 % e ISR de la frontera sea permanente y no se renueve cada año",
+          "url": "https://www.elimparcial.com/tij/tijuana/2026/01/11/van-por-permanencia-de-decreto-de-iva-e-isr-en-frontera-norte/"
+        },
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9 nov 2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct 2025: +4.01 %); industrias metálicas básicas +9.83 % anual, minerales no metálicos +5.71 %, industria de la madera +3.24 %. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        }
+      ]
+    },
+    {
+      "id": "fmt-cuadro-comparativo-cotizaciones",
+      "tipo": "formato",
+      "categoria": "Costos y estimaciones",
+      "titulo": "Cuadro comparativo de cotizaciones (materiales, renta de equipo y subcontratos): mismo alcance, costo puesto en obra, condiciones de pago, IVA frontera y documentos antes de la orden de compra",
+      "resumen": "Formato de una hoja para comparar al menos 3 cotizaciones con el mismo alcance y decidir con el costo real puesto en obra, no con el precio de la primera línea. Obliga a nivelar unidades, cantidades, flete, descarga, merma, crédito, anticipo, vigencia, tiempo de entrega y garantía; revisa que la factura vaya a salir con el IVA correcto (8 % región fronteriza con aviso al SAT, decreto vigente al 31 dic 2026) y que el subcontratista tenga REPSE, y deja firmada la razón de la elección para auditoría o para el cliente.",
+      "agregada": "2026-11-26",
+      "campos": [
+        "Obra / partida / concepto del catálogo o insumo / cantidad requerida y unidad",
+        "Requisición núm. / solicitó (residente) / fecha requerida en obra",
+        "Especificación mínima: norma o calidad (ej. varilla NOM-251-SE-2025 y NMX-B-506, cemento con designación NMX-C-414, block con resistencia mínima, concreto f'c, revenimiento y TMA)",
+        "Proveedor 1 / 2 / 3: razón social, RFC, contacto, domicilio fiscal (¿dentro de la región fronteriza norte?)",
+        "Precio unitario sin IVA y unidad de la cotización (convertida a la unidad del catálogo)",
+        "Qué incluye: flete, descarga o maniobra, bombeo, horas de espera, armado, retiro de sobrantes",
+        "Unidades por viaje / costo de flete por viaje si va aparte",
+        "Merma o rechazo esperado (%) según historial con el proveedor",
+        "Condiciones de pago: anticipo %, días de crédito, forma de pago",
+        "Tasa de IVA que facturará (8 % o 16 %) y retenciones que aplican",
+        "Tiempo de entrega (días desde el pedido) y capacidad de surtir por semana",
+        "Vigencia de la cotización y cláusula de ajuste de precio",
+        "Garantía, certificado de calidad o pruebas que entrega",
+        "Costo real puesto en obra por unidad (calculadora 'Costo real puesto en obra') y total",
+        "Precio presupuestado del insumo en el precio unitario y diferencia (%)",
+        "Proveedor elegido, razón de la elección y precio máximo negociado",
+        "Elaboró (compras) / Revisó (superintendente) / Autorizó (gerente o cliente)"
+      ],
+      "items": [
+        "Hay al menos 3 cotizaciones por escrito (correo o PDF) o se justifica por qué no (proveedor único, urgencia)",
+        "Todas cotizan la misma especificación, cantidad y unidad (sin 'similar' ni 'equivalente' sin aprobación)",
+        "Precios comparados sin IVA y convertidos a la misma unidad del catálogo",
+        "Se sumó flete, descarga y maniobra a las que no los incluyen",
+        "Se aplicó la merma o rechazo histórico de cada proveedor",
+        "Se valoró anticipo y crédito con el costo del dinero de la empresa",
+        "El proveedor en región fronteriza que cotiza IVA 8 % tiene el aviso del SAT presentado (no aplica a inmuebles ni a transporte que sale de la región)",
+        "Para facturas que caigan después del 31-dic-2026 se confirmó si el decreto de IVA 8 % fue prorrogado",
+        "Subcontratos de servicios especializados: el subcontratista tiene registro REPSE vigente y se pedirá ICSOE / SISUB (ver expediente IMSS y REPSE)",
+        "La vigencia de la cotización cubre la fecha de pedido y se pactó qué pasa si sube el precio",
+        "El tiempo de entrega cumple la fecha requerida en el programa (lookahead de restricciones)",
+        "Se pidió certificado de calidad o pruebas y se definió cómo se recibe (formatos de recepción de varilla, cemento, malla u olla)",
+        "El costo real elegido queda dentro del precio presupuestado o la diferencia se reporta en el cierre mensual de costos",
+        "La razón de la elección quedó escrita y firmada"
+      ],
+      "como_usar": [
+        "Cada requisición mayor a un monto que fije la empresa (por ejemplo, 1 % del contrato o $50,000) pasa por el cuadro; compras llena los datos de los 3 proveedores el mismo día que llegan las cotizaciones.",
+        "Para cada proveedor corre la calculadora 'Costo real puesto en obra' (A contra B, y luego el ganador contra el tercero) y anota el costo real por unidad y el precio máximo para empatar.",
+        "El superintendente revisa en 10 minutos los puntos Cumple / No / N/A, sobre todo especificación, tiempo de entrega contra programa, IVA y REPSE; con un 'No' en especificación o REPSE la cotización queda fuera aunque sea la más barata.",
+        "Negocia con el segundo lugar usando el precio máximo para empatar, firma la elección, exporta a PDF y archívalo con la orden de compra y la factura.",
+        "Indicador: ahorro entre el costo real del ganador y el de la cotización más cara (o el presupuestado) por mes, y número de compras sin cuadro; meta: 100 % de las compras grandes con cuadro y diferencia contra presupuesto menor a 3 %."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Decreto que modifica los diversos de estímulos fiscales región fronteriza norte y sur (firmado 30 dic 2025): el estímulo de la región fronteriza norte queda vigente hasta el 31 de diciembre de 2026",
+          "url": "https://sidof.segob.gob.mx/notas/docFuente/5777697"
+        },
+        {
+          "titulo": "SAT – Estímulo IVA región fronteriza norte: qué necesito para facturar (aviso previo, 72 horas, 'IVA Crédito aplicado del 50%', clave de producto y CP de expedición marcados) y casos en que no aplica (inmuebles, intangibles, transporte que sale de la región)",
+          "url": "https://www.sat.gob.mx/minisitio/EstimulosFiscalesFronteraNorteSur/region_fronteriza_norte_iva/que_necesito_para_facturar.html"
+        },
+        {
+          "titulo": "SAT – Región fronteriza norte IVA: en qué casos no aplica el estímulo",
+          "url": "https://www.sat.gob.mx/minisitio/EstimulosFiscalesFronteraNorteSur/region_fronteriza_norte_iva/en_que_casos_no_aplica.html"
+        },
+        {
+          "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9 nov 2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct 2025: +4.01 %); industrias metálicas básicas +9.83 % anual, minerales no metálicos +5.71 %, industria de la madera +3.24 %. Cifras preliminares",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
         }
       ]
     }
