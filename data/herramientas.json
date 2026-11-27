@@ -4794,7 +4794,7 @@
         "Pregunta por el frente de la semana siguiente, con preguntas cerradas: '¿Qué f'c, recubrimiento y traslape lleva la losa del nivel 2 y en qué hoja está?', '¿Coinciden los niveles de piso terminado entre arquitectura y estructura?', '¿Qué cambia entre la Rev B y la Rev C de EST-03?'.",
         "Verifica cada respuesta abriendo la hoja citada; si la cita no existe o el dato no coincide, descártala (la IA puede inventar citas). Solo lo verificado pasa a tu lista.",
         "Lo que tenga contradicción real se vuelve RFI por escrito al proyectista con hoja y detalle de ambos lados, y se anota en el análisis de restricciones (lookahead) como restricción a liberar antes del inicio.",
-        "Nunca uses la respuesta de la IA como liberación: la liberación de colado y los cambios estructurales los firma el residente / DRO sobre el plano, no sobre el chat."
+        "Nunca uses la respuesta de la IA como liberación: la liberación de colado y los cambios estructurales los firma el residente / DRO sobre el plano, no sobre el chat. Si además le pides cantidades a la IA, no las uses en un generador ni en un presupuesto sin pasarlas por 'Auditar una cuantificación hecha con IA' (mejora 27-nov-2026)."
       ],
       "fuentes": [
         {
@@ -4812,6 +4812,10 @@
         {
           "titulo": "Business Wire – Procore Advances the Future of Construction with New AI Innovations at Groundbreak 2025 (15 oct 2025)",
           "url": "https://www.businesswire.com/news/home/20251015796723/en/Procore-Advances-the-Future-of-Construction-with-New-AI-Innovations-at-Groundbreak-2025"
+        },
+        {
+          "titulo": "ConstructConnect (18-ago-2026) – ¿Son precisas las cuantificaciones con IA en 2026?: hasta 95 % más rápido en muros, áreas y conteos (estudio del propio fabricante); falla en geometría curva o en ángulo, símbolos poco comunes, hojas saturadas, escaneos malos, revisiones y addenda, hojas faltantes y límites de alcance; 'no mandes una cuantificación de IA directo a un presupuesto'",
+          "url": "https://www.constructconnect.com/blog/are-ai-takeoffs-accurate-in-2026"
         }
       ]
     },
@@ -13144,6 +13148,258 @@
         {
           "titulo": "INEGI – INPP octubre 2026 (boletín 685/26, 9 nov 2026): sector Construcción +0.65 % mensual y +6.23 % anual (oct 2025: +4.01 %); industrias metálicas básicas +9.83 % anual, minerales no metálicos +5.71 %, industria de la madera +3.24 %. Cifras preliminares",
           "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/inpp/inpp2026_11.pdf"
+        }
+      ]
+    },
+    {
+      "id": "calc-auditoria-cuantificacion-ia",
+      "tipo": "calculadora",
+      "categoria": "Herramientas digitales",
+      "titulo": "Auditar una cuantificación hecha con IA: error medido en una muestra, alcance omitido y presupuesto corregido antes de concursar o contratar",
+      "resumen": "Si una app de IA (Togal, Auto Takeoff de On-Screen Takeoff, el asistente de IA con los PDF) te sacó las cantidades del catálogo, no las mandes directo al presupuesto. Revisa a mano los conceptos de mayor importe y unas hojas completas, captura lo que salió y la calculadora te da el error de la IA en pesos, el alcance que se le escapó proyectado a todo el juego de planos, el presupuesto corregido y si pasas tu tolerancia. Ejemplo: la IA dio $8.5 M; en 15 conceptos que suman $1.9 M la revisión manual dio $2.02 M (5.9 % abajo) y en 12 de 48 hojas faltaron $60,000 de alcance → presupuesto corregido ≈ $9.28 M, 9.1 % arriba: rojo, no se usa sin corregir. Ningún fabricante publica un porcentaje de error verificado de forma independiente: el tuyo lo mides tú con esta muestra.",
+      "agregada": "2026-11-27",
+      "entradas": [
+        {
+          "id": "MT",
+          "label": "Importe total del presupuesto con las cantidades de la IA",
+          "unidad": "$",
+          "valor": 8500000
+        },
+        {
+          "id": "NM",
+          "label": "Conceptos que revisaste a mano (empieza por los de mayor importe)",
+          "unidad": "conceptos",
+          "valor": 15
+        },
+        {
+          "id": "NE",
+          "label": "De esos, conceptos con diferencia mayor que tu tolerancia",
+          "unidad": "conceptos",
+          "valor": 4
+        },
+        {
+          "id": "MIA",
+          "label": "Importe de esos conceptos con la cantidad de la IA",
+          "unidad": "$",
+          "valor": 1900000
+        },
+        {
+          "id": "MMAN",
+          "label": "Importe de esos mismos conceptos con tu cantidad revisada (mismo precio unitario)",
+          "unidad": "$",
+          "valor": 2020000
+        },
+        {
+          "id": "HT",
+          "label": "Hojas del juego de planos",
+          "unidad": "hojas",
+          "valor": 48
+        },
+        {
+          "id": "HR",
+          "label": "Hojas que revisaste completas buscando alcance que la IA no cuantificó",
+          "unidad": "hojas",
+          "valor": 12
+        },
+        {
+          "id": "OM",
+          "label": "Importe del alcance omitido que encontraste en esas hojas (conceptos que no aparecían)",
+          "unidad": "$",
+          "valor": 60000
+        },
+        {
+          "id": "TOL",
+          "label": "Tolerancia que aceptas en el importe total",
+          "unidad": "%",
+          "valor": 2
+        },
+        {
+          "id": "COB",
+          "label": "Cobertura mínima del importe que exiges revisar a mano (regla de ObraLab: 50 %)",
+          "unidad": "%",
+          "valor": 50
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Cobertura: % del importe que ya revisaste a mano",
+          "formula": "MIA/MT*100",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Error de cantidades de la IA en la muestra (+ = la IA se quedó corta; − = la IA se pasó)",
+          "formula": "(MMAN-MIA)/MMAN*100",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true
+        },
+        {
+          "label": "Conceptos de la muestra con error fuera de tolerancia",
+          "formula": "NE/NM*100",
+          "unidad": "%",
+          "decimales": 0
+        },
+        {
+          "label": "Alcance omitido proyectado a todo el juego de planos",
+          "formula": "OM*HT/HR",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Presupuesto corregido estimado (cantidades ajustadas + omisiones proyectadas)",
+          "formula": "MT*MMAN/MIA+OM*HT/HR",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        },
+        {
+          "label": "Dinero que se te iba si usabas la IA sin revisar",
+          "formula": "MT*MMAN/MIA+OM*HT/HR-MT",
+          "unidad": "$",
+          "decimales": 0
+        },
+        {
+          "label": "Diferencia total contra el presupuesto de la IA",
+          "formula": "(MT*MMAN/MIA+OM*HT/HR-MT)/MT*100",
+          "unidad": "%",
+          "decimales": 2
+        },
+        {
+          "label": "Margen contra tu tolerancia (verde ≥ 0: úsalo con la corrección; amarillo hasta −1 %: revisa más conceptos; rojo: recuantifica las partidas con error)",
+          "formula": "TOL-Math.abs((MT*MMAN/MIA+OM*HT/HR-MT)/MT*100)",
+          "unidad": "%",
+          "decimales": 2,
+          "destacar": true,
+          "semaforo": [
+            0,
+            -1
+          ]
+        },
+        {
+          "label": "Importe que todavía falta revisar a mano para llegar a tu cobertura mínima",
+          "formula": "Math.max(0,COB/100*MT-MIA)",
+          "unidad": "$",
+          "decimales": 0
+        }
+      ],
+      "como_usar": [
+        "Exporta de la app de IA el catálogo con cantidades y precio unitario, ordénalo de mayor a menor importe y marca los primeros conceptos hasta juntar al menos la cobertura mínima (en vivienda y edificación casi siempre son concreto, acero, block, cimbra, aplanados y pisos).",
+        "Cuantifica a mano esos conceptos con tus generadores ANTES de ver el número de la IA (para que la IA no se vuelva tu referencia), con el mismo precio unitario, y anota cuántos difieren más que tu tolerancia.",
+        "Elige hojas completas al azar, más todas las que tengan geometría curva o en ángulo, detalles saturados o revisiones recientes, y busca conceptos que la IA no cuantificó (alcance omitido); súmalos en pesos.",
+        "Captura los datos: si el margen sale verde, usa el presupuesto corregido; si sale amarillo, revisa más conceptos hasta cubrir el importe que falta; si sale rojo, recuantifica a mano las partidas con error y anota en el formato de prueba qué tipo de elemento falló.",
+        "Guarda la muestra (hojas, conceptos y generadores) junto al presupuesto como evidencia: si un concepto se reclama después, puedes rastrear su cantidad hasta la hoja y la revisión del plano."
+      ],
+      "fuentes": [
+        {
+          "titulo": "ConstructConnect (18-ago-2026) – ¿Son precisas las cuantificaciones con IA en 2026?: hasta 95 % más rápido en muros, áreas y conteos (estudio del propio fabricante); falla en geometría curva o en ángulo, símbolos poco comunes, hojas saturadas, escaneos malos, revisiones y addenda, hojas faltantes y límites de alcance; 'no mandes una cuantificación de IA directo a un presupuesto'",
+          "url": "https://www.constructconnect.com/blog/are-ai-takeoffs-accurate-in-2026"
+        },
+        {
+          "titulo": "For Construction Pros / BuildVision AI (13-oct-2026) – Prueba las herramientas de cuantificación con IA antes de usarlas para concursar: usa tus obras terminadas, cantidad de referencia hecha antes de ver la IA, registra faltantes, sobrantes, clasificación, escala y límites por separado, prueba de rastreo a la hoja y prueba de revisión cambiando una hoja",
+          "url": "https://www.forconstructionpros.com/construction-technology/automation-and-ai/article/22975238/buildvision-ai-test-ai-takeoff-tools-before-using-them-for-bids"
+        },
+        {
+          "titulo": "Trimble (7-ago-2026) – Resultados de cuantificación asistida por IA en más de 4,000 contratistas de instalaciones: 97 % de escalas detectadas sin corrección y 60 % menos tiempo de conteo incluida la revisión (cifras del fabricante); la IA no termina ni cierra ninguna parte del proceso y cada conteo lleva nivel de confianza",
+          "url": "https://www.trimble.com/en/blog/construction/article/actual-results-mep-estimators-ai-assisted-takeoff"
+        }
+      ]
+    },
+    {
+      "id": "fmt-prueba-cuantificacion-ia",
+      "tipo": "formato",
+      "categoria": "Herramientas digitales",
+      "titulo": "Prueba de una app de cuantificación con IA en una obra ya terminada antes de pagarla o usarla para presupuestar",
+      "resumen": "Protocolo de una sola obra para decidir con datos si una app de cuantificación con IA sirve en tus proyectos: se corre sobre una obra que ya cerraste (donde conoces las cantidades reales), con una cantidad de referencia hecha antes de ver la IA, y se registran por separado faltantes, sobrantes, clasificación, escala y límites, más la prueba de rastreo a la hoja y la prueba de revisión cambiando un plano. Incluye los cuidados de confidencialidad antes de subir planos de un cliente a un servicio en la nube. Se basa en las guías publicadas en agosto y octubre de 2026 y se complementa con la calculadora 'Auditar una cuantificación hecha con IA'.",
+      "agregada": "2026-11-27",
+      "campos": [
+        "Obra de prueba (ya terminada) y tipo (vivienda, edificio, nave)",
+        "App de IA y plan probado (versión, prueba gratis o demo)",
+        "Juego de planos usado: número de hojas y revisión",
+        "Quién hizo la cantidad de referencia y fecha (antes de ver la IA)",
+        "Horas de cuantificación manual de referencia",
+        "Horas con IA (subir, procesar, corregir y revisar)",
+        "Error de importe resultante (de la calculadora de auditoría)",
+        "Alcance omitido encontrado ($)",
+        "Tipo de elemento que más falló",
+        "Costo anual de la app (cotización o sitio oficial, con fecha)",
+        "Decisión: adoptar / piloto en una obra viva / rechazar",
+        "Firma del superintendente y fecha"
+      ],
+      "items": [
+        "La obra de prueba es propia y ya terminada, no un ejemplo elegido por el proveedor",
+        "El juego de planos incluye hojas difíciles: escaneos, notas a mano, escalas mixtas, símbolos poco comunes y geometría curva o en ángulo",
+        "El contrato o el cliente permite subir esos planos a un servicio en la nube; si no, se usaron planos propios o se pidió autorización por escrito",
+        "Se revisó dónde guarda los archivos el proveedor y si los usa para entrenar su IA (condiciones de uso leídas y anotadas)",
+        "La cantidad de referencia la hizo un estimador con experiencia ANTES de ver el resultado de la IA",
+        "La escala de cada hoja se verificó con una cota conocida antes de aceptar áreas y longitudes",
+        "Se registraron por separado: conceptos faltantes, conceptos de más, clasificación equivocada, escala equivocada y límites de medición equivocados",
+        "Cada diferencia se valoró en pesos, no solo en porcentaje de cantidad",
+        "Prueba de rastreo: tres cantidades de la IA se pudieron llevar hasta la hoja, la revisión y el detalle de donde salieron",
+        "Prueba de revisión: se sustituyó una hoja por su revisión nueva y la app avisó qué cambió (o se anotó que no lo hace)",
+        "Se le pidió al proveedor mostrar errores: algo que no contó, algo que contó de más y una geometría mal leída",
+        "El tiempo con IA incluye corrección y revisión, no solo el procesamiento",
+        "Se probó con unidades métricas y en español, o se anotó la limitación y cómo se convierte",
+        "Se corrió la calculadora de auditoría y el margen contra la tolerancia quedó anotado",
+        "Las horas ahorradas y el costo de la app se metieron en '¿Vale la pena esta herramienta digital?' antes de decidir",
+        "La decisión deja por escrito qué partidas se cuantifican siempre a mano aunque se adopte la app"
+      ],
+      "como_usar": [
+        "Escoge una obra que ya cerraste y de la que tengas generadores finales; arma un juego de 20 a 50 hojas con hojas fáciles y difíciles, y confirma que puedes subirlo a la nube sin violar el contrato.",
+        "Pide al estimador o residente que cuantifique a mano las partidas principales sin ver la IA; anota sus horas.",
+        "Corre la app (prueba gratis o demo con tus planos, no con los del proveedor), anota las horas totales incluida la corrección y llena el formato punto por punto.",
+        "Mete los resultados en 'Auditar una cuantificación hecha con IA' y el ahorro de horas y el costo anual en '¿Vale la pena esta herramienta digital?'.",
+        "Decide y firma: si el margen salió verde y se paga sola, piloto de 4 semanas en una obra viva con la auditoría en cada presupuesto; si no, rechaza y archiva el formato como evidencia."
+      ],
+      "fuentes": [
+        {
+          "titulo": "For Construction Pros / BuildVision AI (13-oct-2026) – Prueba las herramientas de cuantificación con IA antes de usarlas para concursar: usa tus obras terminadas, cantidad de referencia hecha antes de ver la IA, registra faltantes, sobrantes, clasificación, escala y límites por separado, prueba de rastreo a la hoja y prueba de revisión cambiando una hoja",
+          "url": "https://www.forconstructionpros.com/construction-technology/automation-and-ai/article/22975238/buildvision-ai-test-ai-takeoff-tools-before-using-them-for-bids"
+        },
+        {
+          "titulo": "ConstructConnect (18-ago-2026) – ¿Son precisas las cuantificaciones con IA en 2026?: hasta 95 % más rápido en muros, áreas y conteos (estudio del propio fabricante); falla en geometría curva o en ángulo, símbolos poco comunes, hojas saturadas, escaneos malos, revisiones y addenda, hojas faltantes y límites de alcance; 'no mandes una cuantificación de IA directo a un presupuesto'",
+          "url": "https://www.constructconnect.com/blog/are-ai-takeoffs-accurate-in-2026"
+        },
+        {
+          "titulo": "Trimble (7-ago-2026) – Resultados de cuantificación asistida por IA en más de 4,000 contratistas de instalaciones: 97 % de escalas detectadas sin corrección y 60 % menos tiempo de conteo incluida la revisión (cifras del fabricante); la IA no termina ni cierra ninguna parte del proceso y cada conteo lleva nivel de confianza",
+          "url": "https://www.trimble.com/en/blog/construction/article/actual-results-mep-estimators-ai-assisted-takeoff"
+        }
+      ]
+    },
+    {
+      "id": "dig-togal-ai",
+      "tipo": "recurso",
+      "categoria": "Herramientas digitales",
+      "titulo": "Togal.AI: cuantificación automática de áreas, muros y conteos sobre planos en PDF (pago anual, sin prueba gratis publicada)",
+      "resumen": "Plataforma web que lee los planos en PDF y detecta y mide sola áreas de cuartos, longitudes de muros y conteos de símbolos (puertas, salidas, luminarias), con búsqueda por imagen o símbolo y un chat para preguntar sobre los planos. Sirve para la primera pasada de cantidades en vivienda en serie y edificación repetitiva; la IA no decide qué entra en tu alcance, así que el resultado se audita siempre. A la fecha no anuncia soporte en español ni unidades métricas en su página de precios: hay que confirmarlo en la demo.",
+      "agregada": "2026-11-27",
+      "beneficio": "Bajar las horas de cuantificación de concursos y presupuestos de cambio en las partidas de áreas y conteos para cotizar más obras con el mismo equipo. Los fabricantes reportan hasta 95 % menos tiempo en elementos estándar (ConstructConnect) y 60 % en conteos incluida la revisión (Trimble), cifras propias no auditadas. Indicador: horas por presupuesto y error de importe medido con la calculadora de auditoría, en una obra terminada antes de pagar y en 4 semanas de piloto (meta: −40 % de horas con margen verde).",
+      "plataforma": "Navegador web (escritorio); no es app de campo para el celular",
+      "costo": "Growth USD 299 por usuario al mes con facturación anual (≈ USD 3,588 al año por usuario, cálculo propio); Business con precio a la medida para 4 o más usuarios (sitio oficial, consultado 27-nov-2026). No publica prueba gratis: el botón lleva a agendar una demo. Precio en pesos, español y unidades métricas: no verificados. Alternativa sin costo: cuantificar en tus PDF con la herramienta de medición de tu lector de PDF y el asistente de IA autorizado (método 'Revisión de planos con IA'), auditando con la calculadora de ObraLab.",
+      "url": "https://www.togal.ai/pricing",
+      "como_usar": [
+        "Agenda la demo y lleva TUS planos de una obra terminada (no los del proveedor); pregunta en la demo por español, metros y m², exportación a Excel y dónde se guardan los archivos.",
+        "Llena el formato 'Prueba de una app de cuantificación con IA' en esa obra: cantidad de referencia hecha antes, faltantes, sobrantes, escala y prueba de revisión.",
+        "Corre 'Auditar una cuantificación hecha con IA' con los resultados; si el margen no sale verde en áreas y conteos, no pagues.",
+        "Con las horas ahorradas medidas corre '¿Vale la pena esta herramienta digital?' contra USD 3,588 al año por usuario más el tipo de cambio del día.",
+        "Si la compras, úsala solo para la primera pasada: las partidas de concreto, acero y los límites de alcance se revisan siempre a mano con los generadores."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Togal.AI – Precios (consultado 27-nov-2026): Growth USD 299 por usuario al mes con facturación anual; Business 'Custom' para 4 o más usuarios; sin prueba gratis publicada (botón 'Try Now' lleva a agendar demo); no menciona español ni unidades métricas",
+          "url": "https://www.togal.ai/pricing"
+        },
+        {
+          "titulo": "ConstructConnect (18-ago-2026) – ¿Son precisas las cuantificaciones con IA en 2026?: hasta 95 % más rápido en muros, áreas y conteos (estudio del propio fabricante); falla en geometría curva o en ángulo, símbolos poco comunes, hojas saturadas, escaneos malos, revisiones y addenda, hojas faltantes y límites de alcance; 'no mandes una cuantificación de IA directo a un presupuesto'",
+          "url": "https://www.constructconnect.com/blog/are-ai-takeoffs-accurate-in-2026"
+        },
+        {
+          "titulo": "Trimble (7-ago-2026) – Resultados de cuantificación asistida por IA en más de 4,000 contratistas de instalaciones: 97 % de escalas detectadas sin corrección y 60 % menos tiempo de conteo incluida la revisión (cifras del fabricante); la IA no termina ni cierra ninguna parte del proceso y cada conteo lleva nivel de confianza",
+          "url": "https://www.trimble.com/en/blog/construction/article/actual-results-mep-estimators-ai-assisted-takeoff"
+        },
+        {
+          "titulo": "Xataka México (22-mar-2026) – La construcción en México no tiene un problema de tecnología sino de cultura: 71 % de los profesionales coordina con correo, juntas y PDF; 52 % del retrabajo viene de mala información y comunicación (cifras citadas de Expansión, BID y CEPAL)",
+          "url": "https://www.xataka.com.mx/otros-1/construccion-mexico-no-tiene-problema-tecnologia-tiene-uno-cultura-ia-esta-evidenciando"
         }
       ]
     }

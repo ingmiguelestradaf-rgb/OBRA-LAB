@@ -1,6 +1,40 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-27",
+      "titulo": "Herramientas digitales e IA: auditar una cuantificación hecha con IA, protocolo de prueba de apps de cuantificación en una obra terminada y Togal.AI con precio verificado",
+      "resumen": "Nueva calculadora 'Auditar una cuantificación hecha con IA': con una muestra revisada a mano (conceptos de mayor importe y hojas completas) da el error de la IA en pesos, el alcance omitido proyectado a todo el juego y el presupuesto corregido; en el ejemplo la IA dio $8.5 M, la muestra salió 5.9 % corta y faltaban $60,000 en 12 de 48 hojas → $9.28 M corregido (+9.1 %, rojo). Nuevo formato 'Prueba de una app de cuantificación con IA en una obra ya terminada', con 16 puntos tomados de las guías de agosto y octubre de 2026 (referencia antes de ver la IA, faltantes y sobrantes por separado, rastreo a la hoja, prueba de revisión y confidencialidad de los planos). Nuevo recurso Togal.AI: Growth USD 299 por usuario al mes con pago anual, Business a la medida, sin prueba gratis publicada; español y unidades métricas no confirmados. Ninguna fuente publica un porcentaje de error verificado de forma independiente: por eso el error se mide en tu propia obra. Mejora: 'Revisión de planos con IA' ahora obliga a auditar cualquier cantidad que salga del asistente.",
+      "herramientas": [
+        "calc-auditoria-cuantificacion-ia",
+        "fmt-prueba-cuantificacion-ia",
+        "dig-togal-ai",
+        "met-ia-revision-planos"
+      ],
+      "como_aplicarlo": "1) En el siguiente presupuesto o generador donde hayas usado IA (o el asistente con los PDF), ordena el catálogo por importe, revisa a mano los conceptos que sumen la mitad del importe y corre la auditoría antes de mandarlo. 2) Si estás pensando en pagar una app de cuantificación, primero llena el formato de prueba con una obra que ya cerraste y tus propios planos. 3) Mete las horas ahorradas y el costo anual en '¿Vale la pena esta herramienta digital?' y decide con margen verde y recuperación en menos de 12 meses.",
+      "fuentes": [
+        {
+          "titulo": "ConstructConnect (18-ago-2026) – ¿Son precisas las cuantificaciones con IA en 2026?: hasta 95 % más rápido en muros, áreas y conteos (estudio del propio fabricante); falla en geometría curva o en ángulo, símbolos poco comunes, hojas saturadas, escaneos malos, revisiones y addenda, hojas faltantes y límites de alcance; 'no mandes una cuantificación de IA directo a un presupuesto'",
+          "url": "https://www.constructconnect.com/blog/are-ai-takeoffs-accurate-in-2026"
+        },
+        {
+          "titulo": "For Construction Pros / BuildVision AI (13-oct-2026) – Prueba las herramientas de cuantificación con IA antes de usarlas para concursar: usa tus obras terminadas, cantidad de referencia hecha antes de ver la IA, registra faltantes, sobrantes, clasificación, escala y límites por separado, prueba de rastreo a la hoja y prueba de revisión cambiando una hoja",
+          "url": "https://www.forconstructionpros.com/construction-technology/automation-and-ai/article/22975238/buildvision-ai-test-ai-takeoff-tools-before-using-them-for-bids"
+        },
+        {
+          "titulo": "Trimble (7-ago-2026) – Resultados de cuantificación asistida por IA en más de 4,000 contratistas de instalaciones: 97 % de escalas detectadas sin corrección y 60 % menos tiempo de conteo incluida la revisión (cifras del fabricante); la IA no termina ni cierra ninguna parte del proceso y cada conteo lleva nivel de confianza",
+          "url": "https://www.trimble.com/en/blog/construction/article/actual-results-mep-estimators-ai-assisted-takeoff"
+        },
+        {
+          "titulo": "Togal.AI – Precios (consultado 27-nov-2026): Growth USD 299 por usuario al mes con facturación anual; Business 'Custom' para 4 o más usuarios; sin prueba gratis publicada (botón 'Try Now' lleva a agendar demo); no menciona español ni unidades métricas",
+          "url": "https://www.togal.ai/pricing"
+        },
+        {
+          "titulo": "Xataka México (22-mar-2026) – La construcción en México no tiene un problema de tecnología sino de cultura: 71 % de los profesionales coordina con correo, juntas y PDF; 52 % del retrabajo viene de mala información y comunicación (cifras citadas de Expansión, BID y CEPAL)",
+          "url": "https://www.xataka.com.mx/otros-1/construccion-mexico-no-tiene-problema-tecnologia-tiene-uno-cultura-ia-esta-evidenciando"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-26",
       "titulo": "Costos: cimbra por m² por uso (pino, fenólico o modular rentada), costo real puesto en obra de dos cotizaciones con flete, merma, crédito e IVA 8 %/16 %, y cuadro comparativo de cotizaciones",
       "resumen": "Nueva calculadora 'Cimbra de contacto': reparte el triplay entre los colados reales de la obra (una hoja de 10 usos en una obra de 8 losas solo da 8) y la compara contra cimbra modular rentada; ejemplo con precios de ejemplo: 250 m² por nivel y 8 colados → pino $291, fenólico $284 y modular $175 por m² por uso, y el fenólico necesita 7.1 usos para empatar al pino. Las fichas de fabricante dan hasta 10 usos (Sistegua) o de 10 a 15 (FINSA) para tableros con película, y Doka hasta 350 puestas en sus marcos con tablero Xlife; los precios no se pudieron verificar en sitio oficial, por eso se capturan de tus cotizaciones. Nueva calculadora 'Costo real puesto en obra de dos cotizaciones': suma flete por viaje, merma, anticipo, crédito y el costo de pagar IVA al 16 % cuando facturas al 8 %; en el ejemplo el block 'barato' a $14.20 sale $17.10 puesto en obra contra $16.21 del local a $15.50 ($3,564 más caro en 4,000 piezas) y debería bajar a $13.36 para empatar. Nuevo formato 'Cuadro comparativo de cotizaciones' con especificación, IVA frontera (decreto vigente al 31 dic 2026, sin prórroga publicada para 2027 a la fecha), REPSE y firma de la elección. Mejora: 'Sobrecosto de un insumo' ahora usa el INPP de octubre 2026 (Construcción +6.23 % anual; metálicas básicas +9.83 %).",
