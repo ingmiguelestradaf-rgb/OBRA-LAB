@@ -1,6 +1,41 @@
 {
   "actualizaciones": [
     {
+      "fecha": "2026-11-28",
+      "titulo": "Lean: salud del lookahead (TA, TMR y PPC de tareas anticipadas contra improvisadas), OEE de la bomba de concreto o la grúa y tablero kaizen de la cuadrilla",
+      "resumen": "'Salud del lookahead' mide si el plan semanal sale del plan de 6 semanas: en el ejemplo TA 63 %, TMR 65 % y PPC 79 %, pero las tareas anticipadas cumplen 93 % y las improvisadas 56 %; si las improvisadas cumplieran igual, el PPC subiría 14.2 puntos. 'OEE del equipo' separa las horas pagadas de bomba, grúa o retro en paros, lentitud y retrabajo: en el ejemplo la bomba produce 3.07 h efectivas de 8 disponibles (OEE 38 %) y se pagan $7,400 en el día sin producir. 'Tablero kaizen de la cuadrilla' capta ideas de los trabajadores y las prueba una semana con indicador antes/después. Mejoras: 'PPC semanal' y 'Análisis de restricciones' ahora remiten a la nueva medición de TA/TMR y piden guardar el lookahead de cada viernes. Las metas de TA y TMR son internas propuestas: el benchmark de Ballard y Tommelein no publica meta para ellas; el costo horario de ejemplo no está verificado.",
+      "herramientas": [
+        "calc-salud-lookahead",
+        "calc-oee-equipo",
+        "fmt-kaizen-cuadrilla",
+        "calc-ppc",
+        "fmt-restricciones"
+      ],
+      "como_aplicarlo": "1) Este viernes guarda el lookahead de 6 semanas en CSV; en 3 semanas tendrás datos para 'Salud del lookahead' (mientras, mide PPC de anticipadas contra improvisadas con el plan actual). 2) En el próximo colado con bomba, pide al checador anotar cada paro con hora y causa y captúralo en 'OEE del equipo'; ataca la pérdida mayor con una contramedida y mide 3 colados. 3) Pon el 'Tablero kaizen' junto al pizarrón de la junta diaria y pide una idea por cuadrilla esta semana; decide el viernes con ellos.",
+      "fuentes": [
+        {
+          "titulo": "Lean Construction Journal 2026, pp. 29-54 – Eivazi Ziaei, Malaeb, Lusis y Hamzeh: Health-Check Framework for Assessing Last Planner System Implementation (aceptado ene-2026): un lookahead bien conectado se asocia con PPC más alto; propone revisar la salud del sistema cada mes",
+          "url": "https://leanconstruction.org/wp-content/uploads/2026/02/LCJ-25-006.pdf%20"
+        },
+        {
+          "titulo": "Ballard y Tommelein (P2SL, UC Berkeley) – 2020 Current Process Benchmark for the Last Planner System: definiciones de TA (tareas anticipadas), TMR (tareas hechas listas), PPC y PRC",
+          "url": "https://p2sl.berkeley.edu/wp-content/uploads/2021/03/Ballard_Tommelein-2021-LPS-Benchmark-2020-2.pdf"
+        },
+        {
+          "titulo": "Emdanat y Azambuja, IGLC 24 – Aligning Near and Long Term Planning for LPS Implementations: revisión de PPC, causas, TA y TMR",
+          "url": "https://iglc.net/papers/Details/1253"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026, actualizado oct-2026): ahorros de 10 a 15 % por actividad con lean; recomienda sesiones kaizen, tableros visuales y Last Planner con lookahead de 6 semanas",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        },
+        {
+          "titulo": "TeepTrak – Optimizar el OEE de equipos de construcción: disponibilidad × rendimiento × calidad aplicado a maquinaria de obra",
+          "url": "https://teeptrak.com/es/optimizar-el-oee-de-equipos-de-construccion/"
+        }
+      ]
+    },
+    {
       "fecha": "2026-11-27",
       "titulo": "Herramientas digitales e IA: auditar una cuantificación hecha con IA, protocolo de prueba de apps de cuantificación en una obra terminada y Togal.AI con precio verificado",
       "resumen": "Nueva calculadora 'Auditar una cuantificación hecha con IA': con una muestra revisada a mano (conceptos de mayor importe y hojas completas) da el error de la IA en pesos, el alcance omitido proyectado a todo el juego y el presupuesto corregido; en el ejemplo la IA dio $8.5 M, la muestra salió 5.9 % corta y faltaban $60,000 en 12 de 48 hojas → $9.28 M corregido (+9.1 %, rojo). Nuevo formato 'Prueba de una app de cuantificación con IA en una obra ya terminada', con 16 puntos tomados de las guías de agosto y octubre de 2026 (referencia antes de ver la IA, faltantes y sobrantes por separado, rastreo a la hoja, prueba de revisión y confidencialidad de los planos). Nuevo recurso Togal.AI: Growth USD 299 por usuario al mes con pago anual, Business a la medida, sin prueba gratis publicada; español y unidades métricas no confirmados. Ninguna fuente publica un porcentaje de error verificado de forma independiente: por eso el error se mide en tu propia obra. Mejora: 'Revisión de planos con IA' ahora obliga a auditar cualquier cantidad que salga del asistente.",

@@ -1424,7 +1424,8 @@
         "Grafica el PPC semana a semana; la meta práctica es mantenerlo arriba de 80 %.",
         "El PCR (restricciones liberadas a tiempo) es indicador adelantado: si baja esta semana, el PPC bajará en las siguientes. Tómalo del formato Análisis de restricciones.",
         "Un PPC sostenido arriba de ~88 % suele indicar que el equipo se compromete a poco; la referencia publicada es lograr 70 % o más de forma estable.",
-        "Cada mes captura las causas en la calculadora 'Pareto de causas de no cumplimiento' para ver cuál pesa más y cuánto PPC recuperas si la eliminas."
+        "Cada mes captura las causas en la calculadora 'Pareto de causas de no cumplimiento' para ver cuál pesa más y cuánto PPC recuperas si la eliminas.",
+        "Si el PPC baja y no sabes por qué, usa 'Salud del lookahead' (TA y TMR): te dice si las tareas que fallan son las que se metieron sin anticipar en el lookahead."
       ],
       "fuentes": [
         {
@@ -1442,6 +1443,10 @@
         {
           "titulo": "Lagos y Alarcón – Composition and Impact of Reasons for Noncompletion: 50 obras, 22,636 causas; ~2 de cada 3 controlables por el contratista principal (IGLC 29, 2021)",
           "url": "https://iglc.net/Papers/Details/1938"
+        },
+        {
+          "titulo": "Ballard y Tommelein (P2SL, UC Berkeley) – 2020 Current Process Benchmark for the Last Planner System: definiciones de TA (tareas anticipadas), TMR (tareas hechas listas), PPC y PRC",
+          "url": "https://p2sl.berkeley.edu/wp-content/uploads/2021/03/Ballard_Tommelein-2021-LPS-Benchmark-2020-2.pdf"
         }
       ]
     },
@@ -1623,7 +1628,8 @@
         "En la junta, cada responsable confirma su fecha; si una restricción no tiene responsable, no se libera.",
         "Pasa al plan semanal solo las actividades con todos los puntos en Cumple o N/A.",
         "Al cierre de la semana marca la fecha real de liberación y captura en la calculadora PPC cuántas restricciones se liberaron a tiempo (PCR).",
-        "Exporta el CSV cada semana: las restricciones que más se repiten por tipo son tu siguiente ciclo PDCA."
+        "Exporta el CSV cada semana: las restricciones que más se repiten por tipo son tu siguiente ciclo PDCA.",
+        "Guarda la versión de cada viernes (CSV con fecha): la calculadora 'Salud del lookahead' necesita los lookahead de hace 2 y 3 semanas para medir TA y TMR."
       ],
       "fuentes": [
         {
@@ -11904,6 +11910,340 @@
         {
           "titulo": "BCG – Building Better with Lean Construction (mar-2026): el retrabajo suele ser 4 a 6 % del valor del contrato (cita a AXA XL); ahorros de 10 a 15 % en actividades con lean, Last Planner con lookahead de 6 semanas, tableros visuales y kaizen",
           "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        }
+      ]
+    },
+    {
+      "id": "calc-salud-lookahead",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Salud del lookahead: ¿tu plan semanal sale del lookahead o se improvisa el lunes? (TA, TMR y PPC de tareas anticipadas contra improvisadas)",
+      "resumen": "Mide si el plan intermedio de 6 semanas de verdad prepara el trabajo. TA = % de las tareas del plan semanal que ya venían en el lookahead; TMR = % de lo que el lookahead marcaba para esta semana que llegó sin restricciones al plan semanal. Además separa el PPC de las tareas anticipadas contra las improvisadas: si las improvisadas fallan mucho más, el problema es el lookahead, no las cuadrillas.",
+      "agregada": "2026-11-28",
+      "entradas": [
+        {
+          "id": "comp",
+          "label": "Tareas comprometidas en el plan semanal de esta semana",
+          "unidad": "tareas",
+          "valor": 24
+        },
+        {
+          "id": "ant",
+          "label": "De ellas, cuántas aparecían en el lookahead de hace 3 semanas (anticipadas)",
+          "unidad": "tareas",
+          "valor": 15
+        },
+        {
+          "id": "lah",
+          "label": "Tareas que el lookahead de hace 2 semanas programaba para esta semana",
+          "unidad": "tareas",
+          "valor": 20
+        },
+        {
+          "id": "listas",
+          "label": "De esas, cuántas entraron al plan semanal sin restricciones (hechas listas)",
+          "unidad": "tareas",
+          "valor": 13
+        },
+        {
+          "id": "hechas",
+          "label": "Tareas completadas al 100 % en la semana",
+          "unidad": "tareas",
+          "valor": 19
+        },
+        {
+          "id": "hant",
+          "label": "De las completadas, cuántas eran anticipadas",
+          "unidad": "tareas",
+          "valor": 14
+        }
+      ],
+      "salidas": [
+        {
+          "label": "TA – tareas anticipadas",
+          "formula": "comp>0?ant/comp*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            60
+          ]
+        },
+        {
+          "label": "TMR – tareas hechas listas",
+          "formula": "lah>0?listas/lah*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            75,
+            55
+          ]
+        },
+        {
+          "label": "PPC de la semana",
+          "formula": "comp>0?hechas/comp*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "destacar": true,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "PPC de tareas anticipadas",
+          "formula": "ant>0?hant/ant*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "PPC de tareas improvisadas (no venían en el lookahead)",
+          "formula": "comp-ant>0?(hechas-hant)/(comp-ant)*100:0",
+          "unidad": "%",
+          "decimales": 0,
+          "semaforo": [
+            80,
+            65
+          ]
+        },
+        {
+          "label": "Tareas improvisadas en el plan semanal",
+          "formula": "comp-ant",
+          "unidad": "tareas",
+          "decimales": 0
+        },
+        {
+          "label": "Tareas del lookahead que no llegaron listas",
+          "formula": "lah-listas",
+          "unidad": "tareas",
+          "decimales": 0
+        },
+        {
+          "label": "PPC que ganarías si las improvisadas cumplieran como las anticipadas",
+          "formula": "comp>0&&ant>0?((comp-ant)*(hant/ant)-(hechas-hant))/comp*100:0",
+          "unidad": "puntos de PPC",
+          "decimales": 1
+        }
+      ],
+      "como_usar": [
+        "Guarda cada viernes una copia (foto o CSV) del lookahead de 6 semanas; sin la copia de hace 2 y 3 semanas no se puede medir.",
+        "Al cerrar la semana, marca en el plan semanal cuáles tareas ya venían en el lookahead de hace 3 semanas (anticipadas) y cuáles se metieron sobre la marcha.",
+        "Cuenta cuántas tareas programaba el lookahead de hace 2 semanas para esta semana y cuántas entraron al plan semanal con todas sus restricciones liberadas (formato 'Análisis de restricciones').",
+        "Captura los valores. En el ejemplo: TA 63 %, TMR 65 %, PPC 79 %, pero las anticipadas cumplen 93 % y las improvisadas 56 %: el plan falla por lo que no se previó.",
+        "Las metas de los semáforos (TA 80 %, TMR 75 %) son metas internas propuestas para arrancar; el benchmark de Ballard y Tommelein no publica valor meta para TA ni TMR, solo para PPC (100 %). Ajusta tus metas después de 4 semanas de datos.",
+        "Si TMR baja, ataca la liberación de restricciones (responsable y fecha en la junta del viernes); si TA baja, el lookahead no se está actualizando con todos los contratistas."
+      ],
+      "fuentes": [
+        {
+          "titulo": "Ballard y Tommelein (P2SL, UC Berkeley) – 2020 Current Process Benchmark for the Last Planner System: definiciones de TA (tareas anticipadas), TMR (tareas hechas listas), PPC y PRC",
+          "url": "https://p2sl.berkeley.edu/wp-content/uploads/2021/03/Ballard_Tommelein-2021-LPS-Benchmark-2020-2.pdf"
+        },
+        {
+          "titulo": "Emdanat y Azambuja, IGLC 24 – Aligning Near and Long Term Planning for LPS Implementations: revisión de PPC, causas, TA y TMR",
+          "url": "https://iglc.net/papers/Details/1253"
+        },
+        {
+          "titulo": "Lean Construction Journal 2026, pp. 29-54 – Eivazi Ziaei, Malaeb, Lusis y Hamzeh: Health-Check Framework for Assessing Last Planner System Implementation (aceptado ene-2026): un lookahead bien conectado se asocia con PPC más alto; propone revisar la salud del sistema cada mes",
+          "url": "https://leanconstruction.org/wp-content/uploads/2026/02/LCJ-25-006.pdf%20"
+        }
+      ]
+    },
+    {
+      "id": "calc-oee-equipo",
+      "tipo": "calculadora",
+      "categoria": "Lean / mejora continua",
+      "titulo": "OEE de la bomba de concreto, grúa o retro: cuánto del tiempo que pagas el equipo realmente produce, y dónde se pierde (paros, lentitud o retrabajo)",
+      "resumen": "Eficiencia global del equipo (OEE = disponibilidad × rendimiento × calidad) aplicada a maquinaria de obra rentada o propia. Separa las horas perdidas en paros (sin frente, espera de olla, falla), lentitud (ritmo menor al alcanzable) y calidad (m³ devueltos, izajes repetidos) y las convierte en pesos para saber qué atacar primero.",
+      "agregada": "2026-11-28",
+      "entradas": [
+        {
+          "id": "turno",
+          "label": "Horas pagadas del equipo en el día (renta + operador)",
+          "unidad": "h",
+          "valor": 9
+        },
+        {
+          "id": "plan",
+          "label": "Paros planeados (comida, cambio de turno, mantenimiento programado)",
+          "unidad": "h",
+          "valor": 1
+        },
+        {
+          "id": "paro",
+          "label": "Paros no planeados (sin frente, espera de olla, falla, sin señalero)",
+          "unidad": "h",
+          "valor": 2.5
+        },
+        {
+          "id": "prod",
+          "label": "Producción real del día (m³ bombeados, izajes, m³ excavados)",
+          "unidad": "unidades",
+          "valor": 48
+        },
+        {
+          "id": "ritmo",
+          "label": "Ritmo alcanzable por hora (el mejor sostenido que has medido en esta obra)",
+          "unidad": "unidades/h",
+          "valor": 15
+        },
+        {
+          "id": "rech",
+          "label": "Producción rechazada o repetida (m³ devueltos, izajes rehechos)",
+          "unidad": "unidades",
+          "valor": 2
+        },
+        {
+          "id": "costo",
+          "label": "Costo por hora del equipo con operador",
+          "unidad": "$/h",
+          "valor": 1500
+        }
+      ],
+      "salidas": [
+        {
+          "label": "Disponibilidad",
+          "formula": "turno-plan>0?Math.max(0,turno-plan-paro)/(turno-plan)*100:0",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Rendimiento",
+          "formula": "(turno-plan-paro)>0&&ritmo>0?prod/((turno-plan-paro)*ritmo)*100:0",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "Calidad",
+          "formula": "prod>0?(prod-rech)/prod*100:0",
+          "unidad": "%",
+          "decimales": 1
+        },
+        {
+          "label": "OEE del equipo",
+          "formula": "turno-plan>0&&ritmo>0?(prod-rech)/ritmo/(turno-plan)*100:0",
+          "unidad": "%",
+          "decimales": 1,
+          "destacar": true,
+          "semaforo": [
+            65,
+            45
+          ]
+        },
+        {
+          "label": "Horas productivas reales",
+          "formula": "ritmo>0?(prod-rech)/ritmo:0",
+          "unidad": "h",
+          "decimales": 2
+        },
+        {
+          "label": "Horas perdidas por paros",
+          "formula": "paro",
+          "unidad": "h",
+          "decimales": 2
+        },
+        {
+          "label": "Horas perdidas por lentitud",
+          "formula": "ritmo>0?Math.max(0,turno-plan-paro-prod/ritmo):0",
+          "unidad": "h",
+          "decimales": 2
+        },
+        {
+          "label": "Horas perdidas por calidad",
+          "formula": "ritmo>0?rech/ritmo:0",
+          "unidad": "h",
+          "decimales": 2
+        },
+        {
+          "label": "Dinero pagado sin producir en el día",
+          "formula": "ritmo>0?Math.max(0,turno-plan-(prod-rech)/ritmo)*costo:0",
+          "unidad": "$",
+          "decimales": 0,
+          "destacar": true
+        }
+      ],
+      "como_usar": [
+        "Elige un solo equipo crítico (bomba pluma, grúa torre o retroexcavadora) y pide al cabo o checador que anote cada paro con hora de inicio, fin y causa durante el turno.",
+        "Toma la producción del día de las remisiones (m³ bombeados), del conteo de izajes o del levantamiento; anota lo devuelto o repetido.",
+        "Como ritmo alcanzable usa el mejor ritmo sostenido medido en tu obra, no el máximo de catálogo: así el OEE mide pérdidas que sí puedes recuperar.",
+        "Captura los datos. En el ejemplo la bomba produce 3.07 h efectivas de 8 disponibles (OEE 38 %): se pagan $7,400 sin producir, 2.5 h por paros y 2.3 h por lentitud.",
+        "Ataca la pérdida más grande con una sola contramedida (por ejemplo, frecuencia de ollas ajustada con la planta o frente liberado un día antes) y vuelve a medir 3 colados.",
+        "El 85 % 'clase mundial' es una referencia de manufactura; en obra usa tu propio OEE de arranque como línea base. El costo por hora de $1,500 es valor de ejemplo, no verificado: usa tu tarifa de renta real o la calculadora 'Costo horario de maquinaria'."
+      ],
+      "fuentes": [
+        {
+          "titulo": "TeepTrak – Optimizar el OEE de equipos de construcción: disponibilidad × rendimiento × calidad aplicado a maquinaria de obra",
+          "url": "https://teeptrak.com/es/optimizar-el-oee-de-equipos-de-construccion/"
+        },
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026, actualizado oct-2026): ahorros de 10 a 15 % por actividad con lean; recomienda sesiones kaizen, tableros visuales y Last Planner con lookahead de 6 semanas",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        },
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery (kaizen, PDCA, first-run study)",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        }
+      ]
+    },
+    {
+      "id": "fmt-kaizen-cuadrilla",
+      "tipo": "formato",
+      "categoria": "Lean / mejora continua",
+      "titulo": "Tablero kaizen de la cuadrilla: ideas de mejora de los propios trabajadores, prueba de una semana y resultado medido",
+      "resumen": "Formato para captar, probar y adoptar mejoras pequeñas propuestas por cabos, oficiales y ayudantes (un acomodo, un dispositivo, un cambio de secuencia). Cada idea lleva dueño, costo, frente de prueba, indicador antes/después y decisión: adoptar, ajustar o descartar. Cierra el ciclo PDCA en días, no en meses.",
+      "agregada": "2026-11-28",
+      "campos": [
+        "Obra",
+        "Frente / nivel / cuadrilla",
+        "Fecha en que se propuso",
+        "Propuso (nombre y oficio)",
+        "Problema que ve (qué estorba, qué se repite, qué se espera)",
+        "Idea de mejora",
+        "Costo estimado ($) y material necesario",
+        "Responsable de la prueba",
+        "Frente y días de prueba (máximo 1 semana)",
+        "Indicador y valor antes (min, m², piezas, viajes, h-h)",
+        "Valor después de la prueba",
+        "Decisión: adoptar / ajustar / descartar",
+        "Dónde se replica (otros frentes o niveles)",
+        "Reconocimiento a quien propuso"
+      ],
+      "items": [
+        "La idea se registró el mismo día en que se propuso, con el nombre de quien la dio",
+        "El problema se describe con un hecho observado en el frente, no con una opinión",
+        "El costo de la prueba es bajo (cabe en caja chica) o lo autorizó el residente",
+        "La prueba no reduce seguridad ni calidad (revisada con el AST y el checklist de la actividad)",
+        "Se midió el indicador antes de la prueba",
+        "La prueba duró como máximo una semana en un solo frente",
+        "Se midió el indicador después con el mismo método",
+        "La decisión se tomó en la junta diaria o semanal con la cuadrilla presente",
+        "Si se adopta, se actualizó el procedimiento o la primera ejecución del siguiente nivel",
+        "Se reconoció públicamente a quien la propuso (pizarrón, junta o incentivo)"
+      ],
+      "como_usar": [
+        "Pon el tablero junto al pizarrón de la junta diaria y pide una idea por cuadrilla a la semana: algo que les quite tiempo, viajes o esfuerzo.",
+        "Llena una ficha por idea el mismo día; el residente asigna responsable y frente de prueba en menos de 48 h.",
+        "Mide antes y después con un indicador simple (minutos por ciclo, viajes de carretilla, m² por jornal) y la misma persona midiendo.",
+        "El viernes decide con la cuadrilla: adoptar, ajustar o descartar. Lo adoptado se replica en el siguiente nivel con la 'Primera ejecución'.",
+        "Exporta el CSV cada mes: cuenta ideas propuestas, probadas y adoptadas, y suma el ahorro medido; es tu indicador de mejora continua."
+      ],
+      "fuentes": [
+        {
+          "titulo": "BCG – Building Better with Lean Construction (mar-2026, actualizado oct-2026): ahorros de 10 a 15 % por actividad con lean; recomienda sesiones kaizen, tableros visuales y Last Planner con lookahead de 6 semanas",
+          "url": "https://www.bcg.com/publications/2026/building-better-with-lean-construction"
+        },
+        {
+          "titulo": "Lean Construction Institute – Glosario Lean Project Delivery (kaizen, PDCA, first-run study)",
+          "url": "https://leanconstruction.org/lci_glossary_10-24-2022"
+        },
+        {
+          "titulo": "Lean Construction Journal 2026, pp. 29-54 – Eivazi Ziaei, Malaeb, Lusis y Hamzeh: Health-Check Framework for Assessing Last Planner System Implementation (aceptado ene-2026): un lookahead bien conectado se asocia con PPC más alto; propone revisar la salud del sistema cada mes",
+          "url": "https://leanconstruction.org/wp-content/uploads/2026/02/LCJ-25-006.pdf%20"
         }
       ]
     },
